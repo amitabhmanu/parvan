@@ -1,0 +1,28 @@
+[project]
+name = "parvan"
+version = "0.1.0"
+description = "A constraint network over Sanskrit textual strata, external anchors, and shared referents"
+requires-python = ">=3.12"
+dependencies = [
+    "pyyaml>=6.0",
+    "click>=8.1",
+]
+
+[project.optional-dependencies]
+bayes = ["pymc>=5.16", "arviz>=0.18"]
+dev = ["pytest>=8.0"]
+
+[project.scripts]
+parvan = "parvan.cli:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/parvan"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src", "tests"]
+addopts = "-q"

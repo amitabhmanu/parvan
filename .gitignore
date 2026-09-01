@@ -1,0 +1,11 @@
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+*.egg-info/
+dist/
+build/
+
+# Run records are reproducible from commit + seed; keep the tree clean.
+# Remove this line if you want run history versioned.
+runs/*/

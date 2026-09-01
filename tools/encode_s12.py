@@ -181,8 +181,19 @@ EDGES = [
      "Post-Vedic grammar", {}),
     ("e.005", "presupposes", "ram.uttara", "ref.post-vedic-grammar", "linguistic-stratigraphy",
      "Post-Vedic grammar", {}),
-    ("e.007", "presupposes", "ram.core", "ref.fortified-ayodhya", "realia-floor",
-     "Ayodhya as a great fortified metropolis", {}),
+    # CORRECTED against the critical edition, and this one was carrying the core's floor.
+    # The canonical description of Ayodhya as a great fortified metropolis - gates, engines,
+    # high watchtowers, hundreds of sataghni, a deep moat, "unassailable by others" - is
+    # Ram.1.005.010-013, in BALAKANDA. Book 2, Ayodhya's own book and part of the core, has
+    # zero sataghni and zero gopura; its one moat-and-rampart passage (2.074.017-018)
+    # describes the army's road camps, and 2.064.001 describes Rajagrha. The core's entire
+    # fortification datum is the single word attalakesu in a list at 2.006.011, which does
+    # not support the referent as defined.
+    ("e.007", "presupposes", "ram.bala", "ref.fortified-ayodhya", "realia-floor",
+     "Ayodhya as a great fortified metropolis [misattributed - see docs/promotion-slice.md]",
+     {"prov": att("Ram.1.005.010-013 - kapatatoranavatim, sarvayantrayudhavatim, "
+                  "uccattaladhvajavatim sataghnisatasamkulam, durgagambhiraparikham "
+                  "durgam anyair durasadam")}),
     ("e.008", "presupposes", "ram.core", "ref.karma-rebirth-moksa", "doctrinal-discontinuity",
      "Karma, rebirth, moksa as assumed framework", {}),
     ("e.009", "presupposes", "ram.core", "ref.kosala-power", "realia-floor",

@@ -1,8 +1,9 @@
 id: e.007
 type: presupposes
-from: ram.core
+from: ram.bala
 to: ref.fortified-ayodhya
 method: realia-floor
 provenance:
-  tier: asserted
-  source: 'docs/dating-sanskrit-epics.md section 12, row: Ayodhya as a great fortified metropolis'
+  tier: attested
+  locus: Ram.1.005.010-013 - kapatatoranavatim, sarvayantrayudhavatim, uccattaladhvajavatim sataghnisatasamkulam,
+    durgagambhiraparikham durgam anyair durasadam

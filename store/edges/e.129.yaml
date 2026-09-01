@@ -1,0 +1,8 @@
+id: e.129
+type: attests
+from: ws.patanjali
+to: ref.vasudeva-arjuna-cult
+method: literary-citation
+provenance:
+  tier: asserted
+  source: 'docs/dating-sanskrit-epics.md scored inventory, row: Patanjali on staged Kamsa performances'

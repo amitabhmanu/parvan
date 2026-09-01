@@ -1,0 +1,14 @@
+id: anc.heliodorus
+kind: anchor
+label: Heliodorus pillar, Besnagar
+interval:
+  floor: -115
+  ceiling: -105
+dating_method: epigraphic-citation
+independent_of:
+- internal-linguistic
+- internal-structural
+holdout_eligible: true
+provenance:
+  tier: attested
+  locus: Besnagar pillar inscription; Vasudeva as god of gods

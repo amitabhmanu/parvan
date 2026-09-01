@@ -1,0 +1,15 @@
+id: anc.khoh-plates
+kind: anchor
+label: Khoh copper plates of Sarvanatha
+interval:
+  floor: 500
+  ceiling: 520
+dating_method: epigraphic-citation
+independent_of:
+- internal-linguistic
+- internal-structural
+- internal-doctrinal
+holdout_eligible: true
+provenance:
+  tier: attested
+  locus: Khoh plates; the hundred-thousand-verse collection compiled by Vyasa

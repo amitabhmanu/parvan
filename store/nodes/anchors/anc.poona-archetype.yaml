@@ -1,0 +1,13 @@
+id: anc.poona-archetype
+kind: anchor
+label: Poona critical edition archetype
+interval:
+  floor: 320
+  ceiling: 600
+dating_method: palaeography
+independent_of:
+- internal-doctrinal
+holdout_eligible: false
+provenance:
+  tier: attested
+  locus: Poona critical edition apparatus

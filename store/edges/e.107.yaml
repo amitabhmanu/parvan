@@ -1,0 +1,10 @@
+id: e.107
+type: absent-from
+from: ws.mbh.core
+to: ref.pataliputra-imperial
+method: absence
+lag_min_years: 0
+confidence: 0.4
+provenance:
+  tier: asserted
+  source: 'docs/dating-sanskrit-epics.md scored inventory, row: Pataliputra absent as imperial capital'

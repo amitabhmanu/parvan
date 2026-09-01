@@ -1,0 +1,9 @@
+id: e.153
+type: frames
+from: mbh.late-peoples
+to: ws.mbh.core
+method: structural-seam
+confidence: 0.7
+provenance:
+  tier: asserted
+  source: 'docs/dating-sanskrit-epics.md scored inventory, row: Peoples lists as later expansion'

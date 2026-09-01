@@ -1,0 +1,14 @@
+id: anc.spitzer
+kind: anchor
+label: Spitzer manuscript, Kizil
+interval:
+  floor: 200
+  ceiling: 300
+dating_method: palaeography
+independent_of:
+- internal-linguistic
+- internal-doctrinal
+holdout_eligible: true
+provenance:
+  tier: attested
+  locus: Palm-leaf fragments from Kizil; parvan list differs from the received one

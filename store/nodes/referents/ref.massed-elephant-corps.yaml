@@ -1,0 +1,11 @@
+id: ref.massed-elephant-corps
+kind: referent
+label: Massed elephant corps in a fourfold army
+class: institution
+emergence:
+  floor: -500
+  ceiling: -350
+text_derived: false
+provenance:
+  tier: attested
+  locus: Magadhan-era military record; Greek accounts

@@ -1,0 +1,9 @@
+id: e.127
+type: attests
+from: anc.heliodorus
+to: ref.vasudeva-arjuna-cult
+method: epigraphic-citation
+provenance:
+  tier: asserted
+  source: 'docs/dating-sanskrit-epics.md scored inventory, row: Heliodorus pillar wording paralleling
+    an epic verse'

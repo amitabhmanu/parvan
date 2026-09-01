@@ -1,0 +1,10 @@
+id: e.132
+type: absent-from
+from: ws.mbh.carvaka
+to: ref.classical-samkhya
+method: doctrinal-discontinuity
+lag_min_years: 0
+provenance:
+  tier: asserted
+  source: 'docs/dating-sanskrit-epics.md scored inventory, row: Unsystematized Samkhya caps the didactic
+    layers at c. 350-400 CE'

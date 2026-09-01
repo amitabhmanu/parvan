@@ -1,0 +1,9 @@
+id: e.130
+type: attests
+from: ws.asvalayana
+to: ref.mbh-as-named-work
+method: literary-citation
+provenance:
+  tier: asserted
+  source: 'docs/dating-sanskrit-epics.md scored inventory, row: Asvalayana Grhyasutra naming Bharata and
+    Mahabharata'

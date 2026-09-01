@@ -1,0 +1,8 @@
+id: e.102
+type: presupposes
+from: ws.mbh.core
+to: ref.iron-weaponry
+method: realia-floor
+provenance:
+  tier: asserted
+  source: 'docs/dating-sanskrit-epics.md scored inventory, row: Iron weaponry (krsna-ayas)'

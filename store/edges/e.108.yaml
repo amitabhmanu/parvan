@@ -1,0 +1,9 @@
+id: e.108
+type: absent-from
+from: ws.mbh.core
+to: ref.classical-kavya-style
+method: absence
+lag_min_years: 0
+provenance:
+  tier: asserted
+  source: 'docs/dating-sanskrit-epics.md scored inventory, row: Short compounds; no mature kavya style'

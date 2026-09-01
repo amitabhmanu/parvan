@@ -1,0 +1,9 @@
+id: ws.patanjali
+kind: work-state
+label: Patanjali, Mahabhasya
+interval:
+  floor: -160
+  ceiling: -140
+provenance:
+  tier: asserted
+  source: 'docs/dating-sanskrit-epics.md scored inventory, row: Patanjali on staged Kamsa performances'

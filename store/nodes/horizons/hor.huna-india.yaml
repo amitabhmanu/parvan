@@ -1,0 +1,10 @@
+id: hor.huna-india
+kind: horizon
+label: Huna presence in South Asia
+interval:
+  floor: 450
+  ceiling: 550
+dating_method: archaeological-horizon
+provenance:
+  tier: attested
+  locus: Hunnic incursion horizon; Gupta-period numismatic and epigraphic record

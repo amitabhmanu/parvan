@@ -1,0 +1,8 @@
+id: e.105
+type: presupposes
+from: mbh.late-peoples
+to: ref.yavana-saka
+method: realia-floor
+provenance:
+  tier: asserted
+  source: 'docs/dating-sanskrit-epics.md scored inventory, row: Yavanas'

@@ -1,0 +1,9 @@
+id: e.110
+type: presupposes
+from: mbh.late-peoples
+to: ref.hunas
+method: realia-floor
+provenance:
+  tier: asserted
+  source: 'docs/dating-sanskrit-epics.md scored inventory, row: Hunas in the peoples lists - latest binding
+    floor'

@@ -1,4 +1,4 @@
-"""Encode the Ramayana inventory from docs/dating-sanskrit-epics.md section 12.
+"""Encode the scored inventories from docs/dating-sanskrit-epics.md, sections 11 and 12.
 
 The store is one file per record so that disagreement is a diff (D-4). The *encoding* is a
 table so that it is reviewable as an argument rather than as sixty files. Run:
@@ -26,7 +26,7 @@ DOC = "docs/dating-sanskrit-epics.md"
 
 
 def src(row: str) -> dict:
-    return {"tier": "asserted", "source": f"{DOC} section 12, row: {row}"}
+    return {"tier": "asserted", "source": f"{DOC} scored inventory, row: {row}"}
 
 
 def att(locus: str) -> dict:
@@ -58,6 +58,25 @@ ANCHORS = [
     ("anc.baroda-archetype", "Baroda critical edition archetype", 320, 600, "palaeography",
      ["internal-doctrinal"], False,
      "Baroda critical edition apparatus; archetype of the surviving manuscripts"),
+    # --- section 11 anchors -------------------------------------------------------
+    ("anc.agathocles", "Silver coins of Agathocles, Ai-Khanoum", -190, -180, "numismatic",
+     ["internal-linguistic", "internal-structural", "internal-doctrinal"], True,
+     "Ai-Khanoum excavation; Vasudeva-Krsna with wheel and conch, Samkarsana-Balarama "
+     "with plough and club"),
+    ("anc.spitzer", "Spitzer manuscript, Kizil", 200, 300, "palaeography",
+     ["internal-linguistic", "internal-doctrinal"], True,
+     "Palm-leaf fragments from Kizil; parvan list differs from the received one"),
+    ("anc.heliodorus", "Heliodorus pillar, Besnagar", -115, -105, "epigraphic-citation",
+     ["internal-linguistic", "internal-structural"], True,
+     "Besnagar pillar inscription; Vasudeva as god of gods"),
+    ("anc.khoh-plates", "Khoh copper plates of Sarvanatha", 500, 520, "epigraphic-citation",
+     ["internal-linguistic", "internal-structural", "internal-doctrinal"], True,
+     "Khoh plates; the hundred-thousand-verse collection compiled by Vyasa"),
+    ("anc.imprecatory-grants", "Imprecatory verses quoted in land grants", 450, 600,
+     "epigraphic-citation", ["internal-linguistic", "internal-structural"], True,
+     "Standard imprecatory verses in hundreds of copper-plate grants from the 5th c."),
+    ("anc.poona-archetype", "Poona critical edition archetype", 320, 600, "palaeography",
+     ["internal-doctrinal"], False, "Poona critical edition apparatus"),
 ]
 
 # Material horizons. Wide, contested intervals of their own, which must propagate rather
@@ -78,6 +97,18 @@ HORIZONS = [
      "archaeological-horizon", "Pre-Mauryan and Mauryan-era southern material contact"),
     ("hor.mauryan-capital", "Pataliputra as the imperial centre", -320, -180,
      "archaeological-horizon", "Pataliputra excavation; Nanda-Mauryan imperial phase"),
+    ("hor.huna-india", "Huna presence in South Asia", 450, 550, "archaeological-horizon",
+     "Hunnic incursion horizon; Gupta-period numismatic and epigraphic record"),
+    ("hor.qin-china", "The Qin state, source of Cina", -221, -206, "foreign-catalogue",
+     "Qin dynastic records"),
+    ("hor.stupa-eduka", "Stupa and reliquary-mound construction", -250, -150,
+     "archaeological-horizon", "Early stupa horizon, post-Asokan"),
+    ("hor.massed-elephants", "Massed elephant corps in a fourfold army", -500, -350,
+     "archaeological-horizon", "Magadhan-era military record; Greek accounts of Indian armies"),
+    ("hor.greek-astrology", "Greek-derived astrological terminology in Sanskrit", 150, 250,
+     "foreign-catalogue", "Yavanajataka horizon; horā, kendra, drekkāṇa as loans"),
+    ("hor.temple-image-worship", "Temple and image worship", -200, -100,
+     "archaeological-horizon", "Earliest shrine and image archaeology"),
 ]
 
 # Other literary works, as work-states. Their intervals are asserted, not anchored.
@@ -92,8 +123,6 @@ WORK_STATES = [
     ("ws.bhasa", "Bhasa, Pratimanataka and Abhisekanataka", 100, 400,
      "Bhasa's Pratimanataka, Abhisekanataka"),
     ("ws.dasaratha-jataka", "Dasaratha Jataka (verses)", -300, -100, "Dasaratha Jataka"),
-    ("ws.mbh.ramopakhyana", "Ramopakhyana within the Mahabharata", None, None,
-     "Ramopakhyana in the Mahabharata apparently depending on Valmiki"),
     ("ws.ram.251ce", "The Rama narrative as it stood when translated into Chinese", None, None,
      "Liudu jijing: Rama narrative in Chinese"),
     ("ws.ram.600ce", "The Ramayana as endowed for recitation at Veal Kantel", None, None,
@@ -106,18 +135,29 @@ WORK_STATES = [
     # section 11 - importing that would make V-1 circular.
     ("ws.brhadaranyaka", "Brhadaranyaka and Chandogya Upanisads", -700, -500,
      "Karma, rebirth, moksa - emerging in the Brhadaranyaka and Chandogya c. 700-500 BCE"),
+    ("ws.panini", "Panini, Astadhyayi", -370, -330,
+     "Panini on devotees of Vasudeva and Arjuna"),
+    ("ws.patanjali", "Patanjali, Mahabhasya", -160, -140,
+     "Patanjali on staged Kamsa performances"),
+    ("ws.asvalayana", "Asvalayana Grhyasutra", -400, -250,
+     "Asvalayana Grhyasutra naming Bharata and Mahabharata"),
+    ("ws.samkhyakarika", "Isvarakrsna, Samkhyakarika", 350, 450,
+     "Unsystematized Samkhya, pre-Samkhyakarika"),
     ("ws.manusmrti", "Manusmrti", -200, 200,
      "Sambuka episode's hardened caste orthodoxy - floor alongside Manusmrti material"),
-    ("ws.mbh.carvaka", "Carvaka's cameo in the Mahabharata", None, None,
-     "Materialism as a named opponent - Carvaka's hostile cameo in the Mahabharata"),
-    ("ws.mbh.core", "The Bharata war narrative", None, None,
-     "Ramayana never mentions the Pandavas or the Bharata war"),
 ]
 
 # Ramayana strata. Extents follow the critical edition's kanda.sarga.sloka addressing where
 # section 12 localises a claim, and are left open where it does not.
 STRATA = [
     ("ram.core", "Core, books 2-6 (Ayodhya through Yuddha) - the adikavya", ["Ram.2", "Ram.6"]),
+    # --- Mahabharata strata, section 11 and the stratification in section 4 --------
+    ("ws.mbh.core", "MBh heroic narrative: quarrel, dicing, exile, embassy, the eighteen days",
+     ["MBh.2", "MBh.11"]),
+    ("ws.mbh.carvaka", "MBh didactic mass: Santi and Anusasana", ["MBh.12", "MBh.13"]),
+    ("ws.mbh.ramopakhyana", "MBh anthology layer, including the Ramopakhyana", ["MBh.3"]),
+    ("mbh.theological", "MBh theological layer: Gita, Narayaniya, avatara doctrine", ["MBh.6"]),
+    ("mbh.late-peoples", "MBh passages naming Hunas, Cinas, Romakas", []),
     ("ram.bala", "Balakanda (book 1)", ["Ram.1"]),
     ("ram.uttara", "Uttarakanda (book 7)", ["Ram.7"]),
     ("ram.kiskindha-geog", "Kiskindhakanda geography, with Yavana and Saka lists", ["Ram.4"]),
@@ -162,6 +202,39 @@ REFERENTS = [
     ("ref.pataliputra-imperial", "Pataliputra as the recognised imperial capital",
      "institution", -320, -300, False,
      att("Pataliputra excavation record; Nanda-Mauryan imperial phase")),
+    # --- section 11 referents -----------------------------------------------------
+    ("ref.hunas", "Hunas as a known people", "institution", 450, 550, False,
+     att("Hunnic incursion horizon, Gupta-period record")),
+    ("ref.cinas", "Cinas as a known people", "institution", -221, -206, False,
+     att("Qin dynastic records")),
+    ("ref.eduka-polemic", "Eduka and stupa construction as a target of polemic", "institution",
+     -250, -150, False, att("Early stupa horizon, post-Asokan")),
+    ("ref.massed-elephant-corps", "Massed elephant corps in a fourfold army", "institution",
+     -500, -350, False, att("Magadhan-era military record; Greek accounts")),
+    ("ref.greek-astrology-terms", "Greek-derived astrological vocabulary", "concept",
+     150, 250, False, att("hora, kendra, drekkana as loans into Sanskrit jyotisa")),
+    ("ref.temple-image-worship", "Temple and image worship", "institution", -200, -100,
+     False, att("Earliest shrine and image archaeology")),
+    ("ref.classical-samkhya", "Classical Samkhya's fixed twenty-five-tattva scheme", "concept",
+     None, None, True, src("Unsystematized Samkhya, pre-Samkhyakarika")),
+    # Not text-derived: the Khoh plates and the Spitzer fragment attest a work under this
+    # name by non-textual means, so it may anchor (G-4).
+    ("ref.mbh-as-named-work", "A work circulating under the name Mahabharata", "concept",
+     None, None, False, src("Asvalayana Grhyasutra naming Mahabharata")),
+    # SPLIT, on the network's own diagnosis. Encoded first as one referent with emergence
+    # pinned to the Agathocles coins at [-190, -180], which produced a negative cycle:
+    # Panini attests the cult at c. 330 BCE, 150 years before the coins. The witness path
+    # named all three constraints. The error was mine and it is the one R-4 exists to
+    # prevent - an attestation caps emergence from above and never floors it - but the
+    # deeper fault was conflation, so the fix is R-10's split operator.
+    #
+    # Section 11 already keeps these apart: Panini gives a ceiling on "the cult pairing",
+    # the coins on "the divine pair with epic attributes". Two referents, two dates.
+    ("ref.vasudeva-arjuna-cult", "The Vasudeva-Arjuna cult pairing", "concept",
+     None, None, False, att("Besnagar epigraphy; Panini on devotees of Vasudeva and Arjuna")),
+    ("ref.vasudeva-epic-attributes",
+     "The divine pair with epic attributes - wheel and conch, plough and club", "concept",
+     None, None, False, att("Ai-Khanoum coin types of Agathocles")),
 ]
 
 # Edges. Each row: id, type, from, to, method, section-12 row, extras.
@@ -325,6 +398,105 @@ EDGES = [
      "Yuddhakanda divine-assembly ending", {}),
     ("e.075", "frames", "ram.sambuka", "ram.core", "structural-seam",
      "Sambuka episode within the Uttarakanda", {}),
+
+    # ==================================================================================
+    # SECTION 11 - MAHABHARATA
+    # ==================================================================================
+    # Referent ids below without an "mbh" prefix are SHARED with the Ramayana inventory.
+    # That sharing is the reification hypothesis under test: if it pays, the second text
+    # should give ram.core a second route to one of its bounds.
+
+    ("e.101", "presupposes", "ws.mbh.core", "ref.horse-chariot", "realia-floor",
+     "Horses and spoked chariots throughout", {}),
+    ("e.102", "presupposes", "ws.mbh.core", "ref.iron-weaponry", "realia-floor",
+     "Iron weaponry (krsna-ayas)", {}),
+    ("e.103", "presupposes", "ws.mbh.core", "ref.post-vedic-grammar",
+     "linguistic-stratigraphy", "Post-Vedic grammar: no accent, collapsed tenses", {}),
+    ("e.104", "presupposes", "ws.mbh.core", "ref.karma-rebirth-moksa",
+     "doctrinal-discontinuity", "Karma, rebirth, moksa as framework", {}),
+    ("e.105", "presupposes", "mbh.late-peoples", "ref.yavana-saka", "realia-floor", "Yavanas", {}),
+    ("e.106", "presupposes", "mbh.theological", "ref.avatara-theology",
+     "doctrinal-discontinuity", "Bhakti and avatara theology", {}),
+
+    # THE SHARED CEILING. Section 11 carries the same Pataliputra row as section 12, so the
+    # two texts meet at one referent. If a second path to ram.core exists, it is here.
+    ("e.107", "absent-from", "ws.mbh.core", "ref.pataliputra-imperial", "absence",
+     "Pataliputra absent as imperial capital", {"lag_min_years": 0, "confidence": 0.4}),
+    ("e.108", "absent-from", "ws.mbh.core", "ref.classical-kavya-style", "absence",
+     "Short compounds; no mature kavya style", {"lag_min_years": 0}),
+
+    ("e.110", "presupposes", "mbh.late-peoples", "ref.hunas", "realia-floor",
+     "Hunas in the peoples lists - latest binding floor", {}),
+    ("e.111", "presupposes", "mbh.late-peoples", "ref.cinas", "realia-floor", "Cinas (from Qin)", {}),
+    ("e.112", "presupposes", "ws.mbh.carvaka", "ref.eduka-polemic", "realia-floor",
+     "Eduka / stupa polemic", {}),
+    ("e.113", "presupposes", "ws.mbh.core", "ref.massed-elephant-corps", "realia-floor",
+     "Massed elephant corps, fourfold army", {}),
+    ("e.114", "presupposes", "ws.mbh.carvaka", "ref.temple-image-worship", "realia-floor",
+     "Temple and image worship assumed", {}),
+    ("e.115", "presupposes", "ws.mbh.carvaka", "ref.greek-astrology-terms", "realia-floor",
+     "Greek-derived astrological vocabulary", {}),
+
+    ("e.120", "attests", "hor.huna-india", "ref.hunas", "archaeological-horizon",
+     "Hunas in the peoples lists", {}),
+    ("e.121", "attests", "hor.qin-china", "ref.cinas", "foreign-catalogue", "Cinas (from Qin)", {}),
+    ("e.122", "attests", "hor.stupa-eduka", "ref.eduka-polemic", "archaeological-horizon",
+     "Eduka / stupa polemic", {}),
+    ("e.123", "attests", "hor.massed-elephants", "ref.massed-elephant-corps",
+     "archaeological-horizon", "Massed elephant corps, fourfold army", {}),
+    ("e.124", "attests", "hor.greek-astrology", "ref.greek-astrology-terms",
+     "foreign-catalogue", "Greek-derived astrological vocabulary", {}),
+    ("e.125", "attests", "hor.temple-image-worship", "ref.temple-image-worship",
+     "archaeological-horizon", "Temple and image worship assumed", {}),
+    ("e.126", "attests", "anc.agathocles", "ref.vasudeva-epic-attributes", "numismatic",
+     "Agathocles coins, Krsna-Balarama iconography", {}),
+    ("e.135", "attests", "anc.heliodorus", "ref.vasudeva-epic-attributes",
+     "epigraphic-citation",
+     "Heliodorus pillar wording paralleling an epic verse - quotation or commonplace?",
+     {"confidence": 0.5}),
+    ("e.136", "presupposes", "mbh.theological", "ref.vasudeva-epic-attributes",
+     "doctrinal-discontinuity", "Bhakti and avatara theology", {}),
+    ("e.127", "attests", "anc.heliodorus", "ref.vasudeva-arjuna-cult", "epigraphic-citation",
+     "Heliodorus pillar wording paralleling an epic verse", {}),
+    ("e.128", "attests", "ws.panini", "ref.vasudeva-arjuna-cult", "literary-citation",
+     "Panini on Vasudeva-Arjuna devotees - ceiling on the cult, not on any text", {}),
+    ("e.129", "attests", "ws.patanjali", "ref.vasudeva-arjuna-cult", "literary-citation",
+     "Patanjali on staged Kamsa performances", {}),
+    ("e.130", "attests", "ws.asvalayana", "ref.mbh-as-named-work", "literary-citation",
+     "Asvalayana Grhyasutra naming Bharata and Mahabharata", {}),
+    # D-2 refused this referent at degree 1 on the first combined pass. Both further
+    # attesters are in the document: the Khoh plates cite the epic by name and size, and
+    # the Spitzer fragment is the earliest physical witness to a work so called.
+    ("e.133", "attests", "anc.khoh-plates", "ref.mbh-as-named-work", "epigraphic-citation",
+     "Copper-plate grants citing the hundred-thousand-verse collection of Vyasa", {}),
+    ("e.134", "attests", "anc.spitzer", "ref.mbh-as-named-work", "palaeography",
+     "Spitzer manuscript parvan list - earliest physical trace, contents not yet final", {}),
+    ("e.131", "attests", "ws.samkhyakarika", "ref.classical-samkhya",
+     "doctrinal-discontinuity", "Unsystematized Samkhya, pre-Samkhyakarika", {}),
+    ("e.132", "absent-from", "ws.mbh.carvaka", "ref.classical-samkhya",
+     "doctrinal-discontinuity",
+     "Unsystematized Samkhya caps the didactic layers at c. 350-400 CE", {"lag_min_years": 0}),
+
+    ("e.140", "cites", "anc.spitzer", "ws.mbh.core", "palaeography",
+     "Spitzer manuscript parvan list", {"lag_min_years": 1}),
+    ("e.141", "cites", "anc.khoh-plates", "ws.mbh.carvaka", "epigraphic-citation",
+     "Copper-plate grants citing the hundred-thousand-verse collection of Vyasa",
+     {"lag_min_years": 1}),
+    ("e.142", "cites", "anc.imprecatory-grants", "ws.mbh.carvaka", "epigraphic-citation",
+     "Imprecatory verses quoted in hundreds of grants from the 5th c.", {"lag_min_years": 1}),
+    ("e.143", "cites", "anc.poona-archetype", "ws.mbh.core", "palaeography",
+     "Poona critical edition archetype", {"lag_min_years": 1}),
+    ("e.144", "cites", "anc.veal-kantel", "ws.mbh.carvaka", "epigraphic-citation",
+     "Veal Kantel: complete Bharata endowed in Cambodia", {"lag_min_years": 1}),
+
+    ("e.150", "frames", "mbh.theological", "ws.mbh.core", "structural-seam",
+     "The Gita lifts out cleanly; Sanjaya's report resumes exactly", {}),
+    ("e.151", "frames", "ws.mbh.carvaka", "ws.mbh.core", "structural-seam",
+     "Bhisma's death deferred thousands of verses to accommodate the didactic mass", {}),
+    ("e.152", "frames", "ws.mbh.ramopakhyana", "ws.mbh.core", "structural-seam",
+     "Anthology: Nala, Savitri, Ramopakhyana, tirtha catalogue", {}),
+    ("e.153", "frames", "mbh.late-peoples", "ws.mbh.core", "structural-seam",
+     "Peoples lists as later expansion", {"confidence": 0.7}),
 ]
 
 

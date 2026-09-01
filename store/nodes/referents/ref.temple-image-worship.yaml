@@ -1,0 +1,11 @@
+id: ref.temple-image-worship
+kind: referent
+label: Temple and image worship
+class: institution
+emergence:
+  floor: -200
+  ceiling: -100
+text_derived: false
+provenance:
+  tier: attested
+  locus: Earliest shrine and image archaeology

@@ -1,0 +1,8 @@
+id: e.113
+type: presupposes
+from: ws.mbh.core
+to: ref.massed-elephant-corps
+method: realia-floor
+provenance:
+  tier: asserted
+  source: 'docs/dating-sanskrit-epics.md scored inventory, row: Massed elephant corps, fourfold army'

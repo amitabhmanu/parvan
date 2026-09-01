@@ -1,0 +1,9 @@
+id: e.103
+type: presupposes
+from: ws.mbh.core
+to: ref.post-vedic-grammar
+method: linguistic-stratigraphy
+provenance:
+  tier: asserted
+  source: 'docs/dating-sanskrit-epics.md scored inventory, row: Post-Vedic grammar: no accent, collapsed
+    tenses'

@@ -1,0 +1,9 @@
+id: e.151
+type: frames
+from: ws.mbh.carvaka
+to: ws.mbh.core
+method: structural-seam
+provenance:
+  tier: asserted
+  source: 'docs/dating-sanskrit-epics.md scored inventory, row: Bhisma''s death deferred thousands of
+    verses to accommodate the didactic mass'

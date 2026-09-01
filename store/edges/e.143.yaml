@@ -1,0 +1,9 @@
+id: e.143
+type: cites
+from: anc.poona-archetype
+to: ws.mbh.core
+method: palaeography
+lag_min_years: 1
+provenance:
+  tier: asserted
+  source: 'docs/dating-sanskrit-epics.md scored inventory, row: Poona critical edition archetype'

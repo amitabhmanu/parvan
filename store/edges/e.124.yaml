@@ -1,0 +1,8 @@
+id: e.124
+type: attests
+from: hor.greek-astrology
+to: ref.greek-astrology-terms
+method: foreign-catalogue
+provenance:
+  tier: asserted
+  source: 'docs/dating-sanskrit-epics.md scored inventory, row: Greek-derived astrological vocabulary'

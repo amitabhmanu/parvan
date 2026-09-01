@@ -1,0 +1,9 @@
+id: ws.panini
+kind: work-state
+label: Panini, Astadhyayi
+interval:
+  floor: -370
+  ceiling: -330
+provenance:
+  tier: asserted
+  source: 'docs/dating-sanskrit-epics.md scored inventory, row: Panini on devotees of Vasudeva and Arjuna'

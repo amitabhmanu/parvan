@@ -1,0 +1,8 @@
+id: ref.mbh-as-named-work
+kind: referent
+label: A work circulating under the name Mahabharata
+class: concept
+text_derived: false
+provenance:
+  tier: asserted
+  source: 'docs/dating-sanskrit-epics.md scored inventory, row: Asvalayana Grhyasutra naming Mahabharata'

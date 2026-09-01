@@ -1,0 +1,9 @@
+id: ws.samkhyakarika
+kind: work-state
+label: Isvarakrsna, Samkhyakarika
+interval:
+  floor: 350
+  ceiling: 450
+provenance:
+  tier: asserted
+  source: 'docs/dating-sanskrit-epics.md scored inventory, row: Unsystematized Samkhya, pre-Samkhyakarika'

@@ -1,0 +1,8 @@
+id: e.106
+type: presupposes
+from: mbh.theological
+to: ref.avatara-theology
+method: doctrinal-discontinuity
+provenance:
+  tier: asserted
+  source: 'docs/dating-sanskrit-epics.md scored inventory, row: Bhakti and avatara theology'

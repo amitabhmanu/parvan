@@ -1,0 +1,10 @@
+id: hor.greek-astrology
+kind: horizon
+label: Greek-derived astrological terminology in Sanskrit
+interval:
+  floor: 150
+  ceiling: 250
+dating_method: foreign-catalogue
+provenance:
+  tier: attested
+  locus: Yavanajataka horizon; horā, kendra, drekkāṇa as loans

@@ -1,0 +1,10 @@
+id: hor.temple-image-worship
+kind: horizon
+label: Temple and image worship
+interval:
+  floor: -200
+  ceiling: -100
+dating_method: archaeological-horizon
+provenance:
+  tier: attested
+  locus: Earliest shrine and image archaeology

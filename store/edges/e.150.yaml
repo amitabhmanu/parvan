@@ -1,0 +1,9 @@
+id: e.150
+type: frames
+from: mbh.theological
+to: ws.mbh.core
+method: structural-seam
+provenance:
+  tier: asserted
+  source: 'docs/dating-sanskrit-epics.md scored inventory, row: The Gita lifts out cleanly; Sanjaya''s
+    report resumes exactly'

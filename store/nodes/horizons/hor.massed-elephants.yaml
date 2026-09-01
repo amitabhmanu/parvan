@@ -1,0 +1,10 @@
+id: hor.massed-elephants
+kind: horizon
+label: Massed elephant corps in a fourfold army
+interval:
+  floor: -500
+  ceiling: -350
+dating_method: archaeological-horizon
+provenance:
+  tier: attested
+  locus: Magadhan-era military record; Greek accounts of Indian armies

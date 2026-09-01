@@ -1,0 +1,10 @@
+id: hor.qin-china
+kind: horizon
+label: The Qin state, source of Cina
+interval:
+  floor: -221
+  ceiling: -206
+dating_method: foreign-catalogue
+provenance:
+  tier: attested
+  locus: Qin dynastic records

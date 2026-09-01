@@ -1,0 +1,8 @@
+id: e.125
+type: attests
+from: hor.temple-image-worship
+to: ref.temple-image-worship
+method: archaeological-horizon
+provenance:
+  tier: asserted
+  source: 'docs/dating-sanskrit-epics.md scored inventory, row: Temple and image worship assumed'

@@ -1,0 +1,16 @@
+id: anc.agathocles
+kind: anchor
+label: Silver coins of Agathocles, Ai-Khanoum
+interval:
+  floor: -190
+  ceiling: -180
+dating_method: numismatic
+independent_of:
+- internal-linguistic
+- internal-structural
+- internal-doctrinal
+holdout_eligible: true
+provenance:
+  tier: attested
+  locus: Ai-Khanoum excavation; Vasudeva-Krsna with wheel and conch, Samkarsana-Balarama with plough and
+    club

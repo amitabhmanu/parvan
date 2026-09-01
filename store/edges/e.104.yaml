@@ -1,0 +1,8 @@
+id: e.104
+type: presupposes
+from: ws.mbh.core
+to: ref.karma-rebirth-moksa
+method: doctrinal-discontinuity
+provenance:
+  tier: asserted
+  source: 'docs/dating-sanskrit-epics.md scored inventory, row: Karma, rebirth, moksa as framework'

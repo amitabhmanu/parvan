@@ -1,0 +1,9 @@
+id: e.128
+type: attests
+from: ws.panini
+to: ref.vasudeva-arjuna-cult
+method: literary-citation
+provenance:
+  tier: asserted
+  source: 'docs/dating-sanskrit-epics.md scored inventory, row: Panini on Vasudeva-Arjuna devotees - ceiling
+    on the cult, not on any text'

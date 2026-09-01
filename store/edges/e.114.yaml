@@ -1,0 +1,8 @@
+id: e.114
+type: presupposes
+from: ws.mbh.carvaka
+to: ref.temple-image-worship
+method: realia-floor
+provenance:
+  tier: asserted
+  source: 'docs/dating-sanskrit-epics.md scored inventory, row: Temple and image worship assumed'

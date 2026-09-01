@@ -1,0 +1,9 @@
+id: e.134
+type: attests
+from: anc.spitzer
+to: ref.mbh-as-named-work
+method: palaeography
+provenance:
+  tier: asserted
+  source: 'docs/dating-sanskrit-epics.md scored inventory, row: Spitzer manuscript parvan list - earliest
+    physical trace, contents not yet final'

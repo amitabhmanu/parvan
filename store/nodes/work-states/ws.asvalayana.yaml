@@ -1,0 +1,10 @@
+id: ws.asvalayana
+kind: work-state
+label: Asvalayana Grhyasutra
+interval:
+  floor: -400
+  ceiling: -250
+provenance:
+  tier: asserted
+  source: 'docs/dating-sanskrit-epics.md scored inventory, row: Asvalayana Grhyasutra naming Bharata and
+    Mahabharata'

@@ -1,0 +1,8 @@
+id: ref.classical-samkhya
+kind: referent
+label: Classical Samkhya's fixed twenty-five-tattva scheme
+class: concept
+text_derived: true
+provenance:
+  tier: asserted
+  source: 'docs/dating-sanskrit-epics.md scored inventory, row: Unsystematized Samkhya, pre-Samkhyakarika'

@@ -1,0 +1,14 @@
+id: anc.imprecatory-grants
+kind: anchor
+label: Imprecatory verses quoted in land grants
+interval:
+  floor: 450
+  ceiling: 600
+dating_method: epigraphic-citation
+independent_of:
+- internal-linguistic
+- internal-structural
+holdout_eligible: true
+provenance:
+  tier: attested
+  locus: Standard imprecatory verses in hundreds of copper-plate grants from the 5th c.

@@ -1,0 +1,9 @@
+id: e.152
+type: frames
+from: ws.mbh.ramopakhyana
+to: ws.mbh.core
+method: structural-seam
+provenance:
+  tier: asserted
+  source: 'docs/dating-sanskrit-epics.md scored inventory, row: Anthology: Nala, Savitri, Ramopakhyana,
+    tirtha catalogue'

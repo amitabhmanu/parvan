@@ -1,0 +1,8 @@
+id: e.131
+type: attests
+from: ws.samkhyakarika
+to: ref.classical-samkhya
+method: doctrinal-discontinuity
+provenance:
+  tier: asserted
+  source: 'docs/dating-sanskrit-epics.md scored inventory, row: Unsystematized Samkhya, pre-Samkhyakarika'

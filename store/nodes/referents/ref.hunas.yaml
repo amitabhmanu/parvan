@@ -1,0 +1,11 @@
+id: ref.hunas
+kind: referent
+label: Hunas as a known people
+class: institution
+emergence:
+  floor: 450
+  ceiling: 550
+text_derived: false
+provenance:
+  tier: attested
+  locus: Hunnic incursion horizon, Gupta-period record

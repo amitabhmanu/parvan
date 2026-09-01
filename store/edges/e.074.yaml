@@ -1,0 +1,8 @@
+id: e.074
+type: frames
+from: ram.yuddha-ending
+to: ram.core
+method: structural-seam
+provenance:
+  tier: asserted
+  source: 'docs/dating-sanskrit-epics.md section 12, row: Yuddhakanda divine-assembly ending'

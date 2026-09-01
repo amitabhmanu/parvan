@@ -1,0 +1,8 @@
+id: e.005
+type: presupposes
+from: ram.uttara
+to: ref.post-vedic-grammar
+method: linguistic-stratigraphy
+provenance:
+  tier: asserted
+  source: 'docs/dating-sanskrit-epics.md section 12, row: Post-Vedic grammar'

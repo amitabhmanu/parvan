@@ -1,0 +1,9 @@
+id: ws.bhasa
+kind: work-state
+label: Bhasa, Pratimanataka and Abhisekanataka
+interval:
+  floor: 100
+  ceiling: 400
+provenance:
+  tier: asserted
+  source: 'docs/dating-sanskrit-epics.md section 12, row: Bhasa''s Pratimanataka, Abhisekanataka'

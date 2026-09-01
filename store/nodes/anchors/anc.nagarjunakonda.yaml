@@ -1,0 +1,14 @@
+id: anc.nagarjunakonda
+kind: anchor
+label: Ramayana terracottas, Nagarjunakonda
+interval:
+  floor: 200
+  ceiling: 400
+dating_method: art-historical
+independent_of:
+- internal-linguistic
+- internal-structural
+holdout_eligible: true
+provenance:
+  tier: attested
+  locus: Nagarjunakonda site reliefs and terracottas

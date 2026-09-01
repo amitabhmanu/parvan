@@ -1,0 +1,9 @@
+id: ws.dasaratha-jataka
+kind: work-state
+label: Dasaratha Jataka (verses)
+interval:
+  floor: -300
+  ceiling: -100
+provenance:
+  tier: asserted
+  source: 'docs/dating-sanskrit-epics.md section 12, row: Dasaratha Jataka'

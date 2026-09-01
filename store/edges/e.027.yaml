@@ -1,0 +1,8 @@
+id: e.027
+type: attests
+from: ws.asvaghosa
+to: ref.valmiki-as-author
+method: literary-citation
+provenance:
+  tier: asserted
+  source: 'docs/dating-sanskrit-epics.md section 12, row: Asvaghosa naming Valmiki as a metrical innovator'

@@ -1,0 +1,10 @@
+id: ws.bhatti
+kind: work-state
+label: Bhatti, Bhattikavya
+interval:
+  floor: 600
+  ceiling: 700
+provenance:
+  tier: asserted
+  source: 'docs/dating-sanskrit-epics.md section 12, row: Bhatti''s Bhattikavya, later source of the Old
+    Javanese poem'

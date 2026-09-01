@@ -1,0 +1,8 @@
+id: e.010
+type: presupposes
+from: ram.kiskindha-geog
+to: ref.yavana-saka
+method: realia-floor
+provenance:
+  tier: asserted
+  source: 'docs/dating-sanskrit-epics.md section 12, row: Yavanas and Sakas in the Kiskindha geography'

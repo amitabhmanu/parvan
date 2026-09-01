@@ -1,0 +1,10 @@
+id: hor.mauryan-capital
+kind: horizon
+label: Pataliputra as the imperial centre
+interval:
+  floor: -320
+  ceiling: -180
+dating_method: archaeological-horizon
+provenance:
+  tier: attested
+  locus: Pataliputra excavation; Nanda-Mauryan imperial phase

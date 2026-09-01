@@ -1,0 +1,8 @@
+id: e.030
+type: attests
+from: ws.kalidasa
+to: ref.classical-kavya-style
+method: metrical-statistics
+provenance:
+  tier: asserted
+  source: 'docs/dating-sanskrit-epics.md section 12, row: Short compounds; no mature kavya style'

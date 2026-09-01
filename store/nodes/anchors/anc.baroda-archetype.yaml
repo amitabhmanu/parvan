@@ -1,0 +1,13 @@
+id: anc.baroda-archetype
+kind: anchor
+label: Baroda critical edition archetype
+interval:
+  floor: 320
+  ceiling: 600
+dating_method: palaeography
+independent_of:
+- internal-doctrinal
+holdout_eligible: false
+provenance:
+  tier: attested
+  locus: Baroda critical edition apparatus; archetype of the surviving manuscripts

@@ -1,0 +1,8 @@
+id: ref.karma-rebirth-moksa
+kind: referent
+label: Karma, rebirth and moksa as an assumed framework
+class: concept
+text_derived: true
+provenance:
+  tier: asserted
+  source: 'docs/dating-sanskrit-epics.md section 12, row: Karma, rebirth, moksa as assumed framework'

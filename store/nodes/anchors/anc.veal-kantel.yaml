@@ -1,0 +1,15 @@
+id: anc.veal-kantel
+kind: anchor
+label: Veal Kantel inscription, Cambodia
+interval:
+  floor: 590
+  ceiling: 610
+dating_method: epigraphic-citation
+independent_of:
+- internal-linguistic
+- internal-structural
+- internal-doctrinal
+holdout_eligible: true
+provenance:
+  tier: attested
+  locus: Veal Kantel stele, Cambodia; endows recitation of the Ramayana

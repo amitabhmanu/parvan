@@ -1,0 +1,8 @@
+id: e.028
+type: attests
+from: anc.cham-valmiki
+to: ref.valmiki-as-author
+method: epigraphic-citation
+provenance:
+  tier: asserted
+  source: 'docs/dating-sanskrit-epics.md section 12, row: Cham inscription dedicating a temple to Valmiki'

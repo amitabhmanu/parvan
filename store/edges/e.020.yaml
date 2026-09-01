@@ -1,0 +1,8 @@
+id: e.020
+type: attests
+from: hor.horse-chariot
+to: ref.horse-chariot
+method: archaeological-horizon
+provenance:
+  tier: asserted
+  source: 'docs/dating-sanskrit-epics.md section 12, row: Horses and chariots throughout'

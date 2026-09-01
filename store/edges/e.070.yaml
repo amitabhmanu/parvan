@@ -1,0 +1,9 @@
+id: e.070
+type: frames
+from: ram.uttara
+to: ram.core
+method: structural-seam
+provenance:
+  tier: asserted
+  source: 'docs/dating-sanskrit-epics.md section 12, row: Uttarakanda frame where Valmiki appears and
+    the twins recite the poem'

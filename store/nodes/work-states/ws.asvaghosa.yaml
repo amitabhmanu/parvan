@@ -1,0 +1,9 @@
+id: ws.asvaghosa
+kind: work-state
+label: Asvaghosa, naming Valmiki as a metrical innovator
+interval:
+  floor: 50
+  ceiling: 200
+provenance:
+  tier: asserted
+  source: 'docs/dating-sanskrit-epics.md section 12, row: Asvaghosa naming Valmiki as a metrical innovator'

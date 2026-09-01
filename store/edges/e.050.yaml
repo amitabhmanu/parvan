@@ -1,0 +1,10 @@
+id: e.050
+type: contains
+from: ws.ram.600ce
+to: ram.core
+method: epigraphic-citation
+confidence: 0.95
+provenance:
+  tier: asserted
+  source: 'docs/dating-sanskrit-epics.md section 12, row: Veal Kantel: Ramayana endowed for recitation
+    in Cambodia'

@@ -1,0 +1,10 @@
+id: hor.kosala-power
+kind: horizon
+label: Kosala as a major political power
+interval:
+  floor: -750
+  ceiling: -650
+dating_method: archaeological-horizon
+provenance:
+  tier: attested
+  locus: Mahajanapada-period settlement and fortification record

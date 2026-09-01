@@ -1,0 +1,8 @@
+id: e.014
+type: presupposes
+from: ram.sambuka
+to: ref.caste-hardening
+method: doctrinal-discontinuity
+provenance:
+  tier: asserted
+  source: 'docs/dating-sanskrit-epics.md section 12, row: Sambuka episode''s hardened caste orthodoxy'

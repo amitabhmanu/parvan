@@ -1,0 +1,14 @@
+id: anc.cham-valmiki
+kind: anchor
+label: Cham inscription dedicating a temple to Valmiki
+interval:
+  floor: 600
+  ceiling: 700
+dating_method: epigraphic-citation
+independent_of:
+- internal-linguistic
+- internal-structural
+holdout_eligible: true
+provenance:
+  tier: attested
+  locus: Cham inscription, temple dedication to Valmiki

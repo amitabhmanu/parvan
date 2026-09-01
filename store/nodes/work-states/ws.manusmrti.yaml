@@ -1,0 +1,10 @@
+id: ws.manusmrti
+kind: work-state
+label: Manusmrti
+interval:
+  floor: -200
+  ceiling: 200
+provenance:
+  tier: asserted
+  source: 'docs/dating-sanskrit-epics.md section 12, row: Sambuka episode''s hardened caste orthodoxy
+    - floor alongside Manusmrti material'

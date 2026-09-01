@@ -1,0 +1,8 @@
+id: e.072
+type: frames
+from: ram.bala
+to: ram.core
+method: doctrinal-discontinuity
+provenance:
+  tier: asserted
+  source: 'docs/dating-sanskrit-epics.md section 12, row: Books 1 and 7 divinize Rama; books 2-6 do not'

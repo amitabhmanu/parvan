@@ -1,0 +1,10 @@
+id: e.054
+type: contains
+from: ws.ram.251ce
+to: ram.core
+method: foreign-catalogue
+confidence: 0.6
+provenance:
+  tier: asserted
+  source: 'docs/dating-sanskrit-epics.md section 12, row: Liudu jijing: Rama narrative in Chinese (lean,
+    Jataka-like)'

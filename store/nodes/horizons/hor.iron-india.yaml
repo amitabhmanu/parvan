@@ -1,0 +1,10 @@
+id: hor.iron-india
+kind: horizon
+label: Iron metallurgy in South Asia
+interval:
+  floor: -1300
+  ceiling: -1200
+dating_method: archaeological-horizon
+provenance:
+  tier: attested
+  locus: Earliest iron-bearing levels, South Asian excavation record

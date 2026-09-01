@@ -1,0 +1,8 @@
+id: e.002
+type: presupposes
+from: ram.core
+to: ref.iron-weaponry
+method: realia-floor
+provenance:
+  tier: asserted
+  source: 'docs/dating-sanskrit-epics.md section 12, row: Iron weaponry'

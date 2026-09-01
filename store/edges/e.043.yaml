@@ -1,0 +1,11 @@
+id: e.043
+type: absent-from
+from: ram.core
+to: ref.pataliputra-imperial
+method: absence
+lag_min_years: 0
+confidence: 0.4
+provenance:
+  tier: asserted
+  source: 'docs/dating-sanskrit-epics.md section 12, row: Pataliputra absent as imperial capital - soft
+    ceiling c. 300 BCE on the geographic frame'

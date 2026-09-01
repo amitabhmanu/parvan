@@ -1,0 +1,10 @@
+id: hor.ayodhya-urban
+kind: horizon
+label: Substantial urban occupation at Ayodhya
+interval:
+  floor: -700
+  ceiling: -600
+dating_method: archaeological-horizon
+provenance:
+  tier: attested
+  locus: Ayodhya excavation levels; no substantial occupation earlier

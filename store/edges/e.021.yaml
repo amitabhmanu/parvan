@@ -1,0 +1,8 @@
+id: e.021
+type: attests
+from: hor.iron-india
+to: ref.iron-weaponry
+method: archaeological-horizon
+provenance:
+  tier: asserted
+  source: 'docs/dating-sanskrit-epics.md section 12, row: Iron weaponry'

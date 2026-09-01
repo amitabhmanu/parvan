@@ -1,0 +1,10 @@
+id: hor.horse-chariot
+kind: horizon
+label: Domestic horse and spoked-wheel chariot in South Asia
+interval:
+  floor: -2100
+  ceiling: -1900
+dating_method: archaeological-horizon
+provenance:
+  tier: attested
+  locus: Sintashta chariot burials; Pontic-Caspian domestic lineage; absence in Harappan faunal assemblages

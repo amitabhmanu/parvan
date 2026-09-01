@@ -1,0 +1,8 @@
+id: ref.classical-kavya-style
+kind: referent
+label: Mature classical kavya style (long compounds)
+class: concept
+text_derived: true
+provenance:
+  tier: asserted
+  source: 'docs/dating-sanskrit-epics.md section 12, row: Short compounds; no mature kavya style'

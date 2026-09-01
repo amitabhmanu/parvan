@@ -1,0 +1,11 @@
+id: ref.kosala-power
+kind: referent
+label: Kosala as a major power
+class: institution
+emergence:
+  floor: -750
+  ceiling: -650
+text_derived: false
+provenance:
+  tier: attested
+  locus: Mahajanapada settlement and fortification record

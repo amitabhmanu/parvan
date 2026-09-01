@@ -1,0 +1,10 @@
+id: e.059
+type: cites
+from: ws.bhasa
+to: ram.core
+method: literary-citation
+confidence: 0.4
+provenance:
+  tier: asserted
+  source: 'docs/dating-sanskrit-epics.md section 12, row: Bhasa''s Pratimanataka, Abhisekanataka (attribution
+    contested)'

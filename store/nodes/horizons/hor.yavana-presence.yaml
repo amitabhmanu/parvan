@@ -1,0 +1,10 @@
+id: hor.yavana-presence
+kind: horizon
+label: Greek presence in the northwest
+interval:
+  floor: -330
+  ceiling: -300
+dating_method: archaeological-horizon
+provenance:
+  tier: attested
+  locus: Alexander's campaign and successor settlement; Indo-Greek horizon

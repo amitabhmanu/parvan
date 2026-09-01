@@ -1,0 +1,11 @@
+id: ref.pataliputra-imperial
+kind: referent
+label: Pataliputra as the recognised imperial capital
+class: institution
+emergence:
+  floor: -320
+  ceiling: -300
+text_derived: false
+provenance:
+  tier: attested
+  locus: Pataliputra excavation record; Nanda-Mauryan imperial phase

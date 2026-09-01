@@ -1,0 +1,11 @@
+id: ref.deccan-knowledge
+kind: referent
+label: Southern flora, fauna and place-knowledge
+class: institution
+emergence:
+  floor: -450
+  ceiling: -350
+text_derived: false
+provenance:
+  tier: attested
+  locus: Material record of northern contact with the Deccan

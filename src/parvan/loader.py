@@ -100,7 +100,9 @@ def _edge_from(raw: dict, path: str, in_quarantine: bool) -> Edge:
         src=raw.get("from", ""),
         dst=raw.get("to", ""),
         method=raw.get("method", ""),
-        lag_min_years=int(raw.get("lag_min_years", 0) or 0),
+        lag_min_years=(
+            None if raw.get("lag_min_years") is None else int(raw["lag_min_years"])
+        ),
         direction_uncertain=bool(raw.get("direction_uncertain", False)),
         confidence=float(raw.get("confidence", 1.0)),
         provenance=Provenance.parse(raw.get("provenance")),
@@ -214,13 +216,20 @@ def _check_graph(store: Store) -> list[Violation]:
     # Without it a chain collapses to one constraint and a directed cycle of these edges
     # never reports infeasible - the diagnostic quietly stops working.
     for edge in store.edges.values():
-        if edge.type in ("cites", "frames") and edge.lag_min_years <= 0:
+        # An omitted lag inherits the run's epsilon, which policy keeps positive. An
+        # *explicit* zero is refused: at zero the chain transmits nothing and directed
+        # cycles stop reporting infeasible, so the diagnostic switches off silently.
+        if (
+            edge.type in ("cites", "frames")
+            and edge.lag_min_years is not None
+            and edge.lag_min_years <= 0
+        ):
             out.append(
                 Violation(
                     "R-5",
                     edge.source_file or edge.id,
-                    f"{edge.type!r} edge needs lag_min_years > 0; at zero the chain "
-                    "transmits nothing and directed cycles stop reporting infeasible",
+                    f"{edge.type!r} edge may not declare lag_min_years <= 0; omit the field "
+                    "to inherit the run's epsilon, which is always positive",
                 )
             )
 

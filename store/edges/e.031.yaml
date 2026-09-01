@@ -1,0 +1,8 @@
+id: e.031
+type: attests
+from: ws.bhatti
+to: ref.classical-kavya-style
+method: metrical-statistics
+provenance:
+  tier: asserted
+  source: 'docs/dating-sanskrit-epics.md section 12, row: Bhatti''s Bhattikavya'

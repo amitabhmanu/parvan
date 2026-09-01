@@ -1,0 +1,7 @@
+id: ram.core
+kind: stratum
+label: Core, books 2-6 (Ayodhya through Yuddha) - the adikavya
+work: ramayana
+extent:
+- Ram.2
+- Ram.6

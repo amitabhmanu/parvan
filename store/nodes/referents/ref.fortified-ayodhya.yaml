@@ -1,0 +1,11 @@
+id: ref.fortified-ayodhya
+kind: referent
+label: Ayodhya as a great fortified metropolis
+class: institution
+emergence:
+  floor: -700
+  ceiling: -600
+text_derived: false
+provenance:
+  tier: attested
+  locus: Ayodhya excavation levels

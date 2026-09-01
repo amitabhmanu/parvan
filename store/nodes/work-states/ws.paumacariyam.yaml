@@ -1,0 +1,9 @@
+id: ws.paumacariyam
+kind: work-state
+label: Vimalasuri, Paumacariyam
+interval:
+  floor: 1
+  ceiling: 500
+provenance:
+  tier: asserted
+  source: 'docs/dating-sanskrit-epics.md section 12, row: Vimalasuri''s Paumacariyam arguing against Valmiki'

@@ -1,0 +1,10 @@
+id: ws.brhadaranyaka
+kind: work-state
+label: Brhadaranyaka and Chandogya Upanisads
+interval:
+  floor: -700
+  ceiling: -500
+provenance:
+  tier: asserted
+  source: 'docs/dating-sanskrit-epics.md section 12, row: Karma, rebirth, moksa - emerging in the Brhadaranyaka
+    and Chandogya c. 700-500 BCE'

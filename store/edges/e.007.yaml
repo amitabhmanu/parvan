@@ -1,0 +1,8 @@
+id: e.007
+type: presupposes
+from: ram.core
+to: ref.fortified-ayodhya
+method: realia-floor
+provenance:
+  tier: asserted
+  source: 'docs/dating-sanskrit-epics.md section 12, row: Ayodhya as a great fortified metropolis'

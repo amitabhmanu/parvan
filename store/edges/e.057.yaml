@@ -1,0 +1,8 @@
+id: e.057
+type: cites
+from: ws.kalidasa
+to: ram.core
+method: literary-citation
+provenance:
+  tier: asserted
+  source: 'docs/dating-sanskrit-epics.md section 12, row: Kalidasa''s Raghuvamsa'

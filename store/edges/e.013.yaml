@@ -1,0 +1,8 @@
+id: e.013
+type: presupposes
+from: ram.uttara
+to: ref.avatara-theology
+method: doctrinal-discontinuity
+provenance:
+  tier: asserted
+  source: 'docs/dating-sanskrit-epics.md section 12, row: Avatara theology in Bala and Uttara'

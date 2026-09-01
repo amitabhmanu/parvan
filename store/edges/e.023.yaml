@@ -1,0 +1,8 @@
+id: e.023
+type: attests
+from: hor.kosala-power
+to: ref.kosala-power
+method: archaeological-horizon
+provenance:
+  tier: asserted
+  source: 'docs/dating-sanskrit-epics.md section 12, row: Kosala as a major power'

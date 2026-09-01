@@ -1,0 +1,9 @@
+id: e.058
+type: cites
+from: ws.bhatti
+to: ram.core
+method: literary-citation
+provenance:
+  tier: asserted
+  source: 'docs/dating-sanskrit-epics.md section 12, row: Bhatti''s Bhattikavya, later source of the Old
+    Javanese poem'

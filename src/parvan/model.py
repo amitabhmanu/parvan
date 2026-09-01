@@ -226,7 +226,9 @@ class Edge:
     src: str
     dst: str
     method: str = ""
-    lag_min_years: int = 0
+    # None means "inherit the run's epsilon", which is distinct from an explicit 0.
+    # Conflating the two silently swallows a legitimate zero-lag absence edge (R-5, O-1).
+    lag_min_years: int | None = None
     direction_uncertain: bool = False
     confidence: float = 1.0
     provenance: Provenance | None = None
@@ -261,7 +263,7 @@ class Edge:
                 )
             )
 
-        if self.lag_min_years < 0:
+        if self.lag_min_years is not None and self.lag_min_years < 0:
             out.append(Violation("R-5", rec, "lag_min_years may not be negative"))
 
         if not 0.0 <= self.confidence <= 1.0:

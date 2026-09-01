@@ -1,0 +1,8 @@
+id: e.075
+type: frames
+from: ram.sambuka
+to: ram.core
+method: structural-seam
+provenance:
+  tier: asserted
+  source: 'docs/dating-sanskrit-epics.md section 12, row: Sambuka episode within the Uttarakanda'

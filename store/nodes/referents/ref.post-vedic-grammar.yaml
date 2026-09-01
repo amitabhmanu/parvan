@@ -1,0 +1,9 @@
+id: ref.post-vedic-grammar
+kind: referent
+label: Post-Vedic, non-Paninian grammar
+class: concept
+text_derived: true
+provenance:
+  tier: asserted
+  source: 'docs/dating-sanskrit-epics.md section 12, row: Post-Vedic grammar: no accent, collapsed tenses,
+    absolutive chaining'

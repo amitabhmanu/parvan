@@ -1,0 +1,8 @@
+id: e.008
+type: presupposes
+from: ram.core
+to: ref.karma-rebirth-moksa
+method: doctrinal-discontinuity
+provenance:
+  tier: asserted
+  source: 'docs/dating-sanskrit-epics.md section 12, row: Karma, rebirth, moksa as assumed framework'

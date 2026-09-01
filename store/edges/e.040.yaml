@@ -1,0 +1,9 @@
+id: e.040
+type: absent-from
+from: ram.core
+to: ref.classical-kavya-style
+method: absence
+lag_min_years: 0
+provenance:
+  tier: asserted
+  source: 'docs/dating-sanskrit-epics.md section 12, row: Short compounds; no mature kavya style'

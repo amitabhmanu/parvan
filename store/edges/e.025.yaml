@@ -1,0 +1,8 @@
+id: e.025
+type: attests
+from: hor.yavana-presence
+to: ref.yavana-saka
+method: archaeological-horizon
+provenance:
+  tier: asserted
+  source: 'docs/dating-sanskrit-epics.md section 12, row: Yavanas and Sakas in the Kiskindha geography'

@@ -1,0 +1,16 @@
+id: anc.liudu-jijing
+kind: anchor
+label: Liudu jijing, tr. Kang Senghui
+interval:
+  floor: 251
+  ceiling: 251
+dating_method: foreign-catalogue
+independent_of:
+- internal-linguistic
+- internal-structural
+- internal-doctrinal
+- documentary
+holdout_eligible: true
+provenance:
+  tier: attested
+  locus: Chinese Buddhist translation catalogues, Kang Senghui, 251 CE

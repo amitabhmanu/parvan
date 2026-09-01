@@ -1,0 +1,9 @@
+id: ws.kalidasa
+kind: work-state
+label: Kalidasa, Raghuvamsa
+interval:
+  floor: 380
+  ceiling: 460
+provenance:
+  tier: asserted
+  source: 'docs/dating-sanskrit-epics.md section 12, row: Kalidasa''s Raghuvamsa'

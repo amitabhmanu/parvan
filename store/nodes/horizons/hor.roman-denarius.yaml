@@ -1,0 +1,10 @@
+id: hor.roman-denarius
+kind: horizon
+label: Roman denarius in circulation reaching India
+interval:
+  floor: 1
+  ceiling: 100
+dating_method: numismatic
+provenance:
+  tier: attested
+  locus: Roman coin finds in South Asian hoards; denarius issue chronology

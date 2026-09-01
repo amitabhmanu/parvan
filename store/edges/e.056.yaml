@@ -1,0 +1,9 @@
+id: e.056
+type: cites
+from: anc.liudu-jijing
+to: ws.ram.251ce
+method: foreign-catalogue
+lag_min_years: 1
+provenance:
+  tier: asserted
+  source: 'docs/dating-sanskrit-epics.md section 12, row: Liudu jijing: Rama narrative in Chinese'

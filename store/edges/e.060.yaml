@@ -1,0 +1,11 @@
+id: e.060
+type: cites
+from: ws.mbh.ramopakhyana
+to: ram.core
+method: literary-citation
+direction_uncertain: true
+confidence: 0.7
+provenance:
+  tier: asserted
+  source: 'docs/dating-sanskrit-epics.md section 12, row: Ramopakhyana in the Mahabharata apparently depending
+    on Valmiki'

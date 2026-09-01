@@ -1,0 +1,10 @@
+id: hor.deccan-contact
+kind: horizon
+label: Sustained northern contact with the Deccan
+interval:
+  floor: -450
+  ceiling: -350
+dating_method: archaeological-horizon
+provenance:
+  tier: attested
+  locus: Pre-Mauryan and Mauryan-era southern material contact

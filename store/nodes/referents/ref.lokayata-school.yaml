@@ -1,0 +1,8 @@
+id: ref.lokayata-school
+kind: referent
+label: Lokayata as a named school worth refuting
+class: concept
+text_derived: true
+provenance:
+  tier: asserted
+  source: 'docs/dating-sanskrit-epics.md section 12, row: Jabali''s Lokayata speech'

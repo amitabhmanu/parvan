@@ -1,0 +1,8 @@
+id: e.024
+type: attests
+from: hor.roman-denarius
+to: ref.dinara
+method: numismatic
+provenance:
+  tier: asserted
+  source: 'docs/dating-sanskrit-epics.md section 12, row: Dinara, the Roman denarius'

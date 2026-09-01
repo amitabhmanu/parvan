@@ -1,0 +1,14 @@
+id: anc.deogarh
+kind: anchor
+label: Gupta Ramayana panels, Deogarh
+interval:
+  floor: 400
+  ceiling: 550
+dating_method: art-historical
+independent_of:
+- internal-linguistic
+- internal-structural
+holdout_eligible: true
+provenance:
+  tier: attested
+  locus: Dasavatara temple reliefs, Deogarh

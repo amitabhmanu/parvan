@@ -1,0 +1,9 @@
+id: e.053
+type: attests
+from: anc.veal-kantel
+to: ref.valmiki-as-author
+method: epigraphic-citation
+provenance:
+  tier: asserted
+  source: 'docs/dating-sanskrit-epics.md section 12, row: Veal Kantel: Ramayana endowed for recitation
+    in Cambodia'

@@ -4,5 +4,6 @@ from: ram.core
 to: ref.iron-weaponry
 method: realia-floor
 provenance:
-  tier: asserted
-  source: 'docs/dating-sanskrit-epics.md section 12, row: Iron weaponry'
+  tier: attested
+  locus: Ram.6.086.006 - ayasam parigham grhya; an iron bludgeon wielded in battle. Cf. Ram.6.060.022,
+    6.067.006 sruvam karsnayasam (black iron)

@@ -52,11 +52,15 @@ Worth a schema field: `archetypal: true|star` on stratum passages.
 divergence" constraint (scored 3, relative ordering) stops being a citation to someone else's
 collation and becomes computable from two files.
 
-> **OPEN — verify before Phase 6.** The GRETIL index describes the primary Rāmāyaṇa as a
-> "constituted text" without naming Baroda. It must be confirmed whether this is the Baroda
-> critical edition or the vulgate. Phase 6 stratification on the wrong text would be worthless.
-> **Does not block Phases 1–5** — V-1 encodes §12's constraints from `dating-sanskrit-epics.md`,
-> not from the text itself.
+> **RESOLVED 2026-09-01 — this is the Baroda critical edition.** 18,761 verses across 7
+> kāṇḍas, against the CE's ~18,600 and the vulgate's ~24,000, with sarga counts well below
+> vulgate values throughout. Addressing is `R_1.001.001ab` — kāṇḍa.sarga.śloka plus pāda-pair.
+> Phase 6 is unblocked. See `promotion-slice.md`.
+>
+> **But: no critical apparatus.** The TEI carries zero `<app>`, `<rdg>`, `<lem>` or `<note>`
+> elements. Unlike the Mahābhārata file, it preserves no star passages, so `archetypal:
+> true|star` can be populated for the Mahābhārata and **not** for the Rāmāyaṇa. That removes
+> the cheapest way to distinguish an archetypal reading from an excised one.
 
 ---
 
@@ -124,8 +128,10 @@ partition Parvan computes is one it can also recompute under ablation.
 
 1. **Adopt pāda-level addressing** in the Phase 1 schema, not śloka-level. Amends **R-1**.
 2. **Add `archetypal: true|star`** to stratum passage records to carry the BORI apparatus.
-3. **Verify the GRETIL Rāmāyaṇa edition basis** before Phase 6.
+3. ~~Verify the GRETIL Rāmāyaṇa edition basis before Phase 6.~~ **Done** — Baroda CE
+   confirmed; no apparatus.
 4. **Confirm the Siddham licence variant and current Zenodo DOI** at Phase 4.
 5. **Plan to re-derive** rather than ship a Brockington seed partition (**R-15**).
 
-No files have been downloaded. Ingestion begins at Phase 4 and needs a separate go-ahead.
+**Update 2026-09-01.** The three GRETIL Rāmāyaṇa files have been fetched into a gitignored
+`corpus/` directory (6.1 MB, not redistributed). Nothing else has been downloaded.

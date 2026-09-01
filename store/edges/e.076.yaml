@@ -1,9 +1,0 @@
-id: e.076
-type: frames
-from: ram.dinara
-to: ram.core
-method: structural-seam
-confidence: 0.6
-provenance:
-  tier: asserted
-  source: 'docs/dating-sanskrit-epics.md section 12, row: Dinara passages as later insertions'

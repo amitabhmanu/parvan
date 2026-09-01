@@ -72,8 +72,6 @@ HORIZONS = [
      "archaeological-horizon", "Ayodhya excavation levels; no substantial occupation earlier"),
     ("hor.kosala-power", "Kosala as a major political power", -750, -650,
      "archaeological-horizon", "Mahajanapada-period settlement and fortification record"),
-    ("hor.roman-denarius", "Roman denarius in circulation reaching India", 1, 100,
-     "numismatic", "Roman coin finds in South Asian hoards; denarius issue chronology"),
     ("hor.yavana-presence", "Greek presence in the northwest", -330, -300,
      "archaeological-horizon", "Alexander's campaign and successor settlement; Indo-Greek horizon"),
     ("hor.deccan-contact", "Sustained northern contact with the Deccan", -450, -350,
@@ -126,7 +124,6 @@ STRATA = [
     ("ram.yuddha-ending", "Yuddhakanda divine-assembly ending", ["Ram.6"]),
     ("ram.jabali", "Jabali's Lokayata speech", ["Ram.2"]),
     ("ram.sambuka", "Sambuka episode", ["Ram.7"]),
-    ("ram.dinara", "Passages using dinara", []),  # section 12 does not localise these
 ]
 
 # Referents. `text_derived` is not a judgement about importance - it records that the
@@ -141,8 +138,6 @@ REFERENTS = [
      -700, -600, False, att("Ayodhya excavation levels")),
     ("ref.kosala-power", "Kosala as a major power", "institution", -750, -650, False,
      att("Mahajanapada settlement and fortification record")),
-    ("ref.dinara", "Dinara, the Roman denarius", "technology", 1, 100, False,
-     att("Roman coin finds in South Asian hoards")),
     ("ref.yavana-saka", "Yavanas and Sakas as known peoples", "institution", -330, -300, False,
      att("Indo-Greek and Saka horizon in the northwest")),
     ("ref.deccan-knowledge", "Southern flora, fauna and place-knowledge", "institution",
@@ -173,25 +168,34 @@ REFERENTS = [
 EDGES = [
     # --- floors: the strata presuppose these referents -------------------------------
     ("e.001", "presupposes", "ram.core", "ref.horse-chariot", "realia-floor",
-     "Horses and chariots throughout", {}),
+     "Horses and chariots throughout",
+     {"prov": att("Ram.2.090.008 - rathasvagajasambadham yattair yuktam padatibhih; "
+                  "an army thronged with chariots, horses and elephants, joined by foot")}),
     ("e.002", "presupposes", "ram.core", "ref.iron-weaponry", "realia-floor",
-     "Iron weaponry", {}),
+     "Iron weaponry",
+     {"prov": att("Ram.6.086.006 - ayasam parigham grhya; an iron bludgeon wielded in "
+                  "battle. Cf. Ram.6.060.022, 6.067.006 sruvam karsnayasam (black iron)")}),
     ("e.003", "presupposes", "ram.core", "ref.post-vedic-grammar", "linguistic-stratigraphy",
      "Post-Vedic grammar", {}),
     ("e.004", "presupposes", "ram.bala", "ref.post-vedic-grammar", "linguistic-stratigraphy",
      "Post-Vedic grammar", {}),
     ("e.005", "presupposes", "ram.uttara", "ref.post-vedic-grammar", "linguistic-stratigraphy",
      "Post-Vedic grammar", {}),
-    ("e.006", "presupposes", "ram.dinara", "ref.dinara", "realia-floor",
-     "Dinara, the Roman denarius", {}),
     ("e.007", "presupposes", "ram.core", "ref.fortified-ayodhya", "realia-floor",
      "Ayodhya as a great fortified metropolis", {}),
     ("e.008", "presupposes", "ram.core", "ref.karma-rebirth-moksa", "doctrinal-discontinuity",
      "Karma, rebirth, moksa as assumed framework", {}),
     ("e.009", "presupposes", "ram.core", "ref.kosala-power", "realia-floor",
      "Kosala as a major power", {}),
-    ("e.010", "presupposes", "ram.kiskindha-geog", "ref.yavana-saka", "realia-floor",
-     "Yavanas and Sakas in the Kiskindha geography", {}),
+    # CORRECTED against the critical edition. Section 12 places this in the Kiskindha
+    # geography (book 4, part of the core). Book 4 of the Baroda CE contains no foreign
+    # ethnonym at all. The Yavanas and Sakas are in BALAKANDA, which section 12 itself
+    # classes as a later stratum - so the floor does no work it was credited with.
+    ("e.010", "presupposes", "ram.bala", "ref.yavana-saka", "realia-floor",
+     "Yavanas and Sakas in the Kiskindha geography [misattributed - see docs/promotion-slice.md]",
+     {"prov": att("Ram.1.053.020, Ram.1.053.021, Ram.1.054.003 - pahlavan ... sakan "
+                  "yavanamisritan. Baroda CE book 4: zero hits for yavana, saka, pahlava, "
+                  "kamboja, mleccha, kirata, pulinda, andhra, cola, pandya, kerala, cina")}),
     ("e.011", "presupposes", "ram.jabali", "ref.lokayata-school", "doctrinal-discontinuity",
      "Jabali's Lokayata speech", {}),
     ("e.012", "presupposes", "ram.bala", "ref.avatara-theology", "doctrinal-discontinuity",
@@ -212,8 +216,6 @@ EDGES = [
      "Ayodhya as a great fortified metropolis", {}),
     ("e.023", "attests", "hor.kosala-power", "ref.kosala-power", "archaeological-horizon",
      "Kosala as a major power", {}),
-    ("e.024", "attests", "hor.roman-denarius", "ref.dinara", "numismatic",
-     "Dinara, the Roman denarius", {}),
     ("e.025", "attests", "hor.yavana-presence", "ref.yavana-saka", "archaeological-horizon",
      "Yavanas and Sakas in the Kiskindha geography", {}),
     ("e.026", "attests", "hor.deccan-contact", "ref.deccan-knowledge", "archaeological-horizon",
@@ -246,7 +248,10 @@ EDGES = [
     # The only pre-CE ceiling anywhere in section 12's table, and it is scored 2.
     ("e.043", "absent-from", "ram.core", "ref.pataliputra-imperial", "absence",
      "Pataliputra absent as imperial capital - soft ceiling c. 300 BCE on the geographic frame",
-     {"lag_min_years": 0, "confidence": 0.4}),
+     {"lag_min_years": 0, "confidence": 0.4,
+      "prov": att("GRETIL Baroda CE, all 18761 verses: 0 hits for "
+                  "/pa?[tt]aliputra|pa?[tt]alipura/ and for the diacritic-folded form. "
+                  "A measured silence: re-runnable via tools/concordance.py")}),
     ("e.044", "attests", "hor.mauryan-capital", "ref.pataliputra-imperial",
      "archaeological-horizon", "Pataliputra absent as imperial capital", {}),
     ("e.042", "absent-from", "ram.core", "ref.bharata-war-narrative", "absence",
@@ -299,8 +304,6 @@ EDGES = [
      "Yuddhakanda divine-assembly ending", {}),
     ("e.075", "frames", "ram.sambuka", "ram.core", "structural-seam",
      "Sambuka episode within the Uttarakanda", {}),
-    ("e.076", "frames", "ram.dinara", "ram.core", "structural-seam",
-     "Dinara passages as later insertions", {"confidence": 0.6}),
 ]
 
 
@@ -355,8 +358,10 @@ def emit() -> None:
 
     for eid, etype, frm, to, method, row, extras in EDGES:
         rec = {"id": eid, "type": etype, "from": frm, "to": to, "method": method}
+        extras = dict(extras)
+        prov = extras.pop("prov", None)
         rec.update(extras)
-        rec["provenance"] = src(row)
+        rec["provenance"] = prov or src(row)
         dump(STORE / "edges" / f"{eid}.yaml", rec)
 
     n = len(ANCHORS) + len(HORIZONS) + len(WORK_STATES) + len(STRATA) + len(REFERENTS)

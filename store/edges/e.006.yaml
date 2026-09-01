@@ -1,8 +1,0 @@
-id: e.006
-type: presupposes
-from: ram.dinara
-to: ref.dinara
-method: realia-floor
-provenance:
-  tier: asserted
-  source: 'docs/dating-sanskrit-epics.md section 12, row: Dinara, the Roman denarius'

@@ -6,6 +6,6 @@ method: absence
 lag_min_years: 0
 confidence: 0.4
 provenance:
-  tier: asserted
-  source: 'docs/dating-sanskrit-epics.md section 12, row: Pataliputra absent as imperial capital - soft
-    ceiling c. 300 BCE on the geographic frame'
+  tier: attested
+  locus: 'GRETIL Baroda CE, all 18761 verses: 0 hits for /pa?[tt]aliputra|pa?[tt]alipura/ and for the
+    diacritic-folded form. A measured silence: re-runnable via tools/concordance.py'

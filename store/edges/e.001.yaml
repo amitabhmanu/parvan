@@ -4,5 +4,6 @@ from: ram.core
 to: ref.horse-chariot
 method: realia-floor
 provenance:
-  tier: asserted
-  source: 'docs/dating-sanskrit-epics.md section 12, row: Horses and chariots throughout'
+  tier: attested
+  locus: Ram.2.090.008 - rathasvagajasambadham yattair yuktam padatibhih; an army thronged with chariots,
+    horses and elephants, joined by foot

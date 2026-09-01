@@ -95,8 +95,15 @@ HORIZONS = [
      "archaeological-horizon", "Alexander's campaign and successor settlement; Indo-Greek horizon"),
     ("hor.deccan-contact", "Sustained northern contact with the Deccan", -450, -350,
      "archaeological-horizon", "Pre-Mauryan and Mauryan-era southern material contact"),
-    ("hor.mauryan-capital", "Pataliputra as the imperial centre", -320, -180,
-     "archaeological-horizon", "Pataliputra excavation; Nanda-Mauryan imperial phase"),
+    # ONSET, not duration. Grounding pins a referent's emergence to its horizon's interval,
+    # so a horizon must express the window in which the thing BEGAN, not how long it lasted.
+    # This was first encoded as [-320, -180], the span of the imperial phase, which made the
+    # absence argument yield "predates 180 BCE" - the date Pataliputra stopped being an
+    # unremarkable thing to omit, which is not the claim. Corrected to the accession window.
+    # Every other horizon in this file was already an onset window; this was the only one.
+    ("hor.mauryan-capital", "Pataliputra becomes the recognised imperial centre", -350, -300,
+     "archaeological-horizon",
+     "Pataliputra excavation; Nanda accession through early Mauryan consolidation"),
     ("hor.huna-india", "Huna presence in South Asia", 450, 550, "archaeological-horizon",
      "Hunnic incursion horizon; Gupta-period numismatic and epigraphic record"),
     ("hor.qin-china", "The Qin state, source of Cina", -221, -206, "foreign-catalogue",
@@ -170,18 +177,18 @@ STRATA = [
 # referent's date comes from texts, which bars it from anchoring the strata it constrains (G-4).
 REFERENTS = [
     # id, label, class, emergence(floor, ceiling), text_derived, provenance
-    ("ref.horse-chariot", "Horse-and-chariot warfare", "technology", -2100, -1900, False,
+    ("ref.horse-chariot", "Horse-and-chariot warfare", "technology", None, None, False,
      att("Sintashta chariot burials; domestic horse lineage; Harappan faunal absence")),
-    ("ref.iron-weaponry", "Iron weaponry (krsna-ayas)", "technology", -1300, -1200, False,
+    ("ref.iron-weaponry", "Iron weaponry (krsna-ayas)", "technology", None, None, False,
      att("Earliest iron-bearing levels, South Asian excavation record")),
     ("ref.fortified-ayodhya", "Ayodhya as a great fortified metropolis", "institution",
-     -700, -600, False, att("Ayodhya excavation levels")),
-    ("ref.kosala-power", "Kosala as a major power", "institution", -750, -650, False,
+     None, None, False, att("Ayodhya excavation levels")),
+    ("ref.kosala-power", "Kosala as a major power", "institution", None, None, False,
      att("Mahajanapada settlement and fortification record")),
-    ("ref.yavana-saka", "Yavanas and Sakas as known peoples", "institution", -330, -300, False,
+    ("ref.yavana-saka", "Yavanas and Sakas as known peoples", "institution", None, None, False,
      att("Indo-Greek and Saka horizon in the northwest")),
     ("ref.deccan-knowledge", "Southern flora, fauna and place-knowledge", "institution",
-     -450, -350, False, att("Material record of northern contact with the Deccan")),
+     None, None, False, att("Material record of northern contact with the Deccan")),
     # Text-derived: dated from literature, so barred from anchoring (G-4).
     ("ref.post-vedic-grammar", "Post-Vedic, non-Paninian grammar", "concept", None, None, True,
      src("Post-Vedic grammar: no accent, collapsed tenses, absolutive chaining")),
@@ -200,19 +207,19 @@ REFERENTS = [
     ("ref.bharata-war-narrative", "The Bharata war narrative in circulation", "concept",
      None, None, True, src("Ramayana never mentions the Pandavas or the Bharata war")),
     ("ref.pataliputra-imperial", "Pataliputra as the recognised imperial capital",
-     "institution", -320, -300, False,
+     "institution", None, None, False,
      att("Pataliputra excavation record; Nanda-Mauryan imperial phase")),
     # --- section 11 referents -----------------------------------------------------
-    ("ref.hunas", "Hunas as a known people", "institution", 450, 550, False,
+    ("ref.hunas", "Hunas as a known people", "institution", None, None, False,
      att("Hunnic incursion horizon, Gupta-period record")),
-    ("ref.cinas", "Cinas as a known people", "institution", -221, -206, False,
+    ("ref.cinas", "Cinas as a known people", "institution", None, None, False,
      att("Qin dynastic records")),
     ("ref.eduka-polemic", "Eduka and stupa construction as a target of polemic", "institution",
-     -250, -150, False, att("Early stupa horizon, post-Asokan")),
+     None, None, False, att("Early stupa horizon, post-Asokan")),
     ("ref.massed-elephant-corps", "Massed elephant corps in a fourfold army", "institution",
-     -500, -350, False, att("Magadhan-era military record; Greek accounts")),
+     None, None, False, att("Magadhan-era military record; Greek accounts")),
     ("ref.greek-astrology-terms", "Greek-derived astrological vocabulary", "concept",
-     150, 250, False, att("hora, kendra, drekkana as loans into Sanskrit jyotisa")),
+     None, None, False, att("hora, kendra, drekkana as loans into Sanskrit jyotisa")),
     ("ref.temple-image-worship", "Temple and image worship", "institution", -200, -100,
      False, att("Earliest shrine and image archaeology")),
     ("ref.classical-samkhya", "Classical Samkhya's fixed twenty-five-tattva scheme", "concept",
@@ -497,6 +504,43 @@ EDGES = [
      "Anthology: Nala, Savitri, Ramopakhyana, tirtha catalogue", {}),
     ("e.153", "frames", "mbh.late-peoples", "ws.mbh.core", "structural-seam",
      "Peoples lists as later expansion", {"confidence": 0.7}),
+
+    # ==================================================================================
+    # GROUNDING - the missing half of `attests`
+    # ==================================================================================
+    # Attestation caps an emergence from above and never floors it, so before these edges
+    # existed every material referent carried a hardcoded emergence interval and the
+    # thirteen horizon nodes were inert: deleting an anchor changed nothing at all. Each
+    # pair below derives the floor from its horizon, so anchors carry the system the way
+    # the design says they should.
+    ("g.020", "grounds", "hor.horse-chariot", "ref.horse-chariot", "archaeological-horizon",
+     "Horses and chariots throughout", {}),
+    ("g.021", "grounds", "hor.iron-india", "ref.iron-weaponry", "archaeological-horizon",
+     "Iron weaponry", {}),
+    ("g.022", "grounds", "hor.ayodhya-urban", "ref.fortified-ayodhya", "archaeological-horizon",
+     "Ayodhya as a great fortified metropolis", {}),
+    ("g.023", "grounds", "hor.kosala-power", "ref.kosala-power", "archaeological-horizon",
+     "Kosala as a major power", {}),
+    ("g.025", "grounds", "hor.yavana-presence", "ref.yavana-saka", "archaeological-horizon",
+     "Yavanas and Sakas", {}),
+    ("g.026", "grounds", "hor.deccan-contact", "ref.deccan-knowledge", "archaeological-horizon",
+     "Southern flora, fauna, place-knowledge", {}),
+    ("g.044", "grounds", "hor.mauryan-capital", "ref.pataliputra-imperial", "archaeological-horizon",
+     "Pataliputra absent as imperial capital", {}),
+    ("g.120", "grounds", "hor.huna-india", "ref.hunas", "archaeological-horizon",
+     "Hunas in the peoples lists", {}),
+    ("g.121", "grounds", "hor.qin-china", "ref.cinas", "foreign-catalogue",
+     "Cinas (from Qin)", {}),
+    ("g.122", "grounds", "hor.stupa-eduka", "ref.eduka-polemic", "archaeological-horizon",
+     "Eduka / stupa polemic", {}),
+    ("g.123", "grounds", "hor.massed-elephants", "ref.massed-elephant-corps", "archaeological-horizon",
+     "Massed elephant corps, fourfold army", {}),
+    ("g.124", "grounds", "hor.greek-astrology", "ref.greek-astrology-terms", "foreign-catalogue",
+     "Greek-derived astrological vocabulary", {}),
+    ("g.125", "grounds", "hor.temple-image-worship", "ref.temple-image-worship", "archaeological-horizon",
+     "Temple and image worship assumed", {}),
+    ("g.126", "grounds", "anc.agathocles", "ref.vasudeva-epic-attributes", "numismatic",
+     "Agathocles coins, Krsna-Balarama iconography", {}),
 ]
 
 

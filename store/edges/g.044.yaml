@@ -1,0 +1,8 @@
+id: g.044
+type: grounds
+from: hor.mauryan-capital
+to: ref.pataliputra-imperial
+method: archaeological-horizon
+provenance:
+  tier: asserted
+  source: 'docs/dating-sanskrit-epics.md scored inventory, row: Pataliputra absent as imperial capital'

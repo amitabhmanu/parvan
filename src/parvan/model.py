@@ -16,15 +16,27 @@ from typing import Literal
 NodeKind = Literal[
     "anchor", "horizon", "referent", "stratum", "work-state", "reception", "feature-band"
 ]
-EdgeType = Literal["presupposes", "attests", "cites", "contains", "frames", "absent-from"]
+EdgeType = Literal[
+    "presupposes", "attests", "grounds", "cites", "contains", "frames", "absent-from"
+]
 Tier = Literal["attested", "asserted", "model-inferred"]
 
 NODE_KINDS: frozenset[str] = frozenset(
     ("anchor", "horizon", "referent", "stratum", "work-state", "reception", "feature-band")
 )
 EDGE_TYPES: frozenset[str] = frozenset(
-    ("presupposes", "attests", "cites", "contains", "frames", "absent-from")
+    ("presupposes", "attests", "grounds", "cites", "contains", "frames", "absent-from")
 )
+
+# `grounds` is the missing half of `attests`. Attestation caps an emergence from above and
+# never floors it (R-4), so a referent whose emergence is only attested contributes no floor
+# to anything - which is how thirteen horizon nodes came to be inert while the floors they
+# were supposed to supply sat hardcoded in the encoder instead.
+#
+# A material horizon makes a genuinely two-sided claim: iron metallurgy did not exist in
+# South Asia before c. 1300 BCE. That is a floor, and only material evidence can make it,
+# so only material node kinds may ground.
+GROUNDING_KINDS: frozenset[str] = frozenset(("horizon", "anchor"))
 TIERS: frozenset[str] = frozenset(("attested", "asserted", "model-inferred"))
 
 # Structural nodes are inferred groupings, not evidential claims, so they carry no

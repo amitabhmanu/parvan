@@ -2,9 +2,6 @@ id: ref.yavana-saka
 kind: referent
 label: Yavanas and Sakas as known peoples
 class: institution
-emergence:
-  floor: -330
-  ceiling: -300
 text_derived: false
 provenance:
   tier: attested

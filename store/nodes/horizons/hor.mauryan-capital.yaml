@@ -1,10 +1,10 @@
 id: hor.mauryan-capital
 kind: horizon
-label: Pataliputra as the imperial centre
+label: Pataliputra becomes the recognised imperial centre
 interval:
-  floor: -320
-  ceiling: -180
+  floor: -350
+  ceiling: -300
 dating_method: archaeological-horizon
 provenance:
   tier: attested
-  locus: Pataliputra excavation; Nanda-Mauryan imperial phase
+  locus: Pataliputra excavation; Nanda accession through early Mauryan consolidation

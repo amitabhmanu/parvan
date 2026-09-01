@@ -2,9 +2,6 @@ id: ref.iron-weaponry
 kind: referent
 label: Iron weaponry (krsna-ayas)
 class: technology
-emergence:
-  floor: -1300
-  ceiling: -1200
 text_derived: false
 provenance:
   tier: attested

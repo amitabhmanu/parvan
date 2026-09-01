@@ -111,9 +111,27 @@ carry nothing. What carries the system is about six numbers typed into
 `tools/encode_inventory.py`, each with `attested` provenance pointing at an excavation report
 nobody has opened.
 
-**Fix required before any Phase 5 result is reportable.** Material referents need their
-emergence *derived* from a horizon rather than declared alongside one — which needs a
-two-sided edge type, since `attests` only caps from above. Logged as the next schema change.
+**Fixed.** A seventh edge type, `grounds`, supplies the floor that `attests` cannot, and G-7
+restricts it to material node kinds. Every material referent now derives its emergence from a
+horizon instead of declaring one, and the anchors bind:
+
+```
+drop hor.mauryan-capital   ram.core    [750 BCE, 300 BCE] -> [750 BCE, 250 CE]
+                           ws.mbh.core [500 BCE, 300 BCE] -> [500 BCE, 299 CE]
+drop hor.kosala-power      ram.core    [750 BCE, 300 BCE] -> [1300 BCE, 300 BCE]
+drop hor.massed-elephants  ws.mbh.core [500 BCE, 300 BCE] -> [750 BCE, 300 BCE]
+```
+
+The brackets are unchanged, which is the point: the same numbers, now derived from cited
+horizons rather than typed into the encoder. Cuts remain 1, but the single point of failure is
+now a named archaeological horizon rather than an invisible constant.
+
+The change also exposed a second error. Grounding pins emergence to the horizon's interval, so
+a horizon must express an **onset window**, not a duration. `hor.mauryan-capital` had been
+encoded as the imperial phase [-320, -180], which made the absence argument yield "predates
+180 BCE" — the date Pāṭaliputra stopped being unremarkable to omit, which is not the claim.
+Corrected to the accession window. Every other horizon was already an onset window; this was
+the only one, and only deriving rather than declaring made it visible.
 
 ## 3. A limitation this exposed in `parvan influence`
 

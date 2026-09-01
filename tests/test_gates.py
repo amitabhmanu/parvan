@@ -360,3 +360,43 @@ def test_report_groups_violations_by_gate(store: Path) -> None:
     report = exc.value.report()
     assert "G-1" in report and "R-6" in report
     assert "e.bad" in report
+
+
+# --- G-7: only material evidence may floor an emergence ---------------------------
+
+
+def test_g7_a_text_may_not_ground_an_emergence(store: Path) -> None:
+    """A floor on when something began to exist is a material claim. Letting a text make it
+    reintroduces exactly the circularity G-4 prevents: the text would date the referent that
+    then dates the text."""
+    write(
+        store,
+        "edges/e.textgrounds.yaml",
+        {
+            "id": "e.textgrounds",
+            "type": "grounds",
+            "from": "str.test",
+            "to": "ref.test",
+            "method": "realia-floor",
+            "provenance": {"tier": "attested", "locus": "Test.1.4.2"},
+        },
+    )
+    assert "G-7" in refuse(store)
+
+
+def test_g7_a_horizon_may_ground(store: Path) -> None:
+    """The control: an anchor grounding a referent is exactly what the edge is for."""
+    write(
+        store,
+        "edges/e.anchorgrounds.yaml",
+        {
+            "id": "e.anchorgrounds",
+            "type": "grounds",
+            "from": "anc.test",
+            "to": "ref.test",
+            "method": "numismatic",
+            "provenance": {"tier": "attested", "locus": "test coin catalogue no. 1"},
+        },
+    )
+    loaded = load(store)
+    assert "e.anchorgrounds" in loaded.edges

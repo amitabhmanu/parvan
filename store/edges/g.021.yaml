@@ -1,0 +1,8 @@
+id: g.021
+type: grounds
+from: hor.iron-india
+to: ref.iron-weaponry
+method: archaeological-horizon
+provenance:
+  tier: asserted
+  source: 'docs/dating-sanskrit-epics.md scored inventory, row: Iron weaponry'

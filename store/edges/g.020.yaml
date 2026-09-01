@@ -1,0 +1,8 @@
+id: g.020
+type: grounds
+from: hor.horse-chariot
+to: ref.horse-chariot
+method: archaeological-horizon
+provenance:
+  tier: asserted
+  source: 'docs/dating-sanskrit-epics.md scored inventory, row: Horses and chariots throughout'

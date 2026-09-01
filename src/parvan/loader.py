@@ -15,7 +15,7 @@ from pathlib import Path
 
 import yaml
 
-from .model import Edge, Interval, Node, Provenance, Violation
+from .model import GROUNDING_KINDS, Edge, Interval, Node, Provenance, Violation
 
 # Referents may legitimately be attested by these kinds without circularity: they are dated
 # by non-textual means. A referent attested only by texts is text-derived (G-4).
@@ -230,6 +230,22 @@ def _check_graph(store: Store) -> list[Violation]:
                     edge.source_file or edge.id,
                     f"{edge.type!r} edge may not declare lag_min_years <= 0; omit the field "
                     "to inherit the run's epsilon, which is always positive",
+                )
+            )
+
+    # --- G-7: only material evidence may floor an emergence --------------------
+    for edge in store.edges.values():
+        if edge.type != "grounds":
+            continue
+        src = store.nodes.get(edge.src)
+        if src is not None and src.kind not in GROUNDING_KINDS:
+            out.append(
+                Violation(
+                    "G-7",
+                    edge.source_file or edge.id,
+                    f"{edge.src!r} is a {src.kind!r} and may not ground an emergence; "
+                    "a floor on when something began to exist is a material claim, and "
+                    "letting a text make it reintroduces the circularity G-4 prevents",
                 )
             )
 

@@ -2,9 +2,6 @@ id: ref.eduka-polemic
 kind: referent
 label: Eduka and stupa construction as a target of polemic
 class: institution
-emergence:
-  floor: -250
-  ceiling: -150
 text_derived: false
 provenance:
   tier: attested

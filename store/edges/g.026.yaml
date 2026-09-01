@@ -1,0 +1,8 @@
+id: g.026
+type: grounds
+from: hor.deccan-contact
+to: ref.deccan-knowledge
+method: archaeological-horizon
+provenance:
+  tier: asserted
+  source: 'docs/dating-sanskrit-epics.md scored inventory, row: Southern flora, fauna, place-knowledge'

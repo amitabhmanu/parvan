@@ -1,0 +1,8 @@
+id: g.022
+type: grounds
+from: hor.ayodhya-urban
+to: ref.fortified-ayodhya
+method: archaeological-horizon
+provenance:
+  tier: asserted
+  source: 'docs/dating-sanskrit-epics.md scored inventory, row: Ayodhya as a great fortified metropolis'

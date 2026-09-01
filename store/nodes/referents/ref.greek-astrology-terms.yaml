@@ -2,9 +2,6 @@ id: ref.greek-astrology-terms
 kind: referent
 label: Greek-derived astrological vocabulary
 class: concept
-emergence:
-  floor: 150
-  ceiling: 250
 text_derived: false
 provenance:
   tier: attested

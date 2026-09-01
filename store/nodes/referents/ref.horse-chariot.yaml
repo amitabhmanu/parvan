@@ -2,9 +2,6 @@ id: ref.horse-chariot
 kind: referent
 label: Horse-and-chariot warfare
 class: technology
-emergence:
-  floor: -2100
-  ceiling: -1900
 text_derived: false
 provenance:
   tier: attested

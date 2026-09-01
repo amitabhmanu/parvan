@@ -157,6 +157,15 @@ def build(
                 )
             )
 
+        elif edge.type == "grounds":
+            # The referent did not exist before the horizon: X_ref^e >= X_horizon.
+            # This is the only edge that floors an emergence from material evidence, and
+            # it is what makes an anchor load-bearing rather than ornamental.
+            h, r = date_var(store, edge.src), emergence_var(edge.dst)
+            cons.append(
+                Constraint(r, h, 0.0, edge.id, f"{edge.dst} not before {edge.src}")
+            )
+
         elif edge.type == "absent-from":
             # The only method that ever floors a concept referent: a source that should
             # mention it and does not.

@@ -2,9 +2,6 @@ id: ref.cinas
 kind: referent
 label: Cinas as a known people
 class: institution
-emergence:
-  floor: -221
-  ceiling: -206
 text_derived: false
 provenance:
   tier: attested

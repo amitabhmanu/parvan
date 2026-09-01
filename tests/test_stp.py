@@ -264,3 +264,53 @@ def test_astronomical_date_for_rama_is_infeasible_against_the_iron_floor() -> No
         c.origin for c in sol.constraints
     }
     assert "cycle weight" in sol.witness()
+
+
+# --- grounding: the missing half of attestation -----------------------------------
+
+
+def test_grounds_floors_an_emergence_where_attests_cannot() -> None:
+    """Attestation caps from above and never floors. Without `grounds`, a material referent
+    contributes no floor to anything that presupposes it - which is how thirteen horizon
+    nodes came to be inert while their floors sat hardcoded in the encoder."""
+    nodes = [
+        Node(id="hor.iron", kind="horizon", interval=Interval(floor=-1300, ceiling=-1200),
+             provenance=PROV),
+        referent("ref.iron"),
+        stratum("str.epic"),
+    ]
+    attest_only = mkstore(nodes, [
+        edge("e1", "attests", "hor.iron", "ref.iron"),
+        edge("e2", "presupposes", "str.epic", "ref.iron"),
+    ])
+    sol = solve(attest_only)
+    assert sol.consistent
+    assert sol.bounds["str.epic"].floor == float("-inf")
+
+    grounded = mkstore(nodes, [
+        edge("e1", "attests", "hor.iron", "ref.iron"),
+        edge("e3", "grounds", "hor.iron", "ref.iron"),
+        edge("e2", "presupposes", "str.epic", "ref.iron"),
+    ])
+    sol = solve(grounded)
+    assert sol.consistent
+    assert sol.bounds["str.epic"].floor == -1300
+
+
+def test_grounding_makes_the_anchor_load_bearing() -> None:
+    """The point of the change: deleting a horizon must now move what it supports."""
+    nodes = [
+        Node(id="hor.iron", kind="horizon", interval=Interval(floor=-1300, ceiling=-1200),
+             provenance=PROV),
+        referent("ref.iron"),
+        stratum("str.epic"),
+    ]
+    edges = [
+        edge("e1", "attests", "hor.iron", "ref.iron"),
+        edge("e3", "grounds", "hor.iron", "ref.iron"),
+        edge("e2", "presupposes", "str.epic", "ref.iron"),
+    ]
+    with_anchor = solve(mkstore(nodes, edges))
+    without = solve(mkstore(nodes[1:], [e for e in edges if e.src != "hor.iron"]))
+    assert with_anchor.bounds["str.epic"].floor == -1300
+    assert without.bounds["str.epic"].floor == float("-inf")

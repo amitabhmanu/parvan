@@ -1,0 +1,8 @@
+id: g.120
+type: grounds
+from: hor.huna-india
+to: ref.hunas
+method: archaeological-horizon
+provenance:
+  tier: asserted
+  source: 'docs/dating-sanskrit-epics.md scored inventory, row: Hunas in the peoples lists'

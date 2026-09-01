@@ -1,0 +1,140 @@
+# Closed method vocabulary (R-6).
+#
+# A method is the kind of reasoning that licenses an edge. Methods are the units of the
+# Phase 5 reliability model: edges hang off their method, so two edges sharing a method
+# are correlated by construction and contribute less than two that do not (D-3).
+#
+# Adding a tag is a SCHEMA CHANGE, not a config edit. An unknown tag would silently create
+# an unpooled category and quietly overstate independence.
+#
+# `independence_class` groups methods that share underlying reasoning. Path-disjointness
+# (R-13) counts two routes as independent only if they share no class - not merely no edges.
+#
+# Deliberately NOT recorded here: any prior reliability weight. Reliability is estimated in
+# Phase 5, not assigned. Writing a number here would reintroduce the hand-assigned 1-5 scores
+# the design sets out to replace.
+
+schema_version: "0.1.0"
+
+independence_classes:
+  internal-linguistic: Features of the language itself - morphology, lexicon, metre.
+  internal-structural: Composition and seams - framing, interruption, recension divergence.
+  internal-doctrinal: Ideas presupposed or argued against.
+  material: Physical and archaeological evidence.
+  documentary: Dated Indian written records.
+  foreign-documentary: Dated records from outside the Indian archive.
+  comparative: Inherited narrative structure across traditions.
+
+methods:
+
+  realia-floor:
+    class: internal-doctrinal
+    definition: >
+      A people, object, or institution named in the text cannot predate its existence.
+      Yields a floor on the passage, never a ceiling.
+    weakness: >
+      Late items interpolate easily, so the floor binds the passage and not the work.
+      Poets also archaise deliberately.
+
+  linguistic-stratigraphy:
+    class: internal-linguistic
+    definition: >
+      Post-Vedic, non-Paninian morphology and syntax drifting toward Middle Indo-Aryan.
+    weakness: >
+      Scribes normalised toward the Paninian standard, so the surviving text is tidier than
+      what was composed. Gives a minimum level of irregularity, which pushes estimates later.
+
+  metrical-statistics:
+    class: internal-linguistic
+    definition: >
+      Vipula-to-pathya ratios, the frequency ranking of vipula types, compound length.
+    weakness: >
+      Formulaic diction preserves obsolete forms indefinitely; dates the tradition rather
+      than the composition.
+
+  doctrinal-discontinuity:
+    class: internal-doctrinal
+    definition: >
+      A doctrine visibly under construction, or a hero mortal in one chapter and divine in
+      the next. Inconsistent lists indicate an emerging rather than a settled doctrine.
+    weakness: Staged debate is not endorsement; texts voice positions in order to defeat them.
+
+  structural-seam:
+    class: internal-structural
+    definition: >
+      The interruption test - excise a passage and the narrative closes seamlessly, often
+      resuming a line already spoken. Also nested frames, which must postdate what they wrap.
+    weakness: Late insertion does not imply late material.
+
+  manuscript-divergence:
+    class: internal-structural
+    definition: Passages present in one recension and absent from another.
+    weakness: Contamination between branches defeats clean stemmatic inference.
+
+  epigraphic-citation:
+    class: documentary
+    definition: An inscription quoting, naming, or endowing a work.
+    weakness: Attests a work bearing that name, not necessarily our text.
+
+  numismatic:
+    class: material
+    definition: Coin types with datable issue, iconography with identifiable attributes.
+    weakness: Attests cult and iconography rather than any text.
+
+  palaeography:
+    class: material
+    definition: Letter forms dating a manuscript witness.
+    weakness: Dates the copy, never the composition.
+
+  radiocarbon:
+    class: material
+    definition: Direct dating of a physical substrate.
+    weakness: Dates the substrate. Calibration curves carry their own uncertainty.
+
+  archaeological-horizon:
+    class: material
+    definition: Material culture the text's setting must or must not match.
+    weakness: Horizons have wide contested intervals that must propagate, not collapse.
+
+  foreign-catalogue:
+    class: foreign-documentary
+    definition: >
+      Dated translation records in an independent chronological system - Chinese dynastic
+      catalogues above all.
+    weakness: The translated form may be a redaction rather than the source.
+
+  art-historical:
+    class: material
+    definition: Sculpture and relief dating the reception of a specific episode.
+    weakness: Binds an episode's circulation, not a text.
+
+  literary-citation:
+    class: documentary
+    definition: One work citing, reworking, or polemicising against another.
+    weakness: >
+      Direction is frequently the disputed part. Polemic attests authority without
+      attesting content.
+
+  genealogical-reckoning:
+    class: documentary
+    definition: Regnal intervals in king lists.
+    weakness: >
+      Oral king lists inflate systematically - inserting ancestors is prestigious, deleting
+      them is not. Manuscripts disagree.
+
+  astronomical-structural:
+    class: material
+    definition: >
+      Structural features of the nakshatra system - the Krttika-to-Asvini list-head shift
+      tracking precession. NOT verse-matching against ephemeris software.
+    weakness: >
+      Both conventions appear in the same corpus, so it marks layering rather than a date.
+
+  absence:
+    class: internal-structural
+    definition: >
+      A text that should mention a referent and does not, bounding that referent from below.
+      The only method that ever supplies a floor to a concept referent.
+    weakness: >
+      A lossy archive generates false silences constantly. Strength depends on corpus
+      density and must be scored separately (design section 13, step 6).

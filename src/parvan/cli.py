@@ -12,7 +12,8 @@ import click
 
 from . import __version__
 from .loader import StoreError, load
-from .stp import SOLVER_VERSION, Solution, fmt_bounds, solve as run_solve
+from .stp import (SOLVER_VERSION, Solution, bound_support, fmt_bounds,
+                  solve as run_solve)
 
 
 @click.group()
@@ -103,6 +104,55 @@ def influence(store_path: Path, target: tuple[str, ...], epsilon: int) -> None:
         for d in diffs:
             click.echo(f"      {d}")
     click.secho(f"\nSLACK    {len(store.edges) - len(binding)} edges move nothing", fg="yellow")
+
+
+@main.command()
+@click.argument("store_path", default="store",
+                type=click.Path(exists=True, file_okay=False, path_type=Path))
+@click.option("--target", "-t", multiple=True, required=True, help="Node ids. Repeatable.")
+@click.option("--epsilon", default=25, show_default=True)
+def support(store_path: Path, target: tuple[str, ...], epsilon: int) -> None:
+    """How redundantly is each bound held up? Reports the minimum cut (R-12).
+
+    Leave-one-out cannot answer this: remove either edge of a two-route bound and nothing
+    moves, so both look slack, and the better-supported a bound is the less important its
+    supports appear. By Menger's theorem the minimum number of constraints whose joint
+    removal moves a bound equals the number of edge-disjoint routes realising it, so this
+    counts routes instead.
+
+    A cut of 1 is a single point of failure. That is the number to worry about.
+    """
+    try:
+        store = load(store_path)
+    except StoreError as exc:
+        click.secho(f"REFUSED - {len(exc.violations)} violation(s)\n", fg="red", bold=True)
+        click.echo(exc.report())
+        sys.exit(1)
+
+    sol = run_solve(store, epsilon=epsilon)
+    if not sol.consistent:
+        click.secho("store is inconsistent; resolve that first", fg="red")
+        click.echo(sol.witness())
+        sys.exit(1)
+
+    for node_id in target:
+        var = node_id if node_id in sol.bounds else f"{node_id}#emergence"
+        if var not in sol.bounds:
+            click.secho(f"{node_id}: not in the store", fg="red")
+            continue
+        click.secho(f"\n{node_id}  {fmt_bounds(sol.bounds[var])}", bold=True)
+        for side in ("floor", "ceiling"):
+            routes = bound_support(store, node_id, side, epsilon=epsilon)
+            n = len(routes)
+            if n == 0:
+                click.echo(f"  {side:<9} unbounded - nothing to support")
+                continue
+            colour = "red" if n == 1 else "green"
+            click.echo(f"  {side:<9} ", nl=False)
+            click.secho(f"cut {n}", fg=colour, nl=False)
+            click.echo("  (single point of failure)" if n == 1 else "  edge-disjoint routes")
+            for c in routes[0]:
+                click.echo(f"      {c.origin:<28} {c.why}")
 
 
 def _commit_hash() -> str:

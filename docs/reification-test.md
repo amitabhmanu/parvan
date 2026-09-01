@@ -3,8 +3,11 @@
 The design's central bet is that making referents into nodes lets evidence cross between texts.
 Adding the Mahābhārata to a Rāmāyaṇa-only store is the direct test.
 
-**Result: it pays — but in redundancy, not precision.** I predicted it would do neither. Half
-that prediction was right for the right reason, and half was wrong.
+**Result: it pays in connection, not in robustness.** Both texts' ceilings now run through one
+shared referent — but through the *same* declared value, so the minimum cut is still 1.
+
+§2 below originally claimed redundancy. It was measured with leave-one-out, the instrument §3
+identifies as broken, and §2a corrects it. The corrected finding is weaker and more useful.
 
 Store: 76 nodes, 94 edges, both inventories.
 
@@ -56,6 +59,61 @@ applied to §12 in isolation could have predicted that this row would matter.
 
 It is also §14's convergence argument made concrete — multiple disjoint paths, from different
 anchors, arriving at the same bound.
+
+## 2a. CORRECTION — measured again with the right instrument, §2 is wrong
+
+§2 was written with leave-one-out, the instrument §3 goes on to identify as broken. That was
+careless, and the corrected measurement inverts the conclusion.
+
+`parvan support` counts edge-disjoint routes, so the number it reports is the minimum cut —
+how many constraints must fail *together* before a bound moves.
+
+```
+ram.core   [750 BCE, 300 BCE]
+  floor    cut 1   e.009  ram.core presupposes ref.kosala-power
+                   ref.kosala-power           emergence floor -750
+  ceiling  cut 1   ref.pataliputra-imperial   emergence ceiling -300
+                   e.043  ref.pataliputra-imperial absent from ram.core
+
+ws.mbh.core  [500 BCE, 300 BCE]
+  ceiling  cut 1   ref.pataliputra-imperial   emergence ceiling -300
+                   e.107  ref.pataliputra-imperial absent from ws.mbh.core
+```
+
+**Every bound in the store has a minimum cut of 1.** Not one is redundantly supported.
+
+The two Pāṭaliputra routes are real — either absence edge suffices, as §2 shows — but they
+**share their terminus**. Both end at one declared number, `ref.pataliputra-imperial`'s
+emergence ceiling of −300 BCE. Remove that and both routes die together. So the redundancy is
+at the level of *edges*, not of *evidence*: the Rāmāyaṇa and the Mahābhārata now hang their
+ceilings on the same single value.
+
+That is a weaker and more useful result than the one §2 claimed. Reification did connect the
+two texts; it did not make either bound robust.
+
+### The defect underneath: the anchors are decorative
+
+```
+drop hor.mauryan-capital (the anchor)   ram.core = [750 BCE, 300 BCE]   unchanged
+```
+
+Deleting the archaeological horizon changes nothing, because the referent's emergence was
+**declared** in the encoder rather than derived from the horizon that attests it. The same is
+true of every material referent: `hor.iron-india`, `hor.horse-chariot`, `hor.ayodhya-urban`,
+`hor.kosala-power` and the rest are all inert. Thirteen horizon nodes, contributing nothing.
+
+This is the Vāsudeva error again in a form that does not announce itself. There it produced a
+negative cycle and got caught in one reading. Here it produces a *consistent* network whose
+anchors are ornamental, and only a cut analysis reveals it.
+
+It also falsifies, for this store, §14's claim that "anchors carry the whole system". They
+carry nothing. What carries the system is about six numbers typed into
+`tools/encode_inventory.py`, each with `attested` provenance pointing at an excavation report
+nobody has opened.
+
+**Fix required before any Phase 5 result is reportable.** Material referents need their
+emergence *derived* from a horizon rather than declared alongside one — which needs a
+two-sided edge type, since `attests` only caps from above. Logged as the next schema change.
 
 ## 3. A limitation this exposed in `parvan influence`
 
@@ -125,9 +183,12 @@ diagnosis took one reading.
 | Prediction | Outcome |
 |---|---|
 | Tightening scales as log T; a second text moves little | **Confirmed** — one non-binding referent moved |
-| Redundancy is where corpus growth pays | **Confirmed, against my own prediction that it would not** |
+| Redundancy is where corpus growth pays | **Not shown.** Two routes, one shared terminus, minimum cut still 1 |
 | Inconsistency detection does real work | **Confirmed** — caught a conflation I introduced |
 
-The design's claim that testability scales better than precision now has a measurement behind
-it. What a second text bought was not a better answer but a bound that no longer depends on a
-single argument from silence.
+What a second text bought was a *connection* between the epics, not a robust bound. Every
+bound in the store remains a single point of failure, and the anchors that were supposed to
+fix absolute time turn out to be inert.
+
+The honest summary is that Phase 4 found two defects in the model and one in the measurement,
+and that this is worth more than the confirmation it was looking for.

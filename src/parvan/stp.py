@@ -323,3 +323,88 @@ def fmt_bounds(b: Bounds) -> str:
     lo = "unbounded" if b.floor == -INF else fmt_year(b.floor)
     hi = "unbounded" if b.ceiling == INF else fmt_year(b.ceiling)
     return f"[{lo}, {hi}]"
+
+
+# ---------------------------------------------------------------------------------------
+# Bound support: how redundantly is a bound held up?
+# ---------------------------------------------------------------------------------------
+# Leave-one-out cannot answer this. Remove either edge of a two-route bound and nothing
+# moves, so both report as slack - the better-supported a bound is, the less important its
+# supports appear. That is backwards.
+#
+# By Menger's theorem the minimum number of constraints whose joint removal moves a bound
+# equals the maximum number of edge-disjoint paths realising it. So we count routes: find a
+# shortest path that realises the bound, delete it, and see whether the bound survives.
+
+
+def _shortest_path(
+    cons: list[Constraint], variables: list[str], src: str, dst: str
+) -> tuple[float, list[Constraint]]:
+    """Bellman-Ford with predecessors. Returns (distance, the path's constraints)."""
+    dist: dict[str, float] = {v: INF for v in variables}
+    pred: dict[str, Constraint | None] = {v: None for v in variables}
+    dist[src] = 0.0
+
+    for _ in range(len(variables) - 1):
+        changed = False
+        for c in cons:
+            if dist[c.src] != INF and dist[c.src] + c.weight < dist[c.dst] - 1e-9:
+                dist[c.dst] = dist[c.src] + c.weight
+                pred[c.dst] = c
+                changed = True
+        if not changed:
+            break
+
+    if dist[dst] == INF:
+        return INF, []
+
+    path: list[Constraint] = []
+    seen: set[str] = set()
+    cursor = dst
+    while cursor != src:
+        edge = pred[cursor]
+        if edge is None or cursor in seen:
+            break
+        seen.add(cursor)
+        path.append(edge)
+        cursor = edge.src
+    path.reverse()
+    return dist[dst], path
+
+
+def bound_support(
+    store: Store,
+    target: str,
+    side: str = "ceiling",
+    *,
+    epsilon: int = 25,
+    contains_threshold: float = 0.5,
+    max_routes: int = 12,
+) -> list[list[Constraint]]:
+    """Edge-disjoint routes holding up one bound of ``target``.
+
+    ``len(result)`` is the minimum cut: how many constraints must fail together before the
+    bound moves. 1 means a single point of failure; 0 means the bound is unbounded already.
+    """
+    cons, variables, _ = build(store, epsilon=epsilon, contains_threshold=contains_threshold)
+    var = date_var(store, target)
+    if var not in variables:
+        return []
+
+    # X_i <= d(origin, i) is the ceiling; X_i >= -d(i, origin) is the floor.
+    src, dst = (ORIGIN, var) if side == "ceiling" else (var, ORIGIN)
+
+    baseline, _ = _shortest_path(cons, variables, src, dst)
+    if baseline == INF:
+        return []
+
+    routes: list[list[Constraint]] = []
+    live = list(cons)
+    for _ in range(max_routes):
+        dist, path = _shortest_path(live, variables, src, dst)
+        if dist != baseline or not path:
+            break
+        routes.append(path)
+        drop = set(map(id, path))
+        live = [c for c in live if id(c) not in drop]
+    return routes

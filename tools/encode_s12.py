@@ -196,8 +196,18 @@ EDGES = [
                   "durgam anyair durasadam")}),
     ("e.008", "presupposes", "ram.core", "ref.karma-rebirth-moksa", "doctrinal-discontinuity",
      "Karma, rebirth, moksa as assumed framework", {}),
+    # VERIFIED against the critical edition, and it holds - the first floor constraint on
+    # the core that survives contact with the text. The dating claim rests on Ram.4.039.021,
+    # where Kosala appears in a mahajanapada roster with Videha, Kasi, Magadha, Pundra and
+    # Vanga. Note the cross-check: book 4's geography knows Indian mahajanapadas and no
+    # Greeks or Scythians at all, which is the profile of a pre-Hellenistic core geography.
     ("e.009", "presupposes", "ram.core", "ref.kosala-power", "realia-floor",
-     "Kosala as a major power", {}),
+     "Kosala as a major power",
+     {"prov": att("Ram.4.039.021 - brahmamalan videhams ca malavan kasikosalan / "
+                  "magadhams ca mahagraman pundran vangams tathaiva ca; Kosala in a "
+                  "mahajanapada roster. Supporting: Ram.2.047.011 bhoksyaty adhirajavat "
+                  "(as an overlord); Ram.2.043.007 kosalan kosalesvarah; Ram.5.041.007 and "
+                  "Ram.6.031.066 kosalendrasya ramasya, envoys naming Kosala at Lanka")}),
     # CORRECTED against the critical edition. Section 12 places this in the Kiskindha
     # geography (book 4, part of the core). Book 4 of the Baroda CE contains no foreign
     # ethnonym at all. The Yavanas and Sakas are in BALAKANDA, which section 12 itself

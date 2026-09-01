@@ -4,5 +4,8 @@ from: ram.core
 to: ref.kosala-power
 method: realia-floor
 provenance:
-  tier: asserted
-  source: 'docs/dating-sanskrit-epics.md section 12, row: Kosala as a major power'
+  tier: attested
+  locus: 'Ram.4.039.021 - brahmamalan videhams ca malavan kasikosalan / magadhams ca mahagraman pundran
+    vangams tathaiva ca; Kosala in a mahajanapada roster. Supporting: Ram.2.047.011 bhoksyaty adhirajavat
+    (as an overlord); Ram.2.043.007 kosalan kosalesvarah; Ram.5.041.007 and Ram.6.031.066 kosalendrasya
+    ramasya, envoys naming Kosala at Lanka'

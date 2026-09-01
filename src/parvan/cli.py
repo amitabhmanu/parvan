@@ -46,6 +46,65 @@ def validate(store_path: Path) -> None:
     click.echo(f"  quarantined {len(store.quarantine)}  (G-2: never enters a solve)")
 
 
+@main.command()
+@click.argument(
+    "store_path",
+    default="store",
+    type=click.Path(exists=True, file_okay=False, path_type=Path),
+)
+@click.option("--target", "-t", multiple=True, help="Node ids to watch. Repeatable.")
+@click.option("--epsilon", default=25, show_default=True)
+def influence(store_path: Path, target: tuple[str, ...], epsilon: int) -> None:
+    """Leave-one-out: which edges actually move a bound, and which are slack (R-12).
+
+    Scoring an argument for confidence says nothing about whether it *binds*. A score-5
+    constraint dominated by a weaker one contributes exactly nothing to the answer, and only
+    this pass can tell you which is which.
+    """
+    try:
+        store = load(store_path)
+    except StoreError as exc:
+        click.secho(f"REFUSED - {len(exc.violations)} violation(s)\n", fg="red", bold=True)
+        click.echo(exc.report())
+        sys.exit(1)
+
+    targets = list(target) or [n.id for n in store.of_kind("stratum")]
+    ref = run_solve(store, epsilon=epsilon)
+    if not ref.consistent:
+        click.secho("store is inconsistent; resolve that first", fg="red")
+        click.echo(ref.witness())
+        sys.exit(1)
+
+    base = {t: (ref.bounds[t].floor, ref.bounds[t].ceiling) for t in targets if t in ref.bounds}
+    binding: list[tuple[str, str, str, list[str]]] = []
+
+    for eid in sorted(store.edges):
+        probe = load(store_path)
+        del probe.edges[eid]
+        sol = run_solve(probe, epsilon=epsilon)
+        if not sol.consistent:
+            continue
+        diffs = [
+            f"{t} {fmt_bounds(ref.bounds[t])} -> {fmt_bounds(sol.bounds[t])}"
+            for t in base
+            if (sol.bounds[t].floor, sol.bounds[t].ceiling) != base[t]
+        ]
+        if diffs:
+            e = store.edges[eid]
+            binding.append((eid, e.provenance.tier, e.method, diffs))
+
+    click.echo(f"leave-one-out over {len(store.edges)} edges, watching {len(base)} node(s)\n")
+    click.secho(f"BINDING  {len(binding)}", fg="green", bold=True)
+    for eid, tier, method, diffs in binding:
+        colour = "cyan" if tier == "attested" else "yellow"
+        click.echo("  ", nl=False)
+        click.secho(f"{eid}", fg=colour, nl=False)
+        click.echo(f"  [{tier}/{method}]")
+        for d in diffs:
+            click.echo(f"      {d}")
+    click.secho(f"\nSLACK    {len(store.edges) - len(binding)} edges move nothing", fg="yellow")
+
+
 def _commit_hash() -> str:
     try:
         out = subprocess.run(

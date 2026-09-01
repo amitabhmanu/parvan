@@ -4,7 +4,7 @@
 whether F-6 gets an answer. Manual, no agent: the point was to learn what an extraction
 contract needs before writing one.
 
-**Result.** Five edges promoted. F-6 now returns a real bracket instead of nothing. Along the
+**Result.** Six edges promoted. F-6 now returns a real bracket instead of nothing. Along the
 way the text contradicted **three** of §12's rows — one scored 5, two scored 4 — including the
 one that was setting the core's floor.
 
@@ -164,6 +164,11 @@ The sentence F-6 exists to produce is finally writable:
 > Bālakāṇḍa after 330 BCE. Scholarly interpretation tightens the core's floor from 1300 BCE
 > to 750 BCE.**
 
+**Superseded — see [binding-analysis.md](binding-analysis.md).** Checking the fourth floor
+constraint (`ref.kosala-power`) closed the gap: it held, it is attested, and it carries the
+750 BCE floor by itself. The attested-only bracket for the core is now **identical** to the
+full one, and F-6 passes.
+
 Five edges carry that: iron floors the core, the Pāṭaliputra silence ceilings it, and Yavanas
 plus a fortified Ayodhyā floor Bāla. Everything else in the store is still testimony.
 
@@ -195,7 +200,7 @@ Ahead of Phase 3, the refusal conditions need to be sharper than the design's th
 ## 5. Next
 
 - ~~Promote `ref.fortified-ayodhya`.~~ **Done — it failed.** The description is Bālakāṇḍa's.
-- Check `ref.kosala-power`, now the only thing flooring the core, and the only untested member
-  of the class that has failed three times.
+- ~~Check `ref.kosala-power`.~~ **Done — it holds.** Rām.4.039.021, Kosala in a mahājanapada
+  roster. The first floor constraint on the core to survive contact with the text.
 - Fetch a vulgate text to test the §2 hypothesis directly.
 - Carry the *dīnāra* and Yavana corrections into any restatement of §12.

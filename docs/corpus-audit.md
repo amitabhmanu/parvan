@@ -48,7 +48,7 @@ Worth a schema field: `archetypal: true|star` on stratum passages.
 - **Southern Recension:** `sa_vAlmIki-rAmAyaNa-southern-2.xml`, entered by Oliver Hellwig.
 - **Formats offered:** TEI XML, analytic HTML, plain text.
 
-**The southern recension file is a direct win.** §12's "southern vs northern recension
+~~**The southern recension file is a direct win.**~~ **RETRACTED 2026-09-02 — see `pali-crosscheck.md` §1.** The file is the constituted Ayodhyākāṇḍa with southern readings, not an independent recension: every one of its 3,158 verses has a near-identical counterpart in the critical edition (median best-match Jaccard 1.00, 2 orphans). It yields no labelled lateness set and cannot promote the divergence constraint. Originally: §12's "southern vs northern recension
 divergence" constraint (scored 3, relative ordering) stops being a citation to someone else's
 collation and becomes computable from two files.
 
@@ -263,3 +263,27 @@ It earned its place immediately, and twice:
    with the Rāmāyaṇa's own late books retired the withheld *mokṣa* constraint for good.
 
 See `aspect-and-participle.md`. Available as `--corpus ragh`.
+
+
+---
+
+## 8. Pali: the Digha-Nikaya · fetched 2026-09-02
+
+`corpus/pali/dighn{1,2,3}ou.htm` — PTS edition via GRETIL, 903 pages, 1.7 MB, gitignored.
+**Fetch the annotated (`ou`) files, not the plain (`pu`) ones**: the plain versions state that
+"all annotations have been removed", which strips the PTS page references, and a text with no
+citable locus cannot satisfy G-1.
+
+Licence: PTS and Dhammakāya Foundation, CC BY-SA 4.0, "for scholarly purposes only". Held in
+the gitignored corpus directory and not redistributed, as with everything else here.
+
+**A parse rule this corpus forces.** PTS pages carry editorial footnotes below a rule line.
+Searching them as text returns three hits for *potthaka*, "book" — and all three are the
+editors writing *Sīhaḷapotthake*, "in the Sinhalese manuscript". `tools/pali.py` holds
+footnotes separately and searches them only on request; counting them would manufacture
+exactly the claim such a search is meant to test.
+
+Outcome in `pali-crosscheck.md`: it replicates the writing horizon from an independent
+tradition with a stronger, enumerative control, corroborates the Pāṭaliputra argument from
+inside the transition, and — the first corpus addition in this project to tighten anything —
+gets its own ceiling pulled back 130 years by its ignorance of writing.

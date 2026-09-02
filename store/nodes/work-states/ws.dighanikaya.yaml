@@ -1,0 +1,19 @@
+id: ws.dighanikaya
+kind: work-state
+label: Digha-Nikaya, Pali Sutta-Pitaka
+work: dighanikaya
+interval:
+  floor: -400
+  ceiling: -100
+  hedge: >
+    The collection as a collection, not its individual suttas. Deliberately wide and
+    deliberately late at the ceiling: the Pali canon's own chronology is contested, and this
+    node is used for an absence claim, where a late ceiling makes the claim weaker rather
+    than stronger.
+provenance:
+  tier: asserted
+  source: >
+    Conventional dating of the Sutta-Pitaka collections. Held as a work-state on an
+    INDEPENDENT dating chain - Pali transmission, Sinhalese manuscript tradition, and a
+    scholarly apparatus with no stake in Sanskrit epic chronology - which is the design's
+    stated criterion for what a corpus addition is worth.

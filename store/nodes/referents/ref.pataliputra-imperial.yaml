@@ -6,3 +6,24 @@ text_derived: false
 provenance:
   tier: attested
   locus: Pataliputra excavation record; Nanda-Mauryan imperial phase
+  note: >
+    INDEPENDENT CORROBORATION OF THE CONTROL, added 2026-09-02. This referent carries the
+    pre-Common-Era ceiling for both epics and its attestation e.044 is the single point of
+    failure in the whole network, so the warrant behind it deserves recording.
+
+    The epic argument is that the epics name Girivraja/Rajagrha as Magadha's capital and
+    never Pataliputra, and that a text listing capitals would name the current one. The Pali
+    Digha-Nikaya, transmitted independently and dated by an unrelated apparatus, shows the
+    same distribution and dates the transition from inside it: Rajagaha is the operative
+    capital on 22 PTS pages, while Pataliputta appears on 2 and only as a city not yet built.
+    Within two pages the same place is a village and then a future city -
+    DN ii.86, Sunidha-Vassakara Magadha-mahamatta PATALIGAME NAGARAM MAPENTI Vajjinam
+    patibahaya, Magadha's chief ministers building a fort at the village of Pataligama; and
+    DN ii.88, Pataliputtassa kho Ananda tayo antaraya bhavissanti, the three dangers foretold
+    for Pataliputta.
+
+    This is deliberately NOT encoded as an edge. Everything the Digha-Nikaya can attest about
+    this referent is slacker than the Mauryan horizon already supplies, so an edge would add
+    a node and change no bound - the same law that made the Mahabharata and the Atharvaveda
+    slack. What it changes is the confidence in the warrant, which belongs here and not in
+    the graph. See docs/pali-crosscheck.md.

@@ -1,0 +1,22 @@
+id: e.165
+type: absent-from
+from: ws.dighanikaya
+to: ref.writing-practice
+method: absence
+lag_min_years: 0
+provenance:
+  tier: attested
+  locus: >
+    Digha-Nikaya, PTS ed., 903 pages, text only with the editors' footnotes held separate.
+    Zero lipi, zero lekha as script, zero potthaka in the text - the three potthaka hits are
+    the PTS editors' own "Sihalapotthake", in the Sinhalese manuscript, and counting them
+    would have manufactured the very claim being tested. Zero kahapana.
+    The root LIKH occurs twice and both are one stock phrase, DN i.63 and DN i.250,
+    sankha-likhitam brahmacariyam, the holy life "polished like a conch-shell" - the same
+    scratch-and-polish sense the Ramayana core uses and no other.
+    POSITIVE CONTROL of the enumerative kind, which is stronger than a narrative silence.
+    The Brahmajala and Samannaphala suttas list the low arts a recluse abstains from, dozens
+    of items, and at DN i.11 and DN i.69 the list runs muddA, gaNanA, saMkhAnaM, kAveyyaM,
+    lokAyataM - finger-reckoning, counting, computation, poetry, Lokayata. It enumerates the
+    skills adjacent to writing and stops short of writing itself.
+    Re-runnable: tools/pali.py

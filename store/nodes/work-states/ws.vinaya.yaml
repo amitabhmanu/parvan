@@ -1,0 +1,19 @@
+id: ws.vinaya
+kind: work-state
+label: Vinaya-Pitaka, Pali monastic code
+work: vinaya
+interval:
+  floor: -400
+  ceiling: -50
+  hedge: >
+    The collection as transmitted. Wide, and late at the ceiling on purpose: this node is
+    used to attest a referent, where a late ceiling makes the attestation weaker rather than
+    stronger, and the Pali canon's internal chronology is contested.
+provenance:
+  tier: asserted
+  source: >
+    Conventional dating of the Vinaya-Pitaka. Held for the same reason as ws.dighanikaya -
+    an independent transmission and an independent dating apparatus - and specifically
+    because a monastic legal code is ENUMERATIVE, which is the scarce commodity in this
+    store. Absence arguments need lists that aim at completeness, and rules that enumerate
+    trades, possessions and offences are the best available supply.

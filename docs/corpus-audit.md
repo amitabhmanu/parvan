@@ -287,3 +287,29 @@ Outcome in `pali-crosscheck.md`: it replicates the writing horizon from an indep
 tradition with a stronger, enumerative control, corroborates the Pāṭaliputra argument from
 inside the transition, and — the first corpus addition in this project to tighten anything —
 gets its own ceiling pulled back 130 years by its ignorance of writing.
+
+
+---
+
+## 9. The Vinaya-Pitaka · fetched 2026-09-02
+
+`corpus/pali/vin{1ma,2cu,3s1,4s2,5pa}ou.htm` — PTS ed. (Oldenberg), 1,511 pages, 3.9 MB,
+gitignored. Same licence and handling as the Digha-Nikaya. PTS volume order is Oldenberg's:
+i Mahavagga, ii Cullavagga, iii–iv Suttavibhanga, v Parivara, so `Vin iii.76` is a
+Suttavibhanga page. `tools/pali.py --corpus vin`.
+
+**Fetched for its genre, not its content.** A monastic legal code is *enumerative* — it lists
+trades, possessions and offences exhaustively — and enumerative lists are the scarce commodity
+here, because an absence argument is only as good as a source that aimed at completeness and
+still omitted the item. This is the same property that made the Brahmajala list of low arts
+decisive for the writing horizon.
+
+It paid immediately. Within one tradition, one language and one transmission:
+
+```
+                           Digha-Nikaya   Vinaya
+  lekhaka (scribe)                    0        yes
+  kahapana / masaka / rupiya          0     7 / 18 / 16
+```
+
+See `pali-crosscheck.md` §4.

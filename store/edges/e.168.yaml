@@ -1,0 +1,22 @@
+id: e.168
+type: attests
+from: ws.vinaya
+to: ref.writing-practice
+method: literary-citation
+provenance:
+  tier: attested
+  locus: >
+    Vinaya-Pitaka, PTS ed., 1,511 pages, text only with footnotes held separate.
+    Vin iv.8 is the decisive one and it is ENUMERATIVE: a rule against insulting speech
+    lists the trades, naming nalakara kumbhakara pesakara cammakara nahapita as low and
+    MUDDIKAM GANAKAM LEKHAKAM - reckoner, calculator, SCRIBE - as high. That is the same
+    slot the Digha-Nikaya fills with muddA gaNanA saMkhAnaM and no scribe.
+    Cf. Vin i.77, Upali's parents weighing lekha, writing, as a trade for their son; and
+    Vin iii.76, where inciting a death BY WRITING, lekhaya samvanneti, is an offence.
+    Coinage arrives with it: kahapana on 7 pages, masaka on 18, rupiya on 16, against zero
+    for all three in the Digha-Nikaya.
+    TWO READINGS WITHDRAWN on inspection. potthaka at Vin i.306 and i.311 is a coarse cloth
+    in a list of forbidden robes, not a book; and avalekhanakattha at Vin ii.141 and ii.222
+    is a latrine scraping-stick, not a stylus - the scratch sense of LIKH persisting beside
+    the literate one. Neither is evidence of writing and neither is counted.
+    Re-runnable: tools/pali.py --corpus vin

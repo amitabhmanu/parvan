@@ -28,7 +28,15 @@ from dataclasses import dataclass
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1] / "corpus" / "pali"
-VOLS = {1: "i", 2: "ii", 3: "iii"}
+# PTS volume order. The Vinaya's is Oldenberg's: Mahavagga, Cullavagga, the two halves of
+# the Suttavibhanga, Parivara - so "Vin iii.21" is a Suttavibhanga page, not a Mahavagga one.
+COLLECTIONS = {
+    "dn": ("Digha-Nikaya", "DN",
+           [("dighn1ou", "i"), ("dighn2ou", "ii"), ("dighn3ou", "iii")]),
+    "vin": ("Vinaya-Pitaka", "Vin",
+            [("vin1maou", "i"), ("vin2cuou", "ii"), ("vin3s1ou", "iii"),
+             ("vin4s2ou", "iv"), ("vin5paou", "v")]),
+}
 PAGE = re.compile(r"\[page (\d+)\]")
 # A run of hyphens separates the text of a PTS page from its footnotes.
 RULE = re.compile(r"-{20,}")
@@ -40,25 +48,29 @@ class Page:
     page: int
     text: str
     notes: str
+    sigil: str = "DN"
 
     @property
     def locus(self) -> str:
-        return f"DN {self.vol}.{self.page}"
+        return f"{self.sigil} {self.vol}.{self.page}"
 
 
-def load(directory: Path = ROOT) -> list[Page]:
+def load(collection: str = "dn", directory: Path = ROOT) -> list[Page]:
+    if collection not in COLLECTIONS:
+        sys.exit(f"unknown collection {collection!r}; choose from {sorted(COLLECTIONS)}")
+    heading, sigil, files = COLLECTIONS[collection]
     if not directory.exists():
         sys.exit(f"Pali corpus not found at {directory}; see docs/corpus-audit.md")
     out: list[Page] = []
-    for n, vol in VOLS.items():
-        path = directory / f"dighn{n}ou.htm"
+    for stem, vol in files:
+        path = directory / f"{stem}.htm"
         if not path.exists():
             sys.exit(f"missing {path}: fetch the ANNOTATED (ou) files, not the plain ones - "
                      "the plain version strips the page references that make a locus citable")
         raw = path.read_text(encoding="utf-8", errors="replace")
-        start = raw.find("Dīgha-Nikāya Vol.")
+        start = raw.find(heading)
         if start < 0:
-            sys.exit(f"{path}: no volume heading found; the file layout has changed")
+            sys.exit(f"{path}: heading {heading!r} not found; the file layout has changed")
         body = re.sub(r"<[^>]+>", " ", raw[start:])
         parts = PAGE.split(body)
         if len(parts) < 3:
@@ -67,7 +79,7 @@ def load(directory: Path = ROOT) -> list[Page]:
             chunk = re.sub(r"\s+", " ", parts[i + 1])
             split = RULE.split(chunk, maxsplit=1)
             out.append(Page(vol, int(parts[i]), split[0],
-                            split[1] if len(split) > 1 else ""))
+                            split[1] if len(split) > 1 else "", sigil))
     return out
 
 
@@ -88,15 +100,17 @@ def main() -> None:
         sys.stdout.reconfigure(encoding="utf-8", errors="replace")
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("pattern")
+    ap.add_argument("--corpus", choices=sorted(COLLECTIONS), default="dn")
     ap.add_argument("--notes", action="store_true",
                     help="search the PTS footnotes too; off by default, because they are the "
                          "editors' words and counting them as text manufactures evidence")
     ap.add_argument("--limit", type=int, default=12)
     args = ap.parse_args()
 
-    pages = load()
+    pages = load(args.corpus)
     hits = search(pages, args.pattern, notes=args.notes)
-    print(f"pattern {args.pattern!r} over {len(pages)} PTS pages"
+    print(f"pattern {args.pattern!r} over {len(pages)} PTS pages of "
+          f"{COLLECTIONS[args.corpus][0]}"
           f"{' including footnotes' if args.notes else ''}: {len(hits)} page(s)\n")
     if not hits:
         print("  MEASURED SILENCE - re-runnable by anyone with the same PTS files")

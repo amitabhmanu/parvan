@@ -1,0 +1,24 @@
+id: e.164
+type: absent-from
+from: ram.core
+to: ref.writing-practice
+method: absence
+lag_min_years: 0
+provenance:
+  tier: attested
+  locus: >
+    Writing is absent from Ram.2-6 (14,130 verses) in the strong sense: the vocabulary is
+    absent AND the practice is visibly replaced by another. Zero lipi, zero pustaka, zero
+    sealed or written message. The root LIKH occurs 11 times and every one is physical
+    scratching - Ram.4.040.028 ambaram vilikhann iva, Ram.5.002.023 alikhantam ivambaram,
+    Ram.6.030.023 kham ivollikhan, ten of the eleven being that one formula of peaks and
+    palaces scraping the sky, plus Ram.6.046.038 of beasts scoring each other with fangs.
+    Not one means write or even draw.
+    POSITIVE CONTROL, and it is the plot itself. The core contains 25 duta episodes and 18
+    uses of abhijnana, recognition token. The central authentication problem - proving a
+    messenger genuine to a captive across enemy territory - is solved with a SIGNET RING:
+    Ram.4.043.011 dadau ... svanamankopasobhitam angulIyam abhijnanam, and Ram.5.034.002
+    ramanamankitam cedam pasya devy angulIyakam. Sita answers not with a letter but with
+    the cudamani, Ram.5.036.052. So the text has objects marked with a personal name and
+    still no writing: the one slot a literate culture fills with a document is filled here
+    by a token. Re-runnable: tools/writing.py

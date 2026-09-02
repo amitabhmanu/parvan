@@ -1,0 +1,11 @@
+id: ref.writing-practice
+kind: referent
+label: Writing in ordinary use
+class: institution
+text_derived: false
+provenance:
+  tier: asserted
+  source: >
+    Writing as a normal instrument of communication and record, as distinct from marks on
+    objects. Reified because it is exactly the kind of institution a narrative reveals by
+    what its characters do rather than by naming it. See docs/writing-horizon.md.

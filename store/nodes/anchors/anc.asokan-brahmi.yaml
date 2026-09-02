@@ -1,0 +1,18 @@
+id: anc.asokan-brahmi
+kind: anchor
+label: Asokan Brahmi inscriptions
+interval:
+  floor: -260
+  ceiling: -230
+  hedge: >
+    The regnal years of Asoka's edict series. Taken as the securely dated attestation of
+    writing in general use in South Asia. Earlier Brahmi is argued for on Anuradhapura and
+    other sherds; this node deliberately takes the LATE end of that debate, so any bound it
+    supplies is conservative.
+dating_method: epigraphic
+provenance:
+  tier: asserted
+  source: >
+    Corpus Inscriptionum Indicarum I, Hultzsch, Inscriptions of Asoka. Carried as asserted
+    rather than attested: the inscription numbers are resolvable by anyone, but this project
+    marks attested only what it has resolved itself.

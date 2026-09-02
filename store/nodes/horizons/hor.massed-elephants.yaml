@@ -1,10 +1,18 @@
 id: hor.massed-elephants
 kind: horizon
-label: Massed elephant corps in a fourfold army
+label: Massed elephant corps in a fourfold army - Indian record
 interval:
   floor: -500
   ceiling: -350
+  hedge: >
+    This node now carries only the Indian side. The Greek eyewitness accounts it used to be
+    bundled with are anc.greek-elephant-accounts, split out under R-10 so that each chain
+    states what it can carry alone.
 dating_method: archaeological-horizon
 provenance:
-  tier: attested
-  locus: Magadhan-era military record; Greek accounts of Indian armies
+  tier: asserted
+  source: >
+    Magadhan-era military record: the elephant as a standing arm of the caturanga, as against
+    the chariot-and-horse army of the earlier period. Held as asserted rather than attested
+    because it still names a class of evidence rather than a report and a page - the weakness
+    this store records against its whole archaeological tier.

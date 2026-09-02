@@ -7,4 +7,12 @@ interval:
 dating_method: archaeological-horizon
 provenance:
   tier: attested
-  locus: Mahajanapada-period settlement and fortification record
+  locus: >
+    K. K. Sinha, Excavations at Sravasti - 1959, reporting Painted Grey Ware in the lowest
+    PRE-FORTIFICATION levels passing into the Northern Black Polished Ware sequence, beneath
+    a rampart circuit of about five kilometres. The fortification postdates the PGW horizon,
+    which is what dates Kosala's emergence as a fortified power rather than a settlement.
+    NOT SPLIT, deliberately. The other two load-bearing horizons bundled two dating chains
+    each and were separated; this one rests on a single chain, settlement-and-fortification
+    archaeology, and splitting it into two labels over one excavation would manufacture
+    exactly the false redundancy the split was meant to expose.

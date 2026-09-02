@@ -1,0 +1,22 @@
+id: hor.pataliputra-site
+kind: horizon
+label: Pataliputra urban site - archaeological chain
+interval:
+  floor: -600
+  ceiling: -150
+  hedge: >
+    Deliberately wide. Split from hor.mauryan-capital so that each dating chain states only
+    what it can carry alone, and archaeology alone dates this site far less precisely than
+    the bundled node implied. The result is that this node is slack against the historical
+    chain, which is the honest outcome rather than a disappointing one.
+dating_method: archaeological-horizon
+provenance:
+  tier: asserted
+  source: >
+    A. S. Altekar and V. Mishra, Report on Kumrahar Excavations 1951-1955, K. P. Jayaswal
+    Research Institute, Patna 1959; with the timber palisade remains from Bulandibagh and
+    Kumrahar and the NBPW sequence.
+    INDEPENDENCE IS PARTIAL AND MUST NOT BE OVERSTATED. The palisade is conventionally
+    identified as the wall Megasthenes describes, so the site's phasing leans on the very
+    Greek account this node is supposed to be independent of. It is entered with an interval
+    wide enough that nothing rests on the entanglement.

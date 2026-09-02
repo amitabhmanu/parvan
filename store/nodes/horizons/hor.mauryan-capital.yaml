@@ -1,10 +1,24 @@
 id: hor.mauryan-capital
 kind: horizon
-label: Pataliputra becomes the recognised imperial centre
+label: Pataliputra as imperial centre - historical chain
 interval:
   floor: -350
   ceiling: -300
-dating_method: archaeological-horizon
+  hedge: >
+    Nanda accession through early Mauryan consolidation. This node now carries ONLY the
+    historical-chronological chain; the archaeological evidence was split out to
+    hor.pataliputra-site under R-10, because one node was silently bundling two dating
+    chains and taking the precision of neither.
+dating_method: genealogical-reckoning
 provenance:
   tier: attested
-  locus: Pataliputra excavation; Nanda accession through early Mauryan consolidation
+  locus: >
+    Strabo, Geographica XV.1.36 - Palibothra at the confluence of the Ganges and the
+    Erannoboas, eighty stadia by fifteen, a parallelogram walled in timber and pierced for
+    archery, reported from Megasthenes, who was at Candragupta's court as Seleucus' envoy.
+    The chain is anchored outside India: Megasthenes' embassy and the Seleucus-Candragupta
+    settlement of c. 303 BCE sit inside Seleucid chronology.
+    VERIFICATION: the passage and its section number were checked against two independent
+    editions (Loeb and Perseus) rather than recalled; the Loeb prints it at XV.1.36-37, so
+    cite the range if the exact section matters. This replaces a category reference,
+    "Pataliputra excavation; Nanda accession", which named no source at all.

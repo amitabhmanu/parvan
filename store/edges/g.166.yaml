@@ -1,0 +1,10 @@
+id: g.166
+type: grounds
+from: hor.pataliputra-site
+to: ref.pataliputra-imperial
+method: archaeological-horizon
+provenance:
+  tier: asserted
+  source: >
+    Altekar and Mishra 1959. No imperial centre at this site before the urban sequence
+    begins; a floor only excavation can supply (G-7).

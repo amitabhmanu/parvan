@@ -1,0 +1,17 @@
+id: anc.greek-elephant-accounts
+kind: anchor
+label: Greek eyewitness accounts of Indian elephant corps
+interval:
+  floor: -330
+  ceiling: -300
+dating_method: foreign-catalogue
+independent_of:
+  - hor.massed-elephants
+provenance:
+  tier: asserted
+  source: >
+    Arrian, Anabasis V.15 - Poros' elephant line at the Hydaspes, 326 BCE; and Strabo,
+    Geographica XV.2.9 - the five hundred elephants Seleucus received from Candragupta under
+    the settlement of c. 303 BCE. Split out of hor.massed-elephants, which bundled "Magadhan
+    military record" with "Greek accounts" in a single node and a single interval.
+    These are Greek-chronology sources and do not depend on any Indian dating.

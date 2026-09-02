@@ -1,0 +1,11 @@
+id: e.166
+type: attests
+from: hor.pataliputra-site
+to: ref.pataliputra-imperial
+method: archaeological-horizon
+provenance:
+  tier: asserted
+  source: >
+    Altekar and Mishra 1959, Kumrahar. The excavated urban sequence caps the referent from
+    above on archaeological grounds alone, independently of the Greek chain - loosely, which
+    is the point of separating them.

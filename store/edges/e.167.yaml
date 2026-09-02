@@ -1,0 +1,11 @@
+id: e.167
+type: attests
+from: anc.greek-elephant-accounts
+to: ref.massed-elephant-corps
+method: foreign-catalogue
+provenance:
+  tier: asserted
+  source: >
+    Arrian Anabasis V.15; Strabo XV.2.9. Massed elephants in a fourfold army are attested by
+    observers with no stake in Indian chronology, which caps the referent by a route that
+    shares no evidence with the Magadhan military record.

@@ -22,7 +22,13 @@ def staged() -> list[Path]:
         ["git", "diff", "--cached", "--name-only", "--diff-filter=ACM"],
         capture_output=True, text=True, check=False,
     ).stdout.split()
-    return [Path(p) for p in out if p.startswith("store/") and p.endswith(".yaml")]
+    # Any path with a `store/` segment, not just a top-level one: stores live under
+    # projects/<name>/store/ since the engine/project split, and a prefix test would have
+    # silently stopped gating every record in the repo.
+    return [
+        Path(p) for p in out
+        if p.endswith(".yaml") and "store" in Path(p).parts
+    ]
 
 
 def main() -> int:

@@ -22,7 +22,8 @@ from __future__ import annotations
 import sys
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
+PROJECT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(PROJECT.parents[1] / "src"))
 
 from parvan.loader import load  # noqa: E402
 from parvan.stp import bound_support  # noqa: E402
@@ -81,7 +82,7 @@ def order_columns(nodes, edges):
 
 
 def main() -> None:
-    store = load("store")
+    store = load(PROJECT / "store")
     global nodes_by
     nodes_by = store.nodes
     nodes = list(store.nodes.values())

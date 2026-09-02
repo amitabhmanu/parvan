@@ -8,7 +8,7 @@ build/
 
 # Run records are reproducible from commit + seed; keep the tree clean.
 # Remove this line if you want run history versioned.
-runs/*/
+projects/*/runs/*/
 
-# Third-party corpus texts. Fetched, not redistributed - see docs/corpus-audit.md
-corpus/
+# Third-party corpus texts. Fetched, not redistributed - see each project's corpus audit.
+projects/*/corpus/

@@ -14,7 +14,7 @@ import pytest
 import yaml
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
-REAL_METHODS = REPO_ROOT / "store" / "methods.yaml"
+FIXTURE_METHODS = Path(__file__).resolve().parent / "fixtures" / "methods.yaml"
 
 
 def write(root: Path, relpath: str, data: dict) -> Path:
@@ -32,8 +32,9 @@ def store(tmp_path: Path) -> Path:
     for sub in ("nodes/anchors", "nodes/referents", "nodes/strata", "edges", "quarantine"):
         (root / sub).mkdir(parents=True, exist_ok=True)
 
-    # Validate against the real vocabulary, so a method rename breaks the tests loudly.
-    shutil.copy(REAL_METHODS, root / "methods.yaml")
+    # An engine-owned vocabulary, not a project's. See the header of fixtures/methods.yaml:
+    # real stores are kept honest by test_projects.py instead.
+    shutil.copy(FIXTURE_METHODS, root / "methods.yaml")
 
     write(
         root,

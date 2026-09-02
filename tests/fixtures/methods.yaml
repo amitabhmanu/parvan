@@ -1,0 +1,46 @@
+# Engine test vocabulary. NOT a project's methods file.
+#
+# The gate tests used to load projects/sanskrit-epics/store/methods.yaml, on the reasoning
+# that binding them to the real vocabulary makes a method rename break loudly. That reasoning
+# was right while the Sanskrit store *was* the project. It is exactly backwards now: an
+# engine test that fails when a Sanskrit method is renamed is asserting that the engine knows
+# about Sanskrit, which is the coupling the split exists to remove.
+#
+# The loud break is preserved where it belongs - tests/test_projects.py validates every real
+# store in projects/, so a rename that orphans an edge still fails the suite.
+#
+# Only the three method tags the fixtures actually cite are defined here. `vibes` is
+# deliberately absent: test_gates asserts R-6 refuses it.
+
+schema_version: "0.1.0"
+
+# These ARE portable. The classes carve the space of evidence in any philological tradition -
+# what the text is made of, how it is put together, what it believes, and the four kinds of
+# external control - so they are the one part of a methods file worth sharing across projects.
+independence_classes:
+  internal-linguistic: Features of the language itself - morphology, lexicon, metre.
+  internal-structural: Composition and seams - framing, interruption, recension divergence.
+  internal-doctrinal: Ideas presupposed or argued against.
+  material: Physical and archaeological evidence.
+  documentary: Dated written records from inside the tradition's own archive.
+  foreign-documentary: Dated records from outside it.
+  comparative: Inherited structure shared across traditions.
+
+methods:
+
+  realia-floor:
+    class: internal-doctrinal
+    definition: >
+      A people, object, or institution named in the text cannot predate its existence.
+      Yields a floor on the passage, never a ceiling.
+    weakness: Late items interpolate easily, so the floor binds the passage and not the work.
+
+  numismatic:
+    class: material
+    definition: Coin types with datable issue, iconography with identifiable attributes.
+    weakness: Attests cult and iconography rather than any text.
+
+  literary-citation:
+    class: documentary
+    definition: One work citing, reworking, or polemicising against another.
+    weakness: Direction of borrowing is often the thing in dispute.

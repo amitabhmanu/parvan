@@ -15,13 +15,13 @@ the whole design exists to keep separate.
 ## What you are given
 
 An edge id, the claim it encodes, and the stratum it belongs to. Read the edge file in
-`store/edges/` and the stratum file in `store/nodes/strata/` for its declared `extent`.
+`projects/sanskrit-epics/store/edges/` and the stratum file in `projects/sanskrit-epics/store/nodes/strata/` for its declared `extent`.
 
 ## Your tool
 
 ```bash
-uv run python tools/concordance.py '<regex>' --kanda 2-6 --limit 20
-uv run python tools/concordance.py '<regex>' --count
+uv run python projects/sanskrit-epics/tools/concordance.py '<regex>' --kanda 2-6 --limit 20
+uv run python projects/sanskrit-epics/tools/concordance.py '<regex>' --count
 ```
 
 IAST with diacritics, matched as a substring against verse text. `--fold` strips diacritics
@@ -31,7 +31,7 @@ IAST with diacritics, matched as a substring against verse text. `--fold` strips
 Mahābhārata, 18 parvans, addressed `MBh.PP.AAA.VVV`. For the MBh, `--kanda` selects parvans.
 
 ```bash
-uv run python tools/concordance.py 'hūṇ' --corpus mbh --archetypal-only --count
+uv run python projects/sanskrit-epics/tools/concordance.py 'hūṇ' --corpus mbh --archetypal-only --count
 ```
 
 **`--archetypal-only` matters more than anything else in this file, and only works for the
@@ -131,7 +131,7 @@ rejected: ["Ram.2.035.020 āyasaṃ hṛdayaṃ - metaphor"]
 ```
 
 **REFUSE** — with the reason: no locus, outside extent, matches are all false positives,
-claim not separable from a neighbouring one, or the method has no tag in `store/methods.yaml`.
+claim not separable from a neighbouring one, or the method has no tag in `projects/sanskrit-epics/store/methods.yaml`.
 
 **CONTRADICTS** — the text positively fails the claim. State what was searched, over what
 scope, with what counts, and what the store should do about it.

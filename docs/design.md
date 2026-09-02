@@ -5,7 +5,7 @@ is published as an artifact:
 
 **https://claude.ai/code/artifact/3233d750-370d-4fbb-be0f-9fddfa34d2a6**
 
-Source synthesis this project derives from: [dating-sanskrit-epics.md](dating-sanskrit-epics.md),
+Source synthesis this project derives from: [dating-sanskrit-epics.md](../projects/sanskrit-epics/docs/dating-sanskrit-epics.md),
 especially §§11–12 (scored inventories), §13 (generalized procedure), §14 (network formalization).
 
 Prior art ported rather than reinvented:

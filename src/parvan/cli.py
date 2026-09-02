@@ -20,7 +20,7 @@ from .stp import (SOLVER_VERSION, Solution, bound_support, fmt_bounds,
 @click.group()
 @click.version_option(__version__, prog_name="parvan")
 def main() -> None:
-    """A constraint network over Sanskrit textual strata."""
+    """A constraint network over textual strata."""
 
 
 @main.command()
@@ -233,8 +233,10 @@ def _render(sol: Solution, store, epsilon: int) -> str:
               help="Below this confidence, containment defers to the Bayesian layer.")
 @click.option("--seed", default=0, show_default=True, help="Recorded for reproducibility (G-6).")
 @click.option("--no-record", is_flag=True, help="Skip writing a run record.")
+@click.option("--runs-dir", type=click.Path(file_okay=False, path_type=Path), default=None,
+              help="Where to write the run record. Defaults to the store's sibling runs/.")
 def solve(store_path: Path, epsilon: int, contains_threshold: float, seed: int,
-          no_record: bool) -> None:
+          no_record: bool, runs_dir: Path | None) -> None:
     """Propagate STORE_PATH to its tightest consistent bounds."""
     try:
         store = load(store_path)
@@ -253,7 +255,11 @@ def solve(store_path: Path, epsilon: int, contains_threshold: float, seed: int,
     # G-6: a result that cannot be regenerated from these four values is not a result.
     commit = _commit_hash()
     stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
-    outdir = Path("runs") / f"{stamp}-{commit[:8]}"
+    # Run records belong to the project that owns the store, not to whatever directory the
+    # command happened to be invoked from. Once stores live under projects/<name>/store, a
+    # cwd-relative "runs/" silently scatters one project's history across the tree.
+    base = runs_dir or (store_path.resolve().parent / "runs")
+    outdir = base / f"{stamp}-{commit[:8]}"
     outdir.mkdir(parents=True, exist_ok=True)
 
     record = {

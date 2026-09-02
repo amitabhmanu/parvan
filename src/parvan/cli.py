@@ -12,6 +12,7 @@ import click
 
 from . import __version__
 from .loader import StoreError, load
+from .profile import Profile, ProfileError
 from .retrodict import fmt_v2, run_all
 from .stp import (SOLVER_VERSION, Solution, bound_support, fmt_bounds,
                   solve as run_solve)
@@ -21,6 +22,14 @@ from .stp import (SOLVER_VERSION, Solution, bound_support, fmt_bounds,
 @click.version_option(__version__, prog_name="parvan")
 def main() -> None:
     """A constraint network over textual strata."""
+    # Windows consoles default to cp1252, which cannot encode most of the scripts a
+    # project will cite - IAST diacritics, Greek, Hebrew, CJK. Without this a command
+    # that merely prints a search pattern dies on UnicodeEncodeError instead of
+    # reporting its result. The corpus tools each learned this separately; the engine
+    # should not have to learn it a fifth time.
+    for stream in (sys.stdout, sys.stderr):
+        if hasattr(stream, "reconfigure"):
+            stream.reconfigure(encoding="utf-8", errors="replace")
 
 
 @main.command()
@@ -176,6 +185,64 @@ def retrodict(store_path: Path, epsilon: int) -> None:
     results, summary = run_all(str(store_path), epsilon=epsilon)
     click.echo(fmt_v2(results, summary))
     sys.exit(0 if summary["meets_v2"] else 1)
+
+
+
+@main.command()
+@click.argument("project_path", type=click.Path(exists=True, path_type=Path))
+@click.option("--check", is_flag=True,
+              help="Run every declared control against the live corpora.")
+def profile(project_path: Path, check: bool) -> None:
+    """Validate a project's PROFILE.YAML, and optionally re-run its calibration controls.
+
+    The controls are what stop a profile being decorative. A positive control that has
+    stopped matching means the loader, the corpus file, or the orthography moved underneath
+    the project - and every silence measured since is unsound, silently and in the direction
+    that flatters the hypothesis.
+    """
+    try:
+        prof = Profile.load(project_path)
+    except ProfileError as exc:
+        click.secho(f"REFUSED - {len(exc.violations)} violation(s)\n", fg="red", bold=True)
+        click.echo(exc.report())
+        sys.exit(1)
+
+    click.secho("OK", fg="green", bold=True)
+    click.echo(f"  project     {prof.project}")
+    click.echo(f"  tradition   {prof.tradition}")
+    click.echo(f"  languages   {', '.join(prof.languages)}")
+    click.echo(f"  corpora     {len(prof.corpora)}")
+    for key, entry in prof.corpora.items():
+        n = len(entry.positive_controls) + len(entry.known_silences)
+        click.echo(f"    {key:<8}{entry.role:<24}{n} control(s)")
+    click.echo(f"  traps       {len(prof.traps)}")
+    for t in prof.traps:
+        click.echo(f"    {t.id:<36}{t.severity:<10}{len(t.examples)} example(s)")
+
+    if not check:
+        return
+
+    click.echo("\ncalibration")
+    try:
+        results = prof.calibrate()
+    except ProfileError as exc:
+        click.secho(f"\nREFUSED - {len(exc.violations)} violation(s)\n", fg="red", bold=True)
+        click.echo(exc.report())
+        sys.exit(1)
+
+    bad = [r for r in results if not r["ok"]]
+    for r in results:
+        colour = "green" if r["ok"] else "red"
+        mark = "ok  " if r["ok"] else "FAIL"
+        click.secho(f"  {mark}", fg=colour, nl=False)
+        click.echo(f"  {r['corpus']:<6}{r['kind']:<10}{r['pattern']:<14}"
+                   f"expect {r['expect']:<7}got {r['got']}")
+    if bad:
+        click.secho(f"\n{len(bad)} control(s) no longer hold. Every absence claim measured "
+                    "over the affected corpus is now unsound until this is explained.",
+                    fg="red", bold=True)
+        sys.exit(1)
+    click.secho(f"\nall {len(results)} controls hold", fg="green", bold=True)
 
 
 def _commit_hash() -> str:

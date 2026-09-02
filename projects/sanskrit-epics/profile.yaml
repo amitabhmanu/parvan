@@ -1,0 +1,308 @@
+# The sanskrit-epics profile: what an extraction agent must know before it searches.
+#
+# The agent carries the seven rules, which are the same in any tradition. This file carries
+# the tables underneath them, which are not. A Homerist forking this project replaces every
+# line below and changes nothing in the agent.
+#
+# Validated by `parvan profile projects/sanskrit-epics --check`. P-1 refuses a search trap
+# with no worked example, and P-4 refuses a primary or baseline corpus with no positive
+# control, because a silence measured with a search nobody proved could find anything is not
+# a measured silence.
+
+schema_version: "0.1.0"
+
+project: sanskrit-epics
+tradition: Sanskrit epic, with Pali and Vedic controls
+languages: [Sanskrit, Pali]
+script: >
+  IAST - Latin transliteration with diacritics. Retroflexion (ṭ ḍ ṇ ṣ), length (ā ī ū),
+  vocalic r (ṛ ṝ), palatal and velar nasals (ñ ṅ) and the sibilants (ś ṣ) are all
+  distinctive. Type them, or state that you folded and accept the noise.
+
+adapter_module: tools/corpora.py
+
+# ---------------------------------------------------------------------------------------
+# CORPORA. `role` tells the agent what a corpus may be used FOR, which is not the same as
+# what it contains: nothing dates the Ramayana from Kalidasa, but Kalidasa can refute a
+# claim that the genre forbade a subject.
+# ---------------------------------------------------------------------------------------
+
+corpora:
+
+  ram:
+    role: primary
+    object: RAM
+    command: "uv run python tools/concordance.py '<regex>' --kanda 2-6 --limit 20"
+    note: >
+      Baroda critical edition, 18,761 verses, addressed Ram.K.SSS.VVV. NO APPARATUS - this
+      edition marks no interpolations at all, so --archetypal-only is refused here and the
+      lateness check available for the Mahabharata does not exist for this text. Say so in
+      any finding that would have wanted it.
+    positive_controls:
+      - pattern: "yavan"
+        expect: 29
+        note: >
+          The single most important control in this file. The untruncated 'yavana' returns
+          ZERO over Kiskindhakanda and that zero was published as a finding. If this control
+          ever stops returning 29, the loader or the orthography moved and every silence
+          measured since is unsound.
+      - pattern: "rāma"
+        expect: 1902
+        note: A term that cannot possibly be absent. Catches a dead corpus file outright.
+    known_silences:
+      - pattern: "lipi"
+        expect: 0
+        note: >
+          No word for writing anywhere in the Ramayana. Load-bearing for the writing horizon;
+          see docs/horizon-split.md.
+      - pattern: "pustak"
+        expect: 0
+        note: No book, either. The comparison row is mbh/pustak, which is apparatus-only.
+      - pattern: "dīnār"
+        expect: 0
+        note: The Roman aureus. Absent from both epics' constituted text.
+
+  mbh:
+    role: primary
+    object: MBH
+    command: "uv run python tools/concordance.py '<regex>' --corpus mbh --archetypal-only --count"
+    note: >
+      BORI critical edition, 18 parvans, addressed MBh.PP.AAA.VVV. THE APPARATUS IS
+      PRESERVED, and it matters more than anything else here: 66,177 of 224,679 lines are
+      star (*) or appendix (@) passages the critical editors judged NON-ARCHETYPAL. That is a
+      per-passage label of relative lateness in the same work, the same genre, the same
+      language and the same transmission - a control nothing else in the project comes close
+      to. A locus with a trailing * is apparatus, not constituted text, and a floor resting
+      on it is a floor on an interpolation. Always run a search both ways and report both
+      counts. A claim that survives ONLY in the apparatus is a CONTRADICTS, and it is the
+      most valuable result available anywhere in this project.
+    positive_controls:
+      - pattern: "dhanur"
+        expect: 699
+        note: Bow. Present throughout; the whole-text figure.
+      - pattern: "dhanur"
+        expect: 504
+        archetypal_only: true
+        note: >
+          The same search filtered. The pair is the control for the filter itself - if these
+          two numbers ever converge, --archetypal-only has stopped filtering.
+      - pattern: "yudhiṣṭhir"
+        expect: 2165
+        archetypal_only: true
+        note: Catches a corpus that loaded only some of its eighteen parvans.
+    known_silences:
+      - pattern: "dīnār"
+        expect: 0
+        archetypal_only: true
+        note: >
+          Zero in the constituted text against a row scored 5 - the most valuable outcome of
+          the manual promotion slice. It returns 3 over the whole text, so this silence
+          exists ONLY under the apparatus filter. Report both numbers, always.
+      - pattern: "pustak"
+        expect: 0
+        archetypal_only: true
+        note: >
+          Book. 4 hits over the whole text, all apparatus. The later layers of the same
+          tradition acquire the vocabulary, which is what makes the Ramayana's silence a fact
+          about date rather than about genre.
+      - pattern: "drekkāṇ"
+        expect: 0
+        note: >
+          One of the three Greek astrological loans. Zero under every spelling tried, which
+          is why section 11's Greek-astrology row was removed rather than encoded.
+
+  av:
+    role: baseline
+    object: AV
+    command: "uv run python tools/concordance.py '<regex>' --corpus av --count"
+    note: >
+      Atharvaveda-Samhita, Saunaka recension, ACCENTED (GRETIL avs_acu.htm). The one Vedic
+      text GRETIL ships with accent intact. The Vedic baseline against which post-Vedic drift
+      is measured - it dates nothing by itself. Accent is folded at search time, and vocalic
+      r is written differently here than in the epic files, so a pattern typed for the epics
+      works unchanged and one typed against the raw file does not.
+    positive_controls:
+      - pattern: "agni"
+        expect: 275
+        note: >
+          Tests the accent fold specifically. The text has 'agní' with a combining acute; if
+          folding regresses this returns 0 while the file is perfectly intact.
+      - pattern: "kṛṇ"
+        expect: 300
+        note: >
+          Tests the vocalic-r normalisation. The file writes r + COMBINING RING BELOW where
+          the epics use the precomposed ṛ; unfolded, this returns 0.
+
+  ragh:
+    role: genre-control
+    object: RAGH
+    command: "uv run python tools/concordance.py '<regex>' --corpus ragh --archetypal-only"
+    note: >
+      Kalidasa's Raghuvamsa, c. 400 CE. Court epic in the same genre as the Ramayana,
+      narrating the same dynasty, securely dated. Its ONLY use is to refute "the genre
+      forbade it": a subject Kalidasa discusses freely is not one epic convention suppressed.
+      Never date anything from it. Marks interpolations with *, so --archetypal-only works,
+      and a control resting on an interpolated verse is not a control.
+    positive_controls:
+      - pattern: "raghu"
+        expect: 40
+      - pattern: "raghu"
+        expect: 38
+        archetypal_only: true
+
+  dn:
+    role: independent-tradition
+    object: DN
+    command: "uv run python tools/pali.py '<regex>'"
+    note: >
+      Digha-Nikaya, PTS text. Transmitted independently of Sanskrit epic tradition, dated by
+      an independent apparatus, and full of the same referents - Magadha, Kosala, Rajagaha,
+      Pataliputta. Independence of dating chain is the design's criterion for what a corpus
+      addition is worth and nothing else available scores as high. Loci are PTS volume and
+      page - "DN ii.86" - which is how the Pali is cited in print.
+    positive_controls:
+      - pattern: "rājagah"
+        expect: 22
+      - pattern: "likh"
+        expect: 2
+    known_silences:
+      - pattern: "potthak"
+        expect: 0
+        note: >
+          THE FOOTNOTE TRAP, and the reason editorial matter is held apart from text. This
+          returns 3 with --notes, and all three are the PTS editors writing "Sihalapotthake",
+          'in the Sinhalese manuscript'. Counting them would have produced the exact claim
+          the search was meant to test - that this tradition knows books - out of nothing but
+          apparatus.
+
+  vin:
+    role: independent-tradition
+    object: VIN
+    command: "uv run python tools/pali.py '<regex>' --corpus vin"
+    note: >
+      Vinaya-Pitaka, PTS, Oldenberg's volume order - Mahavagga, Cullavagga, the two halves of
+      the Suttavibhanga, Parivara - so "Vin iii.21" is a Suttavibhanga page, not a Mahavagga
+      one. Same tradition and language as the Digha-Nikaya, and here the scribe appears.
+    positive_controls:
+      - pattern: "lekh"
+        expect: 35
+      - pattern: "potthak"
+        expect: 2
+        note: >
+          In the TEXT, not the footnotes - the contrast with the Digha-Nikaya, and the reason
+          the Pali writing horizon splits. See docs/pali-crosscheck.md.
+
+# ---------------------------------------------------------------------------------------
+# SEARCH TRAPS. Ways a naive search over this language returns the wrong answer.
+# P-1 refuses any entry here without a worked example.
+# ---------------------------------------------------------------------------------------
+
+search_traps:
+
+  - id: sandhi-stem-final-vowel
+    severity: critical
+    rule: >
+      Search the consonantal stem, never the citation form. A stem-final vowel changes under
+      case-ending sandhi, so the dictionary form frequently does not occur anywhere in the
+      text. Truncate before the stem-final vowel, ALWAYS. A zero result from an untruncated
+      stem is not evidence of anything. For an absence claim, say explicitly which truncated
+      stems you searched, or the silence is unmeasured.
+    examples:
+      - search: "yavana"
+        text_has: "yavanāṃś"
+        result: "no match - the citation form does not occur"
+      - search: "yavan"
+        text_has: "kāmbojān yavanāṃś caiva śakān"
+        result: "Ram.4.042.011 - the verse the untruncated search missed"
+      - search: "cola"
+        text_has: "colān"
+        result: "no match"
+      - search: "āndhra"
+        text_has: "āndhrāṃś"
+        result: "no match"
+    cost: >
+      The worst error in the project. 'yavana' over Kiskindhakanda returned zero and was
+      published as a finding that section 12 had misattributed a passage. The truncated stem
+      returns the verse, and section 12 was right all along. The finding had to be retracted.
+
+  - id: compound-internal-stems
+    severity: critical
+    rule: >
+      A string match is a candidate, not a citation. Sanskrit compounds are written as one
+      orthographic word, so a stem sits inside unrelated words and a substring search finds
+      all of them. Read every candidate verse. Quote the phrase that carries the claim and
+      say what it means. If you cannot, refuse.
+    examples:
+      - search: "yavana"
+        text_has: "cyavana"
+        result: "the sage - 5 of 8 raw hits were this"
+      - search: "śaka"
+        text_has: "śakalī-, maśaka, nāśakat"
+        result: "shattering, mosquito, 'could not' - none of them the Saka people"
+      - search: "āyasa"
+        text_has: "vaihāyasa"
+        result: "'of the sky' - contains the stem, means nothing like iron"
+
+  - id: literal-terms-used-metaphorically
+    severity: high
+    rule: >
+      A realia term in a poem is routinely a figure of speech. Establishing that a word occurs
+      is not establishing that the thing existed; name the subject of the passage, not just
+      its vocabulary.
+    examples:
+      - search: "āyasa"
+        text_has: "āyasaṃ hṛdayaṃ"
+        result: "'a heart of iron' at Ram.2.035.020 - metaphor, not metallurgy"
+      - search: "āyasa"
+        text_has: "āyasaṃ parighaṃ gṛhya"
+        result: "Ram.6.086.006 - an iron bludgeon wielded in battle. This one counts."
+
+  - id: neighbouring-claim
+    severity: high
+    rule: >
+      Distinguish the claim from a neighbouring one. Vocabulary from the right semantic field
+      is not the claim; the claim is about a specific subject.
+    examples:
+      - search: "moat / fortification vocabulary"
+        text_has: "army camps ringed with moats; a moat belonging to Rājagṛha"
+        result: >
+          Neither establishes 'Ayodhyā is a fortified metropolis'. Different subject, same
+          vocabulary.
+
+  - id: wrong-stratum
+    severity: high
+    rule: >
+      Check the stratum, not just the text. A verse in the wrong book is not a weaker
+      citation, it is a different claim. Confirm the locus falls inside the stratum's declared
+      extent before proposing it, and if it does not, say which stratum it DOES belong to -
+      that is the finding. But sandhi-stem-final-vowel comes first: an apparent wrong-stratum
+      result is more often a bad search than a bad attribution.
+    examples:
+      - search: "fortified-Ayodhyā description"
+        text_has: "the passage sits in Bālakāṇḍa, not in books 2-6"
+        result: >
+          Section 12 credits it to ram.core; it belongs to ram.bala. Reported as a
+          misattribution rather than promoted.
+    cost: >
+      The Yavana case looked exactly like this one and turned out to be a sandhi bug, so a
+      wrong-stratum verdict must be reached only after the truncated search has been run.
+
+# ---------------------------------------------------------------------------------------
+# CONVENTIONS the agent needs in order to write a record this project will accept.
+# ---------------------------------------------------------------------------------------
+
+conventions:
+  store: projects/sanskrit-epics/store
+  edges: projects/sanskrit-epics/store/edges/<edge-id>.yaml
+  strata: projects/sanskrit-epics/store/nodes/strata/<stratum-id>.yaml
+  methods: projects/sanskrit-epics/store/methods.yaml
+  run_from: projects/sanskrit-epics
+  extent_form: >
+    A stratum's `extent` lists coarse loci - "Ram.2" through "Ram.6" - optionally narrowed by
+    `excludes` naming specific sargas. A proposed locus must fall inside extent and outside
+    excludes.
+  locus_form: >
+    Ram.K.SSS.VVV and MBh.PP.AAA.VVV, sarga and sloka zero-padded to three. A trailing *
+    marks an apparatus passage. Pali is PTS volume and page: "DN ii.86".
+  gloss_language: >
+    Verbatim Sanskrit in IAST, with a plain-English gloss for every phrase relied on.

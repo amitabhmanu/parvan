@@ -87,6 +87,7 @@ def _node_from(raw: dict, path: str, in_quarantine: bool) -> Node:
         node_class=raw.get("class"),
         work=raw.get("work"),
         extent=raw.get("extent") or [],
+        excludes=raw.get("excludes") or [],
         archetypal=str(raw.get("archetypal", "true")),
         source_file=path,
         in_quarantine=in_quarantine,
@@ -248,6 +249,23 @@ def _check_graph(store: Store) -> list[Violation]:
                     "letting a text make it reintroduces the circularity G-4 prevents",
                 )
             )
+
+    # --- G-8: a carve-out must be claimed by some other stratum ----------------
+    # An excluded range that no stratum owns is a hole: the passages fall out of the
+    # network entirely and nothing says so.
+    claimed = {e for n in store.of_kind("stratum") for e in n.extent}
+    for stratum in store.of_kind("stratum"):
+        for ex in stratum.excludes:
+            if ex not in claimed:
+                out.append(
+                    Violation(
+                        "G-8",
+                        stratum.source_file or stratum.id,
+                        f"excludes {ex!r}, which no stratum claims as its extent; "
+                        "a carve-out nothing owns drops those passages from the network "
+                        "silently",
+                    )
+                )
 
     for referent in store.of_kind("referent"):
         rec = referent.source_file or referent.id

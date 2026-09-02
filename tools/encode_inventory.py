@@ -164,7 +164,11 @@ WORK_STATES = [
 # Ramayana strata. Extents follow the critical edition's kanda.sarga.sloka addressing where
 # section 12 localises a claim, and are left open where it does not.
 STRATA = [
-    ("ram.core", "Core, books 2-6 (Ayodhya through Yuddha) - the adikavya", ["Ram.2", "Ram.6"]),
+    # The divine-assembly seam is carved out explicitly rather than left to convention.
+    # Both strata used to claim book 6 with nothing resolving the overlap, so every check
+    # had to subtract 6.105 and 6.107 by hand. G-8 now refuses a carve-out no stratum owns.
+    ("ram.core", "Core, books 2-6 (Ayodhya through Yuddha) - the adikavya", ["Ram.2", "Ram.6"],
+     ["Ram.6.105", "Ram.6.107"]),
     # --- Mahabharata strata, section 11 and the stratification in section 4 --------
     ("ws.mbh.core", "MBh heroic narrative: quarrel, dicing, exile, embassy, the eighteen days",
      ["MBh.2", "MBh.11"]),
@@ -266,6 +270,24 @@ EDGES = [
      "Iron weaponry",
      {"prov": att("Ram.6.086.006 - ayasam parigham grhya; an iron bludgeon wielded in "
                   "battle. Cf. Ram.6.060.022, 6.067.006 sruvam karsnayasam (black iron)")}),
+    # REFUSED, and the refusal is the finding. ref.post-vedic-grammar bundles six
+    # typologically distinct changes into one 5/5 floor. A concordance supports two of them
+    # strongly - universal -tva absolutive chaining (1,714 hits in Ram.2-6; 5,121 archetypal
+    # in MBh.2-11, with quotable three-absolutive chains at Ram.2.046.055 and MBh.5.033.043),
+    # and -tum as the only surviving infinitive type, with the older -dhyai/-tave/-tavai
+    # suffixes returning zero genuine survivals once tava+eva sandhi and sadhyaih/kitavaih
+    # are excluded.
+    #
+    # It says nothing about the other four. Absent pitch accent is unfalsifiable here because
+    # GRETIL strips accent from every text it hosts, Vedic included - a fact about the
+    # transcription, not the epic. The lost subjunctive and injunctive need a Vedic baseline
+    # this corpus does not contain. Aspectual collapse and PPP-as-predicate are claims about
+    # how forms FUNCTION across a whole text, which no locus settles.
+    #
+    # A compound presupposition is only as strong as its weakest conjunct, and the weakest
+    # here is not weakly evidenced - it is off the instrument entirely. Promoting on the two
+    # searchable threads would record store-level support for a claim this project cannot
+    # check, which is the laundering the design exists to prevent. Stays asserted.
     ("e.003", "presupposes", "ram.core", "ref.post-vedic-grammar", "linguistic-stratigraphy",
      "Post-Vedic grammar", {}),
     ("e.004", "presupposes", "ram.bala", "ref.post-vedic-grammar", "linguistic-stratigraphy",
@@ -316,9 +338,15 @@ EDGES = [
     ("e.011", "presupposes", "ram.jabali", "ref.lokayata-school", "doctrinal-discontinuity",
      "Jabali's Lokayata speech", {}),
     ("e.012", "presupposes", "ram.bala", "ref.avatara-theology", "doctrinal-discontinuity",
-     "Avatara theology in Bala and Uttara", {}),
+     "Avatara theology in Bala and Uttara",
+     {"prov": att("Ram.1.015.001-007 - nararayano visnur niyuktah surasattamaih ... "
+                  "manusim tanum asthaya ravanam jahi samyuge ... visnur atmavan pitaram "
+                  "rocayam asa tada dasaratham nrpam. Rama's birth narrated as Visnu's "
+                  "incarnation, in narrator voice, before the character exists")}),
     ("e.013", "presupposes", "ram.uttara", "ref.avatara-theology", "doctrinal-discontinuity",
-     "Avatara theology in Bala and Uttara", {}),
+     "Avatara theology in Bala and Uttara",
+     {"prov": att("Ram.7.008.025 - bhavan narayano devas caturbahuh sanatanah; direct "
+                  "second-person identification of Rama with Narayana. Cf. Ram.7.008.024")}),
     ("e.014", "presupposes", "ram.sambuka", "ref.caste-hardening", "doctrinal-discontinuity",
      "Sambuka episode's hardened caste orthodoxy", {}),
     # Promoted, narrowed to the real half of Sugriva's southern-direction speech. The same
@@ -370,8 +398,29 @@ EDGES = [
     # --- ceilings from absence: the core lacks what later works have -------------------
     ("e.040", "absent-from", "ram.core", "ref.classical-kavya-style", "absence",
      "Short compounds; no mature kavya style", {"lag_min_years": 0}),
+    # The score-5 stratification claim, and the differential holds once the seam is carved
+    # out. Over the core minus Ram.6.105/6.107 (14,065 verses) there are 25 visnu and 4
+    # narayana hits and not one is a narrator- or god-voiced identity claim: they are
+    # similes ("strong AS Visnu", grammatically a comparison between two distinct beings),
+    # background myth about Trivikrama, Rama worshipping Narayana as a SEPARATE deity
+    # before exile, and two character speculations - Malyavan's "we suppose Rama to be
+    # Visnu" and the raksasas' panic at 6.082.024, which the text itself retracts five
+    # verses later.
+    #
+    # Worth recording: Rama's own "atmanam manusam manye" occurs EXACTLY ONCE in all 18,761
+    # verses, at Ram.6.105.010 - inside the carved-out seam, one verse before Brahma answers
+    # it. The disclaimer and the declaration are not opposing evidence from different layers;
+    # they are two beats of a single scene. The reverse evidence does not independently
+    # corroborate a mortal Rama in the core. It is the interior of the seam.
     ("e.041", "absent-from", "ram.core", "ref.avatara-theology", "doctrinal-discontinuity",
-     "Books 1 and 7 divinize Rama; books 2-6 do not", {"lag_min_years": 0}),
+     "Books 1 and 7 divinize Rama; books 2-6 do not",
+     {"lag_min_years": 0,
+      "prov": att("Measured absence over Ram.2-6 excluding Ram.6.105 and Ram.6.107 "
+                  "(14,065 verses): 25 visnu + 4 narayana hits, every one read, none a "
+                  "narrator- or deity-voiced identity claim. Rejected: Ram.2.110.019 and "
+                  "kandas 3-5 similes; Ram.2.006.001/003 Rama worshipping Narayana as a "
+                  "distinct god; Ram.6.026.031 and 6.082.024 character speculation, the "
+                  "latter retracted at 6.082.029")}),
     # The only pre-CE ceiling anywhere in section 12's table, and it is scored 2.
     ("e.043", "absent-from", "ram.core", "ref.pataliputra-imperial", "absence",
      "Pataliputra absent as imperial capital - soft ceiling c. 300 BCE on the geographic frame",
@@ -455,9 +504,30 @@ EDGES = [
     # should give ram.core a second route to one of its bounds.
 
     ("e.101", "presupposes", "ws.mbh.core", "ref.horse-chariot", "realia-floor",
-     "Horses and spoked chariots throughout", {}),
+     "Horses and spoked chariots throughout",
+     {"prov": att("MBh.6.023.014 - tatah svetair hayair yukte mahati syandane sthitau; "
+                  "the chariot Krsna and Arjuna stand in at the opening of the Gita, yoked "
+                  "with white horses. Cf. MBh.5.138.021 ratham svetahayair yuktam arjuno "
+                  "vahayisyati. Both ARCHETYPAL. 'hayair yukt' returns 8 hits in MBh.2-11 "
+                  "and all 8 survive the apparatus filter")}),
+    # The technical term the claim names - krsna-ayas / karsnayasa, "black iron" - is rare
+    # (10 archetypal hits in MBh.2-11) but concentrated in unambiguous material uses.
+    #
+    # The metaphor trap the Ramayana taught GENERALISES, and is a recurring epic formula
+    # rather than a one-off: MBh.5.131.032 ayasam hrdayam krtva, MBh.5.133.001
+    # krsnayasasyeva ... hrdayam krtam, MBh.3.028.005 ayasam hrdayam nunam - three separate
+    # "heart of iron" lines. Anyone counting ayas hits as evidence of metallurgy would be
+    # badly misled in both epics. Also excluded: MBh.3.212.014, Agni's liver becoming black
+    # iron in an etiological myth about the origin of minerals; MBh.8.024.014, the asura
+    # Maya's three magical cities; MBh.7.170.018, iron balls as sky portents.
+    #
+    # lohayas returns 0 anywhere - a measured silence about which term the epic uses.
     ("e.102", "presupposes", "ws.mbh.core", "ref.iron-weaponry", "realia-floor",
-     "Iron weaponry (krsna-ayas)", {}),
+     "Iron weaponry (krsna-ayas)",
+     {"prov": att("MBh.7.028.004 - atha karsnayasair banaih ... avidhyad devakiputram; "
+                  "black-iron arrowheads striking Krsna in battle. Cf. MBh.7.102.055 "
+                  "karsnayasam varma, iron armour worn into battle, and MBh.4.049.015 "
+                  "suvarnakarsnayasavarmanaddha. All ARCHETYPAL")}),
     ("e.103", "presupposes", "ws.mbh.core", "ref.post-vedic-grammar",
      "linguistic-stratigraphy", "Post-Vedic grammar: no accent, collapsed tenses", {}),
     ("e.104", "presupposes", "ws.mbh.core", "ref.karma-rebirth-moksa",
@@ -667,11 +737,12 @@ def emit() -> None:
         rec["provenance"] = src(row)
         dump(STORE / "nodes/work-states" / f"{nid}.yaml", rec)
 
-    for nid, label, extent in STRATA:
-        dump(STORE / "nodes/strata" / f"{nid}.yaml", {
-            "id": nid, "kind": "stratum", "label": label,
-            "work": "ramayana", "extent": extent,
-        })
+    for nid, label, extent, *rest in STRATA:
+        rec = {"id": nid, "kind": "stratum", "label": label,
+               "work": "ramayana", "extent": extent}
+        if rest and rest[0]:
+            rec["excludes"] = rest[0]
+        dump(STORE / "nodes/strata" / f"{nid}.yaml", rec)
 
     for nid, label, cls, lo, hi, derived, prov in REFERENTS:
         rec = {"id": nid, "kind": "referent", "label": label, "class": cls}

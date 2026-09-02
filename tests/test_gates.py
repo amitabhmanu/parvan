@@ -400,3 +400,48 @@ def test_g7_a_horizon_may_ground(store: Path) -> None:
     )
     loaded = load(store)
     assert "e.anchorgrounds" in loaded.edges
+
+
+# --- G-8: a carve-out must be claimed by some other stratum -----------------------
+
+
+def test_g8_dangling_carve_out_is_refused(store: Path) -> None:
+    """A seam inside a book can only be expressed by carving it out of the containing
+    stratum. If nothing claims the carved range, those passages fall out of the network
+    silently - which is worse than the overlap the carve-out was meant to fix."""
+    write(
+        store,
+        "nodes/strata/str.test.yaml",
+        {
+            "id": "str.test",
+            "kind": "stratum",
+            "label": "Test stratum",
+            "work": "test",
+            "extent": ["Test.1"],
+            "excludes": ["Test.1.099"],
+        },
+    )
+    assert "G-8" in refuse(store)
+
+
+def test_g8_carve_out_claimed_by_another_stratum_loads(store: Path) -> None:
+    """The control: once a stratum owns the carved range, the store is coherent."""
+    write(
+        store,
+        "nodes/strata/str.test.yaml",
+        {
+            "id": "str.test", "kind": "stratum", "label": "Test stratum",
+            "work": "test", "extent": ["Test.1"], "excludes": ["Test.1.099"],
+        },
+    )
+    write(
+        store,
+        "nodes/strata/str.seam.yaml",
+        {
+            "id": "str.seam", "kind": "stratum", "label": "The carved-out seam",
+            "work": "test", "extent": ["Test.1.099"],
+        },
+    )
+    loaded = load(store)
+    assert loaded.nodes["str.test"].excludes == ["Test.1.099"]
+    assert "str.seam" in loaded.nodes

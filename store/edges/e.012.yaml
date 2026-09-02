@@ -4,5 +4,7 @@ from: ram.bala
 to: ref.avatara-theology
 method: doctrinal-discontinuity
 provenance:
-  tier: asserted
-  source: 'docs/dating-sanskrit-epics.md scored inventory, row: Avatara theology in Bala and Uttara'
+  tier: attested
+  locus: Ram.1.015.001-007 - nararayano visnur niyuktah surasattamaih ... manusim tanum asthaya ravanam
+    jahi samyuge ... visnur atmavan pitaram rocayam asa tada dasaratham nrpam. Rama's birth narrated as
+    Visnu's incarnation, in narrator voice, before the character exists

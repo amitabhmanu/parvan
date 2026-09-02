@@ -5,6 +5,8 @@ to: ref.avatara-theology
 method: doctrinal-discontinuity
 lag_min_years: 0
 provenance:
-  tier: asserted
-  source: 'docs/dating-sanskrit-epics.md scored inventory, row: Books 1 and 7 divinize Rama; books 2-6
-    do not'
+  tier: attested
+  locus: 'Measured absence over Ram.2-6 excluding Ram.6.105 and Ram.6.107 (14,065 verses): 25 visnu +
+    4 narayana hits, every one read, none a narrator- or deity-voiced identity claim. Rejected: Ram.2.110.019
+    and kandas 3-5 similes; Ram.2.006.001/003 Rama worshipping Narayana as a distinct god; Ram.6.026.031
+    and 6.082.024 character speculation, the latter retracted at 6.082.029'

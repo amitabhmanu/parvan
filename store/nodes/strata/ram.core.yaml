@@ -5,3 +5,6 @@ work: ramayana
 extent:
 - Ram.2
 - Ram.6
+excludes:
+- Ram.6.105
+- Ram.6.107

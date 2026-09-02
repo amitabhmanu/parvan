@@ -4,5 +4,8 @@ from: ws.mbh.core
 to: ref.horse-chariot
 method: realia-floor
 provenance:
-  tier: asserted
-  source: 'docs/dating-sanskrit-epics.md scored inventory, row: Horses and spoked chariots throughout'
+  tier: attested
+  locus: MBh.6.023.014 - tatah svetair hayair yukte mahati syandane sthitau; the chariot Krsna and Arjuna
+    stand in at the opening of the Gita, yoked with white horses. Cf. MBh.5.138.021 ratham svetahayair
+    yuktam arjuno vahayisyati. Both ARCHETYPAL. 'hayair yukt' returns 8 hits in MBh.2-11 and all 8 survive
+    the apparatus filter

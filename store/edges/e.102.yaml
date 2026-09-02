@@ -4,5 +4,7 @@ from: ws.mbh.core
 to: ref.iron-weaponry
 method: realia-floor
 provenance:
-  tier: asserted
-  source: 'docs/dating-sanskrit-epics.md scored inventory, row: Iron weaponry (krsna-ayas)'
+  tier: attested
+  locus: MBh.7.028.004 - atha karsnayasair banaih ... avidhyad devakiputram; black-iron arrowheads striking
+    Krsna in battle. Cf. MBh.7.102.055 karsnayasam varma, iron armour worn into battle, and MBh.4.049.015
+    suvarnakarsnayasavarmanaddha. All ARCHETYPAL

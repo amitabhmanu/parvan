@@ -4,5 +4,6 @@ from: ram.uttara
 to: ref.avatara-theology
 method: doctrinal-discontinuity
 provenance:
-  tier: asserted
-  source: 'docs/dating-sanskrit-epics.md scored inventory, row: Avatara theology in Bala and Uttara'
+  tier: attested
+  locus: Ram.7.008.025 - bhavan narayano devas caturbahuh sanatanah; direct second-person identification
+    of Rama with Narayana. Cf. Ram.7.008.024

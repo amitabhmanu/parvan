@@ -186,6 +186,11 @@ class Node:
     # stratum / work-state
     work: str | None = None
     extent: list[str] = field(default_factory=list)
+    # Ranges carved out of `extent` and claimed by a more specific stratum. Without this a
+    # seam inside a book can only be expressed by two strata both claiming the book, which
+    # leaves the overlap unresolved and forces every check to subtract it by hand - exactly
+    # the sort of convention that holds until someone forgets (G-8).
+    excludes: list[str] = field(default_factory=list)
     archetypal: str = "true"  # 'true' | 'star' - BORI apparatus status, see corpus audit
 
     source_file: str = ""

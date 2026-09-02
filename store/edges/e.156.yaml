@@ -1,0 +1,15 @@
+id: e.156
+type: presupposes
+from: ws.mbh.core
+to: ref.subjunctive-loss
+method: linguistic-stratigraphy
+provenance:
+  tier: attested
+  locus: >
+    MBh archetypal text only, star and appendix passages excluded, 903,578 words: 1,778
+    thematic indicatives across the same 28 stems and three person slots, and ZERO
+    subjunctives. All 126 word-final -Ati types read; every one is a root-class or class-9
+    present or a sandhi artifact (nAti = na+ati, cAti = ca+ati, babhUvAti = babhUva+ati).
+    Positive control: karavANi x39 and dadAni x32 - the 1sg survives, so a zero in the other
+    persons is a property of the text and not of the search. At the Atharvaveda's rate the
+    expected count here is about 409. Re-runnable: tools/subjunctive.py

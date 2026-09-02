@@ -1,0 +1,16 @@
+id: e.154
+type: absent-from
+from: ws.atharvaveda
+to: ref.subjunctive-loss
+method: absence
+lag_min_years: 0
+provenance:
+  tier: attested
+  locus: >
+    The loss is absent from the Atharvaveda, where the category is fully productive.
+    AVS.2.036.003 suvana putran mahisi bhavati - "she shall become chief queen", the
+    subjunctive of bhavati with the thematic vowel lengthened. Cf. AVS.5.020.006 purvo
+    dundubhe pra vadasi vacam and AVS.1.010.002 (jivati). Paired within-stem count over 28
+    thematic present stems (classes 1/4/6/10) and three person slots, GRETIL avs_acu.htm,
+    5,839 verses / 85,489 words: 46 subjunctives to 200 indicatives, 18.7 per cent, in 19
+    distinct forms across 15 distinct stems. Re-runnable: tools/subjunctive.py

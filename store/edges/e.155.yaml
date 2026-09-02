@@ -1,0 +1,15 @@
+id: e.155
+type: presupposes
+from: ram.core
+to: ref.subjunctive-loss
+method: linguistic-stratigraphy
+provenance:
+  tier: attested
+  locus: >
+    Ram.2-6, 14,130 verses / 160,993 words: 247 thematic indicatives across the same 28 stems
+    and three person slots, and ZERO subjunctives. Every word-final -Ati type in the core was
+    read (37 types: yAti, bhAti, vAti, pAti, AkhyAti, jahAti, dadAti, and the class-9
+    -nAti/-NAti group jAnAti, aznAti, gRhNAti, badhnAti); not one is a thematic subjunctive.
+    Positive control - the search can see the category where it survived: karavANi occurs
+    twice, the 1sg the subjunctive kept by being reassigned to the imperative paradigm.
+    Re-runnable: tools/subjunctive.py

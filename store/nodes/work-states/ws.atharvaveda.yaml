@@ -1,0 +1,17 @@
+id: ws.atharvaveda
+kind: work-state
+label: Atharvaveda-Samhita, Saunaka recension
+work: atharvaveda
+interval:
+  floor: -1200
+  ceiling: -900
+  hedge: >
+    Conventional linguistic-and-material placement of the Saunaka Samhita, later than the
+    Rgveda and earlier than the Brahmana prose. Carried as asserted: no anchor in this store
+    dates it, and nothing here depends on the exact value - see docs/subjunctive-baseline.md,
+    where the bound this node supplies is slack by 150 years.
+provenance:
+  tier: asserted
+  source: >
+    Standard chronology of the Vedic corpus. The node exists to serve as a baseline for
+    absence claims about archaic morphology, not to date anything by itself.

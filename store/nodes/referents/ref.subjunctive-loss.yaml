@@ -1,0 +1,12 @@
+id: ref.subjunctive-loss
+kind: referent
+label: Thematic subjunctive no longer productive
+class: concept
+text_derived: true
+provenance:
+  tier: attested
+  locus: >
+    Split from ref.post-vedic-grammar under R-10. That referent bundles six typologically
+    distinct changes and could not be attested as a unit; this component can be, and is the
+    third of the six to become checkable at locus level. Measured in
+    docs/subjunctive-baseline.md.

@@ -37,6 +37,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1] / "corpus"
 CORPUS = ROOT / "sa_rAmAyaNa.xml"
 MBH_DIR = ROOT / "mbh"
+AV_FILE = ROOT / "av" / "avs_acu.htm"
 
 VERSE_RE = re.compile(r'<lg xml:id="R_(\d+)\.(\d+)\.(\d+)">(.*?)</lg>', re.S)
 LINE_RE = re.compile(r'<l xml:id="[^"]*">(.*?)</l>', re.S)
@@ -66,6 +67,49 @@ TOLERANCE = 0.0005  # 0.05% - source defects only, never a pattern bug
 MBH_RE = re.compile(
     r"^(\d+),(\d+)\.(\d+)[a-zA-Z]*([*@][^\t<]*)?(?:\t|<>)(.*?)(?:<BR>)?\s*$"
 )
+
+
+# Atharvaveda-Samhita, Saunaka recension, ACCENTED text (GRETIL avs_acu.htm; Orlandi 1991
+# collated with Roth/Whitney 1856, rev. Griffiths 2009). The one Vedic text GRETIL ships with
+# accent intact - its stated default, confirmed in the Rgveda header, is that "accents have
+# been dropped in order to facilitate word search".
+#
+#   (AVS_1,1.1a) ye trisaptah pariyanti visva rupani bibhratah |<BR>
+#   (AVS_19,7.1[2.3]a) ...        books 11-20 carry a second numbering in brackets
+#
+# Two encoding differences from the epic files, and both silently break a cross-corpus
+# search if not normalised:
+#   1. Accent is a combining acute (udatta) or grave (svarita) on the vowel. A pattern
+#      typed without accents matches nothing at all unless the text is folded first.
+#   2. Vocalic r is r + COMBINING RING BELOW, not the precomposed 'r' the epic files use.
+#      So 'krta' finds 5,142 vocalic r's in the epics and zero here.
+# av_fold() handles both. Vocalic l (9 occurrences) is left alone: folding it to 'l' would
+# collide with the intervocalic retroflex d the same file writes 'l'.
+AV_LINE = re.compile(
+    r"^\(AVŚ_(\d+),(\d+)(?:\[\d+\])?\.(?:\[-\])?(\d+)(?:\[[^\]]*\])?"
+    r"[a-zA-Zḍ]?\)\s*(.*?)(?:<BR>)?\s*$"
+)
+
+ACCENTS = ("\N{COMBINING ACUTE ACCENT}", "\N{COMBINING GRAVE ACCENT}")
+"""Udatta and svarita. Named escapes because these marks are invisible in source."""
+
+def av_fold(s: str) -> str:
+    """Drop Vedic accent and write vocalic r the way the epic corpora write it.
+
+    Length, retroflexion, nasalisation and palatalisation all survive - only the two accent
+    marks are removed, so this is not strip_diacritics(). The result is directly comparable
+    with a Ramayana or Mahabharata line.
+    """
+    d = unicodedata.normalize("NFD", s)
+    for a in ACCENTS:
+        d = d.replace(a, "")
+    # r + COMBINING RING BELOW -> the precomposed vocalic r the epic files use.
+    d = d.replace(
+        "r\N{COMBINING RING BELOW}\N{COMBINING MACRON}",
+        "\N{LATIN SMALL LETTER R WITH DOT BELOW AND MACRON}",
+    )
+    d = d.replace("r\N{COMBINING RING BELOW}", "\N{LATIN SMALL LETTER R WITH DOT BELOW}")
+    return unicodedata.normalize("NFC", d)
 
 
 @dataclass(frozen=True)
@@ -127,8 +171,55 @@ def load_mbh(directory: Path = MBH_DIR) -> list[Verse]:
     return out
 
 
+def load_av(path: Path = AV_FILE) -> list[Verse]:
+    """The accented Saunaka Atharvaveda, padas merged into whole verses.
+
+    Accent is preserved in `text` - it is the reason to hold this file rather than the
+    unaccented sibling - and folded at search time, so a pattern written for the epics works
+    here unchanged.
+    """
+    if not path.exists():
+        sys.exit(f"Atharvaveda not found at {path}; see docs/corpus-audit.md")
+    lines = path.read_text(encoding="utf-8").splitlines()
+    body = [ln for ln in lines if ln.startswith("(AV")]
+    merged: dict[tuple[int, int, int], list[str]] = {}
+    order: list[tuple[int, int, int]] = []
+    dropped = 0
+    for ln in body:
+        m = AV_LINE.match(ln)
+        if not m:
+            dropped += 1
+            continue
+        book, hymn, verse, text = m.groups()
+        text = re.sub(r"<[^>]+>", " ", text)
+        text = re.sub(r"\s+", " ", text).strip()
+        key = (int(book), int(hymn), int(verse))
+        if key not in merged:
+            merged[key] = []
+            order.append(key)
+        if text:
+            merged[key].append(text)
+    # Same discipline as load_mbh, and for the same reason: the Atharvaveda's value here is
+    # as a *baseline* for absence claims, and a baseline that quietly drops lines makes every
+    # differential computed against it wrong in the direction that flatters the hypothesis.
+    if dropped > len(body) * TOLERANCE:
+        raise SystemExit(
+            f"AV parse incomplete: {dropped} of {len(body)} verse lines did not match "
+            f"({100 * dropped / len(body):.2f}%). Fix AV_LINE before using it."
+        )
+    return [
+        Verse(b, h, v, " / ".join(merged[(b, h, v)]), work="AVS")
+        for (b, h, v) in order
+        if merged[(b, h, v)]
+    ]
+
+
 def load_corpus(name: str) -> list[Verse]:
-    return load_mbh() if name == "mbh" else load()
+    if name == "mbh":
+        return load_mbh()
+    if name == "av":
+        return load_av()
+    return load()
 
 
 def load(path: Path = CORPUS) -> list[Verse]:
@@ -137,7 +228,16 @@ def load(path: Path = CORPUS) -> list[Verse]:
     raw = path.read_text(encoding="utf-8")
     out: list[Verse] = []
     for k, sg, sl, body in VERSE_RE.findall(raw):
-        lines = [re.sub(r"\s+", " ", t).strip() for t in LINE_RE.findall(body)]
+        lines = []
+        for t in LINE_RE.findall(body):
+            # Many <l> elements wrap their padas in <seg type="pada" n="a">. Leaving that
+            # markup in the text glued attribute text onto the first word of every seg -
+            # 16,154 corrupted tokens, so `n="a">sa` was in the corpus where `sa` should be.
+            # Word-final searches survived it; a whole-word or anchored search did not, and
+            # the literal string "pada" inside type="pada" was matchable as if it were text.
+            # The Mahabharata loader has always stripped tags here; this one did not.
+            t = re.sub(r"<[^>]+>", " ", t)
+            lines.append(re.sub(r"\s+", " ", t).strip())
         out.append(Verse(int(k), int(sg), int(sl), " / ".join(lines)))
     return out
 
@@ -150,7 +250,9 @@ def search(
     for v in verses:
         if kandas and v.kanda not in kandas:
             continue
-        hay = strip_diacritics(v.text) if fold else v.text
+        hay = av_fold(v.text) if v.work == "AVS" else v.text
+        if fold:
+            hay = strip_diacritics(hay)
         if rx.search(hay):
             hits.append(v)
     return hits
@@ -178,11 +280,11 @@ def main() -> None:
 
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("pattern", help="regex, matched against IAST verse text")
-    ap.add_argument("--kanda", help="restrict to kandas, e.g. 2-6 or 1,7")
+    ap.add_argument("--kanda", help="restrict to kandas/parvans/books, e.g. 2-6 or 1,7")
     ap.add_argument("--fold", action="store_true",
                     help="strip diacritics before matching (looser, noisier)")
     ap.add_argument("--count", action="store_true", help="report counts only")
-    ap.add_argument("--corpus", choices=("ram", "mbh"), default="ram")
+    ap.add_argument("--corpus", choices=("ram", "mbh", "av"), default="ram")
     ap.add_argument("--archetypal-only", action="store_true",
                     help="MBh only: exclude star passages, which the BORI editors judged "
                          "non-archetypal. A floor resting on a star passage is a floor on "
@@ -197,7 +299,7 @@ def main() -> None:
     scope = [v for v in verses if not kandas or v.kanda in kandas]
     hits = search(verses, args.pattern, kandas=kandas, fold=args.fold)
 
-    unit = "parvan" if args.corpus == "mbh" else "kanda"
+    unit = {"mbh": "parvan", "av": "book"}.get(args.corpus, "kanda")
     where = f"{unit} {args.kanda}" if args.kanda else "whole text"
     print(f"pattern {args.pattern!r} over {where}: {len(hits)} hit(s) in {len(scope)} verses")
 

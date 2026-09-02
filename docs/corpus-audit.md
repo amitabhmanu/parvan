@@ -226,4 +226,15 @@ as ordinary that are missing from the Atharvaveda would floor those referents' e
 is the only mechanism that floors a text presupposing them. Every such edge needs the
 Pāṭaliputra treatment — a positive control — before it may leave quarantine.
 
-**Not fetched.** Awaiting a go-ahead; ~2 MB, gitignored like the rest of `corpus/`.
+**Fetched 2026-09-02** into `corpus/av/avs_acu.htm` (1.1 MB, gitignored). Parse is complete:
+all 11,395 verse-ID lines matched, zero dropped, 731 hymns and 5,839 verses across all 20
+books. Two encoding differences from the epic files, both silently fatal to a cross-corpus
+search if unhandled — accent as a combining acute or grave, and vocalic *r* written as
+`r` + COMBINING RING BELOW rather than the precomposed `ṛ` the epic files use. `av_fold()`
+in `tools/concordance.py` normalises both, so a pattern written for the epics works here
+unchanged. Available as `--corpus av`.
+
+**Outcome: the subjunctive component is now attested, and the bound it supplies is slack.**
+See `subjunctive-baseline.md`. The Atharvaveda is the earliest text in the store and so was
+the strongest available test of the Phase 4 result that corpus growth buys checking rather
+than resolution. The law held: both headline brackets are unchanged to the year.

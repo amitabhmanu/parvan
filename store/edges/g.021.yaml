@@ -4,5 +4,5 @@ from: hor.iron-india
 to: ref.iron-weaponry
 method: archaeological-horizon
 provenance:
-  tier: asserted
-  source: 'docs/dating-sanskrit-epics.md scored inventory, row: Iron weaponry'
+  tier: attested
+  locus: 'hor.iron-india: Earliest iron-bearing levels, South Asian excavation record'

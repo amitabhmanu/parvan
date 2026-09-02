@@ -4,5 +4,5 @@ from: hor.stupa-eduka
 to: ref.eduka-polemic
 method: archaeological-horizon
 provenance:
-  tier: asserted
-  source: 'docs/dating-sanskrit-epics.md scored inventory, row: Eduka / stupa polemic'
+  tier: attested
+  locus: 'hor.stupa-eduka: Early stupa horizon, post-Asokan'

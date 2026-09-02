@@ -4,5 +4,8 @@ from: ram.kiskindha-geog
 to: ref.deccan-knowledge
 method: realia-floor
 provenance:
-  tier: asserted
-  source: 'docs/dating-sanskrit-epics.md scored inventory, row: Southern flora, fauna, place-knowledge'
+  tier: attested
+  locus: Ram.4.040.008-019 - vindhyam, narmadam, godavarim, krsnavenim, vidarbhan rsikams ... bangan kalingams
+    ca, andhrams ca pundrams ca colan pandyan sakeralan, sacandanavana (sandalwood), kaverim, tamraparnim
+    grahajustam (crocodile-infested), kavatam pandyanam. Excludes 4.040.020-047, mythic cosmography in
+    the same sarga

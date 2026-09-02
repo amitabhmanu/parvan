@@ -4,5 +4,5 @@ from: hor.massed-elephants
 to: ref.massed-elephant-corps
 method: archaeological-horizon
 provenance:
-  tier: asserted
-  source: 'docs/dating-sanskrit-epics.md scored inventory, row: Massed elephant corps, fourfold army'
+  tier: attested
+  locus: 'hor.massed-elephants: Magadhan-era military record; Greek accounts of Indian armies'

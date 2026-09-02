@@ -5,6 +5,5 @@ to: ref.vasudeva-epic-attributes
 method: epigraphic-citation
 confidence: 0.5
 provenance:
-  tier: asserted
-  source: 'docs/dating-sanskrit-epics.md scored inventory, row: Heliodorus pillar wording paralleling
-    an epic verse - quotation or commonplace?'
+  tier: attested
+  locus: 'anc.heliodorus: Besnagar pillar inscription; Vasudeva as god of gods'

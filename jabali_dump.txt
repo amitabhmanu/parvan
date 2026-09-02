@@ -1,0 +1,130 @@
+Ram.2.099.001  punar evaṃ bruvāṇaṃ tu bharataṃ lakṣmaṇāgrajaḥ / pratyuvaca tataḥ śrīmāñ jñātimadhye 'tisatkṛtaḥ
+Ram.2.099.002  upapannam idaṃ vākyaṃ yat tvam evam abhāṣathāḥ / jātaḥ putro daśarathāt kaikeyyāṃ rājasattamāt
+Ram.2.099.003  purā bhrātaḥ pitā naḥ sa mātaraṃ te samudvahan / mātāmahe samāśrauṣīd rājyaśulkam anuttamam
+Ram.2.099.004  devāsure ca saṃgrāme jananyai tava pārthivaḥ / saṃprahṛṣṭo dadau rājā varam ārādhitaḥ prabhuḥ
+Ram.2.099.005  tataḥ sā saṃpratiśrāvya tava mātā yaśasvinī / ayācata naraśreṣṭhaṃ dvau varau varavarṇinī
+Ram.2.099.006  tava rājyaṃ naravyāghra mama pravrājanaṃ tathā / tac ca rājā tathā tasyai niyuktaḥ pradadau varam
+Ram.2.099.007  tena pitrāham apy atra niyuktaḥ puruṣarṣabha / caturdaśa vane vāsaṃ varṣāṇi varadānikam
+Ram.2.099.008  so 'haṃ vanam idaṃ prāpto nirjanaṃ lakṣmaṇānvitaḥ / śītayā cāpratidvandvaḥ satyavāde sthitaḥ pituḥ
+Ram.2.099.009  bhavān api tathety eva pitaraṃ satyavādinam / kartum arhati rājendraṃ kṣipram evābhiṣecanāt
+Ram.2.099.010  ṛṇān mocaya rājānaṃ matkṛte bharata prabhum / pitaraṃ trāhi dharmajña mātaraṃ cābhinandaya
+Ram.2.099.011  śrūyate hi purā tāta śrutir gītā yaśasvinī / gayena yajamānena gayeṣv eva pitṝn prati
+Ram.2.099.012  puṃ nāmnā narakād yasmāt pitaraṃ trāyate sutaḥ / tasmāt putra iti proktaḥ pitṝn yat pāti vā sutaḥ
+Ram.2.099.013  eṣṭavyā bahavaḥ putrā guṇavanto bahuśrutāḥ / teṣāṃ vai samavetānām api kaś cid gayāṃ vrajet
+Ram.2.099.014  evaṃ rājarṣayaḥ sarve pratītā rājanandana / tasmāt trāhi naraśreṣṭha pitaraṃ narakāt prabho
+Ram.2.099.015  ayodhyāṃ gaccha bharata prakṛtīr anurañjaya / śatrughna sahito vīra saha sarvair dvijātibhiḥ
+Ram.2.099.016  pravekṣye daṇḍakāraṇyam aham apy avilambayan / ābhyāṃ tu sahito rājan vaidehyā lakṣmaṇena ca
+Ram.2.099.017  <seg type="pāda" n="a">tvaṃ rājā bhava bharata svayaṃ narāṇāṃ</seg> <seg type="pāda" n="b">vanyānām aham api rājarāṇ mṛgāṇām</seg> / <seg type="pāda" n="c">gaccha tvaṃ puravaram adya saṃprahṛṣṭaḥ</seg> <seg type="pāda" n="d">saṃhṛṣṭas tv aham api daṇḍakān pravekṣye</seg>
+Ram.2.099.018  <seg type="pāda" n="a">chāyāṃ te dinakarabhāḥ prabādhamānaṃ</seg> <seg type="pāda" n="b">varṣatraṃ bharata karotu mūrdhni śītām</seg> / <seg type="pāda" n="c">eteṣām aham api kānanadrumāṇāṃ</seg> <seg type="pāda" n="d">chāyāṃ tām atiśayinīṃ sukhaṃ śrayiṣye</seg>
+Ram.2.099.019  <seg type="pāda" n="a">śatrughnaḥ kuśalamatis tu te sahāyaḥ</seg> <seg type="pāda" n="b">saumitrir mama viditaḥ pradhānamitram</seg> / <seg type="pāda" n="c">catvāras tanayavarā vayaṃ narendraṃ</seg> <seg type="pāda" n="d">satyasthaṃ bharata carāma mā viṣādam</seg>
+Ram.2.100.001  āśvāsayantaṃ bharataṃ jābālir brāhmaṇottamaḥ / uvāca rāmaṃ dharmajñaṃ dharmāpetam idaṃ vacaḥ
+Ram.2.100.002  sādhu rāghava mā bhūt te buddhir evaṃ nirarthakā / prākṛtasya narasyeva ārya buddhes tapasvinaḥ
+Ram.2.100.003  kaḥ kasya puruṣo bandhuḥ kim āpyaṃ kasya kena cit / yad eko jāyate jantur eka eva vinaśyati
+Ram.2.100.004  tasmān mātā pitā ceti rāma sajjeta yo naraḥ / unmatta iva sa jñeyo nāsti kā cid dhi kasya cit
+Ram.2.100.005  yathā grāmāntaraṃ gacchan naraḥ kaś cit kva cid vaset / utsṛjya ca tam āvāsaṃ pratiṣṭhetāpare 'hani
+Ram.2.100.006  evam eva manuṣyāṇāṃ pitā mātā gṛhaṃ vasu / āvāsamātraṃ kākutstha sajjante nātra sajjanāḥ
+Ram.2.100.007  pitryaṃ rājyaṃ samutsṛjya sa nārhati narottama / āsthātuṃ kāpathaṃ duḥkhaṃ viṣamaṃ bahukaṇṭakam
+Ram.2.100.008  samṛddhāyām ayodhyāyām ātmānam abhiṣecaya / ekaveṇīdharā hi tvāṃ nagarī saṃpratīkṣate
+Ram.2.100.009  rājabhogān anubhavan mahārhān pārthivātmaja / vihara tvam ayodhyāyāṃ yathā śakras triviṣṭape
+Ram.2.100.010  na te kaś cid daśarataḥs tvaṃ ca tasya na kaś cana / anyo rājā tvam anyaś ca tasmāt kuru yad ucyate
+Ram.2.100.011  gataḥ sa nṛpatis tatra gantavyaṃ yatra tena vai / pravṛttir eṣā martyānāṃ tvaṃ tu mithyā vihanyase
+Ram.2.100.012  arthadharmaparā ye ye tāṃs tāñ śocāmi netarān / te hi duḥkham iha prāpya vināśaṃ pretya bhejire
+Ram.2.100.013  aṣṭakā pitṛdaivatyam ity ayaṃ prasṛto janaḥ / annasyopadravaṃ paśya mṛto hi kim aśiṣyati
+Ram.2.100.014  yadi bhuktam ihānyena deham anyasya gacchati / dadyāt pravasataḥ śrāddhaṃ na tat pathy aśanaṃ bhavet
+Ram.2.100.015  dānasaṃvananā hy ete granthā medhāvibhiḥ kṛtāḥ / yajasva dehi dīkṣasva tapas tapyasva saṃtyaja
+Ram.2.100.016  sa nāsti param ity eva kuru buddhiṃ mahāmate / pratyakṣaṃ yat tad ātiṣṭha parokṣaṃ pṛṣṭhataḥ kuru
+Ram.2.100.017  satāṃ buddhiṃ puraskṛtya sarvalokanidarśinīm / rājyaṃ tvaṃ pratigṛhṇīṣva bharatena prasāditaḥ
+Ram.2.101.001  jābāles tu vacaḥ śrutvā rāmaḥ satyātmanāṃ varaḥ / uvāca parayā yuktyā svabuddhyā cāvipannayā
+Ram.2.101.002  bhavān me priyakāmārthaṃ vacanaṃ yad ihoktavān / akāryaṃ kāryasaṃkāśam apathyaṃ pathyasaṃmitam
+Ram.2.101.003  nirmaryādas tu puruṣaḥ pāpācārasamanvitaḥ / mānaṃ na labhate satsu bhinnacāritradarśanaḥ
+Ram.2.101.004  kulīnam akulīnaṃ vā vīraṃ puruṣamāninam / cāritram eva vyākhyāti śuciṃ vā yadi vāśucim
+Ram.2.101.005  anāryas tv āryasaṃkāśaḥ śaucād dhīnas tathā śuciḥ / lakṣaṇyavad alakṣaṇyo duḥśīlaḥ śīlavān iva
+Ram.2.101.006  adharmaṃ dharmaveṣeṇa yadīmaṃ lokasaṃkaram / abhipatsye śubhaṃ hitvā kriyāvidhivivarjitam
+Ram.2.101.007  kaś cetayānaḥ puruṣaḥ kāryākāryavicakṣaṇaḥ / bahu maṃsyati māṃ loke durvṛttaṃ lokadūṣaṇam
+Ram.2.101.008  kasya yāsyāmy ahaṃ vṛttaṃ kena vā svargam āpnuyām / anayā vartamāno 'haṃ vṛttyā hīnapratijñayā
+Ram.2.101.009  kāmavṛttas tv ayaṃ lokaḥ kṛtsnaḥ samupavartate / yadvṛttāḥ santi rājānas tadvṛttāḥ santi hi prajāḥ
+Ram.2.101.010  satyam evānṛśaṃsyaṃ ca rājavṛttaṃ sanātanam / tasmāt satyātmakaṃ rājyaṃ satye lokaḥ pratiṣṭhitaḥ
+Ram.2.101.011  ṛṣayaś caiva devāś ca satyam eva hi menire / satyavādī hi loke 'smin paramaṃ gacchati kṣayam
+Ram.2.101.012  udvijante yathā sarpān narād anṛtavādinaḥ / dharmaḥ satyaṃ paro loke mūlaṃ svargasya cocyate
+Ram.2.101.013  satyam eveśvaro loke satyaṃ padmā samāśritā / satyamūlāni sarvāṇi satyān nāsti paraṃ padam
+Ram.2.101.014  dattam iṣṭaṃ hutaṃ caiva taptāni ca tapāṃsi ca / vedāḥ satyapratiṣṭhānās tasmāt satyaparo bhavet
+Ram.2.101.015  ekaḥ pālayate lokam ekaḥ pālayate kulam / majjaty eko hi niraya ekaḥ svarge mahīyate
+Ram.2.101.016  so 'haṃ pitur nideśaṃ tu kimarthaṃ nānupālaye / satyapratiśravaḥ satyaṃ satyena samayīkṛtaḥ
+Ram.2.101.017  naiva lobhān na mohād vā na cājñānāt tamo'nvitaḥ / setuṃ satyasya bhetsyāmi guroḥ satyapratiśravaḥ
+Ram.2.101.018  asatyasaṃdhasya sataś calasyāsthiracetasaḥ / naiva devā na pitaraḥ pratīcchantīti naḥ śrutam
+Ram.2.101.019  pratyagātmam imaṃ dharmaṃ satyaṃ paśyāmy ahaṃ svayam / bhāraḥ satpuruṣācīrṇas tad artham abhinandyate
+Ram.2.101.020  kṣātraṃ dharmam ahaṃ tyakṣye hy adharmaṃ dharmasaṃhitam / kṣudraur nṛśaṃsair lubdhaiś ca sevitaṃ pāpakarmabhiḥ
+Ram.2.101.021  kāyena kurute pāpaṃ manasā saṃpradhārya ca / anṛtaṃ jihvayā cāha trividhaṃ karma pātakam
+Ram.2.101.022  bhūmiḥ kīrtir yaśo lakṣmīḥ puruṣaṃ prārthayanti hi / svargasthaṃ cānubadhnanti satyam eva bhajeta tat
+Ram.2.101.023  śreṣṭhaṃ hy anāryam eva syād yad bhavān avadhārya mām / āha yuktikarair vākyair idaṃ bhadraṃ kuruṣva ha
+Ram.2.101.024  kathaṃ hy ahaṃ pratijñāya vanavāsam imaṃ guroḥ / bharatasya kariṣyāmi vaco hitvā guror vacaḥ
+Ram.2.101.025  sthirā mayā pratijñātā pratijñā gurusaṃnidhau / prahṛṣṭamānasā devī kaikeyī cābhavat tadā
+Ram.2.101.026  vanavāsaṃ vasann evaṃ śucir niyatabhojanaḥ / mūlaiḥ puṣpaiḥ phalaiḥ puṇyaiḥ pitṝn devāṃś ca tarpayan
+Ram.2.101.027  saṃtuṣṭapañcavargo 'haṃ lokayātrāṃ pravartaye / akuhaḥ śraddadhānaḥ san kāryākāryavicakṣaṇaḥ
+Ram.2.101.028  karmabhūmim imāṃ prāpya kartavyaṃ karma yac chubham / agnir vāyuś ca somaś ca karmaṇāṃ phalabhāginaḥ
+Ram.2.101.029  śataṃ kratūnām āhṛtya devarāṭ tridivaṃ gataḥ / tapāṃsy ugrāṇi cāsthāya divaṃ yātā maharṣayaḥ
+Ram.2.101.030  <seg type="pāda" n="a">satyaṃ ca dharmaṃ ca parākramaṃ ca</seg> <seg type="pāda" n="b">bhūtānukampāṃ priyavāditāṃ ca</seg> / <seg type="pāda" n="c">dvijātidevātithipūjanaṃ ca</seg> <seg type="pāda" n="d">panthānam āhus tridivasya santaḥ</seg>
+Ram.2.101.031  <seg type="pāda" n="a">dharme ratāḥ satpuruṣaiḥ sametās</seg> <seg type="pāda" n="b">tejasvino dānaguṇapradhānāḥ</seg> / <seg type="pāda" n="c">ahiṃsakā vītamalāś ca loke</seg> <seg type="pāda" n="d">bhavanti pūjyā munayaḥ pradhānāḥ</seg>
+Ram.2.102.001  kruddham ājñāya rāmaṃ tu vasiṣṭhaḥ pratyuvāca ha / jābālir api jānīte lokasyāsya gatāgatim / nivartayitukāmas tu tvām etad vākyam abravīt
+Ram.2.102.002  imāṃ lokasamutpattiṃ lokanātha nibodha me / sarvaṃ salilam evāsīt pṛthivī yatra nirmitā / tataḥ samabhavad brahmā svayambhūr daivataiḥ saha
+Ram.2.102.003  sa varāhas tato bhūtvā projjahāra vasuṃdharām / asṛjac ca jagat sarvaṃ saha putraiḥ kṛtātmabhiḥ
+Ram.2.102.004  ākāśaprabhavo brahmā śāśvato nitya avyayaḥ / tasmān marīciḥ saṃjajñe marīceḥ kaśyapaḥ sutaḥ
+Ram.2.102.005  vivasvān kaśyapāj jajñe manur vaivasvataḥ smṛtaḥ / sa tu prajāpatiḥ pūrvam ikṣvākus tu manoḥ sutaḥ
+Ram.2.102.006  yasyeyaṃ prathamaṃ dattā samṛddhā manunā mahī / tam ikṣvākum ayodhyāyāṃ rājānaṃ viddhi pūrvakam
+Ram.2.102.007  ikṣvākos tu sutaḥ śrīmān kukṣir eveti viśrutaḥ / kukṣer athātmajo vīro vikukṣir udapadyata
+Ram.2.102.008  vikukṣes tu mahātejā bāṇaḥ putraḥ pratāpavān / bāṇasya tu mahābāhur anaraṇyo mahāyaśāḥ
+Ram.2.102.009  nānāvṛṣṭir babhūvāsmin na durbhikṣaṃ satāṃ vare / anaraṇye mahārāje taskaro vāpi kaś cana
+Ram.2.102.010  anaraṇyān mahābāhuḥ pṛthū rājā babhūva ha / tasmāt pṛthor mahārājas triśaṅkur udapadyata / sa satyavacanād vīraḥ saśarīro divaṃ gataḥ
+Ram.2.102.011  triśaṅkor abhavat sūnur dhundhumāro mahāyaśāḥ / dhundhumārān mahātejā yuvanāśvo vyajāyata
+Ram.2.102.012  yuvanāśva sutaḥ śrīmān māndhātā samapadyata / māndhātus tu mahātejāḥ susaṃdhir udapadyata
+Ram.2.102.013  susaṃdher api putrau dvau dhruvasaṃdhiḥ prasenajit / yaśasvī dhruvasaṃdhes tu bharato ripusūdanaḥ
+Ram.2.102.014  bharatāt tu mahābāhor asito nāma jāyata / yasyaite pratirājāna udapadyanta śatravaḥ / haihayās tālajaṅghāś ca śūrāś ca śaśabindavaḥ
+Ram.2.102.015  tāṃs tu sarvān prativyūhya yuddhe rājā pravāsitaḥ / sa ca śailavare ramye babhūvābhirato muniḥ / dve cāsya bhārye garbhiṇyau babhūvatur iti śrutiḥ
+Ram.2.102.016  bhārgavaś cyavano nāma himavantam upāśritaḥ / tam ṛṣiṃ samupāgamya kālindī tv abhyavādayat
+Ram.2.102.017  sa tām abhyavadad vipro varepsuṃ putrajanmani / tataḥ sā gṛham āgamya devī putraṃ vyajāyata
+Ram.2.102.018  sapatnyā tu garas tasyai datto garbhajighāṃsayā / gareṇa saha tenaiva jātaḥ sa sagaro 'bhavat
+Ram.2.102.019  sa rājā sagaro nāma yaḥ samudram akhānayat / iṣṭvā parvaṇi vegena trāsayantam imāḥ prajāḥ
+Ram.2.102.020  asamañjas tu putro 'bhūt sagarasyeti naḥ śrutam / jīvann eva sa pitrā tu nirastaḥ pāpakarmakṛt
+Ram.2.102.021  aṃśumān iti putro 'bhūd asamañjasya vīryavān / dilīpo 'ṃśumataḥ putro dilīpasya bhagīrathaḥ
+Ram.2.102.022  bhagīrathāt kakutsthas tu kākutsthā yena tu smṛtāḥ / kakutsthasya tu putro 'bhūd raghur yena tu rāghavaḥ
+Ram.2.102.023  raghos tu putras tejasvī pravṛddhaḥ puruṣādakaḥ / kalmāṣapādaḥ saudāsa ity evaṃ prathito bhuvi
+Ram.2.102.024  kalmāṣapādaputro 'bhūc chaṅkhaṇas tv iti viśrutaḥ / yas tu tad vīryam āsādya sahaseno vyanīnaśat
+Ram.2.102.025  śaṅkhaṇasya tu putro 'bhūc chūraḥ śrīmān sudarśanaḥ / sudarśanasyāgnivarṇa agnivarṣasya śīghragaḥ
+Ram.2.102.026  śīghragasya maruḥ putro maroḥ putraḥ praśuśrukaḥ / praśuśrukasya putro 'bhūd ambarīṣo mahādyutiḥ
+Ram.2.102.027  ambarīṣasya putro 'bhūn nahuṣaḥ satyavikramaḥ / nahuṣasya ca nābhāgaḥ putraḥ paramadhārmikaḥ
+Ram.2.102.028  ajaś ca suvrataś caiva nābhāgasya sutāv ubhau / ajasya caiva dharmātmā rājā daśarathaḥ sutaḥ
+Ram.2.102.029  tasya jyeṣṭho 'si dāyādo rāma ity abhiviśrutaḥ / tad gṛhāṇa svakaṃ rājyam avekṣasva jagan nṛpa
+Ram.2.102.030  ikṣvākūṇāṃ hi sarveṣāṃ rājā bhavati pūrvajaḥ / pūrvaje nāvaraḥ putro jyeṣṭho rājye 'bhiṣicyate
+Ram.2.102.031  <seg type="pāda" n="a">sa rāghavāṇāṃ kuladharmam ātmanaḥ</seg> <seg type="pāda" n="b">sanātanaṃ nādya vihātum arhasi</seg> / <seg type="pāda" n="c">prabhūtaratnām anuśādhi medinīṃ</seg> <seg type="pāda" n="d">prabhūtarāṣṭrāṃ pitṛvan mahāyaśāḥ</seg>
+Ram.2.103.001  vasiṣṭhas tu tadā rāmam uktvā rājapurohitaḥ / abravīd dharmasaṃyuktaṃ punar evāparaṃ vacaḥ
+Ram.2.103.002  puruṣasyeha jātasya bhavanti guravas trayaḥ / ācāryaś caiva kākutstha pitā mātā ca rāghava
+Ram.2.103.003  pitā hy enaṃ janayati puruṣaṃ puruṣarṣabha / prajñāṃ dadāti cācāryas tasmāt sa gurur ucyate
+Ram.2.103.004  sa te 'haṃ pitur ācāryas tava caiva paraṃtapa / mama tvaṃ vacanaṃ kurvan nātivarteḥ satāṃ gatim
+Ram.2.103.005  imā hi te pariṣadaḥ śreṇayaś ca samāgatāḥ / eṣu tāta caran dharmaṃ nātivarteḥ satāṃ gatim
+Ram.2.103.006  vṛddhāyā dharmaśīlāyā mātur nārhasy avartitum / asyās tu vacanaṃ kurvan nātivarteḥ satāṃ gatim
+Ram.2.103.007  bharatasya vacaḥ kurvan yācamānasya rāghava / ātmānaṃ nātivartes tvaṃ satyadharmaparākrama
+Ram.2.103.008  evaṃ madhuram uktas tu guruṇā rāghavaḥ svayam / pratyuvāca samāsīnaṃ vasiṣṭhaṃ puruṣarṣabhaḥ
+Ram.2.103.009  yan mātāpitarau vṛttaṃ tanaye kurutaḥ sadā / na supratikaraṃ tat tu mātrā pitrā ca yat kṛtam
+Ram.2.103.010  yathāśakti pradānena snāpanāc chādanena ca / nityaṃ ca priyavādena tathā saṃvardhanena ca
+Ram.2.103.011  sa hi rājā janayitā pitā daśaratho mama / ājñātaṃ yan mayā tasya na tan mithyā bhaviṣyati
+Ram.2.103.012  evam uktas tu rāmeṇa bharataḥ pratyanantaram / uvāca paramodāraḥ sūtaṃ paramadurmanāḥ
+Ram.2.103.013  iha me sthaṇḍile śīghraṃ kuśān āstara sārathe / āryaṃ pratyupavekṣyāmi yāvan me na prasīdati
+Ram.2.103.014  anāhāro nirāloko dhanahīno yathā dvijaḥ / śeṣye purastāc chālāyā yāvan na pratiyāsyati
+Ram.2.103.015  sa tu rāmam avekṣantaṃ sumantraṃ prekṣya durmanāḥ / kuśottaram upasthāpya bhūmāv evāstarat svayam
+Ram.2.103.016  tam uvāca mahātejā rāmo rājarṣisattamāḥ / kiṃ māṃ bharata kurvāṇaṃ tāta pratyupavekṣyasi
+Ram.2.103.017  brāhmaṇo hy ekapārśvena narān roddhum ihārhati / na tu mūrdhāvasiktānāṃ vidhiḥ pratyupaveśane
+Ram.2.103.018  uttiṣṭha naraśārdūla hitvaitad dāruṇaṃ vratam / puravaryām itaḥ kṣipram ayodhyāṃ yāhi rāghava
+Ram.2.103.019  āsīnas tv eva bharataḥ paurajānapadaṃ janam / uvāca sarvataḥ prekṣya kim āryaṃ nānuśāsatha
+Ram.2.103.020  te tam ūcur mahātmānaṃ paurajānapadā janāḥ / kākutstham abhijānīmaḥ samyag vadati rāghavaḥ
+Ram.2.103.021  eṣo 'pi hi mahābhāgaḥ pitur vacasi tiṣṭhati / ata eva na śaktāḥ smo vyāvartayitum añjasā
+Ram.2.103.022  teṣām ājñāya vacanaṃ rāmo vacanam abravīt / evaṃ nibodha vacanaṃ suhṛdāṃ dharmacakṣuṣām
+Ram.2.103.023  etac caivobhayaṃ śrutvā samyak saṃpaśya rāghava / uttiṣṭha tvaṃ mahābāho māṃ ca spṛśa tathodakam
+Ram.2.103.024  athotthāya jalaṃ spṛṣṭvā bharato vākyam abravīt / śṛṇvantu me pariṣado mantriṇaḥ śreṇayas tathā
+Ram.2.103.025  na yāce pitaraṃ rājyaṃ nānuśāsāmi mātaram / āryaṃ paramadharmajñam abhijānāmi rāghavam
+Ram.2.103.026  yadi tv avaśyaṃ vastavyaṃ kartavyaṃ ca pitur vacaḥ / aham eva nivatsyāmi caturdaśa vane samāḥ
+Ram.2.103.027  dharmātmā tasya tathyena bhrātur vākyena vismitaḥ / uvāca rāmaḥ saṃprekṣya paurajānapadaṃ janam
+Ram.2.103.028  vikrītam āhitaṃ krītaṃ yat pitrā jīvatā mama / na tal lopayituṃ śakyaṃ mayā vā bharatena vā
+Ram.2.103.029  upadhir na mayā kāryo vanavāse jugupsitaḥ / yuktam uktaṃ ca kaikeyyā pitrā me sukṛtaṃ kṛtam
+Ram.2.103.030  jānāmi bharataṃ kṣāntaṃ gurusatkārakāriṇam / sarvam evātra kalyāṇaṃ satyasaṃdhe mahātmani
+Ram.2.103.031  anena dharmaśīlena vanāt pratyāgataḥ punaḥ / bhrātrā saha bhaviṣyāmi pṛthivyāḥ patir uttamaḥ
+Ram.2.103.032  vṛto rājā hi kaikeyyā mayā tad vacanaṃ kṛtam / anṛtān mocayānena pitaraṃ taṃ mahīpatim

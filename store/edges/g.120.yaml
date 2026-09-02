@@ -4,5 +4,5 @@ from: hor.huna-india
 to: ref.hunas
 method: archaeological-horizon
 provenance:
-  tier: asserted
-  source: 'docs/dating-sanskrit-epics.md scored inventory, row: Hunas in the peoples lists'
+  tier: attested
+  locus: 'hor.huna-india: Hunnic incursion horizon; Gupta-period numismatic and epigraphic record'

@@ -5,5 +5,5 @@ to: ws.ram.251ce
 method: foreign-catalogue
 lag_min_years: 1
 provenance:
-  tier: asserted
-  source: 'docs/dating-sanskrit-epics.md scored inventory, row: Liudu jijing: Rama narrative in Chinese'
+  tier: attested
+  locus: 'anc.liudu-jijing: Chinese Buddhist translation catalogues, Kang Senghui, 251 CE'

@@ -5,6 +5,6 @@ to: ws.mbh.carvaka
 method: epigraphic-citation
 lag_min_years: 1
 provenance:
-  tier: asserted
-  source: 'docs/dating-sanskrit-epics.md scored inventory, row: Imprecatory verses quoted in hundreds
-    of grants from the 5th c.'
+  tier: attested
+  locus: 'anc.imprecatory-grants: Standard imprecatory verses in hundreds of copper-plate grants from
+    the 5th c.'

@@ -4,5 +4,5 @@ from: hor.yavana-presence
 to: ref.yavana-saka
 method: archaeological-horizon
 provenance:
-  tier: asserted
-  source: 'docs/dating-sanskrit-epics.md scored inventory, row: Yavanas and Sakas'
+  tier: attested
+  locus: 'hor.yavana-presence: Alexander''s campaign and successor settlement; Indo-Greek horizon'

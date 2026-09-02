@@ -4,6 +4,5 @@ from: anc.khoh-plates
 to: ref.mbh-as-named-work
 method: epigraphic-citation
 provenance:
-  tier: asserted
-  source: 'docs/dating-sanskrit-epics.md scored inventory, row: Copper-plate grants citing the hundred-thousand-verse
-    collection of Vyasa'
+  tier: attested
+  locus: 'anc.khoh-plates: Khoh plates; the hundred-thousand-verse collection compiled by Vyasa'

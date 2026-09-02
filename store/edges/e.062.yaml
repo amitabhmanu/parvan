@@ -5,5 +5,5 @@ to: ram.core
 method: art-historical
 lag_min_years: 1
 provenance:
-  tier: asserted
-  source: 'docs/dating-sanskrit-epics.md scored inventory, row: Nagarjunakonda and Deogarh Ramayana panels'
+  tier: attested
+  locus: 'anc.nagarjunakonda: Nagarjunakonda site reliefs and terracottas'

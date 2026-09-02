@@ -42,13 +42,33 @@ metaphorical. Every one of these bit during the manual slice:
 Read every candidate verse. Quote the phrase that carries the claim and say what it means. If
 you cannot, refuse.
 
+**1a. Search the consonantal stem, never the citation form.**
+A stem-final vowel changes under case-ending sandhi, so the dictionary form frequently does
+not occur anywhere in the text:
+
+| You search | Text has | Result |
+|---|---|---|
+| `yavana` | `yavanāṃś` | **no match** |
+| `cola` | `colān` | **no match** |
+| `āndhra` | `āndhrāṃś` | **no match** |
+
+This produced the worst error in the project: `yavana` over Kiṣkindhākāṇḍa returned zero and
+was published as a finding that §12 had misattributed a passage. The truncated stem `yavan`
+returns Rām.4.042.011 — *kāmbojān yavanāṃś caiva śakān* — and §12 was right all along.
+
+**Truncate before the stem-final vowel, always. A zero result from an untruncated stem is
+not evidence of anything.** For an absence claim, say explicitly which truncated stems you
+searched, or the silence is unmeasured.
+
 **2. Check the stratum, not just the text.**
 A verse in the wrong book is not a weaker citation, it is a different claim. Confirm the locus
 falls inside the stratum's declared `extent` before proposing it.
 
-This is the error that has cost the most so far: §12 credited both the Yavana passages and the
-fortified-Ayodhyā description to the core, and both are in Bālakāṇḍa. If the evidence sits
-outside the extent, **say which stratum it does belong to** — that is the finding.
+§12 credits the fortified-Ayodhyā description to the core; it is Bālakāṇḍa's. If the evidence
+sits outside the extent, **say which stratum it does belong to** — that is the finding.
+
+But rule 1a comes first: an apparent wrong-stratum result is more often a bad search than a
+bad attribution. The Yavana case looked exactly like this one and was a sandhi bug.
 
 **3. Distinguish the claim from a neighbouring one.**
 "Ayodhyā is a fortified metropolis" is not established by a verse about army camps ringed with

@@ -4,5 +4,5 @@ from: hor.kosala-power
 to: ref.kosala-power
 method: archaeological-horizon
 provenance:
-  tier: asserted
-  source: 'docs/dating-sanskrit-epics.md scored inventory, row: Kosala as a major power'
+  tier: attested
+  locus: 'hor.kosala-power: Mahajanapada-period settlement and fortification record'

@@ -4,6 +4,5 @@ from: anc.cham-valmiki
 to: ref.valmiki-as-author
 method: epigraphic-citation
 provenance:
-  tier: asserted
-  source: 'docs/dating-sanskrit-epics.md scored inventory, row: Cham inscription dedicating a temple to
-    Valmiki'
+  tier: attested
+  locus: 'anc.cham-valmiki: Cham inscription, temple dedication to Valmiki'

@@ -10,6 +10,19 @@ silence is what turns an argument from absence into evidence anyone can re-run.
 Sanskrit compounds mean a stem can sit anywhere inside a word, so matches are substring by
 default and must be read in context before being cited. The tool finds candidates; it does
 not judge them.
+
+SEARCH THE CONSONANTAL STEM, NOT THE CITATION FORM. This is the trap that produced the worst
+error in this project so far. A stem-final vowel changes under case-ending sandhi, so the
+citation form often does not occur anywhere in the text:
+
+    cola   + accusative plural -> colan      'cola' does not match
+    yavana + accusative plural -> yavanan    'yavana' does not match
+    andhra + accusative plural -> andhras    'andhra' does not match
+
+Searching 'yavana' over Kiskindhakanda returned zero and was published as a finding. The
+correct search, 'yavan', returns Ram.4.042.011 - kambojan yavanams caiva sakan - and the
+finding was wrong. Truncate before the stem-final vowel, always, and treat a zero result
+from an untruncated stem as meaningless.
 """
 
 from __future__ import annotations
@@ -84,6 +97,12 @@ def parse_kandas(spec: str | None) -> set[int] | None:
 
 
 def main() -> None:
+    # Windows consoles default to cp1252, which cannot encode IAST. Without this every
+    # diacritic search dies on a UnicodeEncodeError instead of printing its result.
+    # Reported by the extraction agent on its first run.
+    if hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("pattern", help="regex, matched against IAST verse text")
     ap.add_argument("--kanda", help="restrict to kandas, e.g. 2-6 or 1,7")

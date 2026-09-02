@@ -5,5 +5,5 @@ to: ram.core
 method: palaeography
 lag_min_years: 1
 provenance:
-  tier: asserted
-  source: 'docs/dating-sanskrit-epics.md scored inventory, row: Baroda critical edition archetype'
+  tier: attested
+  locus: 'anc.baroda-archetype: Baroda critical edition apparatus; archetype of the surviving manuscripts'

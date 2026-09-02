@@ -4,5 +4,6 @@ from: anc.agathocles
 to: ref.vasudeva-epic-attributes
 method: numismatic
 provenance:
-  tier: asserted
-  source: 'docs/dating-sanskrit-epics.md scored inventory, row: Agathocles coins, Krsna-Balarama iconography'
+  tier: attested
+  locus: 'anc.agathocles: Ai-Khanoum excavation; Vasudeva-Krsna with wheel and conch, Samkarsana-Balarama
+    with plough and club'

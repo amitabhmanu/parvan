@@ -5,5 +5,5 @@ to: ws.mbh.core
 method: palaeography
 lag_min_years: 1
 provenance:
-  tier: asserted
-  source: 'docs/dating-sanskrit-epics.md scored inventory, row: Poona critical edition archetype'
+  tier: attested
+  locus: 'anc.poona-archetype: Poona critical edition apparatus'

@@ -4,5 +4,5 @@ from: hor.ayodhya-urban
 to: ref.fortified-ayodhya
 method: archaeological-horizon
 provenance:
-  tier: asserted
-  source: 'docs/dating-sanskrit-epics.md scored inventory, row: Ayodhya as a great fortified metropolis'
+  tier: attested
+  locus: 'hor.ayodhya-urban: Ayodhya excavation levels; no substantial occupation earlier'

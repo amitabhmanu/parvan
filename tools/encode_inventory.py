@@ -168,7 +168,13 @@ STRATA = [
     ("ram.bala", "Balakanda (book 1)", ["Ram.1"]),
     ("ram.uttara", "Uttarakanda (book 7)", ["Ram.7"]),
     ("ram.kiskindha-geog", "Kiskindhakanda geography, with Yavana and Saka lists", ["Ram.4"]),
-    ("ram.yuddha-ending", "Yuddhakanda divine-assembly ending", ["Ram.6"]),
+    # Extent narrowed from the whole of book 6 to the stuti complex. An extraction agent
+    # checking e.041 found the Brahma-stuti of Ram.6.105 sitting inside ram.core's declared
+    # extent and reported the absence claim as contradicted. It is contradicted only because
+    # both strata claimed book 6: this passage is the retrofit seam section 4 already names,
+    # and it needs its own boundaries if the carve-out is to mean anything.
+    ("ram.yuddha-ending", "Yuddhakanda divine-assembly ending and the Brahma-stuti",
+     ["Ram.6.105", "Ram.6.107"]),
     ("ram.jabali", "Jabali's Lokayata speech", ["Ram.2"]),
     ("ram.sambuka", "Sambuka episode", ["Ram.7"]),
 ]
@@ -288,15 +294,20 @@ EDGES = [
                   "mahajanapada roster. Supporting: Ram.2.047.011 bhoksyaty adhirajavat "
                   "(as an overlord); Ram.2.043.007 kosalan kosalesvarah; Ram.5.041.007 and "
                   "Ram.6.031.066 kosalendrasya ramasya, envoys naming Kosala at Lanka")}),
-    # CORRECTED against the critical edition. Section 12 places this in the Kiskindha
-    # geography (book 4, part of the core). Book 4 of the Baroda CE contains no foreign
-    # ethnonym at all. The Yavanas and Sakas are in BALAKANDA, which section 12 itself
-    # classes as a later stratum - so the floor does no work it was credited with.
-    ("e.010", "presupposes", "ram.bala", "ref.yavana-saka", "realia-floor",
-     "Yavanas and Sakas in the Kiskindha geography [misattributed - see docs/promotion-slice.md]",
-     {"prov": att("Ram.1.053.020, Ram.1.053.021, Ram.1.054.003 - pahlavan ... sakan "
-                  "yavanamisritan. Baroda CE book 4: zero hits for yavana, saka, pahlava, "
-                  "kamboja, mleccha, kirata, pulinda, andhra, cola, pandya, kerala, cina")}),
+    # RETRACTED CORRECTION, then re-corrected. This edge was moved to ram.bala on a search
+    # that returned zero for foreign ethnonyms in Kiskindhakanda. That search was wrong: it
+    # used citation-form stems, which case-ending sandhi hides. 'yavana' does not occur
+    # because the text has 'yavanams'; the truncated stem 'yavan' finds Ram.4.042.011.
+    # Section 12's attribution was right and mine was not. Restored.
+    ("e.010", "presupposes", "ram.kiskindha-geog", "ref.yavana-saka", "realia-floor",
+     "Yavanas and Sakas in the Kiskindha geography",
+     {"prov": att("Ram.4.042.011 - kambojan yavanams caiva sakan arattakan api; Sugriva's "
+                  "western-direction speech. Cf. Ram.4.042.010 mleccha, pulinda; "
+                  "Ram.4.042.012 cina; Ram.4.040.013 andhra, colan pandyan sakeralan")}),
+    ("e.010b", "presupposes", "ram.bala", "ref.yavana-saka", "realia-floor",
+     "Yavanas and Sakas - also present in Balakanda",
+     {"prov": att("Ram.1.053.020-021, Ram.1.054.003 - pahlavan ... sakan yavanamisritan; "
+                  "Vasistha's cow generating barbarian armies")}),
     ("e.011", "presupposes", "ram.jabali", "ref.lokayata-school", "doctrinal-discontinuity",
      "Jabali's Lokayata speech", {}),
     ("e.012", "presupposes", "ram.bala", "ref.avatara-theology", "doctrinal-discontinuity",
@@ -305,8 +316,18 @@ EDGES = [
      "Avatara theology in Bala and Uttara", {}),
     ("e.014", "presupposes", "ram.sambuka", "ref.caste-hardening", "doctrinal-discontinuity",
      "Sambuka episode's hardened caste orthodoxy", {}),
+    # Promoted, narrowed to the real half of Sugriva's southern-direction speech. The same
+    # sarga slides into cosmography from 4.040.020 - Mount Mahendra sinking into the ocean,
+    # the serpent-city Bhogavati, the realm of Yama at the edge of the earth - which is not
+    # Deccan realia and is excluded. Section 12's own "grows vaguer with distance" turns out
+    # to happen inside a single speech.
     ("e.015", "presupposes", "ram.kiskindha-geog", "ref.deccan-knowledge", "realia-floor",
-     "Southern flora, fauna, place-knowledge", {}),
+     "Southern flora, fauna, place-knowledge",
+     {"prov": att("Ram.4.040.008-019 - vindhyam, narmadam, godavarim, krsnavenim, "
+                  "vidarbhan rsikams ... bangan kalingams ca, andhrams ca pundrams ca colan "
+                  "pandyan sakeralan, sacandanavana (sandalwood), kaverim, tamraparnim "
+                  "grahajustam (crocodile-infested), kavatam pandyanam. Excludes "
+                  "4.040.020-047, mythic cosmography in the same sarga")}),
 
     # --- referents attested by the material record ------------------------------------
     ("e.020", "attests", "hor.horse-chariot", "ref.horse-chariot", "archaeological-horizon",
@@ -355,9 +376,24 @@ EDGES = [
                   "A measured silence: re-runnable via tools/concordance.py")}),
     ("e.044", "attests", "hor.mauryan-capital", "ref.pataliputra-imperial",
      "archaeological-horizon", "Pataliputra absent as imperial capital", {}),
+    # Promoted from asserted on a measured silence over the full core extent. Fifteen terms
+    # at zero hits direct and diacritic-folded; eight further terms returned hits that were
+    # read individually and rejected - kuru is the imperative "do!", bhima the adjective
+    # "terrible", pandu the colour "pale", arjuna the tree, vyasa a substring of vyasakta.
+    #
+    # Confidence raised from 0.5 to 0.75. Ram.2.062.010 puts Bharata's itinerary through
+    # Hastinapura, Pancala and Kurujangala: the poets knew the Kuru-Pancala region and its
+    # capital as ordinary geography and still named no character, dynasty or war. Silence
+    # from someone who knows the place is stronger evidence than silence from someone who
+    # does not, which is what section 12's score of 3 does not distinguish.
     ("e.042", "absent-from", "ram.core", "ref.bharata-war-narrative", "absence",
-     "Ramayana never mentions the Pandavas or the Bharata war", {"lag_min_years": 0,
-                                                                "confidence": 0.5}),
+     "Ramayana never mentions the Pandavas or the Bharata war",
+     {"lag_min_years": 0, "confidence": 0.75,
+      "prov": att("Absence search over Ram.2-6 (14130 verses), corpus/sa_rAmAyaNa.xml: "
+                  "0 hits for pandava, kaurava, kauravya, kuruksetra, yudhisthira, draupadi, "
+                  "duryodhana, dhrtarastra, gandiva, bhisma, abhimanyu, sanjaya, duhsasana, "
+                  "hastinapura - direct and diacritic-folded. Re-runnable via "
+                  "tools/concordance.py")}),
 
     # --- ceilings from external attestation of the work ------------------------------
     ("e.050", "contains", "ws.ram.600ce", "ram.core", "epigraphic-citation",
@@ -593,11 +629,24 @@ def emit() -> None:
         rec["provenance"] = prov
         dump(STORE / "nodes/referents" / f"{nid}.yaml", rec)
 
+    # An edge whose source is a horizon or an anchor is a MATERIAL claim, and inherits that
+    # node's locus. G-1 defines `attested` as pointing at a resolvable locus - a verse ID,
+    # an inscription number, a coin catalogue entry, or an excavation report page - so an
+    # edge resting on excavation is attested by that definition, not asserted.
+    #
+    # This matters more than bookkeeping. With these edges left `asserted`, stripping the
+    # asserted tier for F-6 removed every grounding and the whole network went unbounded:
+    # the checkable evidence appeared to support nothing at all.
+    material = {n: rec for n, rec in
+                [(a[0], a[7]) for a in ANCHORS] + [(h[0], h[5]) for h in HORIZONS]}
+
     for eid, etype, frm, to, method, row, extras in EDGES:
         rec = {"id": eid, "type": etype, "from": frm, "to": to, "method": method}
         extras = dict(extras)
         prov = extras.pop("prov", None)
         rec.update(extras)
+        if prov is None and frm in material:
+            prov = att(f"{frm}: {material[frm]}")
         rec["provenance"] = prov or src(row)
         dump(STORE / "edges" / f"{eid}.yaml", rec)
 

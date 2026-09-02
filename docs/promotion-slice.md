@@ -69,7 +69,38 @@ as one of only four score-5 floors in the entire Rāmāyaṇa inventory.
 `ram.dinara` stratum, which turned out to have no extent. A constraint that bears on no verse
 of the critically constituted text does not belong in a store that models it.
 
-### Yavanas and Śakas — misattributed to the wrong stratum
+### Yavanas and Śakas — RETRACTED. The error was mine.
+
+> **This section originally reported that §12 had misattributed the Yavana/Śaka passages to
+> Kiṣkindhākāṇḍa when they were really in Bālakāṇḍa. That finding is withdrawn. §12 was
+> right.**
+
+The searches behind it were run on citation-form stems, which **case-ending sandhi hides**:
+
+```
+searched        text actually has     result
+yavana          yavanāṃś              no match
+cola            colān                 no match
+āndhra          āndhrāṃś              no match
+```
+
+The truncated stem `yavan` returns **Rām.4.042.011** — *kāmbojān yavanāṃś caiva śakān
+āraṭṭakān api* — in Sugrīva's western-direction speech, inside Kiṣkindhākāṇḍa exactly where
+§12 places it. Kāṇḍa 4 also has *mleccha* and *pulinda* (4.042.010), *cīna* (4.042.012), and
+*āndhra, colān pāṇḍyān sakeralān* (4.040.013). The claim that "book 4 contains no foreign
+ethnonym at all" was false.
+
+Caught by an extraction agent checking a different edge, which noticed that `pāṇḍya` returning
+zero was implausible and found the sandhi cause. The store is corrected, the tool now warns,
+and the extractor contract has a rule for it.
+
+**What this cost.** The retracted finding had been committed, pushed, and published in the
+design document, where it was presented as evidence of a systematic bias in §12. One of the
+three rows in that pattern was not a row at all.
+
+### What the original section got right, restated
+
+
 
 §12 places them in "the Kiṣkindhā geography", i.e. book 4, which sits inside the core.
 Book 4 of the Baroda CE contains **no foreign ethnonym at all**:
@@ -125,18 +156,18 @@ rests entirely on `ref.kosala-power` — a single `asserted` edge nobody has che
 
 ### The pattern, and the likely common cause
 
-Three rows now fail, and two fail the same way:
+**Two** rows fail, not three:
 
-| Row | Score | Failure |
-|---|---|---|
-| *Dīnāra* | **5** | Not in the critical edition at all |
-| Yavanas and Śakas | 4 | In Bālakāṇḍa, credited to the core |
-| Fortified Ayodhyā | 4 | In Bālakāṇḍa, credited to the core |
+| Row | Score | Failure | Status |
+|---|---|---|---|
+| *Dīnāra* | **5** | Not in the critical edition at all | holds |
+| Fortified Ayodhyā | 4 | In Bālakāṇḍa, credited to the core | holds |
+| ~~Yavanas and Śakas~~ | 4 | ~~In Bālakāṇḍa~~ | **retracted — §12 was right** |
 
-**The recurring error is Bālakāṇḍa evidence credited to the core**, which systematically
-inflates the apparent case for an early core — the direction that matters, since an early core
-is the interesting claim. Of §12's floors on the core, two of the four strongest do not bear
-on it.
+With the Yavana row withdrawn there is no longer a *pattern* of Bālakāṇḍa evidence credited to
+the core. There is one instance of it, and one row resting on passages outside the critical
+edition. Two separate errors, not a systematic bias — and the claim that it was systematic was
+itself the product of a search bug.
 
 *Dīnāra* is a different failure and looks like a **vulgate-based claim inside an inventory that
 otherwise presupposes the critical edition**. The vulgate's Kiṣkindhākāṇḍa carries sargas the Baroda editors excised, and
@@ -148,36 +179,32 @@ the archetype … otherwise you assign dates to variants that entered in the twe
 
 ---
 
-## 3. F-6 now returns an answer
+## 3. F-6, after agent-driven promotion
 
 ```
-edges: 54 total | 49 asserted | 5 attested
+edges: 109 total | 56 asserted | 53 attested
 
-after stripping every asserted edge:
-  ram.core = [1300 BCE, 300 BCE]
-  ram.bala = [330 BCE, unbounded]
+attested only:
+  ram.core           [750 BCE, 300 BCE]      <- identical to the full network
+  ram.bala           [330 BCE, unbounded]
+  ram.kiskindha-geog [330 BCE, unbounded]
+  ws.mbh.core        [unbounded, 299 CE]
 ```
 
-The sentence F-6 exists to produce is finally writable:
+**The Rāmāyaṇa core's bracket is now carried entirely by checkable evidence.** Stripping every
+`asserted` edge leaves it unchanged at [750 BCE, 300 BCE]. Scholarly interpretation contributes
+nothing to that bracket — which is the sentence F-6 was written to make possible, and which
+was unwriteable two days ago when stripping the asserted tier left nothing at all.
 
-> **The checkable evidence alone puts the Rāmāyaṇa core between 1300 BCE and 300 BCE, and
-> Bālakāṇḍa after 330 BCE. Scholarly interpretation tightens the core's floor from 1300 BCE
-> to 750 BCE.**
+Two things made the difference. Agents promoted realia and absence edges to verse loci. And
+material edges — those sourced from a horizon or an anchor — now inherit their node's locus
+rather than being tiered `asserted`, because G-1 defines `attested` as pointing at a resolvable
+locus and explicitly includes an excavation report page.
 
-**Superseded — see [binding-analysis.md](binding-analysis.md).** Checking the fourth floor
-constraint (`ref.kosala-power`) closed the gap: it held, it is attested, and it carries the
-750 BCE floor by itself. The attested-only bracket for the core is now **identical** to the
-full one, and F-6 passes.
-
-Five edges carry that: iron floors the core, the Pāṭaliputra silence ceilings it, and Yavanas
-plus a fortified Ayodhyā floor Bāla. Everything else in the store is still testimony.
-
-Note what this exposes. The core's **useful** floor — now 750 BCE, from Kosala's rise — rests
-on an `asserted` edge that has never been checked. The attested floor is 1300 BCE, which
-excludes almost nothing. Every time a floor constraint has been taken to the text it has moved
-to Bāla; `ref.kosala-power` is the last one standing, and it is next.
-
----
+**The honest caveat.** Archaeological loci in this store are category references —
+"Ayodhyā excavation levels", "Mahājanapada settlement record" — not volume-and-page citations.
+They are weaker than the verse IDs, and a reader cannot currently check them the way they can
+re-run a concordance search. Bringing them to the same standard is real work and is not done.
 
 ## 4. What this taught the extraction contract
 

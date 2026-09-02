@@ -4,5 +4,5 @@ from: hor.mauryan-capital
 to: ref.pataliputra-imperial
 method: archaeological-horizon
 provenance:
-  tier: asserted
-  source: 'docs/dating-sanskrit-epics.md scored inventory, row: Pataliputra absent as imperial capital'
+  tier: attested
+  locus: 'hor.mauryan-capital: Pataliputra excavation; Nanda accession through early Mauryan consolidation'

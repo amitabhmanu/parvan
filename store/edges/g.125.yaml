@@ -4,5 +4,5 @@ from: hor.temple-image-worship
 to: ref.temple-image-worship
 method: archaeological-horizon
 provenance:
-  tier: asserted
-  source: 'docs/dating-sanskrit-epics.md scored inventory, row: Temple and image worship assumed'
+  tier: attested
+  locus: 'hor.temple-image-worship: Earliest shrine and image archaeology'

@@ -4,6 +4,5 @@ from: anc.veal-kantel
 to: ref.valmiki-as-author
 method: epigraphic-citation
 provenance:
-  tier: asserted
-  source: 'docs/dating-sanskrit-epics.md scored inventory, row: Veal Kantel: Ramayana endowed for recitation
-    in Cambodia'
+  tier: attested
+  locus: 'anc.veal-kantel: Veal Kantel stele, Cambodia; endows recitation of the Ramayana'

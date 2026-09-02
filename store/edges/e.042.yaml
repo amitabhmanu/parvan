@@ -4,8 +4,9 @@ from: ram.core
 to: ref.bharata-war-narrative
 method: absence
 lag_min_years: 0
-confidence: 0.5
+confidence: 0.75
 provenance:
-  tier: asserted
-  source: 'docs/dating-sanskrit-epics.md scored inventory, row: Ramayana never mentions the Pandavas or
-    the Bharata war'
+  tier: attested
+  locus: 'Absence search over Ram.2-6 (14130 verses), corpus/sa_rAmAyaNa.xml: 0 hits for pandava, kaurava,
+    kauravya, kuruksetra, yudhisthira, draupadi, duryodhana, dhrtarastra, gandiva, bhisma, abhimanyu,
+    sanjaya, duhsasana, hastinapura - direct and diacritic-folded. Re-runnable via tools/concordance.py'

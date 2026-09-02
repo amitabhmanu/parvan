@@ -1,10 +1,9 @@
 id: e.010
 type: presupposes
-from: ram.bala
+from: ram.kiskindha-geog
 to: ref.yavana-saka
 method: realia-floor
 provenance:
   tier: attested
-  locus: 'Ram.1.053.020, Ram.1.053.021, Ram.1.054.003 - pahlavan ... sakan yavanamisritan. Baroda CE book
-    4: zero hits for yavana, saka, pahlava, kamboja, mleccha, kirata, pulinda, andhra, cola, pandya, kerala,
-    cina'
+  locus: Ram.4.042.011 - kambojan yavanams caiva sakan arattakan api; Sugriva's western-direction speech.
+    Cf. Ram.4.042.010 mleccha, pulinda; Ram.4.042.012 cina; Ram.4.040.013 andhra, colan pandyan sakeralan

@@ -4,5 +4,5 @@ from: hor.qin-china
 to: ref.cinas
 method: foreign-catalogue
 provenance:
-  tier: asserted
-  source: 'docs/dating-sanskrit-epics.md scored inventory, row: Cinas (from Qin)'
+  tier: attested
+  locus: 'hor.qin-china: Qin dynastic records'

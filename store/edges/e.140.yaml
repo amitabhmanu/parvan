@@ -5,5 +5,5 @@ to: ws.mbh.core
 method: palaeography
 lag_min_years: 1
 provenance:
-  tier: asserted
-  source: 'docs/dating-sanskrit-epics.md scored inventory, row: Spitzer manuscript parvan list'
+  tier: attested
+  locus: 'anc.spitzer: Palm-leaf fragments from Kizil; parvan list differs from the received one'

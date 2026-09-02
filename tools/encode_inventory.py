@@ -24,6 +24,15 @@ ROOT = Path(__file__).resolve().parents[1]
 STORE = ROOT / "store"
 DOC = "docs/dating-sanskrit-epics.md"
 
+# REMOVED, see docs/mbh-promotion.md: section 11's "Greek-derived astrological vocabulary"
+# row, scored 4. The row names no terms; section 3 supplies hora, kendra and drekkana as the
+# Greek loans into Sanskrit jyotisa. None of the three occurs anywhere in the Mahabharata,
+# archetypal or apparatus, under any spelling. All 363 raw hora hits are ghora ("terrible"),
+# ahoratra ("day-and-night") or kathora ("harsh"); the three word-initial ones are elided
+# ahoratra. All four kendr hits are sandhi artefacts - janaka+indra, baka+indra. drekkana
+# returns zero under every spelling tried. The floor cannot be checked as the document
+# states it, and the obvious candidates fail.
+
 
 def src(row: str) -> dict:
     return {"tier": "asserted", "source": f"{DOC} scored inventory, row: {row}"}
@@ -112,8 +121,6 @@ HORIZONS = [
      "archaeological-horizon", "Early stupa horizon, post-Asokan"),
     ("hor.massed-elephants", "Massed elephant corps in a fourfold army", -500, -350,
      "archaeological-horizon", "Magadhan-era military record; Greek accounts of Indian armies"),
-    ("hor.greek-astrology", "Greek-derived astrological terminology in Sanskrit", 150, 250,
-     "foreign-catalogue", "Yavanajataka horizon; horā, kendra, drekkāṇa as loans"),
     ("hor.temple-image-worship", "Temple and image worship", -200, -100,
      "archaeological-horizon", "Earliest shrine and image archaeology"),
 ]
@@ -224,8 +231,6 @@ REFERENTS = [
      None, None, False, att("Early stupa horizon, post-Asokan")),
     ("ref.massed-elephant-corps", "Massed elephant corps in a fourfold army", "institution",
      None, None, False, att("Magadhan-era military record; Greek accounts")),
-    ("ref.greek-astrology-terms", "Greek-derived astrological vocabulary", "concept",
-     None, None, False, att("hora, kendra, drekkana as loans into Sanskrit jyotisa")),
     ("ref.temple-image-worship", "Temple and image worship", "institution", -200, -100,
      False, att("Earliest shrine and image archaeology")),
     ("ref.classical-samkhya", "Classical Samkhya's fixed twenty-five-tattva scheme", "concept",
@@ -463,8 +468,24 @@ EDGES = [
 
     # THE SHARED CEILING. Section 11 carries the same Pataliputra row as section 12, so the
     # two texts meet at one referent. If a second path to ram.core exists, it is here.
+    # Promoted, and corroborated rather than merely unopposed. The silence is measured over
+    # 123,372 verses (91,573 archetypal-only), twelve searches, all zero. What lifts it above
+    # an ordinary argument from absence is the positive control: Magadha's OLDER capital is
+    # named repeatedly and unambiguously - Girivraja as Jarasamdha's seat where he holds rival
+    # kings captive, and Rajagrha again in the tirtha catalogue. The epic's Magadhan geography
+    # is not undescribed. It is described, and stops one city short.
+    #
+    # Confidence raised 0.4 -> 0.7. Section 11 scores this row 2 as a soft ceiling; the
+    # positive control is the thing that score does not account for.
     ("e.107", "absent-from", "ws.mbh.core", "ref.pataliputra-imperial", "absence",
-     "Pataliputra absent as imperial capital", {"lag_min_years": 0, "confidence": 0.4}),
+     "Pataliputra absent as imperial capital",
+     {"lag_min_years": 0, "confidence": 0.7,
+      "prov": att("Absence over MBh.2-11, 123372 verses (91573 archetypal-only): "
+                  "pataliputr, patalipur, kusumapur, puspapur all 0 hits, plain, "
+                  "archetypal-only and folded. Positive control: MBh.2.013.062 tena ruddha "
+                  "hi rajanah sarve jitva girivraje (Jarasamdha's capital); MBh.3.082.089 "
+                  "tato rajagrham gacchet tirthasevi. Excludes MBh.2.052.003 and "
+                  "MBh.5.049.014, both generic 'king's house'")}),
     ("e.108", "absent-from", "ws.mbh.core", "ref.classical-kavya-style", "absence",
      "Short compounds; no mature kavya style", {"lag_min_years": 0}),
 
@@ -482,14 +503,38 @@ EDGES = [
      {"prov": att("MBh.2.023.019 - kirataih ca cinaih ca vrtah pragjyotiso 'bhavat; also "
                   "MBh.2.047.019, MBh.3.048.021. All ARCHETYPAL. Excludes aracina, pracina, "
                   "sucin false positives")}),
-    ("e.112", "presupposes", "ws.mbh.carvaka", "ref.eduka-polemic", "realia-floor",
-     "Eduka / stupa polemic", {}),
+    # RETARGETED. Encoded against the didactic mass on my guess about where the Kali Yuga
+    # material sits. It is not there - eduk returns zero across MBh.12-13. The only two
+    # occurrences in the epic are MBh.3.188, Markandeya's Kali Yuga description in the Vana
+    # Parva. Section 11 says "on the Kali Yuga material" and names no book; the stratum
+    # assignment was mine and it was wrong.
+    #
+    # QUALIFICATION. Section 3 glosses this row "Anti-Buddhist", but the passage names no
+    # Buddhist: bauddha, sramana and nagnaka are all zero in MBh.3.188, and its four buddh
+    # hits are every one of them buddhi, "mind". The polemic is against eduka worship
+    # displacing the gods, in an undifferentiated list of degeneracy signs beside sudras
+    # teaching dharma and untimely rain. Reading eduka as a Buddhist reliquary mound is an
+    # identification the text does not make, so the floor rests on that identification rather
+    # than on the verse. Confidence 0.6.
+    ("e.112", "presupposes", "ws.mbh.ramopakhyana", "ref.eduka-polemic", "realia-floor",
+     "Eduka / stupa polemic - floor on the Kali Yuga material",
+     {"confidence": 0.6,
+      "prov": att("MBh.3.188.064 - edukan pujayisyanti varjayisyanti devatah; MBh.3.188.066 "
+                  "- edukacihna prthivi na devagrhabhusita. Both ARCHETYPAL. Kali Yuga "
+                  "context explicit at MBh.3.188.005. Zero hits for eduk in MBh.12-13")}),
+    # Promoted on the INSTITUTION, not the animal. Elephants appear constantly and mostly
+    # irrelevantly - as a city epithet (gajasahvaya = Hastinapura), as ivory, as tribute, as
+    # one named tusker. What the floor needs is the military institution, and MBh.5.152
+    # defines it outright.
     ("e.113", "presupposes", "ws.mbh.core", "ref.massed-elephant-corps", "realia-floor",
-     "Massed elephant corps, fourfold army", {}),
+     "Massed elephant corps, fourfold army",
+     {"prov": att("MBh.5.152.019-022 - rathasyasan dasa gaja gajasya dasa vajinah ... "
+                  "aksauhiniti paryayair: the aksauhini defined, elephants a fixed arm beside "
+                  "chariot, horse and foot. In use at MBh.6.058.031 anikam dasasahasram "
+                  "kunjaranam / gajanikam, a 10,000-strong elephant division engaged as a "
+                  "unit. In-extent archetypal: caturanga 19, gajanika 34, aksauhini 64")}),
     ("e.114", "presupposes", "ws.mbh.carvaka", "ref.temple-image-worship", "realia-floor",
      "Temple and image worship assumed", {}),
-    ("e.115", "presupposes", "ws.mbh.carvaka", "ref.greek-astrology-terms", "realia-floor",
-     "Greek-derived astrological vocabulary", {}),
 
     ("e.120", "attests", "hor.huna-india", "ref.hunas", "archaeological-horizon",
      "Hunas in the peoples lists", {}),
@@ -498,8 +543,6 @@ EDGES = [
      "Eduka / stupa polemic", {}),
     ("e.123", "attests", "hor.massed-elephants", "ref.massed-elephant-corps",
      "archaeological-horizon", "Massed elephant corps, fourfold army", {}),
-    ("e.124", "attests", "hor.greek-astrology", "ref.greek-astrology-terms",
-     "foreign-catalogue", "Greek-derived astrological vocabulary", {}),
     ("e.125", "attests", "hor.temple-image-worship", "ref.temple-image-worship",
      "archaeological-horizon", "Temple and image worship assumed", {}),
     ("e.126", "attests", "anc.agathocles", "ref.vasudeva-epic-attributes", "numismatic",
@@ -582,8 +625,6 @@ EDGES = [
      "Eduka / stupa polemic", {}),
     ("g.123", "grounds", "hor.massed-elephants", "ref.massed-elephant-corps", "archaeological-horizon",
      "Massed elephant corps, fourfold army", {}),
-    ("g.124", "grounds", "hor.greek-astrology", "ref.greek-astrology-terms", "foreign-catalogue",
-     "Greek-derived astrological vocabulary", {}),
     ("g.125", "grounds", "hor.temple-image-worship", "ref.temple-image-worship", "archaeological-horizon",
      "Temple and image worship assumed", {}),
     ("g.126", "grounds", "anc.agathocles", "ref.vasudeva-epic-attributes", "numismatic",

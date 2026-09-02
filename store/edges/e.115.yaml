@@ -1,8 +1,0 @@
-id: e.115
-type: presupposes
-from: ws.mbh.carvaka
-to: ref.greek-astrology-terms
-method: realia-floor
-provenance:
-  tier: asserted
-  source: 'docs/dating-sanskrit-epics.md scored inventory, row: Greek-derived astrological vocabulary'

@@ -27,6 +27,23 @@ uv run python tools/concordance.py '<regex>' --count
 IAST with diacritics, matched as a substring against verse text. `--fold` strips diacritics
 (looser and noisier). Loci come back as `Ram.K.SSS.VVV`.
 
+**Two corpora.** `--corpus ram` (default) is the Baroda Rāmāyaṇa; `--corpus mbh` is the BORI
+Mahābhārata, 18 parvans, addressed `MBh.PP.AAA.VVV`. For the MBh, `--kanda` selects parvans.
+
+```bash
+uv run python tools/concordance.py 'hūṇ' --corpus mbh --archetypal-only --count
+```
+
+**`--archetypal-only` matters more than anything else in this file, and only works for the
+MBh.** The BORI apparatus is preserved: 66,177 of 224,679 lines are star (`*`) or appendix
+(`@`) passages that the critical editors judged **non-archetypal**. A locus carrying a
+trailing `*` in its printed form is apparatus, not constituted text.
+
+**A floor resting on a star passage is a floor on an interpolation.** Always run the search
+both ways and report both counts. If a claim survives only in the apparatus, that is a
+CONTRADICTS, and it is the most valuable result you can return — the Rāmāyaṇa has no
+apparatus at all, so this check exists nowhere else in the project.
+
 ## The seven rules
 
 **1. A string match is a candidate, not a citation.**

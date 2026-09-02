@@ -4,7 +4,10 @@ from: ws.mbh.core
 to: ref.pataliputra-imperial
 method: absence
 lag_min_years: 0
-confidence: 0.4
+confidence: 0.7
 provenance:
-  tier: asserted
-  source: 'docs/dating-sanskrit-epics.md scored inventory, row: Pataliputra absent as imperial capital'
+  tier: attested
+  locus: 'Absence over MBh.2-11, 123372 verses (91573 archetypal-only): pataliputr, patalipur, kusumapur,
+    puspapur all 0 hits, plain, archetypal-only and folded. Positive control: MBh.2.013.062 tena ruddha
+    hi rajanah sarve jitva girivraje (Jarasamdha''s capital); MBh.3.082.089 tato rajagrham gacchet tirthasevi.
+    Excludes MBh.2.052.003 and MBh.5.049.014, both generic ''king''s house'''

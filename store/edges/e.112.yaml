@@ -1,8 +1,11 @@
 id: e.112
 type: presupposes
-from: ws.mbh.carvaka
+from: ws.mbh.ramopakhyana
 to: ref.eduka-polemic
 method: realia-floor
+confidence: 0.6
 provenance:
-  tier: asserted
-  source: 'docs/dating-sanskrit-epics.md scored inventory, row: Eduka / stupa polemic'
+  tier: attested
+  locus: MBh.3.188.064 - edukan pujayisyanti varjayisyanti devatah; MBh.3.188.066 - edukacihna prthivi
+    na devagrhabhusita. Both ARCHETYPAL. Kali Yuga context explicit at MBh.3.188.005. Zero hits for eduk
+    in MBh.12-13

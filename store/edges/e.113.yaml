@@ -4,5 +4,8 @@ from: ws.mbh.core
 to: ref.massed-elephant-corps
 method: realia-floor
 provenance:
-  tier: asserted
-  source: 'docs/dating-sanskrit-epics.md scored inventory, row: Massed elephant corps, fourfold army'
+  tier: attested
+  locus: 'MBh.5.152.019-022 - rathasyasan dasa gaja gajasya dasa vajinah ... aksauhiniti paryayair: the
+    aksauhini defined, elephants a fixed arm beside chariot, horse and foot. In use at MBh.6.058.031 anikam
+    dasasahasram kunjaranam / gajanikam, a 10,000-strong elephant division engaged as a unit. In-extent
+    archetypal: caturanga 19, gajanika 34, aksauhini 64'

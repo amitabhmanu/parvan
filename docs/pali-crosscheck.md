@@ -141,15 +141,63 @@ does not raise a cut.
 
 ---
 
-## 3. Reproduction
+## 4. The Vinaya-Piṭaka: the scribe appears
+
+The Dīgha-Nikāya established that the Pali tradition shares the Rāmāyaṇa's pre-literate
+profile. The obvious next question is when *that* tradition acquires writing, and the answer
+sits inside the same canon.
+
+The Vinaya was fetched for its **genre**, not its content. A monastic legal code enumerates
+trades, possessions and offences exhaustively, and enumerative lists are the scarce commodity
+here: an absence argument is only as good as a source that aimed at completeness and omitted
+the item anyway.
+
+```
+                              Dīgha-Nikāya      Vinaya
+  lipi (script)                          0           0
+  lekhaka (scribe)                       0         yes
+  kahāpaṇa / māsaka / rūpiya       0 / 0 / 0   7 / 18 / 16
+  √likh                                  2          20
+```
+
+**The decisive passage is enumerative, which is why it was worth going for.** Vin iv.8, a rule
+against insulting speech, lists the trades — *naḷakāraṃ kumbhakāraṃ pesakāraṃ cammakāraṃ
+nahāpitaṃ* as low, and ***muddikaṃ gaṇakaṃ lekhakaṃ*** — reckoner, calculator, **scribe** —
+as high.
+
+That is the *same slot* the Dīgha-Nikāya fills with *muddā, gaṇanā, saṃkhānaṃ* and no scribe.
+One tradition, one language, one transmission, one list-type: in one collection the scribe is
+absent, in the other he is a respectable profession. Cf. Vin i.77, Upāli's parents weighing
+*lekhā* as a trade for their son, and Vin iii.76, where inciting a death **by writing** is an
+offence.
+
+**Two readings withdrawn on inspection**, both of which would have overstated the case.
+*potthaka* at Vin i.306 and i.311 is a coarse cloth in a list of forbidden robes, not a book;
+*avalekhanakaṭṭha* at Vin ii.141 and ii.222 is a latrine scraping-stick, not a stylus — the
+scratch sense of √likh persisting beside the literate one, in the same volume. Neither is
+counted.
+
+**What it changes.** Encoded as `ws.vinaya` attesting `ref.writing-practice`, it is slack
+against the Aśokan attestation, as every addition to this store has been. What it changes is
+the warrant: the genre excuse for the Rāmāyaṇa's silence is now excluded **from inside a
+single tradition** rather than across two.
+
+**And the network entails an ordering it was never built to produce.** The Dīgha-Nikāya must
+precede writing's emergence; the Vinaya attests it. So `DN ≤ writing ≤ Vinaya`. A network
+assembled to date Sanskrit epics has issued a falsifiable claim about the relative order of two
+Pali collections — the kind of output the project exists to generate, and the kind a Pali
+scholar can shoot down.
+
+## 5. Reproduction
 
 ```bash
 uv run python tools/pali.py rājagah
 uv run python tools/pali.py 'lipi|lekhā|potthak'          # measured silence
 uv run python tools/pali.py 'muddā, gaṇanā'               # the enumerative control
 uv run python tools/pali.py potthak --notes               # and why footnotes are held apart
+uv run python tools/pali.py "lekhak|kahāpaṇ" --corpus vin  # the Vinaya contrast
 ```
 
-Store: 82 nodes, 120 edges, 75 attested. Consistent.
-Corpora on disk: five works, 26.7 MB, all gitignored. The Pali files are PTS/Dhammakāya
+Store: 85 nodes, 124 edges, 76 attested. Consistent.
+Corpora on disk: six works, 31 MB, all gitignored. The Pali files are PTS/Dhammakāya
 Foundation material under CC BY-SA 4.0, provided for scholarly use and not redistributed.

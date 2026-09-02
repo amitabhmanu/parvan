@@ -12,7 +12,7 @@ import click
 
 from . import __version__
 from .loader import StoreError, load
-from .profile import Profile, ProfileError
+from .profile import Profile, ProfileError, verify_silences
 from .retrodict import fmt_v2, run_all
 from .stp import (SOLVER_VERSION, Solution, bound_support, fmt_bounds,
                   solve as run_solve)
@@ -243,6 +243,73 @@ def profile(project_path: Path, check: bool) -> None:
                     fg="red", bold=True)
         sys.exit(1)
     click.secho(f"\nall {len(results)} controls hold", fg="green", bold=True)
+
+
+@main.command("verify-silences")
+@click.argument("project_path", type=click.Path(exists=True, path_type=Path))
+def verify_silences_cmd(project_path: Path) -> None:
+    """Re-run every attested absence in a project against the live corpora (G-9).
+
+    The loader checks that a silence record is structurally complete, which works in a clean
+    checkout with no texts on disk. Whether the claim is still TRUE needs the texts, and it
+    drifts silently: a loader that starts dropping lines, a corpus file replaced by a
+    different edition, an orthography normalised - each of those turns a measured silence
+    into an unmeasured one without changing a byte of the store.
+    """
+    try:
+        prof = Profile.load(project_path)
+    except ProfileError as exc:
+        click.secho(f"REFUSED - {len(exc.violations)} violation(s)\n", fg="red", bold=True)
+        click.echo(exc.report())
+        sys.exit(1)
+    try:
+        store = load(Path(project_path) / "store")
+    except StoreError as exc:
+        click.secho(f"REFUSED - {len(exc.violations)} violation(s)\n", fg="red", bold=True)
+        click.echo(exc.report())
+        sys.exit(1)
+
+    results = verify_silences(prof, store)
+    if not results:
+        click.echo("no attested absences in this store")
+        return
+
+    edges = sorted({r["edge"] for r in results})
+    bad = [r for r in results if not r["ok"]]
+    unchecked = [r for r in results if r.get("unchecked")]
+
+    for eid in edges:
+        rows = [r for r in results if r["edge"] == eid]
+        failed = [r for r in rows if not r["ok"]]
+        colour = "red" if failed else "green"
+        click.secho(f"\n{eid}", fg=colour, bold=True, nl=False)
+        click.echo(f"  {store.edges[eid].silence.corpus}  "
+                   f"{store.edges[eid].silence.scope}")
+        for r in rows:
+            if r.get("unchecked"):
+                mark, c = "--  ", "yellow"
+            elif r["ok"]:
+                mark, c = "ok  ", "green"
+            else:
+                mark, c = "FAIL", "red"
+            click.secho(f"  {mark}", fg=c, nl=False)
+            detail = str(r["detail"])[:46]
+            click.echo(f"  {r['check']:<13}{detail:<48}"
+                       f"expect {r.get('expect')}  got {r.get('got')}")
+            if r["message"]:
+                click.echo(f"        {r['message']}")
+
+    click.echo()
+    if bad:
+        click.secho(f"{len(bad)} check(s) FAILED across {len({r['edge'] for r in bad})} edge(s). "
+                    "Nothing measured with a failing control is currently sound.",
+                    fg="red", bold=True)
+        sys.exit(1)
+    click.secho(f"all {len(results) - len(unchecked)} checks hold across {len(edges)} "
+                f"attested absence(s)", fg="green", bold=True)
+    if unchecked:
+        click.secho(f"{len(unchecked)} control(s) are not auto-checkable and need their "
+                    "instrument re-run by hand", fg="yellow")
 
 
 def _commit_hash() -> str:

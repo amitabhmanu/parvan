@@ -10,3 +10,57 @@ provenance:
   locus: 'Absence search over Ram.2-6 (14130 verses), corpus/sa_rAmAyaNa.xml: 0 hits for pandava, kaurava,
     kauravya, kuruksetra, yudhisthira, draupadi, duryodhana, dhrtarastra, gandiva, bhisma, abhimanyu,
     sanjaya, duhsasana, hastinapura - direct and diacritic-folded. Re-runnable via tools/concordance.py'
+silence:
+  corpus: ram
+  scope: Ram.2-6
+  divisions:
+  - 2
+  - 3
+  - 4
+  - 5
+  - 6
+  passages: 14130
+  patterns:
+  - pāṇḍav
+  - kaurav
+  - kuruk[ṣs]etr
+  - yudhiṣṭhir
+  - draupad
+  - duryodhan
+  - dhṛtarāṣṭr
+  - gāṇḍīv
+  - bhīṣm
+  - abhimanyu
+  - saṃjay
+  - duḥśāsan
+  - hāstinapur
+  hits: 2
+  measurement: Zero for twelve of the thirteen stems. The two hits are both dhrtarastri, the FEMININE
+    - a bird-ancestress in Kasyapa's genealogy who bears hamsas and kalahamsas, geese and swans. Sanskrit
+    dhartarastra is an ordinary word for a species of goose. Neither hit is the Mahabharata's king,
+    and the claim stands.
+  rejected:
+  - Ram.3.013.017 - dhrtarastrim tatha sukim, in a list of Kasyapa's daughters who mother bird species;
+    the feminine bird name, not the Kuru king
+  - Ram.3.013.019 - dhrtarastri tu hamsams ca kalahamsams ca sarvasah; she bears geese
+  instrument: tools/concordance.py
+  controls:
+  - pattern: rāvaṇ
+    expect: 801
+    note: the instrument finds epic proper names in this scope
+  - pattern: lakṣmaṇ
+    expect: 880
+  - pattern: pāṇḍav
+    corpus: mbh
+    expect: 4518
+    note: 'CROSS-CORPUS CONTROL, and the one that matters: the same pattern string, run against the
+      Mahabharata, returns thousands. So the zero in the Ramayana is a fact about the text and not
+      about a mistruncated stem - which is exactly the error the yavana retraction was'
+  - pattern: yudhiṣṭhir
+    corpus: mbh
+    expect: 2886
+    note: same string, Mahabharata
+  - pattern: gāṇḍīv
+    corpus: mbh
+    expect: 395
+    note: same string, Mahabharata

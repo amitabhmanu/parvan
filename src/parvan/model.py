@@ -48,6 +48,10 @@ REQUIRES_PROVENANCE: frozenset[str] = frozenset(("anchor", "horizon", "referent"
 # report infeasible.
 LAGGED_EDGES: frozenset[str] = frozenset(("cites", "frames"))
 
+# Edge types whose attested form is an argument from silence, and so must carry a
+# re-runnable Silence record naming a positive control (G-9).
+SILENCE_EDGES: frozenset[str] = frozenset(("absent-from",))
+
 
 @dataclass(frozen=True)
 class Violation:
@@ -165,6 +169,205 @@ class Provenance:
 
 
 @dataclass
+class Control:
+    """Evidence that the instrument which measured a silence can find anything at all.
+
+    Either a pattern with the count it returns, or a locus the search does hit. Both are
+    accepted because the two strongest controls in the store are of different kinds: a
+    signet ring the Ramayana core describes eleven times where a letter would be, and the
+    Digha-Nikaya's list of low arts that enumerates finger-reckoning and computation and
+    stops short of writing.
+    """
+
+    pattern: str | None = None
+    locus: str | None = None
+    #: A number a bespoke instrument produces - a paired ratio's denominator, a rate per
+    #: 10,000 words - which no regex can re-derive. Requires `instrument`.
+    measurement: str | None = None
+    instrument: str = ""
+    expect: int | None = None
+    #: Which corpus this control was measured over. None means the silence's own. A control
+    #: run against a DIFFERENT corpus is often the strongest one available: the same pattern
+    #: string returning thousands of hits elsewhere proves the string is well-formed, which
+    #: is precisely what a mistruncated stem is not.
+    corpus: str | None = None
+    #: Search options the count was measured under. Silently dropping either of these makes
+    #: a sound control look broken - and, worse, could make a broken one look sound.
+    include_notes: bool = False
+    archetypal_only: bool = False
+    note: str = ""
+
+    def validate(self, record: str, edge: str, i: int) -> list[Violation]:
+        kinds = [bool(self.pattern), bool(self.locus), bool(self.measurement)]
+        if sum(kinds) != 1:
+            return [
+                Violation(
+                    "G-9", record,
+                    f"{edge}: control {i} must be exactly one of a pattern (re-runnable as a "
+                    "search), a locus (resolvable in the corpus), or a measurement (a number "
+                    "some named instrument produces)",
+                )
+            ]
+        if self.pattern and self.expect is None:
+            return [
+                Violation("G-9", record,
+                          f"{edge}: control {i} gives pattern {self.pattern!r} with no expected "
+                          "count, so nobody can tell whether it still holds")
+            ]
+        if self.measurement and not self.instrument.strip():
+            return [
+                Violation("G-9", record,
+                          f"{edge}: control {i} describes a measurement with no instrument, so "
+                          "nobody can reproduce it")
+            ]
+        return []
+
+    @property
+    def kind(self) -> str:
+        if self.pattern:
+            return "pattern"
+        return "locus" if self.locus else "measurement"
+
+    @classmethod
+    def parse(cls, raw) -> Control:
+        if isinstance(raw, str):
+            # "ram/yavan" - a reference to a control the project's profile already declares.
+            corpus, _, pattern = raw.partition("/")
+            return cls(pattern=pattern or None, note=f"profile control {raw}", expect=-1)
+        raw = raw or {}
+        return cls(
+            pattern=raw.get("pattern"),
+            locus=raw.get("locus"),
+            measurement=raw.get("measurement"),
+            instrument=raw.get("instrument", ""),
+            expect=raw.get("expect"),
+            corpus=raw.get("corpus"),
+            include_notes=bool(raw.get("include_notes", False)),
+            archetypal_only=bool(raw.get("archetypal_only", False)),
+            note=raw.get("note", ""),
+        )
+
+
+@dataclass
+class Silence:
+    """A measured absence, in the form that lets someone else re-run it (G-9).
+
+    An argument from silence is the strongest thing this project produces and the easiest to
+    fake, because a search that finds nothing looks exactly like a search that cannot find
+    anything. `yavana` over Kiskindhakanda returned zero, was published as a finding, and had
+    to be retracted when the truncated stem returned the verse. The prose record could not
+    have caught that; a declared control would have.
+
+    So an attested absence must say what corpus it searched, over what scope, with how many
+    passages under it, with which patterns, what it got, how to re-run it, and - the part
+    that is the whole gate - what proves the instrument was working.
+    """
+
+    corpus: str = ""
+    scope: str = ""
+    #: The scope again, machine-readable, so the claim can actually be re-run rather than
+    #: merely described. `divisions` are values of the corpus's coarsest ref level; each
+    #: `excludes` entry is a locus PREFIX (Ram.6.105 drops that whole sarga).
+    divisions: list[int | str] = field(default_factory=list)
+    excludes: list[str] = field(default_factory=list)
+    passages: int | None = None
+    patterns: list[str] = field(default_factory=list)
+    hits: int | None = None
+    measurement: str = ""
+    instrument: str = ""
+    controls: list[Control] = field(default_factory=list)
+    #: Hits the search returned that were read and thrown out, with the reason. A string
+    #: match is a candidate, not a citation, so a silence can legitimately have non-zero
+    #: hits - but then it owes an account of every one of them.
+    rejected: list[str] = field(default_factory=list)
+
+    def validate(self, record: str, edge: str) -> list[Violation]:
+        out: list[Violation] = []
+
+        if not self.corpus.strip():
+            out.append(Violation("G-9", record, f"{edge}: silence names no corpus"))
+        if not self.scope.strip():
+            out.append(Violation("G-9", record, f"{edge}: silence names no scope"))
+        if not self.instrument.strip():
+            out.append(
+                Violation("G-9", record,
+                          f"{edge}: silence names no instrument, so it is not re-runnable")
+            )
+
+        # A silence over nothing is vacuous, and a zero denominator is the exact shape of a
+        # corpus that failed to load - which is how 87% of the Mahabharata went missing once.
+        if self.passages is None or self.passages <= 0:
+            out.append(
+                Violation("G-9", record,
+                          f"{edge}: silence must state how many passages it searched, and the "
+                          "number must be positive - an absence over nothing is vacuous, and a "
+                          "zero denominator is what a corpus that failed to load looks like")
+            )
+
+        if not self.patterns and not self.measurement.strip():
+            out.append(
+                Violation("G-9", record,
+                          f"{edge}: silence lists no patterns and describes no measurement, so "
+                          "there is nothing for anyone to re-run")
+            )
+        if self.patterns and self.hits is None:
+            out.append(
+                Violation("G-9", record,
+                          f"{edge}: silence searched {len(self.patterns)} pattern(s) but records "
+                          "no hit count")
+            )
+
+        # A silence whose search returned hits is not thereby wrong - a string match is a
+        # candidate, not a citation, and the two dhrtarastri hits in the Ramayana are a
+        # bird-ancestress in a genealogy of geese, not the Mahabharata's king. But a record
+        # that reports a non-zero count and says nothing about it is indistinguishable from
+        # one whose author never looked.
+        if self.hits and not (self.rejected or self.measurement.strip()):
+            out.append(
+                Violation(
+                    "G-9",
+                    record,
+                    f"{edge}: silence records {self.hits} hit(s) and accounts for none of "
+                    "them. Read every one and either list it under `rejected` with the reason "
+                    "it is not the claim, or describe the reading in `measurement`",
+                )
+            )
+
+        # The gate.
+        if not self.controls:
+            out.append(
+                Violation(
+                    "G-9",
+                    record,
+                    f"{edge}: silence declares no positive control. A search never shown to "
+                    "find anything cannot be trusted to report that something is missing - "
+                    "this is the gate that exists because an untruncated stem returned zero "
+                    "and the zero was published as a finding",
+                )
+            )
+        for i, c in enumerate(self.controls):
+            out += c.validate(record, edge, i)
+        return out
+
+    @classmethod
+    def parse(cls, raw: dict | None) -> Silence | None:
+        if raw is None:
+            return None
+        return cls(
+            corpus=str(raw.get("corpus", "")),
+            scope=str(raw.get("scope", "")),
+            divisions=list(raw.get("divisions") or []),
+            excludes=[str(x) for x in (raw.get("excludes") or [])],
+            passages=raw.get("passages"),
+            patterns=[str(p) for p in (raw.get("patterns") or [])],
+            hits=raw.get("hits"),
+            measurement=str(raw.get("measurement", "")),
+            instrument=str(raw.get("instrument", "")),
+            controls=[Control.parse(c) for c in (raw.get("controls") or [])],
+            rejected=[str(r) for r in (raw.get("rejected") or [])],
+        )
+
+@dataclass
 class Node:
     id: str
     kind: NodeKind
@@ -249,6 +452,7 @@ class Edge:
     direction_uncertain: bool = False
     confidence: float = 1.0
     provenance: Provenance | None = None
+    silence: Silence | None = None
 
     source_file: str = ""
     in_quarantine: bool = False
@@ -285,5 +489,28 @@ class Edge:
 
         if not 0.0 <= self.confidence <= 1.0:
             out.append(Violation("R-3", rec, f"confidence {self.confidence} outside [0, 1]"))
+
+        # G-9. Only the attested tier: an asserted absence is carried as a scholar's claim
+        # and stands or falls on their published argument, not on a search this project ran.
+        attested = self.provenance is not None and self.provenance.tier == "attested"
+        if self.type in SILENCE_EDGES and attested:
+            if self.silence is None:
+                out.append(
+                    Violation(
+                        "G-9",
+                        rec,
+                        "an attested absence needs a `silence:` record - corpus, scope, "
+                        "passages searched, patterns, hits, instrument, and at least one "
+                        "positive control. Prose in the locus is not re-runnable",
+                    )
+                )
+            else:
+                out += self.silence.validate(rec, self.id)
+        elif self.silence is not None and not attested:
+            out.append(
+                Violation("G-9", rec,
+                          "a `silence:` record on a non-attested edge claims a measurement "
+                          "the tier does not support; promote it or drop the block")
+            )
 
         return out

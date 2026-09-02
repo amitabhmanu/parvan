@@ -302,6 +302,129 @@ class Profile:
         return results
 
 
+def scope_of(corpus, silence) -> list:
+    """The passages a silence actually covers, reconstructed from its declared scope.
+
+    `divisions` filters the coarsest ref level; each `excludes` entry is a locus prefix, so
+    "Ram.6.105" drops that whole sarga however many verses it holds. Prefix matching is what
+    lets one convention serve a three-level verse address and a two-level page address.
+    """
+    passages = corpus.load()
+    if silence.divisions:
+        keep = set(silence.divisions)
+        passages = [p for p in passages if p.ref and p.ref[0] in keep]
+    for locus in silence.excludes:
+        try:
+            prefix = corpus.parse_locus(locus)
+        except ValueError:
+            continue
+        passages = [p for p in passages if p.ref[: len(prefix)] != prefix]
+    return passages
+
+
+def verify_silences(profile, store) -> list[dict]:
+    """Re-run every attested absence in `store` against the live corpora.
+
+    This is the half of G-9 the loader cannot do. The loader checks that a silence record is
+    STRUCTURALLY complete - it names a corpus, a scope, an instrument and at least one
+    control - which is checkable in a clean checkout with no texts on disk. Whether the claim
+    is still TRUE requires the texts, and drifts silently when a loader, a corpus file or an
+    orthography moves.
+
+    Each result carries `ok`, and a control that no regex can re-derive is reported as
+    `unchecked` rather than quietly counted as passing.
+    """
+    adapters = profile.adapters()
+    out: list[dict] = []
+
+    for eid in sorted(store.edges):
+        edge = store.edges[eid]
+        sil = edge.silence
+        if sil is None:
+            continue
+
+        corpus = adapters.get(sil.corpus)
+        if corpus is None:
+            out.append({"edge": eid, "check": "corpus", "detail": sil.corpus, "ok": False,
+                        "message": f"silence names corpus {sil.corpus!r}, which the profile "
+                                   "does not declare"})
+            continue
+
+        scope = scope_of(corpus, sil)
+
+        # The denominator. A scope that has changed size means the claim was measured over a
+        # different text from the one on disk now, whatever the hit count says.
+        out.append({
+            "edge": eid, "check": "passages", "detail": sil.corpus,
+            "expect": sil.passages, "got": len(scope), "ok": len(scope) == sil.passages,
+            "message": "" if len(scope) == sil.passages else
+                       "the scope no longer holds the number of passages this claim was "
+                       "measured over",
+        })
+
+        # The silence itself.
+        if sil.patterns:
+            hits = sum(len(corpus.search(p, passages=scope)) for p in sil.patterns)
+            out.append({
+                "edge": eid, "check": "hits", "detail": f"{len(sil.patterns)} pattern(s)",
+                "expect": sil.hits, "got": hits, "ok": hits == sil.hits,
+                "message": "" if hits == sil.hits else
+                           "the measured absence has moved; either the claim was wrong or the "
+                           "instrument has changed",
+            })
+
+        # And the controls, which are the point.
+        for i, c in enumerate(sil.controls):
+            if c.kind == "pattern":
+                # A control may name its own corpus, and the cross-corpus one is usually the
+                # strongest: the same string returning thousands of hits in a sibling text
+                # proves it is well-formed, which a mistruncated stem is not.
+                where = adapters.get(c.corpus) if c.corpus else corpus
+                if where is None:
+                    out.append({"edge": eid, "check": f"control[{i}]", "detail": c.pattern,
+                                "expect": c.expect, "got": None, "ok": False,
+                                "message": f"control names corpus {c.corpus!r}, which the "
+                                           "profile does not declare"})
+                    continue
+                kw = {}
+                if c.include_notes:
+                    kw["include_notes"] = True
+                if c.archetypal_only:
+                    kw["archetypal_only"] = True
+                pool = scope if where is corpus else None
+                got = len(where.search(c.pattern, passages=pool, **kw))
+                # A control measured over the whole corpus rather than the scope is still a
+                # control; try both before calling it broken.
+                whole = None if got == c.expect or pool is None else len(
+                    where.search(c.pattern, **kw))
+                ok = got == c.expect or whole == c.expect
+                label = c.pattern if not c.corpus else f"{c.corpus}/{c.pattern}"
+                out.append({
+                    "edge": eid, "check": f"control[{i}]", "detail": label,
+                    "expect": c.expect, "got": got if ok or whole is None else whole, "ok": ok,
+                    "message": "" if ok else "positive control no longer holds - nothing "
+                                             "measured with this search is currently sound",
+                })
+            elif c.kind == "locus":
+                where = adapters.get(c.corpus) if c.corpus else corpus
+                try:
+                    ref = where.parse_locus(c.locus)
+                    found = any(p.ref[: len(ref)] == ref for p in where.load())
+                except ValueError:
+                    found = False
+                out.append({
+                    "edge": eid, "check": f"control[{i}]", "detail": c.locus,
+                    "expect": "resolves", "got": "resolves" if found else "MISSING", "ok": found,
+                    "message": "" if found else "the cited locus does not exist in this corpus",
+                })
+            else:
+                out.append({
+                    "edge": eid, "check": f"control[{i}]", "detail": c.measurement,
+                    "expect": c.expect, "got": None, "ok": True, "unchecked": True,
+                    "message": f"not auto-checkable; re-run {c.instrument}",
+                })
+    return out
+
 class ProfileError(Exception):
     """Raised when a profile fails validation. Carries every violation, not just the first."""
 

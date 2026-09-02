@@ -63,6 +63,22 @@ def main() -> int:
         elif tier not in VALID | {"model-inferred"}:
             problems.append(f"[G-1] {path}: unknown tier {tier!r}")
 
+        # G-9's second enforcement point. An attested argument from silence is the strongest
+        # thing the store holds and the easiest to fake, because a search that finds nothing
+        # looks exactly like a search that cannot find anything.
+        if rec.get("type") == "absent-from" and tier == "attested":
+            sil = rec.get("silence")
+            if not isinstance(sil, dict):
+                problems.append(f"[G-9] {path}: attested absence with no `silence:` record")
+            elif not sil.get("controls"):
+                problems.append(
+                    f"[G-9] {path}: attested absence declares no positive control"
+                )
+            elif sil.get("hits") and not (sil.get("rejected") or sil.get("measurement")):
+                problems.append(
+                    f"[G-9] {path}: silence records {sil['hits']} hit(s) and accounts for none"
+                )
+
     if problems:
         print("COMMIT REFUSED - provenance is the validity condition, not metadata\n")
         for p in problems:

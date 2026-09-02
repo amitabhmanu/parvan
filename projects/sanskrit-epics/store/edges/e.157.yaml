@@ -12,3 +12,18 @@ provenance:
     AVS 1 perfect to 12 imperfect, ratio 0.08 over 85,489 words. AVS.1.010.002 and the
     abruvan forms carry the narration; uvaca occurs once in the whole Samhita.
     Re-runnable: tools/aspect.py section A
+silence:
+  corpus: av
+  scope: the whole Saunaka Atharvaveda, 85,489 words, speech-attribution lines excluded
+  passages: 5839
+  measurement: 'Perfect against imperfect of one root, vac/bru ''said'': 1 perfect to 12 imperfect,
+    ratio 0.08. The collapse is absent because the perfect is not yet a narrative past.'
+  instrument: tools/aspect.py section A
+  controls:
+  - locus: AVS.1.010.002
+    note: the abruvan forms carry the narration, so the instrument finds the imperfect it is counting
+      against
+  - pattern: uvāca
+    expect: 1
+    note: occurs once in the whole Samhita - a non-zero perfect, so the ratio's numerator is measured
+      rather than merely missing

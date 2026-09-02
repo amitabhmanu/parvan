@@ -20,3 +20,39 @@ provenance:
     lokAyataM - finger-reckoning, counting, computation, poetry, Lokayata. It enumerates the
     skills adjacent to writing and stops short of writing itself.
     Re-runnable: tools/pali.py
+silence:
+  corpus: dn
+  scope: Digha-Nikaya, PTS ed., text only with the editors' footnotes held separate
+  passages: 903
+  patterns:
+  - lipi
+  - potthak
+  - kahāpaṇ
+  hits: 0
+  measurement: Zero lipi, zero potthaka, zero kahapana in the text. The 3 potthaka hits are the PTS
+    editors' own 'Sihalapotthake', in the Sinhalese manuscript, and counting them would have manufactured
+    the very claim being tested. The root LIKH occurs 2 times, both one stock phrase - DN i.63 and
+    DN i.250, sankha-likhitam brahmacariyam, the holy life 'polished like a conch-shell' - the same
+    scratch-and-polish sense the Ramayana core uses and no other.
+  instrument: tools/pali.py
+  controls:
+  - pattern: likh
+    expect: 2
+    note: the root is findable in this corpus
+  - pattern: muddā
+    expect: 2
+    note: ENUMERATIVE CONTROL, stronger than a narrative silence. The Brahmajala and Samannaphala
+      low-arts lists run mudda, ganana, samkhanam, kaveyyam, lokayatam - finger-reckoning, counting,
+      computation, poetry, Lokayata. They enumerate the skills adjacent to writing and stop short
+      of writing itself
+  - pattern: gaṇanā
+    expect: 3
+  - locus: DN i.11
+    note: the low-arts list, Brahmajala
+  - locus: DN i.69
+    note: the same list, Samannaphala
+  - pattern: potthak
+    include_notes: true
+    expect: 3
+    note: with --notes; zero without. The gap between these two numbers is why editorial matter is
+      held apart from text

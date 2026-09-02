@@ -22,3 +22,41 @@ provenance:
     the cudamani, Ram.5.036.052. So the text has objects marked with a personal name and
     still no writing: the one slot a literate culture fills with a document is filled here
     by a token. Re-runnable: tools/writing.py
+silence:
+  corpus: ram
+  scope: Ram.2-6
+  divisions:
+  - 2
+  - 3
+  - 4
+  - 5
+  - 6
+  passages: 14130
+  patterns:
+  - lipi
+  - pustak
+  hits: 0
+  measurement: 'Absent in the strong sense: the vocabulary is absent AND the practice is visibly replaced.
+    The root LIKH occurs 11 times and every one is physical scratching - Ram.4.040.028 ambaram vilikhann
+    iva, Ram.5.002.023 alikhantam ivambaram, Ram.6.030.023 kham ivollikhan, ten of the eleven being
+    that one formula of peaks and palaces scraping the sky, plus Ram.6.046.038 of beasts scoring each
+    other with fangs. Not one means write or even draw.'
+  instrument: tools/writing.py
+  controls:
+  - pattern: likh
+    expect: 11
+    note: the root IS findable; what is absent is the sense 'write', not the string
+  - pattern: dūta
+    expect: 25
+    note: CONTROL OF THE PLOT. The core has this many messenger episodes - the slot a literate culture
+      fills with a document
+  - pattern: abhijñān
+    expect: 18
+    note: and fills it instead with a recognition token
+  - locus: Ram.4.043.011
+    note: 'dadau ... svanamankopasobhitam angulIyam abhijnanam - a signet ring marked with Rama''s
+      own name: an object carrying a personal name, and still no writing'
+  - locus: Ram.5.034.002
+    note: ramanamankitam cedam pasya devy angulIyakam
+  - locus: Ram.5.036.052
+    note: Sita answers with the cudamani, not a letter

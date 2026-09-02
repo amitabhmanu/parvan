@@ -11,3 +11,17 @@ provenance:
     three words by a past participle in a nominative or accusative case: 53 occurrences in
     85,489 words of the Atharvaveda, 6.20 per 10,000 - between a third and a quarter of the
     post-Vedic rate. Re-runnable: tools/aspect.py section C
+silence:
+  corpus: av
+  scope: the whole Saunaka Atharvaveda, 85,489 words
+  passages: 5839
+  measurement: 'Instrumental agent (maya, tvaya, tena, yena, asmabhih and six others) followed within
+    three words by a past participle in a nominative or accusative case: 53 occurrences, 6.20 per
+    10,000 - between a third and a quarter of the post-Vedic rate.'
+  instrument: tools/aspect.py section C
+  controls:
+  - measurement: 53 instrumental-agent + participle collocations
+    instrument: tools/aspect.py section C
+    expect: 53
+    note: 'the construction is FOUND, 53 times. This is a rate claim, not a zero: an instrument returning
+      none would be indistinguishable from a broken one'

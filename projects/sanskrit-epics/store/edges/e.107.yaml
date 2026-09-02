@@ -11,3 +11,39 @@ provenance:
     puspapur all 0 hits, plain, archetypal-only and folded. Positive control: MBh.2.013.062 tena ruddha
     hi rajanah sarve jitva girivraje (Jarasamdha''s capital); MBh.3.082.089 tato rajagrham gacchet tirthasevi.
     Excludes MBh.2.052.003 and MBh.5.049.014, both generic ''king''s house'''
+silence:
+  corpus: mbh
+  scope: MBh.2-11 (91573 of 123372 verses archetypal)
+  divisions:
+  - 2
+  - 3
+  - 4
+  - 5
+  - 6
+  - 7
+  - 8
+  - 9
+  - 10
+  - 11
+  passages: 123372
+  patterns:
+  - pāṭaliputr
+  - pāṭalipur
+  - kusumapur
+  - puṣpapur
+  hits: 0
+  measurement: Zero plain, zero archetypal-only (91573 verses) and zero folded. Excludes MBh.2.052.003
+    and MBh.5.049.014, both generic 'king's house'.
+  instrument: tools/concordance.py --corpus mbh
+  controls:
+  - locus: MBh.2.013.062
+    note: tena ruddha hi rajanah sarve jitva girivraje - Jarasamdha's capital, named
+  - locus: MBh.3.082.089
+    note: tato rajagrham gacchet tirthasevi
+  - pattern: girivraj
+    expect: 15
+  - pattern: hāstinapur
+    expect: 29
+    note: the epic names its own capitals in this scope; it does not name this one
+  - pattern: indraprasth
+    expect: 21

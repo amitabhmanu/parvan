@@ -9,3 +9,24 @@ provenance:
   tier: attested
   locus: 'GRETIL Baroda CE, all 18761 verses: 0 hits for /pa?[tt]aliputra|pa?[tt]alipura/ and for the
     diacritic-folded form. A measured silence: re-runnable via tools/concordance.py'
+silence:
+  corpus: ram
+  scope: the whole Ramayana, all seven kandas
+  passages: 18761
+  patterns:
+  - pāṭaliputr
+  - pāṭalipur
+  - kusumapur
+  - puṣpapur
+  hits: 0
+  instrument: tools/concordance.py
+  controls:
+  - pattern: ayodhy
+    expect: 123
+    note: the text names capitals freely; it is this capital it does not name
+  - pattern: laṅk
+    expect: 326
+  - pattern: mithil
+    expect: 21
+  - pattern: kiṣkindh
+    expect: 38

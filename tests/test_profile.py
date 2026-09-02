@@ -196,3 +196,125 @@ def test_calibrate_reports_a_control_that_has_stopped_holding(tmp_path):
     assert by_pattern["gone"]["ok"] is True
     assert by_pattern["moved"]["ok"] is False
     assert by_pattern["moved"]["got"] == 0
+
+
+# -- verify_silences ------------------------------------------------------------------------
+
+
+def _verifiable(tmp_path: Path):
+    """A tiny two-corpus project plus a store holding one attested absence."""
+    (tmp_path / "adapters.py").write_text(
+        "from parvan.corpus import Corpus, Passage\n"
+        "class _C(Corpus):\n"
+        "    ref_levels = ('book', 'line')\n"
+        "    def __init__(self, sigil, rows):\n"
+        "        super().__init__(); self.sigil = sigil; self.name = sigil; self.rows = rows\n"
+        "    def _parse(self, t):\n"
+        "        for ref, text in self.rows:\n"
+        "            t.saw(); yield Passage(ref=ref, text=text, work=self.sigil)\n"
+        "A = _C('A', [((1, 1), 'present-thing'), ((1, 2), 'filler'), ((2, 1), 'other book')])\n"
+        "B = _C('B', [((1, 1), 'absent-thing lives here')])\n",
+        encoding="utf-8",
+    )
+    (tmp_path / "profile.yaml").write_text(
+        yaml.safe_dump({
+            "project": "v", "adapter_module": "adapters.py",
+            "corpora": {
+                "a": {"role": "primary", "object": "A",
+                      "positive_controls": [{"pattern": "present-thing", "expect": 1}]},
+                "b": {"role": "baseline", "object": "B",
+                      "positive_controls": [{"pattern": "absent-thing", "expect": 1}]},
+            },
+            "search_traps": MINIMAL["search_traps"],
+        }, allow_unicode=True, sort_keys=False),
+        encoding="utf-8",
+    )
+    return tmp_path
+
+
+class _Store:
+    def __init__(self, edges):
+        self.edges = edges
+
+
+def _edge(silence):
+    from parvan.model import Edge, Provenance, Silence
+    return Edge(id="e.1", type="absent-from", src="s", dst="d", method="m",
+                provenance=Provenance(tier="attested", locus="x"),
+                silence=Silence.parse(silence))
+
+
+def test_verify_reconstructs_scope_and_confirms_a_silence(tmp_path):
+    from parvan.profile import verify_silences
+    prof = Profile.load(_verifiable(tmp_path))
+    store = _Store({"e.1": _edge({
+        "corpus": "a", "scope": "book 1", "divisions": [1], "passages": 2,
+        "patterns": ["absent-thing"], "hits": 0, "instrument": "t.py",
+        "controls": [{"pattern": "present-thing", "expect": 1}],
+    })})
+    by = {r["check"]: r for r in verify_silences(prof, store)}
+    assert by["passages"]["ok"] and by["passages"]["got"] == 2
+    assert by["hits"]["ok"]
+    assert by["control[0]"]["ok"]
+
+
+def test_verify_catches_a_scope_that_has_changed_size(tmp_path):
+    from parvan.profile import verify_silences
+    prof = Profile.load(_verifiable(tmp_path))
+    store = _Store({"e.1": _edge({
+        "corpus": "a", "scope": "book 1", "divisions": [1], "passages": 99,
+        "patterns": ["absent-thing"], "hits": 0, "instrument": "t.py",
+        "controls": [{"pattern": "present-thing", "expect": 1}],
+    })})
+    by = {r["check"]: r for r in verify_silences(prof, store)}
+    assert by["passages"]["ok"] is False
+    assert "different text" in by["passages"]["message"] or "no longer holds" in by["passages"]["message"]
+
+
+def test_verify_catches_a_control_that_has_stopped_holding(tmp_path):
+    from parvan.profile import verify_silences
+    prof = Profile.load(_verifiable(tmp_path))
+    store = _Store({"e.1": _edge({
+        "corpus": "a", "scope": "book 1", "divisions": [1], "passages": 2,
+        "patterns": ["absent-thing"], "hits": 0, "instrument": "t.py",
+        "controls": [{"pattern": "present-thing", "expect": 44}],
+    })})
+    by = {r["check"]: r for r in verify_silences(prof, store)}
+    assert by["control[0]"]["ok"] is False
+    assert "currently sound" in by["control[0]"]["message"]
+
+
+def test_a_cross_corpus_control_runs_against_its_own_corpus(tmp_path):
+    """The strongest control available: the same string, proven well-formed elsewhere."""
+    from parvan.profile import verify_silences
+    prof = Profile.load(_verifiable(tmp_path))
+    store = _Store({"e.1": _edge({
+        "corpus": "a", "scope": "book 1", "divisions": [1], "passages": 2,
+        "patterns": ["absent-thing"], "hits": 0, "instrument": "t.py",
+        "controls": [{"pattern": "absent-thing", "corpus": "b", "expect": 1}],
+    })})
+    by = {r["check"]: r for r in verify_silences(prof, store)}
+    assert by["control[0]"]["ok"], "the pattern is absent in A but present in B, which is the point"
+    assert by["control[0]"]["detail"] == "b/absent-thing"
+
+
+def test_excludes_drop_a_whole_prefix(tmp_path):
+    from parvan.profile import scope_of
+    prof = Profile.load(_verifiable(tmp_path))
+    from parvan.model import Silence
+    a = prof.adapters()["a"]
+    assert len(scope_of(a, Silence.parse({"divisions": [1, 2]}))) == 3
+    assert len(scope_of(a, Silence.parse({"divisions": [1, 2], "excludes": ["A.2"]}))) == 2
+
+
+def test_a_measurement_control_is_reported_unchecked_not_passed(tmp_path):
+    from parvan.profile import verify_silences
+    prof = Profile.load(_verifiable(tmp_path))
+    store = _Store({"e.1": _edge({
+        "corpus": "a", "scope": "book 1", "divisions": [1], "passages": 2,
+        "measurement": "a ratio no regex can re-derive", "instrument": "t.py",
+        "controls": [{"measurement": "200 indicatives", "instrument": "t.py", "expect": 200}],
+    })})
+    by = {r["check"]: r for r in verify_silences(prof, store)}
+    assert by["control[0]"].get("unchecked") is True
+    assert "re-run t.py" in by["control[0]"]["message"]

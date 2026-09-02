@@ -79,12 +79,53 @@ not just its words.
 
 **4. A zero result is a deliverable, not a failure.**
 An absence search that returns nothing produces an `attested` edge of its own — a measured
-silence. Record the exact pattern, the corpus, the scope and the passage count so anyone can
-re-run it. Report every search you tried, including variant spellings and any folded pass.
+silence. It must be proposed as a `silence:` block, which the loader refuses (G-9) if it is
+incomplete, so build it as you search rather than writing prose and converting later:
 
-Before reporting a silence, **run at least one of that corpus's `positive_controls`** and say
-so. A search tool that was never shown to find anything cannot be trusted to report that
-something is missing. This is what turned a retraction into a rule.
+```yaml
+silence:
+  corpus: ram                       # a key in the profile's `corpora`
+  scope: "Ram.2-6, excluding Ram.6.105 and Ram.6.107"
+  divisions: [2, 3, 4, 5, 6]        # machine-readable, so it can be re-run and not just read
+  excludes: ["Ram.6.105", "Ram.6.107"]   # each entry is a locus PREFIX
+  passages: 14065                   # the denominator. Never guess it; print it.
+  patterns: ["pāṭaliputr", "pāṭalipur", "kusumapur", "puṣpapur"]
+  hits: 0
+  instrument: tools/concordance.py  # how a stranger re-runs this
+  controls:                         # AT LEAST ONE. This is the gate.
+    - pattern: ayodhy
+      expect: 123
+      note: the text names capitals freely; it is this capital it does not name
+  rejected: []                      # required if hits > 0 - see below
+```
+
+Three things the gate will refuse, and each of them has been a real error:
+
+- **No control.** A search tool never shown to find anything cannot be trusted to report that
+  something is missing. Run at least one of that corpus's `positive_controls`, or measure your
+  own, and record the count. This is the rule the `yavana` retraction bought.
+- **A denominator of zero, or none at all.** A zero denominator is what a corpus that failed
+  to load looks like, and an absence over nothing is vacuous.
+- **Hits it does not account for.** A silence may legitimately return hits — a string match is
+  a candidate, not a citation — but then list every one under `rejected` with the reason it is
+  not the claim, or describe the reading in `measurement`.
+
+**The strongest control you can offer is cross-corpus**: the same pattern string, run against
+a sibling text where the thing IS present, returning hits. That proves the string is
+well-formed and correctly truncated, which is exactly what a mistruncated stem is not. Tag it
+with `corpus:` so the verifier runs it in the right place. If a control was measured with
+`--notes` or `--archetypal-only`, say so with `include_notes: true` / `archetypal_only: true`,
+or it will look broken when re-run.
+
+A control that no regex can re-derive — a paired ratio's denominator, a rate per 10,000 words
+— is a `measurement:` control and needs its own `instrument:`. It is reported as unchecked
+rather than counted as passing, which is honest.
+
+Confirm your block before proposing it:
+
+```bash
+uv run parvan verify-silences projects/<project>
+```
 
 **5. Report contradictions; never resolve them.**
 If the text does not support the claim, that is the result. Do not hunt for a different locus

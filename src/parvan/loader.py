@@ -15,7 +15,7 @@ from pathlib import Path
 
 import yaml
 
-from .model import GROUNDING_KINDS, Edge, Interval, Node, Provenance, Violation
+from .model import GROUNDING_KINDS, Edge, Interval, Node, Provenance, Silence, Violation
 
 # Referents may legitimately be attested by these kinds without circularity: they are dated
 # by non-textual means. A referent attested only by texts is text-derived (G-4).
@@ -107,6 +107,7 @@ def _edge_from(raw: dict, path: str, in_quarantine: bool) -> Edge:
         direction_uncertain=bool(raw.get("direction_uncertain", False)),
         confidence=float(raw.get("confidence", 1.0)),
         provenance=Provenance.parse(raw.get("provenance")),
+        silence=Silence.parse(raw.get("silence")),
         source_file=path,
         in_quarantine=in_quarantine,
     )

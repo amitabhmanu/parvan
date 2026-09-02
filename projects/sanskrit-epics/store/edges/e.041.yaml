@@ -10,3 +10,33 @@ provenance:
     4 narayana hits, every one read, none a narrator- or deity-voiced identity claim. Rejected: Ram.2.110.019
     and kandas 3-5 similes; Ram.2.006.001/003 Rama worshipping Narayana as a distinct god; Ram.6.026.031
     and 6.082.024 character speculation, the latter retracted at 6.082.029'
+silence:
+  corpus: ram
+  scope: Ram.2-6, excluding Ram.6.105 and Ram.6.107
+  divisions:
+  - 2
+  - 3
+  - 4
+  - 5
+  - 6
+  excludes:
+  - Ram.6.105
+  - Ram.6.107
+  passages: 14065
+  patterns:
+  - viṣṇu
+  - nārāyaṇ
+  hits: 29
+  measurement: 'Not a zero-hit silence. The vocabulary IS present and every hit was read; what is
+    absent is the identity claim. No occurrence is narrator- or deity-voiced assertion that Rama is
+    Visnu. Rejected: Ram.2.110.019 and the kandas 3-5 similes; Ram.2.006.001 and 2.006.003, Rama worshipping
+    Narayana as a distinct god; Ram.6.026.031 and 6.082.024 character speculation, the latter retracted
+    at 6.082.029.'
+  instrument: tools/concordance.py
+  controls:
+  - pattern: viṣṇu
+    expect: 25
+    note: the instrument finds the vocabulary in scope; the absence is of a reading, not of a word,
+      so the hits ARE the control
+  - pattern: nārāyaṇ
+    expect: 4

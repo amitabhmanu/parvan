@@ -1,15 +1,28 @@
 id: anc.khoh-plates
 kind: anchor
-label: Khoh copper plates of Sarvanatha
+label: Khoh copper plate of Maharaja Sarvanatha, Gupta year 214
 interval:
-  floor: 500
-  ceiling: 520
+  floor: 533
+  ceiling: 534
+  hedge: >
+    Gupta era year 214, epoch 319/320 CE, hence 533 or 534 CE. Stored previously as
+    [500, 520], which was wrong by roughly fifteen years and named no plate; Sarvanatha
+    issued several and only this one carries the phrase. Correcting it changes no bound -
+    the anchor is slack in both positions - so this is a record-accuracy fix, not a result.
 dating_method: epigraphic-citation
 independent_of:
-- internal-linguistic
-- internal-structural
-- internal-doctrinal
+  - internal-linguistic
+  - internal-structural
+  - internal-doctrinal
 holdout_eligible: true
 provenance:
   tier: attested
-  locus: Khoh plates; the hundred-thousand-verse collection compiled by Vyasa
+  locus: >
+    Fleet, Corpus Inscriptionum Indicarum vol. III, Inscriptions of the Early Gupta Kings
+    and Their Successors: Khoh copper plate of Maharaja Sarvanatha, year 214, granting the
+    villages Vyaghrapallika and Kacarapallika to Pulindabhata for the worship of
+    Pistapurikadevi. It refers to the Mahabharata as the SATA-SAHASRI SAMHITA, the
+    hundred-thousand-verse collection - so the epic had reached that extent, under that
+    description, by the first half of the sixth century.
+    Replaces the category reference "Khoh plates; the hundred-thousand-verse collection",
+    which named neither plate nor volume.

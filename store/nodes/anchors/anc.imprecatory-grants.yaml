@@ -10,5 +10,14 @@ independent_of:
 - internal-structural
 holdout_eligible: true
 provenance:
-  tier: attested
-  locus: Standard imprecatory verses in hundreds of copper-plate grants from the 5th c.
+  tier: asserted
+  source: >
+    Fleet, Corpus Inscriptionum Indicarum vol. III, and Epigraphia Indica passim: the stock
+    imprecatory verses - sastim varsasahasrani svarge modati bhumidah and its fellows -
+    appear in hundreds of copper-plate grants from the fifth century onward, and the epic
+    carries them too, so the grants give a terminus ante quem for those verses.
+    DOWNGRADED from attested to asserted. Its previous locus, "standard imprecatory verses
+    in hundreds of copper-plate grants from the 5th c.", names a class of documents and not
+    a document. An anchor whose locus cannot be looked up is an assertion with a date on it,
+    and this store's whole argument is that the difference is the point. Promoting it needs
+    one plate, one volume, one page - not a larger claim, a smaller one.

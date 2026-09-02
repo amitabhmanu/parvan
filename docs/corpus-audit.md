@@ -134,4 +134,26 @@ partition Parvan computes is one it can also recompute under ablation.
 5. **Plan to re-derive** rather than ship a Brockington seed partition (**R-15**).
 
 **Update 2026-09-01.** The three GRETIL Rāmāyaṇa files have been fetched into a gitignored
-`corpus/` directory (6.1 MB, not redistributed). Nothing else has been downloaded.
+`corpus/` directory (6.1 MB, not redistributed).
+
+**Update 2026-09-02 — the Mahābhārata, and the apparatus check.** All 18 parvans fetched
+(16 MB, gitignored). No TEI exists for the MBh; the older HTM files are the ones that
+preserve the BORI apparatus, which is why they are the right source.
+
+```
+224,679 lines parsed, all 18 parvans
+158,502 archetypal          (~79k slokas, matching the critical edition)
+ 66,177 apparatus           star (*) and appendix (@) passages
+     62 unparsed (0.028%)   malformed at source, reported not swallowed
+```
+
+**`--archetypal-only` is a capability the Rāmāyaṇa cannot offer.** A floor resting on a star
+passage is a floor on an interpolation, and until now there was no way to tell.
+
+Getting the parse right took four attempts, each one silently losing data until a completeness
+assertion was added. The format has five variants — a tab separator except in parvan 10 which
+uses `<>`, the apparatus marker after rather than before the pāda letter, uppercase pāda
+letters in prose runs, `@` appendix markers alongside `*` star markers, and marker suffixes
+like `*0128_01(127ab)`. The first pattern loaded 87% of the corpus and reported nothing wrong.
+`load_mbh` now refuses above a 0.05% tolerance, because an absence search over a corpus that
+drops lines is worthless.

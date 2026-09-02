@@ -4,6 +4,7 @@ from: mbh.late-peoples
 to: ref.hunas
 method: realia-floor
 provenance:
-  tier: asserted
-  source: 'docs/dating-sanskrit-epics.md scored inventory, row: Hunas in the peoples lists - latest binding
-    floor'
+  tier: attested
+  locus: MBh.2.047.019 - cinan hunan sakan odran; also MBh.2.029.011, MBh.3.048.021 harahunams, MBh.6.010.064
+    hunah paratakaih saha, MBh.12.312.015 cinahunanisevitan. All ARCHETYPAL - none is a star or appendix
+    passage. Excludes sthuna/prabhunam false positives

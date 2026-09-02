@@ -4,5 +4,6 @@ from: mbh.late-peoples
 to: ref.cinas
 method: realia-floor
 provenance:
-  tier: asserted
-  source: 'docs/dating-sanskrit-epics.md scored inventory, row: Cinas (from Qin)'
+  tier: attested
+  locus: MBh.2.023.019 - kirataih ca cinaih ca vrtah pragjyotiso 'bhavat; also MBh.2.047.019, MBh.3.048.021.
+    All ARCHETYPAL. Excludes aracina, pracina, sucin false positives

@@ -468,9 +468,20 @@ EDGES = [
     ("e.108", "absent-from", "ws.mbh.core", "ref.classical-kavya-style", "absence",
      "Short compounds; no mature kavya style", {"lag_min_years": 0}),
 
+    # Promoted, and checked against the BORI apparatus - the first time that check has been
+    # possible for anything. Section 11 calls the Huna floor "the latest binding floor", so
+    # whether it rests on constituted text or on material the critical editors excluded is
+    # the difference between a real floor and a dinara. It rests on constituted text.
     ("e.110", "presupposes", "mbh.late-peoples", "ref.hunas", "realia-floor",
-     "Hunas in the peoples lists - latest binding floor", {}),
-    ("e.111", "presupposes", "mbh.late-peoples", "ref.cinas", "realia-floor", "Cinas (from Qin)", {}),
+     "Hunas in the peoples lists - latest binding floor",
+     {"prov": att("MBh.2.047.019 - cinan hunan sakan odran; also MBh.2.029.011, "
+                  "MBh.3.048.021 harahunams, MBh.6.010.064 hunah paratakaih saha, "
+                  "MBh.12.312.015 cinahunanisevitan. All ARCHETYPAL - none is a star or "
+                  "appendix passage. Excludes sthuna/prabhunam false positives")}),
+    ("e.111", "presupposes", "mbh.late-peoples", "ref.cinas", "realia-floor", "Cinas (from Qin)",
+     {"prov": att("MBh.2.023.019 - kirataih ca cinaih ca vrtah pragjyotiso 'bhavat; also "
+                  "MBh.2.047.019, MBh.3.048.021. All ARCHETYPAL. Excludes aracina, pracina, "
+                  "sucin false positives")}),
     ("e.112", "presupposes", "ws.mbh.carvaka", "ref.eduka-polemic", "realia-floor",
      "Eduka / stupa polemic", {}),
     ("e.113", "presupposes", "ws.mbh.core", "ref.massed-elephant-corps", "realia-floor",

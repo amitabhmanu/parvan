@@ -1,0 +1,12 @@
+id: ref.ppp-predicate
+kind: referent
+label: Past participle as the predicate of a clause
+class: concept
+text_derived: true
+provenance:
+  tier: attested
+  locus: >
+    Split from ref.post-vedic-grammar under R-10, which bundles six typologically distinct
+    changes and cannot be attested as a unit. Measured in docs/aspect-and-participle.md,
+    re-runnable via tools/aspect.py. Both epics and a dated 5th-century CE control were
+    measured; this component survives that control.

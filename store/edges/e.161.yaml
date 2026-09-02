@@ -1,0 +1,13 @@
+id: e.161
+type: presupposes
+from: ram.core
+to: ref.ppp-predicate
+method: linguistic-stratigraphy
+provenance:
+  tier: attested
+  locus: >
+    Ram.2-6: 356 instrumental-agent-plus-participle constructions in 160,993 words, 22.11 per
+    10,000, against 6.20 in the Atharvaveda. Read in context, e.g. Ram.2 tvaya dasaratho
+    gunair aradhitah, "by you Dasaratha was propitiated with virtues" - the participle is the
+    whole predicate, which is the construction ancestral to the Middle Indo-Aryan ergative.
+    Re-runnable: tools/aspect.py section C

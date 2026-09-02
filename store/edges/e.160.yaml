@@ -1,0 +1,13 @@
+id: e.160
+type: absent-from
+from: ws.atharvaveda
+to: ref.ppp-predicate
+method: absence
+lag_min_years: 0
+provenance:
+  tier: attested
+  locus: >
+    Instrumental agent (maya, tvaya, tena, yena, asmabhih and six others) followed within
+    three words by a past participle in a nominative or accusative case: 53 occurrences in
+    85,489 words of the Atharvaveda, 6.20 per 10,000 - between a third and a quarter of the
+    post-Vedic rate. Re-runnable: tools/aspect.py section C

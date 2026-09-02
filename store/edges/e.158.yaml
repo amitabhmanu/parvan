@@ -1,0 +1,13 @@
+id: e.158
+type: presupposes
+from: ram.core
+to: ref.aspectual-collapse
+method: linguistic-stratigraphy
+provenance:
+  tier: attested
+  locus: >
+    Ram.2-6, 160,993 words: 250 perfect (uvaca, UcuH) to 419 imperfect (abravIt, abruvan) of
+    vac/bru, ratio 0.60 - seven times the Atharvaveda's 0.08. Control: Kalidasa's Raghuvamsa,
+    court epic in the same genre narrating the same dynasty, c. 400 CE, runs 5.50, continuing
+    in the same direction, so the metric is monotone across the three dates and is not a
+    register artifact. Re-runnable: tools/aspect.py section A

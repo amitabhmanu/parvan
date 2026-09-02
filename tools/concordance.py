@@ -38,6 +38,7 @@ ROOT = Path(__file__).resolve().parents[1] / "corpus"
 CORPUS = ROOT / "sa_rAmAyaNa.xml"
 MBH_DIR = ROOT / "mbh"
 AV_FILE = ROOT / "av" / "avs_acu.htm"
+RAGH_FILE = ROOT / "kavya" / "kragh_pu.htm"
 
 VERSE_RE = re.compile(r'<lg xml:id="R_(\d+)\.(\d+)\.(\d+)">(.*?)</lg>', re.S)
 LINE_RE = re.compile(r'<l xml:id="[^"]*">(.*?)</l>', re.S)
@@ -111,6 +112,19 @@ def av_fold(s: str) -> str:
     d = d.replace("r\N{COMBINING RING BELOW}", "\N{LATIN SMALL LETTER R WITH DOT BELOW}")
     return unicodedata.normalize("NFC", d)
 
+
+# Kalidasa, Raghuvamsa (GRETIL kragh_pu.htm; ed. Scharpe, Kalidasa Lexicon I, Bruges 1964).
+# Held as a GENRE CONTROL, not as a dating source. It is court epic in the same genre as the
+# Ramayana, narrating the same dynasty, and securely dated c. 400 CE - so a doctrine it
+# discusses freely cannot be one the Ramayana's genre forbade it to discuss.
+#
+#   ... vande parvatiparamesvarau  // Ragh_1.1 //<BR>       constituted text
+#   ... vaikhanasair adrsyagni...  // Ragh_1.49* //<BR>     ksepaka: interpolated
+#
+# The star means what it means in the Mahabharata files - the editor judged the verse an
+# interpolation - so `archetypal` carries it and --archetypal-only filters it. A control
+# resting on an interpolated verse is not a control.
+RAGH_MARK = re.compile(r"//\s*Ragh_(\d+)\.(\d+)(\*?)\s*//")
 
 @dataclass(frozen=True)
 class Verse:
@@ -214,11 +228,50 @@ def load_av(path: Path = AV_FILE) -> list[Verse]:
     ]
 
 
+def load_ragh(path: Path = RAGH_FILE) -> list[Verse]:
+    """Kalidasa's Raghuvamsa, verses reassembled across their line breaks."""
+    if not path.exists():
+        sys.exit(f"Raghuvamsa not found at {path}; see docs/corpus-audit.md")
+    lines = path.read_text(encoding="utf-8").splitlines()
+    try:
+        start = next(i for i, ln in enumerate(lines) if "Ragh_1.1 //" in ln)
+    except StopIteration:
+        sys.exit("Raghuvamsa: no verse markers found; the file layout has changed")
+    out: list[Verse] = []
+    buf: list[str] = []
+    for ln in lines[start - 1:]:
+        t = re.sub(r"<[^>]+>", " ", ln)
+        t = re.sub(r"\s+", " ", t).strip()
+        if not t:
+            continue
+        m = RAGH_MARK.search(t)
+        if not m:
+            buf.append(t)
+            continue
+        buf.append(RAGH_MARK.sub("", t).strip())
+        text = " ".join(x for x in buf if x)
+        buf = []
+        if text:
+            out.append(Verse(int(m.group(1)), int(m.group(2)), 0, text,
+                             work="Ragh", archetypal=not m.group(3)))
+    # Same discipline as the other two loaders. A control corpus that silently drops verses
+    # would understate the very presence it exists to demonstrate, which is the direction
+    # that flatters the hypothesis - so leftover text is refused rather than ignored.
+    if buf:
+        raise SystemExit(
+            f"Raghuvamsa parse incomplete: {len(buf)} line(s) after the last verse marker "
+            "were never attached to a verse. Fix RAGH_MARK before using it."
+        )
+    return out
+
+
 def load_corpus(name: str) -> list[Verse]:
     if name == "mbh":
         return load_mbh()
     if name == "av":
         return load_av()
+    if name == "ragh":
+        return load_ragh()
     return load()
 
 
@@ -284,9 +337,9 @@ def main() -> None:
     ap.add_argument("--fold", action="store_true",
                     help="strip diacritics before matching (looser, noisier)")
     ap.add_argument("--count", action="store_true", help="report counts only")
-    ap.add_argument("--corpus", choices=("ram", "mbh", "av"), default="ram")
+    ap.add_argument("--corpus", choices=("ram", "mbh", "av", "ragh"), default="ram")
     ap.add_argument("--archetypal-only", action="store_true",
-                    help="MBh only: exclude star passages, which the BORI editors judged "
+                    help="MBh and Raghuvamsa: exclude star passages, which the BORI editors judged "
                          "non-archetypal. A floor resting on a star passage is a floor on "
                          "an interpolation.")
     ap.add_argument("--limit", type=int, default=40)
@@ -299,7 +352,7 @@ def main() -> None:
     scope = [v for v in verses if not kandas or v.kanda in kandas]
     hits = search(verses, args.pattern, kandas=kandas, fold=args.fold)
 
-    unit = {"mbh": "parvan", "av": "book"}.get(args.corpus, "kanda")
+    unit = {"mbh": "parvan", "av": "book", "ragh": "sarga"}.get(args.corpus, "kanda")
     where = f"{unit} {args.kanda}" if args.kanda else "whole text"
     print(f"pattern {args.pattern!r} over {where}: {len(hits)} hit(s) in {len(scope)} verses")
 

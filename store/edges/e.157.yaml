@@ -1,0 +1,14 @@
+id: e.157
+type: absent-from
+from: ws.atharvaveda
+to: ref.aspectual-collapse
+method: absence
+lag_min_years: 0
+provenance:
+  tier: attested
+  locus: >
+    The collapse is absent from the Atharvaveda, where the perfect is not a narrative past.
+    Perfect against imperfect of one root, vac/bru "said", speech-attribution lines excluded:
+    AVS 1 perfect to 12 imperfect, ratio 0.08 over 85,489 words. AVS.1.010.002 and the
+    abruvan forms carry the narration; uvaca occurs once in the whole Samhita.
+    Re-runnable: tools/aspect.py section A

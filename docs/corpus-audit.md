@@ -238,3 +238,28 @@ unchanged. Available as `--corpus av`.
 See `subjunctive-baseline.md`. The Atharvaveda is the earliest text in the store and so was
 the strongest available test of the Phase 4 result that corpus growth buys checking rather
 than resolution. The law held: both headline brackets are unchanged to the year.
+
+
+---
+
+## 7. Kālidāsa, Raghuvaṃśa — a genre control · fetched 2026-09-02
+
+`corpus/kavya/kragh_pu.htm` (GRETIL, ed. Scharpé, *Kālidāsa Lexicon* I, Bruges 1964), 284 KB,
+gitignored. Parse complete: 1,627 verses across 19 sargas, of which **59 carry a `*` marker**
+— *kṣepaka*, verses the editor judged interpolated. That is the same apparatus signal the BORI
+Mahābhārata files carry and the Baroda Rāmāyaṇa lacks, so `archetypal: true|star` and
+`--archetypal-only` work here too. A control resting on an interpolated verse is not a control.
+
+**Held as a control, not as a dating source.** Court epic in the same genre as the Rāmāyaṇa,
+narrating the same dynasty, securely dated c. 400 CE (`ws.kalidasa`, already in the store). Its
+value is that it answers "could a text of this kind have said this?" for any absence claim
+about the Rāmāyaṇa.
+
+It earned its place immediately, and twice:
+
+1. It **refuted the aorist** as a dating metric. Kālidāsa's aorist rate matches the
+   Atharvaveda's and is 25× the Rāmāyaṇa's — a register effect, not a chronological one.
+2. It **confirmed the genre permits soteriological vocabulary** (1.63 per 10,000 words), which
+   with the Rāmāyaṇa's own late books retired the withheld *mokṣa* constraint for good.
+
+See `aspect-and-participle.md`. Available as `--corpus ragh`.

@@ -6,3 +6,22 @@ text_derived: true
 provenance:
   tier: asserted
   source: 'docs/dating-sanskrit-epics.md scored inventory, row: Karma, rebirth, moksa as assumed framework'
+  note: >
+    DO NOT ADD AN absent-from EDGE FROM ram.core. The Ramayana core's silence about
+    liberation is real and measured - 0 occurrences of punarjanman, punarbhava, apunarbhava,
+    samsara, mumuksu, moksadharma, apavarga, kaivalya or brahmanirvana in 160,993 words - and
+    encoding it would move the core's ceiling from 300 BCE to 500 BCE. It was withheld
+    pending a control, and the control has now been run and REFUTES it.
+
+    Books 1 and 7 of the same Ramayana are zero on the same vocabulary: 0 hits in 21,711 and
+    31,111 words. Those books are later than the core by this store's own attested
+    constraints - ram.bala floors at 330 BCE against the core's 750 BCE - and they
+    demonstrably absorbed avatara theology the core does not carry (e.041). If the silence
+    tracked date, the late books would have broken it. They do not.
+
+    External controls agree that the silence is not forced by genre: the Mahabharata runs
+    0.97 such tokens per 10,000 words and Kalidasa's Raghuvamsa, court epic on the same
+    dynasty c. 400 CE, runs 1.63. The whole Ramayana runs 0.00 at every stratum.
+
+    The silence is therefore a property of the Ramayana tradition rather than of its date,
+    and it bounds nothing. See docs/aspect-and-participle.md section 3.

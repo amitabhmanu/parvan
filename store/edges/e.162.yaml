@@ -1,0 +1,14 @@
+id: e.162
+type: presupposes
+from: ws.mbh.core
+to: ref.ppp-predicate
+method: linguistic-stratigraphy
+provenance:
+  tier: attested
+  locus: >
+    MBh archetypal: 1,329 constructions in 891,852 words, 14.90 per 10,000, against 6.20 in
+    the Atharvaveda. Note what this metric can and cannot do: all three post-Vedic texts
+    measured, including Kalidasa at 14.12, sit in a band of 14 to 22 while the Vedic text
+    sits at 6.20. It separates Vedic from post-Vedic and orders nothing within post-Vedic,
+    which is what a floor claim needs and all it supports.
+    Re-runnable: tools/aspect.py section C

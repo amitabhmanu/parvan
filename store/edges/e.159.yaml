@@ -1,0 +1,14 @@
+id: e.159
+type: presupposes
+from: ws.mbh.core
+to: ref.aspectual-collapse
+method: linguistic-stratigraphy
+provenance:
+  tier: attested
+  locus: >
+    MBh archetypal, 891,852 words with the 5,863 bare "NAME uvaca" speech-attribution verses
+    excluded: 811 perfect to 923 imperfect, ratio 0.88 against the Atharvaveda's 0.08.
+    Excluding those lines is not optional - the BORI edition sets speech attribution as a
+    verse of its own and the Baroda Ramayana does not, and counting them reports a twelvefold
+    difference between the two epics that is entirely editorial convention.
+    Re-runnable: tools/aspect.py section A

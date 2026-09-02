@@ -12,6 +12,7 @@ import click
 
 from . import __version__
 from .loader import StoreError, load
+from .retrodict import fmt_v2, run_all
 from .stp import (SOLVER_VERSION, Solution, bound_support, fmt_bounds,
                   solve as run_solve)
 
@@ -153,6 +154,28 @@ def support(store_path: Path, target: tuple[str, ...], epsilon: int) -> None:
             click.echo("  (single point of failure)" if n == 1 else "  edge-disjoint routes")
             for c in routes[0]:
                 click.echo(f"      {c.origin:<28} {c.why}")
+
+
+@main.command()
+@click.argument("store_path", default="store",
+                type=click.Path(exists=True, file_okay=False, path_type=Path))
+@click.option("--epsilon", default=25, show_default=True)
+def retrodict(store_path: Path, epsilon: int) -> None:
+    """V-2: hold out each eligible anchor and measure whether the network recovers it.
+
+    Thresholds come from docs/preregistration.md, frozen before a solver existed. They are
+    not adjustable from here, deliberately.
+    """
+    try:
+        load(store_path)
+    except StoreError as exc:
+        click.secho(f"REFUSED - {len(exc.violations)} violation(s)\n", fg="red", bold=True)
+        click.echo(exc.report())
+        sys.exit(1)
+
+    results, summary = run_all(str(store_path), epsilon=epsilon)
+    click.echo(fmt_v2(results, summary))
+    sys.exit(0 if summary["meets_v2"] else 1)
 
 
 def _commit_hash() -> str:

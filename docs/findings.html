@@ -1,0 +1,1350 @@
+<title>What Parvan Caught</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Spectral:wght@400;500;600&display=swap">
+
+<style>
+  :root {
+    --bg:          #F5F7F8;
+    --surface:     #FFFFFF;
+    --sunk:        #EDF1F2;
+    --ink:         #12232B;
+    --soft:        #4A5C66;
+    --faint:       #7C8E97;
+    --rule:        #DCE4E7;
+    --rule-hard:   #C3CFD4;
+
+    /* Verdict palette. Validated in both modes against the six checks:
+       lightness band, chroma floor, CVD separation, normal-vision floor, contrast. */
+    --holds:       #0A8F86;   /* the claim survives contact with the text */
+    --fails:       #BF4A12;   /* the text does not support the claim */
+    --qual:        #6F4BA8;   /* the claim holds; the reading attached to it does not */
+    --holds-wash:  #E3F1EF;
+    --fails-wash:  #FAEBE4;
+    --qual-wash:   #EFEAF7;
+
+    --serif: "Spectral", Georgia, "Times New Roman", serif;
+    --sans:  "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+    --mono:  "IBM Plex Mono", "Cascadia Mono", Consolas, monospace;
+
+    --s1: .35rem; --s2: .7rem; --s3: 1.1rem; --s4: 1.7rem; --s5: 2.6rem; --s6: 4.2rem;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0E1518; --surface: #161F23; --sunk: #131C20;
+      --ink: #E3EBEE; --soft: #A7B8C0; --faint: #7A8B93;
+      --rule: #253238; --rule-hard: #35474F;
+      --holds: #22AA9D; --fails: #D96B36; --qual: #8F74C9;
+      --holds-wash: #10312F; --fails-wash: #2C1C13; --qual-wash: #1E1830;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --bg: #0E1518; --surface: #161F23; --sunk: #131C20;
+    --ink: #E3EBEE; --soft: #A7B8C0; --faint: #7A8B93;
+    --rule: #253238; --rule-hard: #35474F;
+    --holds: #22AA9D; --fails: #D96B36; --qual: #8F74C9;
+    --holds-wash: #10312F; --fails-wash: #2C1C13; --qual-wash: #1E1830;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 16.5px;
+    line-height: 1.65;
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap { max-width: 950px; margin: 0 auto; padding: var(--s5) var(--s4) var(--s6); }
+
+  /* ---------- masthead ---------- */
+
+  header { border-bottom: 2px solid var(--ink); padding-bottom: var(--s4); margin-bottom: var(--s5); }
+
+  .eyebrow {
+    font-family: var(--mono); font-size: .7rem; letter-spacing: .15em;
+    text-transform: uppercase; color: var(--holds); margin: 0 0 var(--s3);
+  }
+
+  h1 {
+    font-family: var(--serif); font-weight: 600;
+    font-size: clamp(2.6rem, 7.5vw, 4.4rem); line-height: 1;
+    letter-spacing: -.024em; margin: 0 0 var(--s3); text-wrap: balance;
+  }
+
+  .thesis {
+    font-family: var(--serif); font-size: clamp(1.1rem, 2.2vw, 1.38rem);
+    line-height: 1.5; color: var(--soft); max-width: 44ch; margin: 0;
+  }
+
+  .thesis b { color: var(--ink); font-weight: 600; }
+
+  /* ---------- sections ---------- */
+
+  main { display: grid; gap: var(--s6); }
+  section { display: grid; gap: var(--s3); }
+
+  h2 {
+    font-family: var(--serif); font-weight: 600;
+    font-size: clamp(1.45rem, 3.2vw, 1.9rem); line-height: 1.15;
+    letter-spacing: -.014em; margin: 0; text-wrap: balance;
+  }
+
+  .lede { font-family: var(--serif); font-size: 1.06rem; line-height: 1.6; color: var(--soft); max-width: 62ch; }
+  p { margin: 0; max-width: 66ch; }
+  section > ul { margin: 0; padding-left: 1.2rem; max-width: 66ch; display: grid; gap: var(--s2); }
+  strong { font-weight: 600; }
+  em { font-style: italic; }
+
+  code {
+    font-family: var(--mono); font-size: .85em;
+    background: var(--sunk); padding: .1em .34em; border-radius: 2px;
+  }
+
+  h3.sub {
+    font-family: var(--mono); font-size: .72rem; letter-spacing: .13em;
+    text-transform: uppercase; color: var(--holds); font-weight: 500;
+    margin: var(--s3) 0 0; padding-bottom: var(--s1);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  /* ---------- verdict docket ---------- */
+
+  .register {
+    font-family: var(--mono); font-size: .68rem; letter-spacing: .14em;
+    text-transform: uppercase; color: var(--faint);
+    padding-bottom: var(--s2); border-bottom: 1px solid var(--rule-hard); margin: 0;
+  }
+
+  .docket { display: grid; gap: var(--s3); }
+
+  .item {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-left: 3px solid var(--edge, var(--rule-hard));
+    border-radius: 0 3px 3px 0;
+    padding: var(--s3) var(--s4);
+    display: grid; gap: var(--s2);
+  }
+
+  .item-holds { --edge: var(--holds); }
+  .item-fails { --edge: var(--fails); }
+  .item-qual  { --edge: var(--qual);  }
+
+  .item-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--s2) var(--s3); }
+
+  .claim { font-family: var(--serif); font-size: 1.14rem; font-weight: 600; line-height: 1.3; }
+
+  .chip {
+    font-family: var(--mono); font-size: .64rem; letter-spacing: .1em;
+    text-transform: uppercase; padding: .18rem .5rem; border-radius: 2px;
+    border: 1px solid currentColor; white-space: nowrap; flex-shrink: 0;
+  }
+
+  .chip-holds { color: var(--holds); background: var(--holds-wash); }
+  .chip-fails { color: var(--fails); background: var(--fails-wash); }
+  .chip-qual  { color: var(--qual);  background: var(--qual-wash);  }
+
+  .score {
+    font-family: var(--mono); font-size: .68rem; color: var(--faint);
+    letter-spacing: .06em; white-space: nowrap;
+  }
+  .score b { color: var(--ink); font-weight: 500; }
+
+  .item p { font-size: .95rem; max-width: 64ch; }
+
+  .quote {
+    font-family: var(--serif); font-size: 1rem; line-height: 1.5;
+    border-left: 2px solid var(--rule-hard); padding-left: var(--s3);
+    color: var(--ink); display: grid; gap: .2rem; max-width: 62ch;
+  }
+  .quote .gloss { font-family: var(--sans); font-size: .87rem; color: var(--soft); }
+
+  .counts {
+    font-family: var(--mono); font-size: .78rem; line-height: 1.7;
+    background: var(--sunk); border-radius: 3px; padding: var(--s2) var(--s3);
+    overflow-x: auto; white-space: pre; color: var(--soft);
+    font-variant-numeric: tabular-nums;
+  }
+
+
+  /* The network diagram is wide by necessity - 79 labelled nodes - so it keeps its own
+     legible width and scrolls inside .fig-scroll rather than shrinking into the column. */
+  .netfig svg { width: 1132px; min-width: 1132px; max-width: none; }
+
+  /* ---------- figure ---------- */
+
+  figure {
+    margin: 0; display: grid; gap: var(--s2);
+    background: var(--surface); border: 1px solid var(--rule);
+    border-radius: 3px; padding: var(--s4) var(--s3) var(--s3);
+  }
+  .fig-scroll { overflow-x: auto; }
+  figure svg { display: block; width: 100%; min-width: 620px; height: auto; color: var(--ink); }
+  figcaption {
+    font-size: .84rem; line-height: 1.5; color: var(--soft);
+    border-top: 1px solid var(--rule); padding-top: var(--s2); max-width: 74ch;
+  }
+
+  .legend { display: flex; flex-wrap: wrap; gap: var(--s3); font-size: .78rem; color: var(--soft); }
+  .legend span { display: inline-flex; align-items: center; gap: .4rem; }
+  .swatch { width: 14px; height: 8px; border-radius: 2px; flex-shrink: 0; }
+
+  /* ---------- tables ---------- */
+
+  .table-wrap { overflow-x: auto; border: 1px solid var(--rule); border-radius: 3px; }
+  table { border-collapse: collapse; width: 100%; font-size: .88rem; background: var(--surface); min-width: 460px; }
+  th, td { text-align: left; padding: .6rem .85rem; border-bottom: 1px solid var(--rule); vertical-align: top; }
+  thead th {
+    font-family: var(--mono); font-size: .66rem; letter-spacing: .11em; text-transform: uppercase;
+    color: var(--faint); font-weight: 500; background: var(--sunk); white-space: nowrap;
+  }
+  tbody tr:last-child td { border-bottom: none; }
+  td.mono, span.mono { font-family: var(--mono); font-size: .8rem; white-space: nowrap; font-variant-numeric: tabular-nums; }
+
+  /* ---------- pull ---------- */
+
+  .pull {
+    font-family: var(--serif); font-size: clamp(1.15rem, 2.6vw, 1.5rem);
+    line-height: 1.4; color: var(--ink); max-width: 48ch;
+    border-top: 2px solid var(--edge, var(--holds));
+    border-bottom: 1px solid var(--rule);
+    padding: var(--s3) 0; margin: var(--s2) 0;
+  }
+
+  footer {
+    border-top: 2px solid var(--ink); margin-top: var(--s6); padding-top: var(--s3);
+    font-family: var(--mono); font-size: .72rem; color: var(--faint);
+    display: flex; flex-wrap: wrap; gap: var(--s2) var(--s4);
+  }
+
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+</style>
+
+<div class="wrap">
+
+  <header>
+    <p class="eyebrow">Parvan · findings · 2026-09-02</p>
+    <h1>What Parvan Caught</h1>
+    <p class="thesis">Taking each scored claim in the dating of the Sanskrit epics back to the critical editions turned up <b>three rows the manuscripts contradict</b> &mdash; one rated 5 of 5. It also turned up something larger: a way to test whether a dating method can tell late from early <b>at all</b>, and the answer for one whole class of evidence is that it cannot.</p>
+  </header>
+
+  <main>
+
+    <!-- ============ the result ============ -->
+    <section>
+      <h2>The result</h2>
+
+      <p class="lede">Both brackets are now <strong>separable</strong>: strip out every constraint resting on scholarly assertion and neither moves. That is something nobody could say about these dates before, because the evidence and the interpretation had never been held apart and counted.</p>
+
+      <figure>
+        <div class="fig-scroll">
+        <svg viewBox="0 0 900 320" role="img" aria-label="Timeline from 800 BCE to 400 CE comparing four brackets for the Ramayana core and one for the Mahabharata core. The source document states 500 to 200 BCE. Propagating the document's own table gives 750 to 300 BCE. Attested evidence alone gives the identical 750 to 300 BCE. Removing the single Pataliputra row pushes the ceiling to 250 CE. The Mahabharata core is 500 to 300 BCE, attested throughout.">
+          <g stroke="currentColor" stroke-opacity="0.12" stroke-width="1">
+            <line x1="118" y1="30" x2="118" y2="252"></line>
+            <line x1="245" y1="30" x2="245" y2="252"></line>
+            <line x1="371" y1="30" x2="371" y2="252"></line>
+            <line x1="498" y1="30" x2="498" y2="252"></line>
+            <line x1="625" y1="30" x2="625" y2="252"></line>
+            <line x1="751" y1="30" x2="751" y2="252"></line>
+            <line x1="878" y1="30" x2="878" y2="252"></line>
+          </g>
+          <line x1="118" y1="252" x2="878" y2="252" stroke="currentColor" stroke-opacity="0.28" stroke-width="1"></line>
+          <g font-family="IBM Plex Mono, monospace" font-size="10.5" fill="currentColor" fill-opacity="0.55" text-anchor="middle">
+            <text x="118" y="270">800 BCE</text>
+            <text x="245" y="270">600</text>
+            <text x="371" y="270">400</text>
+            <text x="498" y="270">200</text>
+            <text x="625" y="270">0</text>
+            <text x="751" y="270">200 CE</text>
+            <text x="878" y="270">400</text>
+          </g>
+
+          <g font-family="IBM Plex Sans, sans-serif" font-size="12" fill="currentColor">
+            <text x="110" y="52" text-anchor="end" fill-opacity="0.75">as the source states it</text>
+            <rect x="308" y="41" width="190" height="13" rx="4" fill="currentColor" fill-opacity="0.22"></rect>
+            <text x="508" y="52" font-family="IBM Plex Mono, monospace" font-size="10.5" fill-opacity="0.55">500–200 BCE</text>
+
+            <text x="110" y="88" text-anchor="end" fill-opacity="0.75">its own table, propagated</text>
+            <rect x="150" y="77" width="285" height="13" rx="4" fill="var(--holds)"></rect>
+            <text x="445" y="88" font-family="IBM Plex Mono, monospace" font-size="10.5" fill-opacity="0.55">750–300 BCE</text>
+
+            <text x="110" y="124" text-anchor="end" fill-opacity="0.75">attested evidence alone</text>
+            <rect x="150" y="113" width="285" height="13" rx="4" fill="var(--holds)"></rect>
+            <text x="445" y="124" font-family="IBM Plex Mono, monospace" font-size="10.5" fill-opacity="0.55">750–300 BCE · identical</text>
+
+            <text x="110" y="160" text-anchor="end" fill-opacity="0.75">minus one score-2 row</text>
+            <rect x="150" y="149" width="633" height="13" rx="4" fill="var(--fails)"></rect>
+            <text x="150" y="178" font-family="IBM Plex Mono, monospace" font-size="10.5" fill="var(--fails)">750 BCE – 250 CE · the Pāṭaliputra silence is worth 550 years</text>
+
+            <line x1="118" y1="196" x2="878" y2="196" stroke="currentColor" stroke-opacity="0.14" stroke-width="1"></line>
+
+            <text x="110" y="222" text-anchor="end" fill-opacity="0.75">Mahābhārata core</text>
+            <rect x="308" y="211" width="127" height="13" rx="4" fill="var(--holds)"></rect>
+            <text x="445" y="222" font-family="IBM Plex Mono, monospace" font-size="10.5" fill-opacity="0.55">500–300 BCE · attested throughout</text>
+          </g>
+
+          <text x="118" y="16" font-family="IBM Plex Mono, monospace" font-size="10" letter-spacing="1.4" fill="currentColor" fill-opacity="0.5">RĀMĀYAṆA CORE, BOOKS 2–6</text>
+        </svg>
+        </div>
+        <div class="legend">
+          <span><span class="swatch" style="background: var(--holds);"></span> supported by the network</span>
+          <span><span class="swatch" style="background: var(--fails);"></span> counterfactual</span>
+          <span><span class="swatch" style="background: currentColor; opacity:.22;"></span> as the source document states it</span>
+        </div>
+        <figcaption>Two discoveries sit in this picture. The bracket the source states is not the one its own evidence table produces: the stated floor is imported from a different section, and nothing in the table yields 200 BCE at all. And the entire pre-Common-Era ceiling turns out to rest on a single row rated 2 out of 5 &mdash; remove the P&#257;&#7789;aliputra silence and the ceiling moves 550 years.</figcaption>
+      </figure>
+    </section>
+
+    <!-- ============ the whole network ============ -->
+    <section>
+      <h2>The whole network</h2>
+
+      <p class="lede">Everything above comes out of one graph, and this is all of it &mdash;
+      85 nodes and 124 constraints, nothing pruned for the picture. <strong>Eight of those
+      constraints carry both headline brackets.</strong> They are the ones drawn in rust.</p>
+
+      <figure>
+        <div class="fig-scroll netfig">
+<svg viewBox="0 0 1132 884" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans, system-ui, sans-serif" role="img" aria-label="The complete Parvan constraint network: 85 nodes and 124 edges in three tiers.">
+<text x="235" y="34" text-anchor="end" font-size="11.5" font-weight="600" letter-spacing="1.4" fill="currentColor">EXTERNAL EVIDENCE</text>
+<text x="235" y="52" text-anchor="end" font-size="10.5" fill="currentColor" opacity=".5">coins · inscriptions · excavation</text>
+<text x="560" y="34" text-anchor="middle" font-size="11.5" font-weight="600" letter-spacing="1.4" fill="currentColor">REFERENTS</text>
+<text x="560" y="52" text-anchor="middle" font-size="10.5" fill="currentColor" opacity=".5">institutions, concepts, events</text>
+<text x="838" y="34" text-anchor="start" font-size="11.5" font-weight="600" letter-spacing="1.4" fill="currentColor">TEXTS</text>
+<text x="838" y="52" text-anchor="start" font-size="10.5" fill="currentColor" opacity=".5">strata whose dates are the question</text>
+<line x1="398" y1="66" x2="398" y2="864" stroke="currentColor" stroke-width="1" opacity=".1"/>
+<line x1="700" y1="66" x2="700" y2="864" stroke="currentColor" stroke-width="1" opacity=".1"/>
+<path d="M838.0,313.5C740.5,313.5 703.4,313.5 605.9,313.5" fill="none" stroke="var(--holds)" stroke-width="0.85" opacity="0.34"/>
+<path d="M838.0,313.5C740.5,313.5 703.4,417.5 605.9,417.5" fill="none" stroke="var(--holds)" stroke-width="0.85" opacity="0.34"/>
+<path d="M838.0,313.5C746.7,313.5 711.9,183.5 620.6,183.5" fill="none" stroke="currentColor" stroke-width="0.85" opacity="0.17"/>
+<path d="M838.0,235.5C746.7,235.5 711.9,183.5 620.6,183.5" fill="none" stroke="currentColor" stroke-width="0.85" opacity="0.17"/>
+<path d="M838.0,157.5C746.7,157.5 711.9,183.5 620.6,183.5" fill="none" stroke="currentColor" stroke-width="0.85" opacity="0.17"/>
+<path d="M838.0,235.5C745.5,235.5 710.2,105.5 617.6,105.5" fill="none" stroke="var(--holds)" stroke-width="0.85" opacity="0.34"/>
+<path d="M838.0,313.5C740.5,313.5 703.4,365.5 605.9,365.5" fill="none" stroke="var(--holds)" stroke-width="0.85" opacity="0.34"/>
+<path d="M838.0,651.5C738.0,651.5 699.9,599.5 600.0,599.5" fill="none" stroke="var(--holds)" stroke-width="0.85" opacity="0.34"/>
+<path d="M838.0,235.5C738.0,235.5 699.9,599.5 600.0,599.5" fill="none" stroke="var(--holds)" stroke-width="0.85" opacity="0.34"/>
+<path d="M838.0,625.5C743.0,625.5 706.8,625.5 611.8,625.5" fill="none" stroke="currentColor" stroke-width="0.85" opacity="0.17"/>
+<path d="M838.0,235.5C744.2,235.5 708.5,157.5 614.7,157.5" fill="none" stroke="var(--holds)" stroke-width="0.85" opacity="0.34"/>
+<path d="M838.0,157.5C744.2,157.5 708.5,157.5 614.7,157.5" fill="none" stroke="var(--holds)" stroke-width="0.85" opacity="0.34"/>
+<path d="M838.0,781.5C743.0,781.5 706.8,807.5 611.8,807.5" fill="none" stroke="currentColor" stroke-width="0.85" opacity="0.17"/>
+<path d="M838.0,651.5C744.2,651.5 708.5,703.5 614.7,703.5" fill="none" stroke="var(--holds)" stroke-width="0.85" opacity="0.34"/>
+<path d="M235.0,313.5C352.2,313.5 396.9,313.5 514.1,313.5" fill="none" stroke="var(--holds)" stroke-width="0.85" opacity="0.34"/>
+<path d="M235.0,417.5C352.2,417.5 396.9,417.5 514.1,417.5" fill="none" stroke="var(--holds)" stroke-width="0.85" opacity="0.34"/>
+<path d="M235.0,131.5C347.3,131.5 390.1,105.5 502.4,105.5" fill="none" stroke="var(--holds)" stroke-width="0.85" opacity="0.34"/>
+<path d="M235.0,443.5C353.5,443.5 398.6,469.5 517.1,469.5" fill="none" stroke="var(--holds)" stroke-width="0.85" opacity="0.34"/>
+<path d="M235.0,625.5C354.7,625.5 400.3,599.5 520.0,599.5" fill="none" stroke="var(--holds)" stroke-width="0.85" opacity="0.34"/>
+<path d="M235.0,703.5C348.5,703.5 391.8,703.5 505.3,703.5" fill="none" stroke="var(--holds)" stroke-width="0.85" opacity="0.34"/>
+<path d="M838.0,729.5C745.5,729.5 710.2,729.5 617.6,729.5" fill="none" stroke="currentColor" stroke-width="0.85" opacity="0.17"/>
+<path d="M235.0,729.5C347.3,729.5 390.1,729.5 502.4,729.5" fill="none" stroke="var(--holds)" stroke-width="0.85" opacity="0.34"/>
+<path d="M838.0,755.5C745.5,755.5 710.2,729.5 617.6,729.5" fill="none" stroke="currentColor" stroke-width="0.85" opacity="0.17"/>
+<path d="M838.0,417.5C750.4,417.5 717.0,443.5 629.5,443.5" fill="none" stroke="currentColor" stroke-width="0.85" opacity="0.17"/>
+<path d="M838.0,391.5C750.4,391.5 717.0,443.5 629.5,443.5" fill="none" stroke="currentColor" stroke-width="0.85" opacity="0.17"/>
+<path d="M838.0,365.5C740.5,365.5 703.4,365.5 605.9,365.5" fill="none" stroke="currentColor" stroke-width="0.85" opacity="0.17"/>
+<path d="M838.0,365.5C740.5,365.5 703.4,391.5 605.9,391.5" fill="none" stroke="currentColor" stroke-width="0.85" opacity="0.17"/>
+<path d="M838.0,807.5C743.0,807.5 706.8,807.5 611.8,807.5" fill="none" stroke="currentColor" stroke-width="0.85" opacity="0.17"/>
+<path d="M838.0,521.5C743.0,521.5 706.8,625.5 611.8,625.5" fill="none" stroke="currentColor" stroke-width="0.85" opacity="0.17"/>
+<path d="M838.0,313.5C750.4,313.5 717.0,443.5 629.5,443.5" fill="none" stroke="currentColor" stroke-width="0.85" opacity="0.17"/>
+<path d="M838.0,313.5C744.2,313.5 708.5,157.5 614.7,157.5" fill="none" stroke="var(--holds)" stroke-width="0.85" opacity="0.34"/>
+<path d="M838.0,313.5C749.2,313.5 715.3,547.5 626.5,547.5" fill="none" stroke="var(--holds)" stroke-width="0.85" opacity="0.34"/>
+<path d="M906.1,599.5C1032.1,599.5 1026.2,313.5 900.2,313.5" fill="none" stroke="currentColor" stroke-width="0.85" opacity="0.17" stroke-dasharray="3.5 3"/>
+<path d="M906.1,599.5C1032.1,599.5 1026.2,235.5 900.2,235.5" fill="none" stroke="currentColor" stroke-width="0.85" opacity="0.17" stroke-dasharray="3.5 3"/>
+<path d="M906.1,599.5C1032.1,599.5 1038.0,157.5 912.0,157.5" fill="none" stroke="currentColor" stroke-width="0.85" opacity="0.17" stroke-dasharray="3.5 3"/>
+<path d="M235.0,651.5C347.3,651.5 390.1,729.5 502.4,729.5" fill="none" stroke="var(--holds)" stroke-width="0.85" opacity="0.34"/>
+<path d="M906.1,131.5C1001.6,131.5 995.7,313.5 900.2,313.5" fill="none" stroke="currentColor" stroke-width="0.85" opacity="0.17" stroke-dasharray="3.5 3"/>
+<path d="M235.0,651.5C488.3,651.5 584.7,599.5 838.0,599.5" fill="none" stroke="var(--holds)" stroke-width="0.85" opacity="0.34" stroke-dasharray="3.5 3"/>
+<path d="M235.0,183.5C488.3,183.5 584.7,131.5 838.0,131.5" fill="none" stroke="var(--holds)" stroke-width="0.85" opacity="0.34" stroke-dasharray="3.5 3"/>
+<path d="M900.2,417.5C967.6,417.5 967.6,313.5 900.2,313.5" fill="none" stroke="currentColor" stroke-width="0.85" opacity="0.17" stroke-dasharray="3.5 3"/>
+<path d="M888.4,391.5C946.5,391.5 958.3,313.5 900.2,313.5" fill="none" stroke="currentColor" stroke-width="0.85" opacity="0.17" stroke-dasharray="3.5 3"/>
+<path d="M884.0,287.5C923.4,287.5 939.6,313.5 900.2,313.5" fill="none" stroke="currentColor" stroke-width="0.85" opacity="0.17" stroke-dasharray="3.5 3"/>
+<path d="M947.4,833.5C1073.4,833.5 1026.2,313.5 900.2,313.5" fill="none" stroke="currentColor" stroke-width="0.85" opacity="0.17" stroke-dasharray="3.5 3"/>
+<path d="M235.0,235.5C488.3,235.5 584.7,313.5 838.0,313.5" fill="none" stroke="var(--holds)" stroke-width="0.85" opacity="0.34" stroke-dasharray="3.5 3"/>
+<path d="M235.0,261.5C488.3,261.5 584.7,313.5 838.0,313.5" fill="none" stroke="var(--holds)" stroke-width="0.85" opacity="0.34" stroke-dasharray="3.5 3"/>
+<path d="M235.0,209.5C488.3,209.5 584.7,313.5 838.0,313.5" fill="none" stroke="var(--holds)" stroke-width="0.85" opacity="0.34" stroke-dasharray="3.5 3"/>
+<path d="M912.0,157.5C998.2,157.5 986.4,313.5 900.2,313.5" fill="none" stroke="currentColor" stroke-width="0.85" opacity="0.17" stroke-dasharray="3.5 3"/>
+<path d="M912.0,157.5C998.2,157.5 986.4,313.5 900.2,313.5" fill="none" stroke="currentColor" stroke-width="0.85" opacity="0.17" stroke-dasharray="3.5 3"/>
+<path d="M900.2,235.5C958.3,235.5 958.3,313.5 900.2,313.5" fill="none" stroke="currentColor" stroke-width="0.85" opacity="0.17" stroke-dasharray="3.5 3"/>
+<path d="M900.2,235.5C958.3,235.5 958.3,313.5 900.2,313.5" fill="none" stroke="currentColor" stroke-width="0.85" opacity="0.17" stroke-dasharray="3.5 3"/>
+<path d="M953.3,183.5C1030.1,183.5 977.0,313.5 900.2,313.5" fill="none" stroke="currentColor" stroke-width="0.85" opacity="0.17" stroke-dasharray="3.5 3"/>
+<path d="M917.9,781.5C1043.9,781.5 1026.2,313.5 900.2,313.5" fill="none" stroke="currentColor" stroke-width="0.85" opacity="0.17" stroke-dasharray="3.5 3"/>
+<path d="M838.0,339.5C740.5,339.5 703.4,313.5 605.9,313.5" fill="none" stroke="var(--holds)" stroke-width="0.85" opacity="0.34"/>
+<path d="M838.0,339.5C740.5,339.5 703.4,417.5 605.9,417.5" fill="none" stroke="var(--holds)" stroke-width="0.85" opacity="0.34"/>
+<path d="M838.0,339.5C746.7,339.5 711.9,183.5 620.6,183.5" fill="none" stroke="currentColor" stroke-width="0.85" opacity="0.17"/>
+<path d="M838.0,339.5C740.5,339.5 703.4,365.5 605.9,365.5" fill="none" stroke="var(--holds)" stroke-width="0.85" opacity="0.34"/>
+<path d="M838.0,703.5C738.0,703.5 699.9,599.5 600.0,599.5" fill="none" stroke="currentColor" stroke-width="0.85" opacity="0.17"/>
+<path d="M838.0,105.5C744.2,105.5 708.5,157.5 614.7,157.5" fill="none" stroke="currentColor" stroke-width="0.85" opacity="0.17"/>
+<path d="M838.0,339.5C750.4,339.5 717.0,443.5 629.5,443.5" fill="none" stroke="currentColor" stroke-width="0.85" opacity="0.17"/>
+<path d="M838.0,339.5C740.5,339.5 703.4,391.5 605.9,391.5" fill="none" stroke="var(--holds)" stroke-width="0.85" opacity="0.34"/>
+<path d="M838.0,703.5C730.9,703.5 690.1,755.5 583.0,755.5" fill="none" stroke="var(--holds)" stroke-width="0.85" opacity="0.34"/>
+<path d="M838.0,703.5C730.9,703.5 690.1,781.5 583.0,781.5" fill="none" stroke="var(--holds)" stroke-width="0.85" opacity="0.34"/>
+<path d="M838.0,833.5C740.5,833.5 703.4,833.5 605.9,833.5" fill="none" stroke="var(--holds)" stroke-width="0.85" opacity="0.34"/>
+<path d="M838.0,521.5C749.2,521.5 715.3,677.5 626.5,677.5" fill="none" stroke="currentColor" stroke-width="0.85" opacity="0.17"/>
+<path d="M235.0,755.5C361.8,755.5 410.2,755.5 537.0,755.5" fill="none" stroke="var(--holds)" stroke-width="0.85" opacity="0.34"/>
+<path d="M235.0,781.5C361.8,781.5 410.2,781.5 537.0,781.5" fill="none" stroke="var(--holds)" stroke-width="0.85" opacity="0.34"/>
+<path d="M235.0,807.5C352.2,807.5 396.9,833.5 514.1,833.5" fill="none" stroke="var(--holds)" stroke-width="0.85" opacity="0.34"/>
+<path d="M235.0,547.5C342.3,547.5 383.2,521.5 490.6,521.5" fill="none" stroke="var(--holds)" stroke-width="0.85" opacity="0.34"/>
+<path d="M235.0,677.5C343.6,677.5 384.9,677.5 493.5,677.5" fill="none" stroke="var(--holds)" stroke-width="0.85" opacity="0.34"/>
+<path d="M235.0,157.5C338.6,157.5 378.1,131.5 481.7,131.5" fill="none" stroke="var(--holds)" stroke-width="0.85" opacity="0.34"/>
+<path d="M235.0,365.5C343.6,365.5 384.9,573.5 493.5,573.5" fill="none" stroke="var(--holds)" stroke-width="0.85" opacity="0.34"/>
+<path d="M838.0,547.5C749.2,547.5 715.3,573.5 626.5,573.5" fill="none" stroke="currentColor" stroke-width="0.85" opacity="0.17"/>
+<path d="M838.0,573.5C749.2,573.5 715.3,573.5 626.5,573.5" fill="none" stroke="currentColor" stroke-width="0.85" opacity="0.17"/>
+<path d="M838.0,261.5C745.5,261.5 710.2,287.5 617.6,287.5" fill="none" stroke="currentColor" stroke-width="0.85" opacity="0.17"/>
+<path d="M838.0,677.5C745.5,677.5 710.2,651.5 617.6,651.5" fill="none" stroke="currentColor" stroke-width="0.85" opacity="0.17"/>
+<path d="M838.0,521.5C745.5,521.5 710.2,651.5 617.6,651.5" fill="none" stroke="currentColor" stroke-width="0.85" opacity="0.17"/>
+<path d="M235.0,391.5C347.3,391.5 390.1,287.5 502.4,287.5" fill="none" stroke="var(--holds)" stroke-width="0.85" opacity="0.34"/>
+<path d="M235.0,287.5C347.3,287.5 390.1,287.5 502.4,287.5" fill="none" stroke="var(--holds)" stroke-width="0.85" opacity="0.34"/>
+<path d="M235.0,365.5C338.6,365.5 378.1,131.5 481.7,131.5" fill="none" stroke="var(--holds)" stroke-width="0.85" opacity="0.34"/>
+<path d="M838.0,105.5C754.1,105.5 722.2,131.5 638.3,131.5" fill="none" stroke="currentColor" stroke-width="0.85" opacity="0.17"/>
+<path d="M235.0,287.5C488.3,287.5 584.7,339.5 838.0,339.5" fill="none" stroke="var(--holds)" stroke-width="0.85" opacity="0.34" stroke-dasharray="3.5 3"/>
+<path d="M235.0,391.5C488.3,391.5 584.7,521.5 838.0,521.5" fill="none" stroke="var(--holds)" stroke-width="0.85" opacity="0.34" stroke-dasharray="3.5 3"/>
+<path d="M235.0,495.5C488.3,495.5 584.7,521.5 838.0,521.5" fill="none" stroke="var(--holds)" stroke-width="0.85" opacity="0.34" stroke-dasharray="3.5 3"/>
+<path d="M235.0,339.5C488.3,339.5 584.7,339.5 838.0,339.5" fill="none" stroke="var(--holds)" stroke-width="0.85" opacity="0.34" stroke-dasharray="3.5 3"/>
+<path d="M235.0,651.5C488.3,651.5 584.7,521.5 838.0,521.5" fill="none" stroke="var(--holds)" stroke-width="0.85" opacity="0.34" stroke-dasharray="3.5 3"/>
+<path d="M941.5,105.5C1055.7,105.5 1014.4,339.5 900.2,339.5" fill="none" stroke="currentColor" stroke-width="0.85" opacity="0.17" stroke-dasharray="3.5 3"/>
+<path d="M917.9,521.5C1013.4,521.5 995.7,339.5 900.2,339.5" fill="none" stroke="currentColor" stroke-width="0.85" opacity="0.17" stroke-dasharray="3.5 3"/>
+<path d="M947.4,833.5C1073.4,833.5 1026.2,339.5 900.2,339.5" fill="none" stroke="currentColor" stroke-width="0.85" opacity="0.17" stroke-dasharray="3.5 3"/>
+<path d="M947.4,703.5C1073.4,703.5 1026.2,339.5 900.2,339.5" fill="none" stroke="currentColor" stroke-width="0.85" opacity="0.17" stroke-dasharray="3.5 3"/>
+<path d="M838.0,209.5C744.2,209.5 708.5,261.5 614.7,261.5" fill="none" stroke="var(--holds)" stroke-width="0.85" opacity="0.34"/>
+<path d="M838.0,313.5C744.2,313.5 708.5,261.5 614.7,261.5" fill="none" stroke="var(--holds)" stroke-width="0.85" opacity="0.34"/>
+<path d="M838.0,339.5C744.2,339.5 708.5,261.5 614.7,261.5" fill="none" stroke="var(--holds)" stroke-width="0.85" opacity="0.34"/>
+<path d="M838.0,209.5C746.7,209.5 711.9,209.5 620.6,209.5" fill="none" stroke="var(--holds)" stroke-width="0.85" opacity="0.34"/>
+<path d="M838.0,313.5C746.7,313.5 711.9,209.5 620.6,209.5" fill="none" stroke="var(--holds)" stroke-width="0.85" opacity="0.34"/>
+<path d="M838.0,339.5C746.7,339.5 711.9,209.5 620.6,209.5" fill="none" stroke="var(--holds)" stroke-width="0.85" opacity="0.34"/>
+<path d="M838.0,209.5C740.5,209.5 703.4,235.5 605.9,235.5" fill="none" stroke="var(--holds)" stroke-width="0.85" opacity="0.34"/>
+<path d="M838.0,313.5C740.5,313.5 703.4,235.5 605.9,235.5" fill="none" stroke="var(--holds)" stroke-width="0.85" opacity="0.34"/>
+<path d="M838.0,339.5C740.5,339.5 703.4,235.5 605.9,235.5" fill="none" stroke="var(--holds)" stroke-width="0.85" opacity="0.34"/>
+<path d="M235.0,469.5C348.5,469.5 391.8,495.5 505.3,495.5" fill="none" stroke="currentColor" stroke-width="0.85" opacity="0.17"/>
+<path d="M838.0,313.5C744.2,313.5 708.5,495.5 614.7,495.5" fill="none" stroke="var(--holds)" stroke-width="0.85" opacity="0.34"/>
+<path d="M838.0,443.5C744.2,443.5 708.5,495.5 614.7,495.5" fill="none" stroke="var(--holds)" stroke-width="0.85" opacity="0.34"/>
+<path d="M235.0,599.5C343.6,599.5 384.9,547.5 493.5,547.5" fill="none" stroke="currentColor" stroke-width="0.85" opacity="0.17"/>
+<path d="M235.0,521.5C342.3,521.5 383.2,521.5 490.6,521.5" fill="none" stroke="currentColor" stroke-width="0.85" opacity="0.17"/>
+<path d="M838.0,469.5C744.2,469.5 708.5,495.5 614.7,495.5" fill="none" stroke="var(--holds)" stroke-width="0.85" opacity="0.34"/>
+<path d="M235.0,313.5C352.2,313.5 396.9,313.5 514.1,313.5" fill="none" stroke="var(--holds)" stroke-width="0.85" opacity="0.34"/>
+<path d="M235.0,417.5C352.2,417.5 396.9,417.5 514.1,417.5" fill="none" stroke="var(--holds)" stroke-width="0.85" opacity="0.34"/>
+<path d="M235.0,131.5C347.3,131.5 390.1,105.5 502.4,105.5" fill="none" stroke="var(--holds)" stroke-width="0.85" opacity="0.34"/>
+<path d="M235.0,625.5C354.7,625.5 400.3,599.5 520.0,599.5" fill="none" stroke="var(--holds)" stroke-width="0.85" opacity="0.34"/>
+<path d="M235.0,703.5C348.5,703.5 391.8,703.5 505.3,703.5" fill="none" stroke="var(--holds)" stroke-width="0.85" opacity="0.34"/>
+<path d="M235.0,573.5C343.6,573.5 384.9,547.5 493.5,547.5" fill="none" stroke="var(--holds)" stroke-width="0.85" opacity="0.34"/>
+<path d="M235.0,755.5C361.8,755.5 410.2,755.5 537.0,755.5" fill="none" stroke="var(--holds)" stroke-width="0.85" opacity="0.34"/>
+<path d="M235.0,781.5C361.8,781.5 410.2,781.5 537.0,781.5" fill="none" stroke="var(--holds)" stroke-width="0.85" opacity="0.34"/>
+<path d="M235.0,807.5C352.2,807.5 396.9,833.5 514.1,833.5" fill="none" stroke="var(--holds)" stroke-width="0.85" opacity="0.34"/>
+<path d="M235.0,677.5C343.6,677.5 384.9,677.5 493.5,677.5" fill="none" stroke="var(--holds)" stroke-width="0.85" opacity="0.34"/>
+<path d="M235.0,157.5C338.6,157.5 378.1,131.5 481.7,131.5" fill="none" stroke="var(--holds)" stroke-width="0.85" opacity="0.34"/>
+<path d="M235.0,599.5C343.6,599.5 384.9,547.5 493.5,547.5" fill="none" stroke="currentColor" stroke-width="0.85" opacity="0.17"/>
+<path d="M838.0,313.5C739.3,313.5 701.6,469.5 602.9,469.5" fill="none" stroke="var(--fails)" stroke-width="2.1" opacity="1.0"/>
+<path d="M838.0,339.5C750.4,339.5 717.0,339.5 629.5,339.5" fill="none" stroke="var(--fails)" stroke-width="2.1" opacity="1.0"/>
+<path d="M838.0,313.5C750.4,313.5 717.0,339.5 629.5,339.5" fill="none" stroke="var(--fails)" stroke-width="2.1" opacity="1.0"/>
+<path d="M235.0,573.5C343.6,573.5 384.9,547.5 493.5,547.5" fill="none" stroke="var(--fails)" stroke-width="2.1" opacity="1.0"/>
+<path d="M838.0,339.5C749.2,339.5 715.3,547.5 626.5,547.5" fill="none" stroke="var(--fails)" stroke-width="2.1" opacity="1.0"/>
+<path d="M838.0,339.5C750.4,339.5 717.0,521.5 629.5,521.5" fill="none" stroke="var(--fails)" stroke-width="2.1" opacity="1.0"/>
+<path d="M235.0,443.5C353.5,443.5 398.6,469.5 517.1,469.5" fill="none" stroke="var(--fails)" stroke-width="2.1" opacity="1.0"/>
+<path d="M235.0,547.5C342.3,547.5 383.2,521.5 490.6,521.5" fill="none" stroke="var(--fails)" stroke-width="2.1" opacity="1.0"/>
+<rect x="161.0" y="148.0" width="74.0" height="19" rx="2" fill="currentColor" opacity="0.06" stroke="currentColor" stroke-width="0.7" stroke-opacity="0.28"/>
+<text x="198.0" y="161.1" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.72" >agathocles</text>
+<rect x="143.3" y="460.0" width="91.7" height="19" rx="2" fill="currentColor" opacity="0.06" stroke="currentColor" stroke-width="0.7" stroke-opacity="0.28"/>
+<text x="189.2" y="473.1" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.72" >asokan-brahmi</text>
+<rect x="125.6" y="200.0" width="109.4" height="19" rx="2" fill="currentColor" opacity="0.06" stroke="currentColor" stroke-width="0.7" stroke-opacity="0.28"/>
+<text x="180.3" y="213.1" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.72" >baroda-archetype</text>
+<rect x="149.2" y="720.0" width="85.8" height="19" rx="2" fill="currentColor" opacity="0.06" stroke="currentColor" stroke-width="0.7" stroke-opacity="0.28"/>
+<text x="192.1" y="733.1" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.72" >cham-valmiki</text>
+<rect x="178.7" y="226.0" width="56.3" height="19" rx="2" fill="currentColor" opacity="0.06" stroke="currentColor" stroke-width="0.7" stroke-opacity="0.28"/>
+<text x="206.8" y="239.1" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.72" >deogarh</text>
+<rect x="84.3" y="512.0" width="150.7" height="19" rx="2" fill="currentColor" opacity="0.06" stroke="currentColor" stroke-width="0.7" stroke-opacity="0.28"/>
+<text x="159.6" y="525.1" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.72" >greek-elephant-accounts</text>
+<rect x="161.0" y="356.0" width="74.0" height="19" rx="2" fill="currentColor" opacity="0.06" stroke="currentColor" stroke-width="0.7" stroke-opacity="0.28"/>
+<text x="198.0" y="369.1" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.72" >heliodorus</text>
+<rect x="113.8" y="486.0" width="121.2" height="19" rx="2" fill="currentColor" opacity="0.06" stroke="currentColor" stroke-width="0.7" stroke-opacity="0.28"/>
+<text x="174.4" y="499.1" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.72" >imprecatory-grants</text>
+<rect x="155.1" y="382.0" width="79.9" height="19" rx="2" fill="currentColor" opacity="0.06" stroke="currentColor" stroke-width="0.7" stroke-opacity="0.28"/>
+<text x="195.1" y="395.1" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.72" >khoh-plates</text>
+<rect x="149.2" y="174.0" width="85.8" height="19" rx="2" fill="currentColor" opacity="0.06" stroke="currentColor" stroke-width="0.7" stroke-opacity="0.28"/>
+<text x="192.1" y="187.1" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.72" >liudu-jijing</text>
+<rect x="137.4" y="252.0" width="97.6" height="19" rx="2" fill="currentColor" opacity="0.06" stroke="currentColor" stroke-width="0.7" stroke-opacity="0.28"/>
+<text x="186.2" y="265.1" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.72" >nagarjunakonda</text>
+<rect x="131.5" y="330.0" width="103.5" height="19" rx="2" fill="currentColor" opacity="0.06" stroke="currentColor" stroke-width="0.7" stroke-opacity="0.28"/>
+<text x="183.2" y="343.1" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.72" >poona-archetype</text>
+<rect x="178.7" y="278.0" width="56.3" height="19" rx="2" fill="currentColor" opacity="0.06" stroke="currentColor" stroke-width="0.7" stroke-opacity="0.28"/>
+<text x="206.8" y="291.1" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.72" >spitzer</text>
+<rect x="155.1" y="642.0" width="79.9" height="19" rx="2" fill="currentColor" opacity="0.06" stroke="currentColor" stroke-width="0.7" stroke-opacity="0.28"/>
+<text x="195.1" y="655.1" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.72" >veal-kantel</text>
+<rect x="143.3" y="122.0" width="91.7" height="19" rx="9.5" fill="currentColor" opacity="0.06" stroke="currentColor" stroke-width="0.7" stroke-opacity="0.28"/>
+<text x="189.2" y="135.1" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.72" >ayodhya-urban</text>
+<rect x="137.4" y="694.0" width="97.6" height="19" rx="9.5" fill="currentColor" opacity="0.06" stroke="currentColor" stroke-width="0.7" stroke-opacity="0.28"/>
+<text x="186.2" y="707.1" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.72" >deccan-contact</text>
+<rect x="143.3" y="304.0" width="91.7" height="19" rx="9.5" fill="currentColor" opacity="0.06" stroke="currentColor" stroke-width="0.7" stroke-opacity="0.28"/>
+<text x="189.2" y="317.1" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.72" >horse-chariot</text>
+<rect x="161.0" y="746.0" width="74.0" height="19" rx="9.5" fill="currentColor" opacity="0.06" stroke="currentColor" stroke-width="0.7" stroke-opacity="0.28"/>
+<text x="198.0" y="759.1" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.72" >huna-india</text>
+<rect x="161.0" y="408.0" width="74.0" height="19" rx="9.5" fill="currentColor" opacity="0.06" stroke="currentColor" stroke-width="0.7" stroke-opacity="0.28"/>
+<text x="198.0" y="421.1" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.72" >iron-india</text>
+<rect x="149.2" y="434.0" width="85.8" height="19" rx="9.5" fill="var(--fails)" opacity="0.14" stroke="var(--fails)" stroke-width="1.6" stroke-opacity="0.95"/>
+<text x="192.1" y="447.1" text-anchor="middle" font-size="11" fill="currentColor" opacity="1" >kosala-power</text>
+<rect x="125.6" y="538.0" width="109.4" height="19" rx="9.5" fill="var(--fails)" opacity="0.14" stroke="var(--fails)" stroke-width="1.6" stroke-opacity="0.95"/>
+<text x="180.3" y="551.1" text-anchor="middle" font-size="11" fill="currentColor" opacity="1" >massed-elephants</text>
+<rect x="131.5" y="564.0" width="103.5" height="19" rx="9.5" fill="var(--fails)" opacity="0.14" stroke="var(--fails)" stroke-width="1.6" stroke-opacity="0.95"/>
+<text x="183.2" y="577.1" text-anchor="middle" font-size="11" fill="currentColor" opacity="1" >mauryan-capital</text>
+<rect x="125.6" y="590.0" width="109.4" height="19" rx="9.5" fill="currentColor" opacity="0.06" stroke="currentColor" stroke-width="0.7" stroke-opacity="0.28"/>
+<text x="180.3" y="603.1" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.72" >pataliputra-site</text>
+<rect x="166.9" y="772.0" width="68.1" height="19" rx="9.5" fill="currentColor" opacity="0.06" stroke="currentColor" stroke-width="0.7" stroke-opacity="0.28"/>
+<text x="200.9" y="785.1" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.72" >qin-china</text>
+<rect x="155.1" y="798.0" width="79.9" height="19" rx="9.5" fill="currentColor" opacity="0.06" stroke="currentColor" stroke-width="0.7" stroke-opacity="0.28"/>
+<text x="195.1" y="811.1" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.72" >stupa-eduka</text>
+<rect x="102.0" y="668.0" width="133.0" height="19" rx="9.5" fill="currentColor" opacity="0.06" stroke="currentColor" stroke-width="0.7" stroke-opacity="0.28"/>
+<text x="168.5" y="681.1" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.72" >temple-image-worship</text>
+<rect x="131.5" y="616.0" width="103.5" height="19" rx="9.5" fill="currentColor" opacity="0.06" stroke="currentColor" stroke-width="0.7" stroke-opacity="0.28"/>
+<text x="183.2" y="629.1" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.72" >yavana-presence</text>
+<rect x="499.4" y="200.0" width="121.2" height="19" rx="3" fill="currentColor" opacity="0.06" stroke="currentColor" stroke-width="0.7" stroke-opacity="0.28"/>
+<text x="560.0" y="213.1" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.72" >aspectual-collapse</text>
+<rect x="505.3" y="148.0" width="109.4" height="19" rx="3" fill="currentColor" opacity="0.06" stroke="currentColor" stroke-width="0.7" stroke-opacity="0.28"/>
+<text x="560.0" y="161.1" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.72" >avatara-theology</text>
+<rect x="490.6" y="330.0" width="138.9" height="19" rx="3" fill="currentColor" opacity="0.06" stroke="currentColor" stroke-width="0.7" stroke-opacity="0.28"/>
+<text x="560.0" y="343.1" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.72" >bharata-war-narrative</text>
+<rect x="508.2" y="798.0" width="103.5" height="19" rx="3" fill="currentColor" opacity="0.06" stroke="currentColor" stroke-width="0.7" stroke-opacity="0.28"/>
+<text x="560.0" y="811.1" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.72" >caste-hardening</text>
+<rect x="537.0" y="772.0" width="46.0" height="19" rx="3" fill="currentColor" opacity="0.06" stroke="currentColor" stroke-width="0.7" stroke-opacity="0.28"/>
+<text x="560.0" y="785.1" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.72" >cinas</text>
+<rect x="490.6" y="434.0" width="138.9" height="19" rx="3" fill="currentColor" opacity="0.06" stroke="currentColor" stroke-width="0.7" stroke-opacity="0.28"/>
+<text x="560.0" y="447.1" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.72" >classical-kavya-style</text>
+<rect x="502.4" y="642.0" width="115.3" height="19" rx="3" fill="currentColor" opacity="0.06" stroke="currentColor" stroke-width="0.7" stroke-opacity="0.28"/>
+<text x="560.0" y="655.1" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.72" >classical-samkhya</text>
+<rect x="505.3" y="694.0" width="109.4" height="19" rx="3" fill="currentColor" opacity="0.06" stroke="currentColor" stroke-width="0.7" stroke-opacity="0.28"/>
+<text x="560.0" y="707.1" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.72" >deccan-knowledge</text>
+<rect x="514.1" y="824.0" width="91.7" height="19" rx="3" fill="currentColor" opacity="0.06" stroke="currentColor" stroke-width="0.7" stroke-opacity="0.28"/>
+<text x="560.0" y="837.1" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.72" >eduka-polemic</text>
+<rect x="502.4" y="96.0" width="115.3" height="19" rx="3" fill="currentColor" opacity="0.06" stroke="currentColor" stroke-width="0.7" stroke-opacity="0.28"/>
+<text x="560.0" y="109.1" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.72" >fortified-ayodhya</text>
+<rect x="514.1" y="304.0" width="91.7" height="19" rx="3" fill="currentColor" opacity="0.06" stroke="currentColor" stroke-width="0.7" stroke-opacity="0.28"/>
+<text x="560.0" y="317.1" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.72" >horse-chariot</text>
+<rect x="537.0" y="746.0" width="46.0" height="19" rx="3" fill="currentColor" opacity="0.06" stroke="currentColor" stroke-width="0.7" stroke-opacity="0.28"/>
+<text x="560.0" y="759.1" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.72" >hunas</text>
+<rect x="514.1" y="408.0" width="91.7" height="19" rx="3" fill="currentColor" opacity="0.06" stroke="currentColor" stroke-width="0.7" stroke-opacity="0.28"/>
+<text x="560.0" y="421.1" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.72" >iron-weaponry</text>
+<rect x="514.1" y="356.0" width="91.7" height="19" rx="3" fill="currentColor" opacity="0.06" stroke="currentColor" stroke-width="0.7" stroke-opacity="0.28"/>
+<text x="560.0" y="369.1" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.72" >karma-rebirth</text>
+<rect x="517.1" y="460.0" width="85.8" height="19" rx="3" fill="currentColor" opacity="0.06" stroke="currentColor" stroke-width="0.7" stroke-opacity="0.28"/>
+<text x="560.0" y="473.1" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.72" >kosala-power</text>
+<rect x="508.2" y="616.0" width="103.5" height="19" rx="3" fill="currentColor" opacity="0.06" stroke="currentColor" stroke-width="0.7" stroke-opacity="0.28"/>
+<text x="560.0" y="629.1" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.72" >lokayata-school</text>
+<rect x="490.6" y="512.0" width="138.9" height="19" rx="3" fill="currentColor" opacity="0.06" stroke="currentColor" stroke-width="0.7" stroke-opacity="0.28"/>
+<text x="560.0" y="525.1" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.72" >massed-elephant-corps</text>
+<rect x="502.4" y="278.0" width="115.3" height="19" rx="3" fill="currentColor" opacity="0.06" stroke="currentColor" stroke-width="0.7" stroke-opacity="0.28"/>
+<text x="560.0" y="291.1" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.72" >mbh-as-named-work</text>
+<rect x="514.1" y="382.0" width="91.7" height="19" rx="3" fill="currentColor" opacity="0.06" stroke="currentColor" stroke-width="0.7" stroke-opacity="0.28"/>
+<text x="560.0" y="395.1" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.72" >moksa-as-goal</text>
+<rect x="493.5" y="538.0" width="133.0" height="19" rx="3" fill="currentColor" opacity="0.06" stroke="currentColor" stroke-width="0.7" stroke-opacity="0.28"/>
+<text x="560.0" y="551.1" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.72" >pataliputra-imperial</text>
+<rect x="499.4" y="174.0" width="121.2" height="19" rx="3" fill="currentColor" opacity="0.06" stroke="currentColor" stroke-width="0.7" stroke-opacity="0.28"/>
+<text x="560.0" y="187.1" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.72" >post-vedic-grammar</text>
+<rect x="514.1" y="226.0" width="91.7" height="19" rx="3" fill="currentColor" opacity="0.06" stroke="currentColor" stroke-width="0.7" stroke-opacity="0.28"/>
+<text x="560.0" y="239.1" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.72" >ppp-predicate</text>
+<rect x="505.3" y="252.0" width="109.4" height="19" rx="3" fill="currentColor" opacity="0.06" stroke="currentColor" stroke-width="0.7" stroke-opacity="0.28"/>
+<text x="560.0" y="265.1" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.72" >subjunctive-loss</text>
+<rect x="493.5" y="668.0" width="133.0" height="19" rx="3" fill="currentColor" opacity="0.06" stroke="currentColor" stroke-width="0.7" stroke-opacity="0.28"/>
+<text x="560.0" y="681.1" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.72" >temple-image-worship</text>
+<rect x="502.4" y="720.0" width="115.3" height="19" rx="3" fill="currentColor" opacity="0.06" stroke="currentColor" stroke-width="0.7" stroke-opacity="0.28"/>
+<text x="560.0" y="733.1" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.72" >valmiki-as-author</text>
+<rect x="493.5" y="564.0" width="133.0" height="19" rx="3" fill="currentColor" opacity="0.06" stroke="currentColor" stroke-width="0.7" stroke-opacity="0.28"/>
+<text x="560.0" y="577.1" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.72" >vasudeva-arjuna-cult</text>
+<rect x="481.7" y="122.0" width="156.6" height="19" rx="3" fill="currentColor" opacity="0.06" stroke="currentColor" stroke-width="0.7" stroke-opacity="0.28"/>
+<text x="560.0" y="135.1" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.72" >vasudeva-epic-attributes</text>
+<rect x="505.3" y="486.0" width="109.4" height="19" rx="3" fill="currentColor" opacity="0.06" stroke="currentColor" stroke-width="0.7" stroke-opacity="0.28"/>
+<text x="560.0" y="499.1" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.72" >writing-practice</text>
+<rect x="520.0" y="590.0" width="79.9" height="19" rx="3" fill="currentColor" opacity="0.06" stroke="currentColor" stroke-width="0.7" stroke-opacity="0.28"/>
+<text x="560.0" y="603.1" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.72" >yavana-saka</text>
+<rect x="838.0" y="694.0" width="109.4" height="19" rx="2" fill="currentColor" opacity="0.06" stroke="currentColor" stroke-width="0.7" stroke-opacity="0.28"/>
+<text x="892.7" y="707.1" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.72" >mbh.late-peoples</text>
+<rect x="838.0" y="96.0" width="103.5" height="19" rx="2" fill="currentColor" opacity="0.06" stroke="currentColor" stroke-width="0.7" stroke-opacity="0.28"/>
+<text x="889.8" y="109.1" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.72" >mbh.theological</text>
+<rect x="838.0" y="226.0" width="62.2" height="19" rx="2" fill="currentColor" opacity="0.06" stroke="currentColor" stroke-width="0.7" stroke-opacity="0.28"/>
+<text x="869.1" y="239.1" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.72" >Rām bala</text>
+<rect x="838.0" y="304.0" width="62.2" height="19" rx="2" fill="var(--fails)" opacity="0.14" stroke="var(--fails)" stroke-width="1.6" stroke-opacity="0.95"/>
+<text x="869.1" y="317.1" text-anchor="middle" font-size="11" fill="currentColor" opacity="1" font-weight='600'>Rām core</text>
+<rect x="838.0" y="616.0" width="74.0" height="19" rx="2" fill="currentColor" opacity="0.06" stroke="currentColor" stroke-width="0.7" stroke-opacity="0.28"/>
+<text x="875.0" y="629.1" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.72" >Rām jabali</text>
+<rect x="838.0" y="642.0" width="121.2" height="19" rx="2" fill="currentColor" opacity="0.06" stroke="currentColor" stroke-width="0.7" stroke-opacity="0.28"/>
+<text x="898.6" y="655.1" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.72" >Rām kiskindha-geog</text>
+<rect x="838.0" y="772.0" width="79.9" height="19" rx="2" fill="currentColor" opacity="0.06" stroke="currentColor" stroke-width="0.7" stroke-opacity="0.28"/>
+<text x="878.0" y="785.1" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.72" >Rām sambuka</text>
+<rect x="838.0" y="148.0" width="74.0" height="19" rx="2" fill="currentColor" opacity="0.06" stroke="currentColor" stroke-width="0.7" stroke-opacity="0.28"/>
+<text x="875.0" y="161.1" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.72" >Rām uttara</text>
+<rect x="838.0" y="174.0" width="115.3" height="19" rx="2" fill="currentColor" opacity="0.06" stroke="currentColor" stroke-width="0.7" stroke-opacity="0.28"/>
+<text x="895.6" y="187.1" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.72" >Rām yuddha-ending</text>
+<rect x="838.0" y="512.0" width="79.9" height="19" rx="2" fill="currentColor" opacity="0.06" stroke="currentColor" stroke-width="0.7" stroke-opacity="0.28"/>
+<text x="878.0" y="525.1" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.72" >mbh.carvaka</text>
+<rect x="838.0" y="330.0" width="62.2" height="19" rx="2" fill="var(--fails)" opacity="0.14" stroke="var(--fails)" stroke-width="1.6" stroke-opacity="0.95"/>
+<text x="869.1" y="343.1" text-anchor="middle" font-size="11" fill="currentColor" opacity="1" font-weight='600'>mbh.core</text>
+<rect x="838.0" y="824.0" width="109.4" height="19" rx="2" fill="currentColor" opacity="0.06" stroke="currentColor" stroke-width="0.7" stroke-opacity="0.28"/>
+<text x="892.7" y="837.1" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.72" >mbh.ramopakhyana</text>
+<rect x="838.0" y="720.0" width="68.1" height="19" rx="9.5" fill="currentColor" opacity="0.06" stroke="currentColor" stroke-width="0.7" stroke-opacity="0.28"/>
+<text x="872.0" y="733.1" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.72" >asvaghosa</text>
+<rect x="838.0" y="252.0" width="74.0" height="19" rx="9.5" fill="currentColor" opacity="0.06" stroke="currentColor" stroke-width="0.7" stroke-opacity="0.28"/>
+<text x="875.0" y="265.1" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.72" >asvalayana</text>
+<rect x="838.0" y="200.0" width="79.9" height="19" rx="9.5" fill="currentColor" opacity="0.06" stroke="currentColor" stroke-width="0.7" stroke-opacity="0.28"/>
+<text x="878.0" y="213.1" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.72" >atharvaveda</text>
+<rect x="838.0" y="278.0" width="46.0" height="19" rx="9.5" fill="currentColor" opacity="0.06" stroke="currentColor" stroke-width="0.7" stroke-opacity="0.28"/>
+<text x="861.0" y="291.1" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.72" >bhasa</text>
+<rect x="838.0" y="382.0" width="50.4" height="19" rx="9.5" fill="currentColor" opacity="0.06" stroke="currentColor" stroke-width="0.7" stroke-opacity="0.28"/>
+<text x="863.2" y="395.1" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.72" >bhatti</text>
+<rect x="838.0" y="356.0" width="91.7" height="19" rx="9.5" fill="currentColor" opacity="0.06" stroke="currentColor" stroke-width="0.7" stroke-opacity="0.28"/>
+<text x="883.9" y="369.1" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.72" >brhadaranyaka</text>
+<rect x="838.0" y="486.0" width="109.4" height="19" rx="9.5" fill="currentColor" opacity="0.06" stroke="currentColor" stroke-width="0.7" stroke-opacity="0.28"/>
+<text x="892.7" y="499.1" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.72" >dasaratha-jataka</text>
+<rect x="838.0" y="434.0" width="79.9" height="19" rx="9.5" fill="currentColor" opacity="0.06" stroke="currentColor" stroke-width="0.7" stroke-opacity="0.28"/>
+<text x="878.0" y="447.1" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.72" >dighanikaya</text>
+<rect x="838.0" y="408.0" width="62.2" height="19" rx="9.5" fill="currentColor" opacity="0.06" stroke="currentColor" stroke-width="0.7" stroke-opacity="0.28"/>
+<text x="869.1" y="421.1" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.72" >kalidasa</text>
+<rect x="838.0" y="798.0" width="68.1" height="19" rx="9.5" fill="currentColor" opacity="0.06" stroke="currentColor" stroke-width="0.7" stroke-opacity="0.28"/>
+<text x="872.0" y="811.1" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.72" >manusmrti</text>
+<rect x="838.0" y="538.0" width="50.4" height="19" rx="9.5" fill="currentColor" opacity="0.06" stroke="currentColor" stroke-width="0.7" stroke-opacity="0.28"/>
+<text x="863.2" y="551.1" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.72" >panini</text>
+<rect x="838.0" y="564.0" width="68.1" height="19" rx="9.5" fill="currentColor" opacity="0.06" stroke="currentColor" stroke-width="0.7" stroke-opacity="0.28"/>
+<text x="872.0" y="577.1" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.72" >patanjali</text>
+<rect x="838.0" y="746.0" width="85.8" height="19" rx="9.5" fill="currentColor" opacity="0.06" stroke="currentColor" stroke-width="0.7" stroke-opacity="0.28"/>
+<text x="880.9" y="759.1" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.72" >paumacariyam</text>
+<rect x="838.0" y="122.0" width="68.1" height="19" rx="9.5" fill="currentColor" opacity="0.06" stroke="currentColor" stroke-width="0.7" stroke-opacity="0.28"/>
+<text x="872.0" y="135.1" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.72" >ram.251ce</text>
+<rect x="838.0" y="590.0" width="68.1" height="19" rx="9.5" fill="currentColor" opacity="0.06" stroke="currentColor" stroke-width="0.7" stroke-opacity="0.28"/>
+<text x="872.0" y="603.1" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.72" >ram.600ce</text>
+<rect x="838.0" y="668.0" width="91.7" height="19" rx="9.5" fill="currentColor" opacity="0.06" stroke="currentColor" stroke-width="0.7" stroke-opacity="0.28"/>
+<text x="883.9" y="681.1" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.72" >samkhyakarika</text>
+<rect x="838.0" y="460.0" width="50.4" height="19" rx="9.5" fill="currentColor" opacity="0.06" stroke="currentColor" stroke-width="0.7" stroke-opacity="0.28"/>
+<text x="863.2" y="473.1" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.72" >vinaya</text>
+</svg>
+
+        </div>
+
+        <div class="legend">
+          <span><svg width="26" height="10" aria-hidden="true" style="width:26px;min-width:0;height:auto;flex-shrink:0"><line x1="1" y1="5" x2="25" y2="5" stroke="var(--holds)" stroke-width="2" opacity=".85"/></svg> attested to a locus</span>
+          <span><svg width="26" height="10" aria-hidden="true" style="width:26px;min-width:0;height:auto;flex-shrink:0"><line x1="1" y1="5" x2="25" y2="5" stroke="currentColor" stroke-width="2" opacity=".3"/></svg> asserted &mdash; carried as a scholar's claim</span>
+          <span><svg width="26" height="10" aria-hidden="true" style="width:26px;min-width:0;height:auto;flex-shrink:0"><line x1="1" y1="5" x2="25" y2="5" stroke="var(--fails)" stroke-width="3" opacity="1"/></svg> load-bearing: in a headline bracket's minimum cut</span>
+          <span><svg width="26" height="10" aria-hidden="true" style="width:26px;min-width:0;height:auto;flex-shrink:0"><line x1="1" y1="5" x2="25" y2="5" stroke="currentColor" stroke-width="2" opacity=".35" stroke-dasharray="3.5 3"/></svg> ordering between texts</span>
+          <span><svg width="26" height="12" aria-hidden="true" style="width:26px;min-width:0;height:auto;flex-shrink:0"><rect x="1" y="1" width="24" height="10" rx="2" fill="currentColor" fill-opacity=".08" stroke="currentColor" stroke-opacity=".45"/></svg> a dated object, or one stratum</span>
+          <span><svg width="26" height="12" aria-hidden="true" style="width:26px;min-width:0;height:auto;flex-shrink:0"><rect x="1" y="1" width="24" height="10" rx="5" fill="currentColor" fill-opacity=".08" stroke="currentColor" stroke-opacity=".45"/></svg> a span: material horizon, or whole work-state</span>
+        </div>
+
+        <figcaption>Read left to right: dated things bound concepts, and concepts bound the
+        texts that take them for granted. The teal-and-grey distinction is the one this whole
+        project turns on &mdash; teal constraints name a verse or an excavation report a
+        stranger can check, grey ones rest on a scholar's say-so. One node sits unconnected on
+        the right: the <em>Da&#347;aratha J&#257;taka</em>, encoded and so far bounding
+        nothing. The figure is wider than the column and scrolls sideways.</figcaption>
+      </figure>
+
+      <p><strong>How a date actually reaches a text.</strong> The three columns are not
+      decoration; they are the direction of inference, and each arrow type does one job.</p>
+
+      <ul>
+        <li><strong>A material horizon <em>grounds</em> a concept.</strong> Iron metallurgy did
+        not exist in South Asia before about 1300 BCE, so nothing that presupposes iron weaponry
+        is older than that. This is the only kind of edge that can supply a <em>floor</em>, and
+        only excavation can make the claim &mdash; letting a text make it would let the network
+        date itself.</li>
+        <li><strong>A dated object <em>attests</em> a concept.</strong> A coin, an inscription, a
+        translation catalogue. Attestation caps a concept from above and <em>never</em> bounds it
+        below: the Heliodorus pillar proves Vāsudeva worship existed by 110 BCE and says nothing
+        about how much earlier it began.</li>
+        <li><strong>A text <em>presupposes</em> a concept</strong> and inherits its floor. This is
+        the step that turns archaeology into a date for a poem, and it is where almost all the
+        network's mass sits &mdash; 34 of the 124 edges.</li>
+        <li><strong>A text that should mention a concept and does not</strong> floors that
+        concept instead. Powerful, and the most dangerous edge in the store: it needs a positive
+        control before it counts, which is why the P&#257;&#7789;aliputra silence earns one and
+        the R&#257;m&#257;ya&#7751;a's silence about liberation does not.</li>
+      </ul>
+
+      <p>Follow the rust and the argument is bare. The R&#257;m&#257;ya&#7751;a core's floor is
+      three links &mdash; a Kosala power horizon, the concept it grounds, the stratum that
+      presupposes it. Its ceiling is five, and passes through the Mah&#257;bh&#257;rata on the
+      way. Every one of those chains is a <strong>minimum cut of 1</strong>: cut any single link
+      and the bracket moves.</p>
+
+      <blockquote class="pull" style="--edge: var(--fails);">A network of 124 constraints in
+      which 8 do all the work is not a redundant network. It is a thin argument drawn at
+      scale &mdash; and drawing it at scale is what makes the thinness visible.</blockquote>
+    </section>
+
+    <!-- ============ rows that fail ============ -->
+    <section>
+      <h2>Three claims the manuscripts contradict</h2>
+      <p class="register">Scored floors that the text does not bear out &middot; two rated 4 of 5, one rated 5 of 5</p>
+
+      <div class="docket">
+
+        <article class="item item-fails">
+          <div class="item-head">
+            <span class="claim"><em>Dīnāra</em>, the Roman denarius</span>
+            <span class="chip chip-fails">not in the text</span>
+            <span class="score">Rāmāyaṇa floor · scored <b>5 / 5</b></span>
+          </div>
+          <p>One of only four score-5 floors in the entire Rāmāyaṇa inventory, and the basis for placing certain passages after 100 CE. The word does not occur.</p>
+          <div class="counts">d[iī]n+[aā]ra   Baroda critical edition      0 / 18,761 verses
+                southern recension file      0
+                Hellwig revision, kāṇḍas 2-3 0</div>
+          <p>Zero under every spelling, diacritic-folded included, across all three files. The likely explanation is that the claim rests on vulgate passages the Baroda editors excised — which would make it a floor on material outside the constituted text, in an inventory that elsewhere presupposes the critical edition.</p>
+        </article>
+
+        <article class="item item-fails">
+          <div class="item-head">
+            <span class="claim">Ayodhyā as a great fortified metropolis</span>
+            <span class="chip chip-fails">wrong stratum</span>
+            <span class="score">Rāmāyaṇa floor · scored <b>4 / 5</b></span>
+          </div>
+          <p>Credited to the core, and used to floor it at c. 600 BCE. The canonical description belongs to Bālakāṇḍa — the book the same inventory classes as a later stratum, whose lateness nobody disputes.</p>
+          <div class="quote">
+            <span>kapāṭatoraṇavatīṃ … uccāṭṭāladhvajavatīṃ <b>śataghnī</b>śatasaṃkulām … <b>durga</b>gambhīra<b>parikhāṃ</b> durgām anyair durāsadām</span>
+            <span class="gloss">Rām.1.005.010–013 — gates and archways · high watchtowers and banners · thronged with hundreds of <em>śataghnī</em> · a deep impassable moat · a fortress unassailable by others</span>
+          </div>
+          <p>Book 2 — Ayodhyā's own book, inside the core — has <strong>zero</strong> <em>śataghnī</em> and <strong>zero</strong> <em>gopura</em>. Its one moat-and-rampart passage describes the army's road camps on Bharata's march; another describes Rājagṛha. The core's entire fortification datum is the single word <em>aṭṭālakeṣu</em> in a list of city features, which does not support the claim.</p>
+        </article>
+
+        <article class="item item-fails">
+          <div class="item-head">
+            <span class="claim">Greek-derived astrological vocabulary</span>
+            <span class="chip chip-fails">not in the text</span>
+            <span class="score">Mahābhārata floor · scored <b>4 / 5</b></span>
+          </div>
+          <p>The floor placing the didactic layers after c. 200 CE. None of the three loanwords the source names occurs anywhere in the epic — archetypal text or apparatus, under any spelling.</p>
+          <div class="counts">horā       363 hits  →  every one is ghorā "terrible",
+                           ahorātra "day-and-night", kaṭhorā "harsh"
+\bhorā       3 hits  →  all elided ahorātra
+kendra       4 hits  →  sandhi artefacts: janaka+indra, baka+indra
+drekkāṇa     0 hits  →  zero under every spelling tried</div>
+          <p>Worth dwelling on the shape of that. A term occurring zero times returns <strong>363 raw hits</strong> — a keyword count alone would have confirmed the claim handsomely. Only reading them shows every one is an ordinary Sanskrit word.</p>
+          <p>The fair statement: the scored row names no specific terms, and these three come from an earlier section offering them as Greek loans into Sanskrit <em>jyotiṣa</em> generally — a claim about the language, not about this epic. So the row cannot be checked as written, and the obvious candidates fail.</p>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ============ rows that hold ============ -->
+    <section>
+      <h2>What the text confirms &mdash; including one row the scoring badly undersells</h2>
+      <p class="register">Verified against the constituted text, apparatus excluded where available</p>
+
+      <div class="docket">
+
+        <article class="item item-holds">
+          <div class="item-head">
+            <span class="claim">Pāṭaliputra absent as imperial capital</span>
+            <span class="chip chip-holds">holds — and beats its score</span>
+            <span class="score">ceiling for both epics · scored <b>2 / 5</b></span>
+          </div>
+          <p>The lowest-scored row in either inventory turns out to carry the pre-Common-Era ceiling for <strong>both</strong> epics. Zero hits across 123,372 Mahābhārata verses and all 18,761 of the Rāmāyaṇa, under four names the city is known by, plain and diacritic-folded.</p>
+          <p>What lifts it above an ordinary argument from silence is a positive control:</p>
+          <div class="quote">
+            <span>tena ruddhā hi rājānaḥ sarve jitvā <b>girivraje</b></span>
+            <span class="gloss">MBh.2.013.062 — by him all the kings, once conquered, are held at Girivraja · Jarāsaṃdha's capital, named repeatedly; and Rājagṛha again in the <em>tīrtha</em> catalogue</span>
+          </div>
+          <p><strong>The epic's Magadhan geography is not undescribed. It is described, and stops one city short.</strong> Silence from a text that names the predecessor capital is far stronger evidence than silence from a text that names none — a distinction a single 1-to-5 score cannot express, and the reason this row's rating is the least reliable number in either table.</p>
+        </article>
+
+        <article class="item item-holds">
+          <div class="item-head">
+            <span class="claim">Hūṇas in the peoples lists</span>
+            <span class="chip chip-holds">holds · archetypal</span>
+            <span class="score">Mahābhārata floor · scored <b>5 / 5</b></span>
+          </div>
+          <p>The source calls this the latest binding floor on the epic, so whether it stands on constituted text or on material the critical editors excluded is the difference between a real floor and a <em>dīnāra</em>. It stands: every occurrence is archetypal, none in the apparatus.</p>
+          <div class="quote">
+            <span>cīnān <b>hūṇāñ</b> śakān oḍrān parvatāntaravāsinaḥ</span>
+            <span class="gloss">MBh.2.047.019 — Cīnas, Hūṇas, Śakas, Oḍras, dwellers between the mountains. Also MBh.6.010.064, MBh.12.312.015</span>
+          </div>
+        </article>
+
+        <article class="item item-holds">
+          <div class="item-head">
+            <span class="claim">Massed elephant corps, fourfold army</span>
+            <span class="chip chip-holds">holds · institution, not animal</span>
+            <span class="score">Mahābhārata floor · scored <b>4 / 5</b></span>
+          </div>
+          <p>Elephants appear constantly and mostly irrelevantly — as a city epithet (<em>gajasāhvaya</em> = Hastināpura), as ivory, as tribute, as one named sixty-year-old tusker. A floor at c. 500 BCE needs the military institution, not the animal, and the institution is defined outright:</p>
+          <div class="quote">
+            <span>rathasyāsan daśa gajā gajasya daśa vājinaḥ … <b>akṣauhiṇī</b>ti paryāyair</span>
+            <span class="gloss">MBh.5.152.019–022 — ten elephants to a chariot, ten horses to an elephant … which by these names is called an <em>akṣauhiṇī</em></span>
+          </div>
+          <p>And in use at MBh.6.058.031: <em>anīkaṃ daśasāhasraṃ kuñjarāṇāṃ</em>, a ten-thousand-strong elephant division engaged as a single tactical unit.</p>
+        </article>
+
+        <article class="item item-holds">
+          <div class="item-head">
+            <span class="claim">Books 1 and 7 divinize R&#257;ma; books 2&ndash;6 do not</span>
+            <span class="chip chip-holds">holds &middot; differential intact</span>
+            <span class="score">R&#257;m&#257;ya&#7751;a stratification &middot; scored <b>5 / 5</b></span>
+          </div>
+          <p>The load-bearing argument that the core predates its frame, and the highest-rated internal evidence in the R&#257;m&#257;ya&#7751;a inventory. It holds &mdash; once the divine-assembly retrofit at 6.105 is carved out of the core, which the source already identifies as a seam.</p>
+          <div class="quote">
+            <span>m&#257;nu&#7779;&#299;&#7747; tanum &#257;sth&#257;ya r&#257;va&#7751;a&#7747; jahi sa&#7747;yuge &hellip; vi&#7779;&#7751;ur &#257;tmav&#257;n pitara&#7747; rocay&#257;m &#257;sa tad&#257; da&#347;aratha&#7747; n&#7771;pam</span>
+            <span class="gloss">R&#257;m.1.015.003&ndash;007 &mdash; "taking a human body, kill R&#257;va&#7751;a in battle" &hellip; Vi&#7779;&#7751;u resolved on Da&#347;aratha as his father. R&#257;ma's birth narrated as an incarnation, in narrator voice, before the character exists. Cf. R&#257;m.7.008.025 <em>bhav&#257;n n&#257;r&#257;ya&#7751;o deva&#347; caturb&#257;hu&#7717; san&#257;tana&#7717;</em></span>
+          </div>
+          <p>The core, minus the seam, yields 25 <em>vi&#7779;&#7751;u</em> and 4 <em>n&#257;r&#257;ya&#7751;a</em> hits across 14,065 verses &mdash; and <strong>not one is a narrator- or deity-voiced identity claim</strong>. They are similes ("strong <em>as</em> Vi&#7779;&#7751;u", grammatically a comparison between two distinct beings), background myth, R&#257;ma worshipping N&#257;r&#257;ya&#7751;a as a <em>separate</em> god, and two character speculations, the second of which the text retracts five verses later.</p>
+          <p><strong>An unexpected detail.</strong> R&#257;ma's own <em>&#257;tm&#257;na&#7747; m&#257;nu&#7779;a&#7747; manye</em> &mdash; "I consider myself a man" &mdash; occurs exactly once in all 18,761 verses, at 6.105.010, one verse before Brahm&#257; answers it. The disclaimer and the declaration are not opposing evidence from different layers. They are two beats of a single scene, both inside the carved-out seam.</p>
+        </article>
+
+        <article class="item item-qual">
+          <div class="item-head">
+            <span class="claim">Karma, rebirth and <em>mok&#7779;a</em> as an assumed framework</span>
+            <span class="chip chip-qual">holds in one epic, partly in the other</span>
+            <span class="score">floor in both &middot; scored <b>4 / 5</b></span>
+          </div>
+          <p>One row, three components, and the two epics do not support them equally.</p>
+          <p>The <strong>Mah&#257;bh&#257;rata</strong> has all three explicitly and repeatedly in archetypal text &mdash; <em>tyaktv&#257; deha&#7747; punarjanma naiti</em> (G&#299;t&#257; 4.9), and even Brahm&#257;'s realm described as <em>punar&#257;vartin</em>, subject to return.</p>
+          <p>The <strong>R&#257;m&#257;ya&#7751;a core</strong> has karma binding across births &mdash; <em>k&#299;d&#7771;&#347;a&#7747; tu may&#257; p&#257;pa&#7747; pur&#257; <b>deh&#257;ntare</b> k&#7771;tam</em>, S&#299;t&#257; asking what sin she committed in a former body &mdash; and no trace of liberation at all:</p>
+          <div class="counts">R&#257;m&#257;ya&#7751;a core, 14,065 verses:
+  punarjanman 0   sa&#7747;s&#257;ra 0   apunarbhava 0   mumuk&#7779;u 0
+  mok&#7779; 53 hits &rarr;  releasing a necklace &middot; releasing wealth as gifts
+                  shedding tears &middot; loosing anger at enemies
+                  not one soteriological</div>
+          <p>The referent was split in two. Worth setting beside the grammar row below: <strong>this bundle could be repaired and that one could not</strong>, because these components are separately checkable and those are not.</p>
+        </article>
+
+        <article class="item item-qual">
+          <div class="item-head">
+            <span class="claim">The <em>eḍūka</em> polemic</span>
+            <span class="chip chip-qual">holds · the gloss does not</span>
+            <span class="score">Mahābhārata floor · scored <b>4 / 5</b></span>
+          </div>
+          <p>The passage exists, is archetypal, and is unambiguously Kali Yuga material. The floor at c. 250 BCE, however, depends on identifying <em>eḍūka</em> as a Buddhist reliquary mound — and the passage names no Buddhist.</p>
+          <div class="counts">MBh.3.188   bauddha 0   śramaṇa 0   nagnaka 0
+            buddh   4  →  every one of them buddhi, "mind"</div>
+          <p>What it says is <em>eḍūkān pūjayiṣyanti varjayiṣyanti devatāḥ</em> — "they will worship <em>eḍūkas</em> and abandon the gods" — inside an undifferentiated list of degeneracy signs, beside śūdras teaching dharma and untimely rain. The anti-Buddhist reading is an identification brought to the text rather than found in it, so the floor rests on that identification and not on the verse.</p>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ============ where the method runs out ============ -->
+    <section>
+      <h2>What citation-level checking can and cannot reach</h2>
+
+      <p class="lede">Two claims resisted settlement in entirely different ways, and telling those ways apart is the most portable thing here: one lies outside what any concordance can see and always will, while the other was perfectly measurable and turned out, once controlled, to be measuring something else.</p>
+
+      <div class="docket">
+
+        <article class="item item-qual">
+          <div class="item-head">
+            <span class="claim">Post-Vedic, non-P&#257;&#7751;inian grammar</span>
+            <span class="chip chip-holds">five of six components attested</span>
+            <span class="score">floor in both &middot; scored <b>5 / 5</b></span>
+          </div>
+          <p>The source calls this "the tightest single bracket" available and rates it the strongest evidence in either inventory. It bundles six typologically distinct changes. A concordance over the two epics now reaches <strong>five</strong> of them &mdash; and the one it cannot reach turns out to be unreachable for a reason no amount of data fixes.</p>
+          <p><strong>Reachable.</strong> Absolutive chaining is pervasive and quotable &mdash; 1,298 verses of the R&#257;m&#257;ya&#7751;a core carry a word-final <em>-tv&#257;</em>, with three-absolutive chains findable in both epics. <em>-tum</em> is the only surviving infinitive: the older <em>-dhyai</em>, <em>-tave</em> and <em>-tavai</em> return zero genuine survivals once <em>tava</em>+<em>eva</em> sandhi is stripped out. And the <strong>lost subjunctive</strong> is now measured &mdash; see below.</p>
+          <p><strong>Not reachable, and not for want of data.</strong> Absent pitch accent looks like a transcription problem: GRETIL's stated default is that "accents have been dropped in order to facilitate word search." But it makes an explicit exception, and ships the &#346;aunaka Atharvaveda fully marked &mdash; <em>y&#233; tri&#7779;sapt&#257;&#769;&#7717; pariy&#225;nti v&#237;&#347;v&#257; r&#363;p&#257;&#769;&#7751;i b&#237;bhrata&#7717;</em> &mdash; at the same p&#257;da-level addressing as the epics. The obstacle is the <em>other</em> side of the comparison. Accent notation is a Vedic scribal apparatus, and no epic manuscript in any recension carries it. The epic's unaccented state records how the text was transmitted, not how it was spoken &mdash; and no edition, however good, can supply a mark the tradition never wrote. This is the third appearance of one pattern: <strong>an absence that may record what kind of text it is rather than when it was written</strong>, alongside the R&#257;m&#257;ya&#7751;a's silence about liberation and the compound-length result below.</p>
+          <p><strong>The subjunctive, and why the obvious search fails.</strong> Counting word-final <em>-&#257;ti</em> gives 24.7 per 10,000 words in the Atharvaveda against 7.0 and 8.2 in the epics &mdash; an apparent 3.5&times; enrichment that is <em>entirely noise</em>: root-class and class-9 presents (<em>y&#257;ti</em>, <em>j&#257;n&#257;ti</em>, <em>g&#7771;h&#7751;&#257;ti</em>) and sandhi artifacts (<em>n&#257;ti</em> = <em>na</em>+<em>ati</em>), all of which the Vedic text carries too. The subjunctive of a thematic present instead lengthens the stem's own <em>-a</em>, so the count has to be paired <em>within stem</em> &mdash; <em>bhavati</em> against <em>bhav&#257;ti</em> &mdash; which eliminates every confounding form by construction.</p>
+          <div class="counts">28 thematic stems, three person slots:
+  Atharvaveda      85,489 words     200 ind      46 subj   18.7%
+  R&#257;m&#257;ya&#7751;a core   160,993 words     247 ind       0 subj    0.0%
+  Mah&#257;bh&#257;rata    903,578 words   1,778 ind       0 subj    0.0%
+                   expected at the Vedic rate: 57 and 409</div>
+          <p><strong>And it has the positive control the <em>mok&#7779;a</em> silence lacked.</strong> The subjunctive did not vanish outright &mdash; its first person survived by being reassigned to the imperative, and the same search finds it: <em>karav&#257;&#7751;i</em> &times;39 and <em>dad&#257;ni</em> &times;32 in the Mah&#257;bh&#257;rata. The category is visible to the instrument; the second and third persons are gone from the text. Being morphology rather than topic, it carries no genre confound, so this one was encoded rather than withheld.</p>
+          <p><strong>The two that looked hardest.</strong> Aspectual collapse and past-participle-as-predicate are claims about how forms <em>function</em> across a whole text, which no single locus settles &mdash; so the same move works: express the function as a <em>ratio against its own alternative</em>. The perfect displacing the imperfect as plain narrative past runs 0.08 in the Atharvaveda against 0.60 and 0.88 in the epics; the instrumental-agent participle construction runs 6.2 per 10,000 words against 14 to 22. Both encoded.</p>
+          <p><strong>And one metric that looked best of all, refuted.</strong> The aorist falls from 4.33 per 10,000 words in the Atharvaveda to 0.19 in the R&#257;m&#257;ya&#7751;a &mdash; until a control text runs it. K&#257;lid&#257;sa, c. 400 CE, comes in at 4.89, the Vedic rate and twenty-five times the R&#257;m&#257;ya&#7751;a's. <strong>A metric on which a fifth-century poet resembles the Atharvaveda is measuring register, not date.</strong> Recorded as unusable rather than encoded &mdash; the same confound that sank the compound-length measurement.</p>
+          <p>A compound presupposition is only as strong as its weakest component, and the weakest here is not weakly evidenced &mdash; it is unmeasurable on one side by the nature of the transmission. <strong>The highest-rated evidence class in both inventories is the one least amenable to citation-level checking</strong>, and knowing precisely which of its six parts are blocked by cost, which by method, and which permanently is worth more than the aggregate score of 5.</p>
+        </article>
+
+        <article class="item item-fails">
+          <div class="item-head">
+            <span class="claim">The R&#257;m&#257;ya&#7751;a's silence about liberation</span>
+            <span class="chip chip-fails">measured, and refuted</span>
+            <span class="score">would have tightened the headline by <b>200 years</b></span>
+          </div>
+          <p>The silence documented above is real and measured, and encoding it would have moved the R&#257;m&#257;ya&#7751;a core's ceiling from 300 BCE to <strong>500 BCE</strong> &mdash; the largest single move available anywhere in the network. It was withheld pending a control. <strong>The control has now been run, and it kills the argument.</strong></p>
+          <p>The decisive control was not the external one. It was the R&#257;m&#257;ya&#7751;a's <em>own late books</em>.</p>
+          <div class="counts">soteriological vocabulary, per 10,000 words
+  R&#257;m 2-6 (core)    160,993 words     0 hits    0.00
+  R&#257;m 1 (B&#257;la)      21,711 words     0 hits    0.00
+  R&#257;m 7 (Uttara)     31,111 words     0 hits    0.00
+  Mah&#257;bh&#257;rata     903,578 words    88 hits    0.97
+  Raghuva&#7747;&#347;a        18,418 words     3 hits    1.63</div>
+          <p>Books 1 and 7 are zero too. They are <strong>later</strong> than the core by this network's own attested constraints, and they demonstrably absorbed the avat&#257;ra theology the core does not carry &mdash; the differential two cards above. If the silence tracked date, the late books would have broken it. They do not.</p>
+          <p>Meanwhile the genre plainly permits the vocabulary: the Mah&#257;bh&#257;rata uses it, and so does a court epic on the <em>same dynasty</em> written around 400 CE. The whole R&#257;m&#257;ya&#7751;a runs zero at every stratum, early and late alike. <strong>The silence belongs to the tradition, not to the date</strong>, and it bounds nothing.</p>
+          <p>This is a better outcome than promotion would have been. A 200-year tightening bought on a silence that turns out to be traditional would have been the largest error the network could contain &mdash; and it would have looked like the best result in it.</p>
+        </article>
+
+      </div>
+
+      <blockquote class="pull" style="--edge: var(--qual);">A measured silence is not automatically evidence of date. Before it counts, something has to rule out its being evidence of genre.</blockquote>
+    </section>
+
+    <!-- ============ what corpus growth buys ============ -->
+    <section>
+      <h2>What a second text actually buys</h2>
+
+      <p class="lede">Corpus growth buys <strong>checking</strong>, not resolution &mdash; and the exchange rate is measurable. Adding an entire second epic to the network, 25 nodes and 40 edges, moved exactly one shared referent, and that one binds nothing.</p>
+
+      <p>The mechanism is worth having explicitly. A referent's bound is set by its <strong>earliest</strong> attester, so a second source moves it only when it supplies a new extreme. Precision therefore scales logarithmically in corpus size while independent cross-checks scale linearly &mdash; which is worth knowing before anyone spends a year digitising in the hope of tightening a date. The return on more text is real, and it arrives as confidence rather than as precision.</p>
+
+      <h2 style="font-size: 1.15rem; margin-top: var(--s3);">The apparatus check</h2>
+
+      <p>The Mahābhārata's electronic text preserves the critical edition's apparatus; the Rāmāyaṇa's does not. Of 224,679 lines, <strong>66,177 are star or appendix passages</strong> — material the BORI editors judged non-archetypal.</p>
+
+      <p>That makes one question askable for the first time: <em>does this floor rest on constituted text, or on an interpolation?</em> It is the question <em>dīnāra</em> raises and cannot answer, because the Rāmāyaṇa has no apparatus to consult. Every Mahābhārata claim above was run twice, with and without it.</p>
+
+      <blockquote class="pull">A constraint's value is not a property of the constraint. It is a property of the graph it sits in — which is why a scoring column, applied to rows in isolation, cannot tell you which of them matters.</blockquote>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Outcome</th><th>Detail</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>A separable evidence tier</strong></td><td>Strip every claim resting on scholarly assertion and both cores hold their brackets unchanged — <span class="mono">750–300 BCE</span> and <span class="mono">500–300 BCE</span>.</td></tr>
+            <tr><td><strong>Three failed rows</strong></td><td>Two rated 4 of 5, one rated 5 of 5. All passed through the source's own review as sound.</td></tr>
+            <tr><td><strong>One confirmed row</strong></td><td>The 5-of-5 stratification claim holds, once the seam the source already names is carved out of the core.</td></tr>
+            <tr><td><strong>One row taken apart</strong></td><td>The 5-of-5 grammar bracket bundles six changes; five are now attested to a re-runnable measurement and one is permanently unmeasurable.</td></tr>
+            <tr><td><strong>One underrated row</strong></td><td>The 2-of-5 Pāṭaliputra silence carries the ceiling for both epics, corroborated by a control no score can encode.</td></tr>
+            <tr><td><strong>One qualified floor</strong></td><td>The <em>eḍūka</em> passage is real; the anti-Buddhist reading that dates it is not in the text.</td></tr>
+            <tr><td><strong>An audit trail</strong></td><td>Every bound traces to a verse or an excavation record, and every search is one command anyone can re-run.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ============ two new instruments ============ -->
+    <section>
+      <h2>Two instruments nobody had used</h2>
+
+      <p class="lede">Everything to this point was an argument somebody had already made,
+      checked against the text. This is the reverse: read the corpora, find signals the scored
+      inventories never proposed, test them. Two came out &mdash; and the second one
+      <strong>refutes a whole class of evidence this network was relying on</strong>.</p>
+
+      <div class="docket">
+
+        <article class="item item-holds">
+          <div class="item-head">
+            <span class="claim">The critical apparatus is a labelled lateness set</span>
+            <span class="chip chip-holds">calibrated &middot; then it discovers</span>
+            <span class="score">66,177 lines &middot; <b>28%</b> of the transmitted text</span>
+          </div>
+          <p>The Mah&#257;bh&#257;rata's editors marked, passage by passage and on manuscript
+          evidence, which lines they judged non-archetypal. That is a per-passage label of
+          <em>relative lateness</em> in the same work, the same genre, the same language and the
+          same scribal tradition. Every external comparison this project makes &mdash; Vedic
+          against epic, epic against K&#257;lid&#257;sa &mdash; varies genre, register, subject
+          and centuries at once. This one varies date and almost nothing else.</p>
+          <div class="counts">referent                       arch/10k   app/10k   enrichment
+  d&#299;n&#257;ra  (Roman aureus)        0.000     0.085   only in apparatus
+  pustaka (book)                 0.000     0.113   only in apparatus
+  temple  (dev&#257;laya/mandira)      0.033     0.507        15.3&times;
+  mok&#7779;a vocabulary               0.797     2.676         3.4&times;
+  Yavana                         2.368     1.324         0.6&times;
+  horse-chariot                  0.089     0.056         0.6&times;</div>
+          <p><em>D&#299;n&#257;ra</em>, the Roman coin and the inventory's clearest late marker,
+          occurs <strong>zero times in the constituted text and only in the apparatus</strong>.
+          So does <em>pustaka</em>, "book". Early material culture is flat. The instrument
+          works, so it can be turned around and asked what it finds on its own.</p>
+          <p>Ranking all vocabulary by log-odds rather than testing a list produces an
+          unprompted and completely coherent signature: <em>um&#257;</em>, <em>mahe&#347;varaḥ</em>,
+          <em>nama&#7717;</em>, <em>pu&#7751;yaphalaṃ</em>, <em>d&#257;naṃ</em>,
+          <em>karmavip&#257;kena</em>, <em>&#347;&#7771;&#7751;u</em> &mdash; &#346;aiva and
+          goddess devotion, merit-and-gift ritual, and didactic framing, accreting onto a
+          constituted text whose own markers are <em>vai&#347;aṃp&#257;yana</em>,
+          <em>r&#257;jan</em>, <em>ra&#7751;e</em>, <em>iva</em>: narrative, martial, courtly.
+          That is what the scholarship says qualitatively. Here it is measured, and it was
+          found rather than assumed.</p>
+        </article>
+
+        <article class="item item-fails">
+          <div class="item-head">
+            <span class="claim">Grammar fails its own test</span>
+            <span class="chip chip-fails">no discriminative power</span>
+            <span class="score">the method class rated <b>5 / 5</b></span>
+          </div>
+          <p>Run this network's own linguistic dating metrics &mdash; the ones attested three
+          cards above &mdash; against that label.</p>
+          <div class="counts">metric                    archetypal   apparatus   shift
+perfect/imperfect ratio         0.88        0.94   1.07&times;
+PPP-predicate per 10k          14.90       14.26   0.96&times;
+aorist per 10k                  1.12        0.93   0.83&times;
+thematic subjunctives              0           0      &mdash;
+mean word length                7.01        7.07   1.01&times;</div>
+          <p><strong>Every one is flat.</strong> Lexical content moves by fifteenfold and more
+          across exactly the same boundary; grammar does not move at all.</p>
+          <p>The reason is not mysterious once stated: an interpolator adding verses to the
+          Mah&#257;bh&#257;rata writes epic Sanskrit <em>on purpose</em>. <strong>The register
+          is a target, not a symptom.</strong> So linguistic stratigraphy does what it was
+          shown to do earlier &mdash; separate Vedic from epic, a real gap of centuries and a
+          change of genre &mdash; and cannot separate epic from epic-plus-centuries.</p>
+          <p>The score-5 grammar row therefore survives as exactly what it claimed to be, a
+          <em>floor</em>. What does not survive is the hope of using features of that class for
+          fine-grained stratification: on the one labelled dataset that exists, they have no
+          measured power at all, and referential content has plenty. This is the third
+          independent arrival at one confound &mdash; register imitated rather than inherited
+          &mdash; after compound length and the aorist.</p>
+        </article>
+
+        <article class="item item-holds">
+          <div class="item-head">
+            <span class="claim">The writing horizon</span>
+            <span class="chip chip-holds">encoded &middot; the first backstop</span>
+            <span class="score">a ceiling nobody in the inventory proposed</span>
+          </div>
+          <p>The R&#257;m&#257;ya&#7751;a core does not merely lack writing. It visibly does
+          <em>something else</em> in the slot a literate culture fills with a document, which
+          turns an argument from silence into an argument from substitution.</p>
+          <p><strong>The root is present and pre-literate.</strong> &radic;likh occurs eleven
+          times in the core and never means "write". Ten are one formula:</p>
+          <div class="quote">
+            <span>&#347;&#7771;&#7749;gair <b>ambaraṃ vilikhann</b> iva &nbsp;&middot;&nbsp;
+            kail&#257;sa&#347;ikhar&#257;k&#257;ro d&#7771;&#347;yate <b>kham ivollikhan</b></span>
+            <span class="gloss">R&#257;m.4.040.028, R&#257;m.6.030.023 &mdash; peaks and palaces
+            <em>scraping the sky</em>. The word for "write" is sitting there in its original
+            sense of scratching, doing no literate work at all.</span>
+          </div>
+          <p>The Mah&#257;bh&#257;rata archetype has moved one step and no further &mdash;
+          &radic;likh has reached <em>draw</em>: <em>citre 'pi ca likhaty a&#347;v&#257;n</em>,
+          "he draws horses in a picture". And <em>pustaka</em> appears in the apparatus and
+          nowhere else in the corpus. One root, three stages: <strong>scratch &rarr; draw &rarr;
+          books.</strong></p>
+          <p><strong>The control is the plot itself.</strong> The core has 25
+          <em>d&#363;ta</em> episodes and 18 uses of <em>abhij&#241;&#257;na</em>, "recognition
+          token" &mdash; nine times the Mah&#257;bh&#257;rata's rate. Its central problem is the
+          one a letter exists to solve: prove a messenger genuine to a captive behind enemy
+          lines. It is solved with a signet ring.</p>
+          <div class="quote">
+            <span>d&#363;to r&#257;masya &hellip; <b>r&#257;man&#257;m&#257;&#7749;kitaṃ</b>
+            cedaṃ pa&#347;ya devy a&#7749;gul&#299;yakam</span>
+            <span class="gloss">R&#257;m.5.034.002 &mdash; "I am R&#257;ma's messenger; look at
+            this ring <em>marked with R&#257;ma's name</em>." S&#299;t&#257; answers not with a
+            reply but with her crest jewel. Objects bearing a personal name exist; writing does
+            not.</span>
+          </div>
+          <p>And the genre excuse does not apply: later layers of the same tradition acquire
+          the vocabulary, which is precisely where <em>pustaka</em> turns up.</p>
+        </article>
+
+      </div>
+
+      <p><strong>What it buys is insurance, not precision.</strong> Encoded at the
+      <em>late</em> end of the Br&#257;hm&#299; debate so the bound is as weak as the evidence
+      allows, it is slack by 70 years and tightens nothing. But this network's worst structural
+      weakness has been that the pre-Common-Era ceiling for both epics rests on one row scored
+      2 of 5, with a minimum cut of 1. Ablation:</p>
+
+      <div class="counts">scenario                                          R&#257;m core ceiling
+as built                                              300 BCE   (via P&#257;&#7789;aliputra)
+P&#257;&#7789;aliputra attestation removed, writing kept          230 BCE   (via A&#347;okan Br&#257;hm&#299;)
+both removed                                          250 CE</div>
+
+      <p>If the P&#257;&#7789;aliputra argument falls, the ceiling now slips <strong>70 years
+      instead of 480</strong>.</p>
+
+      <blockquote class="pull">The apparatus was sitting in the files the whole time, labelled
+      by the editors, and it answers a question the scored inventories cannot: not whether an
+      argument is <em>believed</em>, but whether its instrument can tell late from early at
+      all.</blockquote>
+    </section>
+
+    <!-- ============ the pali cross-check ============ -->
+    <section>
+      <h2>An independent tradition says the same thing</h2>
+
+      <p class="lede">Every text checked so far belongs to one transmission. The P&#257;li
+      canon does not: separate language, separate manuscripts, separate scholarly apparatus,
+      and no stake whatever in Sanskrit epic chronology. It was added to test the two claims
+      that matter most &mdash; and it <strong>replicates both</strong>.</p>
+
+      <div class="docket">
+
+        <article class="item item-holds">
+          <div class="item-head">
+            <span class="claim">The writing horizon replicates &mdash; with a better control</span>
+            <span class="chip chip-holds">independent confirmation</span>
+            <span class="score">D&#299;gha-Nik&#257;ya &middot; <b>903</b> PTS pages</span>
+          </div>
+          <div class="counts">D&#299;gha-Nik&#257;ya, text only
+  lipi / lekh&#257; as script      0
+  potthaka (book)             0
+  kah&#257;pa&#7751;a (coin)            0
+  &radic;likh                       2</div>
+          <p>Both &radic;likh occurrences are one stock phrase &mdash; <em>sa&#7749;kha-<b>likhitaṃ</b>
+          brahmacariyaṃ</em>, the holy life "polished like a conch-shell". <strong>That is the
+          same scratch-and-polish sense the R&#257;m&#257;ya&#7751;a core uses eleven times and
+          never leaves</strong>, in a tradition with no transmission in common with it.</p>
+          <p><strong>And its control is of a better kind than the R&#257;m&#257;ya&#7751;a's.</strong>
+          The Brahmaj&#257;la and S&#257;ma&#241;&#241;aphala suttas enumerate the low arts a
+          recluse abstains from &mdash; dozens of items &mdash; and the list runs:</p>
+          <div class="quote">
+            <span>mudd&#257;, ga&#7751;an&#257;, saṃkh&#257;naṃ, k&#257;veyyaṃ, lok&#257;yataṃ</span>
+            <span class="gloss">DN i.11, i.69 &mdash; finger-reckoning, counting, computation,
+            poetry, Lok&#257;yata. It names the skills that sit next to writing and stops short
+            of writing itself.</span>
+          </div>
+          <p>A narrative may omit anything. A list that aims at completeness over its domain
+          and omits an item is a far stronger silence &mdash; the <strong>enumerative</strong>
+          control this project has been short of since the <em>mok&#7779;a</em> row died for
+          want of one.</p>
+        </article>
+
+        <article class="item item-holds">
+          <div class="item-head">
+            <span class="claim">P&#257;&#7789;aliputra, corroborated from inside the transition</span>
+            <span class="chip chip-holds">the warrant, independently checked</span>
+            <span class="score">the row carrying <b>both</b> epic ceilings</span>
+          </div>
+          <p>The whole pre-Common-Era ceiling for both epics rests on one argument from
+          silence: the epics name Girivraja as Magadha's capital and never P&#257;&#7789;aliputra,
+          and a text listing capitals would name the current one. The P&#257;li canon shows the
+          same distribution &mdash; <strong>R&#257;jagaha is the operative capital on 22 pages,
+          P&#257;&#7789;aliputta appears on 2</strong> &mdash; and dates the change from inside it.
+          Within two pages the same place is a village, then a city not yet built:</p>
+          <div class="quote">
+            <span>Sun&#299;dha-Vassak&#257;r&#257; <b>Magadha-mah&#257;matt&#257; P&#257;&#7789;alig&#257;me
+            nagaraṃ m&#257;penti</b> Vajj&#299;naṃ pa&#7789;ib&#257;h&#257;ya</span>
+            <span class="gloss">DN ii.86 &mdash; Magadha's chief ministers building a fort at
+            the <em>village</em> of P&#257;&#7789;alig&#257;ma. Two pages later, DN ii.88:
+            <em>P&#257;&#7789;aliputtassa kho &#256;nanda tayo antar&#257;y&#257; bhavissanti</em>,
+            the three dangers foretold for P&#257;&#7789;aliputta.</span>
+          </div>
+          <p><strong>Deliberately not encoded as a constraint.</strong> Everything this text
+          can attest about that referent is slacker than the Mauryan horizon already supplies,
+          so an edge would add a node and move nothing. It is recorded as evidence for the
+          warrant, because what it changes is confidence rather than arithmetic &mdash; and
+          <em>corroboration is not redundancy</em>: a second argument for the same conclusion,
+          running through the same terminus, does not make the network any harder to break.</p>
+        </article>
+
+      </div>
+
+      <p><strong>What did move, and the direction is the surprise.</strong> The
+      D&#299;gha-Nik&#257;ya was entered at [400 BCE, 100 BCE], deliberately late at the ceiling
+      so its own absence claim would be as weak as possible. The solve returns <strong>[400 BCE,
+      230 BCE]</strong>: the P&#257;li collection's ceiling pulled back 130 years by its own
+      ignorance of writing, propagating through the A&#347;okan attestation. This is the first
+      corpus addition in the whole project to tighten anything &mdash; and what it tightened
+      was not an epic but the newcomer itself.</p>
+
+      <blockquote class="pull">A network built to date Sanskrit epics dated a P&#257;li
+      collection instead, and the epic brackets did not move by a year. That is the law this
+      project keeps re-deriving: more text buys checking, and checking is not the same as
+      knowing more.</blockquote>
+    </section>
+
+    <!-- ============ what carries the bounds ============ -->
+    <section>
+      <h2>What was actually carrying the ceiling</h2>
+
+      <p class="lede">Every bound in this network ends at a material horizon that nothing
+      inside the network dates. Pulling those three nodes apart turned out to be the most
+      informative thing done to the store all week &mdash; and it explains why no amount of
+      new text was ever going to make it more robust.</p>
+
+      <div class="docket">
+
+        <article class="item item-fails">
+          <div class="item-head">
+            <span class="claim">One node was two dating chains in a trench coat</span>
+            <span class="chip chip-fails">precision borrowed, not earned</span>
+            <span class="score">the node carrying <b>both</b> epic ceilings</span>
+          </div>
+          <p>The horizon that caps both epics read, in full: <em>"P&#257;&#7789;aliputra
+          excavation; Nanda accession through early Mauryan consolidation"</em> &mdash; site
+          stratigraphy and dynastic chronology, in one interval, labelled
+          <code>archaeological-horizon</code>. Separated into the chain anchored in Seleucid
+          history (Strabo XV.1.36, Megasthenes at Palibothra) and the chain anchored in the
+          Kumrahar excavation reports, then ablated one at a time:</p>
+          <div class="counts">scenario                          R&#257;m core ceiling
+as built                              300 BCE
+archaeological chain removed          300 BCE   (no change at all)
+historical chain removed              230 BCE</div>
+          <p><strong>Archaeology alone supports nothing tighter than 150 BCE.</strong> The
+          entire 300 BCE figure came from the Greek historical chain, while the node presented
+          it under an archaeological label. That is this store's known weakness &mdash;
+          category references standing in for citations &mdash; caught in the one place it
+          mattered most.</p>
+          <p>The independence is also only partial, and is now recorded as such: the Kumrahar
+          timber palisade is conventionally identified as the wall Megasthenes describes, so
+          the site's phasing leans on the very account it is supposed to corroborate.</p>
+        </article>
+
+        <article class="item item-qual">
+          <div class="item-head">
+            <span class="claim">Why redundancy cannot be bought</span>
+            <span class="chip chip-qual">structural, not fixable</span>
+            <span class="score">every cut still <b>1</b></span>
+          </div>
+          <p>Three independently transmitted corpora have now been added and not one raised a
+          minimum cut. The reason is not that the sources are weak. It is arithmetic:</p>
+          <blockquote class="pull" style="--edge: var(--qual);">A cut counts the routes that
+          <em>realise</em> a bound. Two independent chains raise it only when their precisions
+          match &mdash; and real evidence almost never comes in matched pairs.</blockquote>
+          <p>Two honest chains reaching the same conclusion with different tightness give one
+          binding route and one slack one: cut 1, permanently. <strong>The measure is telling
+          the truth about the evidence, not about the store.</strong> What extra evidence
+          <em>does</em> buy is measurable &mdash; <strong>backstop distance</strong>, how far a
+          bound falls when its binding route is removed. For the R&#257;m&#257;ya&#7751;a's
+          ceiling that is now 70 years, against a 550-year collapse a week ago.</p>
+        </article>
+
+        <article class="item item-holds">
+          <div class="item-head">
+            <span class="claim">One tradition, two collections, and the scribe appears in one</span>
+            <span class="chip chip-holds">the genre excuse, closed</span>
+            <span class="score">Vinaya &middot; <b>1,511</b> PTS pages</span>
+          </div>
+          <p>The strongest objection to the writing horizon was always that a heroic narrative
+          might simply have no occasion for documents. The P&#257;li canon answers it from the
+          inside, because it contains both kinds of text in one language and one transmission.</p>
+          <div class="counts">                              D&#299;gha-Nik&#257;ya      Vinaya
+  lipi (script)                          0           0
+  lekhaka (scribe)                       0         yes
+  kah&#257;pa&#7751;a / m&#257;saka / r&#363;piya       0 / 0 / 0   7 / 18 / 16</div>
+          <p>And the decisive passage is <em>enumerative</em>, which is why it was worth going
+          for. Vin iv.8, a rule against insulting speech, lists the trades:</p>
+          <div class="quote">
+            <span>&hellip; na&#7735;ak&#257;raṃ kumbhak&#257;raṃ pesak&#257;raṃ cammak&#257;raṃ
+            nah&#257;pitaṃ &hellip; <b>muddikaṃ ga&#7751;akaṃ lekhakaṃ</b></span>
+            <span class="gloss">Vin iv.8 &mdash; basket-maker, potter, weaver, leather-worker,
+            barber as low; reckoner, calculator, <strong>scribe</strong> as high. That is the
+            same slot the D&#299;gha-Nik&#257;ya fills with <em>mudd&#257;, ga&#7751;an&#257;,
+            saṃkh&#257;naṃ</em> and no scribe.</span>
+          </div>
+          <p>Two readings were withdrawn on inspection, both of which would have overstated
+          the case: <em>potthaka</em> at Vin i.306 is a coarse cloth in a list of forbidden
+          robes, not a book, and <em>avalekhanaka&#7789;&#7789;ha</em> is a latrine
+          scraping-stick, not a stylus &mdash; &radic;likh in its old sense, sitting in the
+          same volume as the scribe.</p>
+        </article>
+
+      </div>
+
+      <p>Encoding the Vinaya changed no epic bracket, as every addition has. But the network
+      now <strong>entails an ordering it was never built to produce</strong>: the
+      D&#299;gha-Nik&#257;ya must precede writing's emergence and the Vinaya attests it, so
+      <code>DN &le; writing &le; Vinaya</code>. A machine assembled to date Sanskrit epics has
+      issued a falsifiable claim about the relative order of two P&#257;li collections &mdash;
+      exactly the kind of output it exists to generate, and exactly the kind a P&#257;li scholar
+      can shoot down.</p>
+    </section>
+
+    <!-- ============ what is new ============ -->
+    <section>
+      <h2>What is new here, and what is not</h2>
+
+      <p class="lede">Most of what is above restates things Indologists have long held, now
+      measured. A smaller part has, as far as could be established, not been done before. It
+      is worth separating the two explicitly, because a project whose whole argument is about
+      the difference between evidence and assertion cannot be vague about its own.</p>
+
+      <h3 class="sub">Method &mdash; no precedent found</h3>
+
+      <ul>
+        <li><strong>A critical apparatus used as a labelled lateness set.</strong> The
+        Mah&#257;bh&#257;rata's editors marked 66,177 lines non-archetypal on manuscript
+        evidence &mdash; a per-passage label of relative date, holding work, genre, language
+        and transmission constant. Treating that discarded apparatus as <em>ground truth for
+        validating dating metrics</em> turned up no precedent when searched for; the nearest
+        related work in manuscript dating deliberately avoids using palaeographic estimates as
+        targets, for the circularity reason this design shares.</li>
+        <li><strong>The result that follows from it, which is a negative one.</strong> Against
+        that label, every linguistic dating metric is flat &mdash; perfect/imperfect 1.07&times;,
+        participle 0.96&times;, aorist 0.83&times;, word length 1.01&times; &mdash; while lexical
+        content moves fifteenfold and more. <strong>The most highly rated class of evidence in
+        the field cannot distinguish epic from epic-plus-centuries</strong>, because the
+        register is a target an interpolator aims at, not a symptom he leaks.</li>
+        <li><strong>Provenance as a validity gate, then tier-stripping as an experiment.</strong>
+        Evidence and interpretation are held apart at the record level, so "remove all 48
+        constraints resting on scholarly assertion and both brackets are identical to the year"
+        is a sentence that can be <em>computed</em>. It could not be said before, because the
+        two had never been separated in a form that could be recomputed.</li>
+        <li><strong>Minimum cut as the robustness measure &mdash; and the theorem it yields.</strong>
+        Leave-one-out cannot see redundancy; Menger's theorem can. What fell out is more
+        general than this corpus: <em>a cut counts the routes that realise a bound, so two
+        independent chains raise it only when their precisions match.</em> Robustness therefore
+        cannot be bought with more evidence, only with evidence of matching precision &mdash;
+        which is why three independently transmitted corpora raised nothing.</li>
+        <li><strong>Backstop distance</strong> as the metric that remains useful once the cut is
+        pinned at 1: not whether a bound survives, but how far it falls.</li>
+        <li><strong>A positive control demanded of every argument from silence</strong> &mdash;
+        and shown to bite in both directions, refusing the <em>mok&#7779;a</em> constraint and
+        admitting the writing one.</li>
+        <li><strong>The pairing technique for claims about how forms behave.</strong> Counting a
+        form against <em>its own alternative in the same stem</em> cancels the confound that
+        makes raw frequencies useless: <em>bhavati</em> against <em>bhav&#257;ti</em>, not
+        <em>-&#257;ti</em> against the dictionary. It converted three components of the grammar
+        row from "no locus can settle this" to measured.</li>
+      </ul>
+
+      <h3 class="sub">Known claims, now measured and re-runnable</h3>
+
+      <ul>
+        <li>That books 1 and 7 divinize R&#257;ma and the core does not &mdash; long argued;
+        here with every one of the 29 hits read and the seam the source itself names carved
+        out.</li>
+        <li>That epic language is post-Vedic &mdash; standard; here decomposed into six
+        components, three now attested to a re-runnable measurement, one shown
+        <em>permanently</em> unmeasurable because no epic manuscript carries accent.</li>
+        <li>That the epics were composed in a pre-literate milieu &mdash; <strong>this is
+        established Indology, not a finding of this work.</strong> What is added is the
+        quantified form: &radic;likh present eleven times in the core and never meaning
+        "write", the same root at "draw" in the Mah&#257;bh&#257;rata archetype, and books
+        only in its apparatus; plus the recognition-token control, 25 messengers and 18
+        <em>abhij&#241;&#257;na</em> and a signet ring where a letter would go.</li>
+        <li>That the P&#257;li canon narrates P&#257;&#7789;alig&#257;ma becoming
+        P&#257;&#7789;aliputta &mdash; a famous passage. What is added is using it as an
+        independent control on the epic argument that depends on the same transition.</li>
+      </ul>
+
+      <h3 class="sub">Findings this work produced</h3>
+
+      <ul>
+        <li><strong>Three scored rows the manuscripts contradict</strong>, one of them rated
+        5 of 5, and a fourth whose evidence table does not yield the bracket the source states
+        beside it.</li>
+        <li><strong>The <em>mok&#7779;a</em> silence refuted as a dating signal</strong> by the
+        R&#257;m&#257;ya&#7751;a's own late books &mdash; which are later by this network's
+        attested constraints, demonstrably absorbed avat&#257;ra theology, and still score
+        zero on the same vocabulary. It would have tightened the headline by 200 years.</li>
+        <li><strong>The aorist refuted as a clock</strong> by a control that runs it: a
+        fifth-century CE poet at the Vedic rate, twenty-five times the R&#257;m&#257;ya&#7751;a's.</li>
+        <li><strong>The node capping both epics was presenting historical-chronological
+        precision under an archaeological label</strong> &mdash; ablation shows archaeology
+        alone supports nothing tighter than 150 BCE.</li>
+        <li><strong>Corpus growth buys checking, not resolution</strong>, measured three times
+        on three independently transmitted corpora, with the mechanism stated: precision scales
+        logarithmically in corpus size, independent checks linearly.</li>
+        <li><strong>A falsifiable claim about a tradition the network knows nothing about</strong>
+        &mdash; <code>DN &le; writing &le; Vinaya</code>, entailed by constraints assembled to
+        date Sanskrit epics.</li>
+      </ul>
+
+      <h3 class="sub">Explicitly not new</h3>
+
+      <p>The dates. Both brackets sit where the consensus already put them, and nothing here
+      moved either by a year. Nor is the accretion model of the Mah&#257;bh&#257;rata new, nor
+      the lateness of the R&#257;m&#257;ya&#7751;a's first and last books, nor the observation
+      that devotional and didactic material accreted onto a martial narrative, nor the argument
+      from P&#257;&#7789;aliputra's absence. <strong>What changed is not the answers but which
+      arguments for them can still be made</strong> &mdash; and, for one class of argument, the
+      discovery that it cannot do the work it has been asked to do for a century.</p>
+    </section>
+
+    <!-- ============ limits ============ -->
+    <section>
+      <h2>What these results license</h2>
+
+      <p class="lede">Four boundaries on the claims above, stated so they are not read wider than the evidence goes.</p>
+
+      <ul>
+        <li><strong>Still no redundancy anywhere.</strong> Every bound in the network has a minimum cut of 1, and adding an independently transmitted tradition did not change that &mdash; corroboration of an argument is not a second route to its conclusion — one constraint removed and it moves. Connecting the two epics through a shared referent did not change this, because both routes pass through the same terminus.</li>
+        <li><strong>Retrodiction cannot validate this network.</strong> Held-out anchors recover a floor and never a ceiling, because the anchors are terminal: nothing in the corpus is later than the Cambodian and Gupta inscriptions, so nothing can bound them from above. That is a true description of the archive, and a real limit on what this kind of validation can show.</li>
+        <li><strong>The evidence tier is uneven.</strong> Verse loci are checkable in seconds. The archaeological loci underwriting the same brackets are category references — "Mahājanapada settlement record" — not volume and page. Both are labelled <em>attested</em>, and that flatters the weaker half.</li>
+        <li><strong>Compound length is not a dating signal.</strong> Proposed as a measurable seed for automatic stratification, it turns out to track descriptive versus narrative register: the earlier core carries ~35% more long compounds than the later frame books, driven almost entirely by one descriptive showpiece.</li>
+      </ul>
+
+      <blockquote class="pull">The dates did not move. What moved is the list of arguments that can still be made for them &mdash; and that turns out to be the more consequential list.</blockquote>
+    </section>
+
+  </main>
+
+  <footer>
+    <span>Parvan · findings as of 2026-09-02</span>
+    <span>Corpora: BORI Mahābhārata · Baroda Rāmāyaṇa, via GRETIL</span>
+    <span>76 of 124 constraints attested to a locus</span>
+  </footer>
+</div>

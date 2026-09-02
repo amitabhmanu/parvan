@@ -157,3 +157,73 @@ letters in prose runs, `@` appendix markers alongside `*` star markers, and mark
 like `*0128_01(127ab)`. The first pattern loaded 87% of the corpus and reported nothing wrong.
 `load_mbh` now refuses above a 0.05% tolerance, because an absence search over a corpus that
 drops lines is worthless.
+
+---
+
+## 6. Accented Vedic text — correction and availability · fetched 2026-09-02
+
+An earlier reading of the grammar row held that GRETIL strips accent from every text it
+hosts, making "absent pitch accent" unfalsifiable for want of data. **That is GRETIL's
+stated default but not its practice**, and the correction matters because the conclusion it
+supported was published.
+
+- **Default, confirmed in the file header of `rv_hn01u.htm`:** "Unless indicated otherwise,
+  accents have been dropped in order to facilitate word search." Inspection agrees — the
+  van Nooten–Holland Ṛgveda reads `RV_1,001.01a agnim īḷe purohitaṃ yajñasya devam ṛtvijam`,
+  vowel-length and anusvāra diacritics only, no udātta or svarita.
+- **The exception is shipped.** `1_veda/1_sam/avs_acu.htm` — Atharvaveda-Saṃhitā, Śaunaka
+  recension, **accented**, alongside `avs___u.htm` unaccented. Verified by inspection:
+
+  ```
+  (AVŚ_1,1.1a)  yé triṣaptā́ḥ pariyánti víśvā rūpā́ṇi bíbhrataḥ
+  (AVŚ_1,1.1c)  vācás pátir bálā téṣāṃ tanvò adyá dadhātu me
+  ```
+
+  UTF-8 with combining marks (`á` udātta, `à` svarita, `ā́` long udātta), header carries the
+  mapping. Addressing is `AVŚ_book,hymn.verse.pāda` — the same pāda granularity as the
+  Mahābhārata files, so it needs no new addressing scheme (**R-1**).
+  Basis: Vishva Bandhu, Hoshiarpur 1960–64.
+
+### What this does and does not unblock
+
+| Grammar-row component | Before | After | Why |
+|---|---|---|---|
+| Absent pitch accent | unreachable | **still unreachable** | See below — the obstacle is not the corpus |
+| Lost subjunctive | unreachable | **reachable** | Needs a Vedic baseline, not accent |
+| Absolutive chaining | reachable | reachable | — |
+| `-tum` as sole infinitive | reachable | reachable | — |
+| Aspectual collapse | unreachable | unreachable | A claim about function across a whole text |
+| Past participle as predicate | unreachable | unreachable | Same |
+
+**Accent stays unreachable for a better reason than the one first given.** Accent notation is
+a Vedic scribal apparatus. No epic manuscript in any recension carries it, so the epic side of
+the comparison cannot be measured from any edition, however good — the mark was never written.
+The epic's unaccented state records how the text was transmitted, not how it was spoken.
+
+This is the **third instance of one confound** already in the store: an absence that may record
+genre rather than date, alongside the Rāmāyaṇa's silence about *mokṣa* (`v2-retrodiction.md`)
+and the compound-length register effect (`compound-length.md`). Worth naming as a standing
+check — an absence needs a positive control before it earns an edge.
+
+**The subjunctive is the actionable one.** Subjunctive morphology (`-āt`, `-ān`, `-āsi`,
+`-āni`) carries no accent dependency; establishing that the forms were productive in the
+earlier stage needs only an accented-or-not Vedic Saṃhitā. This takes the score-5 grammar row
+from two of six components attestable to three, and turns a binary absence claim into a
+measured frequency differential, which is stronger evidence than the row currently carries.
+
+### Second use — the Atharvaveda as a network node
+
+Separate from the grammar row, an early Saṃhitā is the first corpus addition with a structural
+reason to move a bound. A referent's emergence ceiling is set by its **earliest** attester, and
+every text in the store so far is late; adding the Mahābhārata to a Rāmāyaṇa-only network moved
+one referent and bound nothing precisely because neither is an extreme. An Atharvaveda is an
+extreme by construction. **This is a real test of the "corpus growth buys checking, not
+resolution" result rather than a second confirmation of it** — and either outcome is
+informative.
+
+Its `absent-from` potential is the larger prize and the larger trap: referents the epics treat
+as ordinary that are missing from the Atharvaveda would floor those referents' emergence, which
+is the only mechanism that floors a text presupposing them. Every such edge needs the
+Pāṭaliputra treatment — a positive control — before it may leave quarantine.
+
+**Not fetched.** Awaiting a go-ahead; ~2 MB, gitignored like the rest of `corpus/`.

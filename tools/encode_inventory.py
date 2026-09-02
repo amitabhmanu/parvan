@@ -209,8 +209,37 @@ REFERENTS = [
     # Text-derived: dated from literature, so barred from anchoring (G-4).
     ("ref.post-vedic-grammar", "Post-Vedic, non-Paninian grammar", "concept", None, None, True,
      src("Post-Vedic grammar: no accent, collapsed tenses, absolutive chaining")),
-    ("ref.karma-rebirth-moksa", "Karma, rebirth and moksa as an assumed framework", "concept",
+    # SPLIT on R-10. Encoded as one referent bundling three things, which the two epics do
+    # not support equally: the Ramayana core has karma binding across births and no trace
+    # whatever of liberation, while the Mahabharata has all three explicitly and repeatedly.
+    # Unlike the post-Vedic grammar bundle, these components ARE separately checkable, so
+    # the answer is a split rather than a refusal.
+    ("ref.karma-rebirth", "Karma binding across rebirths", "concept",
      None, None, True, src("Karma, rebirth, moksa as assumed framework")),
+    ("ref.moksa-as-goal", "Moksa as release from the cycle of rebirth", "concept",
+     None, None, True, src("Karma, rebirth, moksa as assumed framework")),
+    #
+    # DELIBERATELY NOT ENCODED: `ram.core absent-from ref.moksa-as-goal`.
+    #
+    # The silence is real and measured. Across the Ramayana core (14,065 verses):
+    # punarjanman 0, punarbhava 0, samsara 0, apunarbhava 0, janmantara 0, mumuksu 0, and
+    # all 53 moks / 13 vimoks hits are mundane - releasing a necklace, releasing wealth as
+    # gifts, shedding tears, loosing anger at enemies. Not one is soteriological.
+    #
+    # As an edge it would bind hard, and it would TIGHTEN the core's ceiling from 300 to
+    # 500 BCE, because moksa-as-goal is attested by the Brhadaranyaka. A 200-year tightening
+    # of the headline result is exactly the claim this project should be slowest to make.
+    #
+    # It is withheld because the silence is confounded with GENRE. The Pataliputra absence
+    # earned its promotion on a positive control: the epic names Magadha's predecessor
+    # capital and stops one city short, and a text listing capitals would name the current
+    # one. No equivalent holds here. A heroic narrative can presuppose karma without
+    # discussing soteriology, because soteriology is not narratively relevant - and the
+    # Mahabharata discusses it largely in didactic layers the Ramayana core does not have.
+    # So the Ramayana's silence may record what kind of text it is rather than when it was
+    # written. That is the same confound the compound-length measurement ran into.
+    #
+    # Recorded here rather than encoded. Promote it only if a control is found.
     ("ref.lokayata-school", "Lokayata as a named school worth refuting", "concept",
      None, None, True, src("Jabali's Lokayata speech")),
     ("ref.avatara-theology", "Avatara theology", "concept", None, None, True,
@@ -307,8 +336,12 @@ EDGES = [
      {"prov": att("Ram.1.005.010-013 - kapatatoranavatim, sarvayantrayudhavatim, "
                   "uccattaladhvajavatim sataghnisatasamkulam, durgagambhiraparikham "
                   "durgam anyair durasadam")}),
-    ("e.008", "presupposes", "ram.core", "ref.karma-rebirth-moksa", "doctrinal-discontinuity",
-     "Karma, rebirth, moksa as assumed framework", {}),
+    ("e.008", "presupposes", "ram.core", "ref.karma-rebirth", "doctrinal-discontinuity",
+     "Karma, rebirth, moksa as assumed framework - karma-rebirth leg only",
+     {"prov": att("Ram.5.023.018 - kidrsam tu maya papam pura dehantare krtam yenedam "
+                  "prapyate duhkham; Sita in captivity asking what sin she did in a former "
+                  "body. Cf. Ram.2.047.019 nunam jatyantare kasmin, a present event "
+                  "explained by an act in a prior birth")}),
     # VERIFIED against the critical edition, and it holds - the first floor constraint on
     # the core that survives contact with the text. The dating claim rests on Ram.4.039.021,
     # where Kosala appears in a mahajanapada roster with Videha, Kasi, Magadha, Pundra and
@@ -386,7 +419,9 @@ EDGES = [
     ("e.031", "attests", "ws.bhatti", "ref.classical-kavya-style", "metrical-statistics",
      "Bhatti's Bhattikavya", {}),
     # Second sources that lift the concept referents above D-2's degree threshold.
-    ("e.032", "attests", "ws.brhadaranyaka", "ref.karma-rebirth-moksa",
+    ("e.032", "attests", "ws.brhadaranyaka", "ref.karma-rebirth",
+     "doctrinal-discontinuity", "Karma, rebirth, moksa as assumed framework", {}),
+    ("e.032b", "attests", "ws.brhadaranyaka", "ref.moksa-as-goal",
      "doctrinal-discontinuity", "Karma, rebirth, moksa as assumed framework", {}),
     ("e.033", "attests", "ws.manusmrti", "ref.caste-hardening", "doctrinal-discontinuity",
      "Sambuka episode's hardened caste orthodoxy", {}),
@@ -530,8 +565,19 @@ EDGES = [
                   "suvarnakarsnayasavarmanaddha. All ARCHETYPAL")}),
     ("e.103", "presupposes", "ws.mbh.core", "ref.post-vedic-grammar",
      "linguistic-stratigraphy", "Post-Vedic grammar: no accent, collapsed tenses", {}),
-    ("e.104", "presupposes", "ws.mbh.core", "ref.karma-rebirth-moksa",
-     "doctrinal-discontinuity", "Karma, rebirth, moksa as framework", {}),
+    ("e.104", "presupposes", "ws.mbh.core", "ref.karma-rebirth",
+     "doctrinal-discontinuity", "Karma, rebirth, moksa as framework",
+     {"prov": att("MBh.3.002.067-069 - evam patati samsare tasu tasu iha yonisu / "
+                  "avidyakarmatrsnabhir bhramyamano 'tha cakravat; falling into samsara "
+                  "through ignorance, karma and craving, wandering like a wheel. ARCHETYPAL")}),
+    # The leg the Ramayana core does not have. MBh.2-11 archetypal counts: samsar 27,
+    # punarjanm 4, moks 197 - and unlike the Ramayana's, these are soteriological.
+    ("e.109", "presupposes", "ws.mbh.core", "ref.moksa-as-goal", "doctrinal-discontinuity",
+     "Moksa as release from the cycle",
+     {"prov": att("MBh.6.026.009 (Gita 4.9) - tyaktva deham punarjanma naiti mam eti so "
+                  "'rjuna. Cf. MBh.6.030.015-016, even Brahma's realm is punaravartin, "
+                  "subject to return; MBh.11.006.004 Vidura's parable told by mokseavidbhih; "
+                  "MBh.3.131.008 panthanam apunarbhavam, the path of non-return. ARCHETYPAL")}),
     ("e.105", "presupposes", "mbh.late-peoples", "ref.yavana-saka", "realia-floor", "Yavanas", {}),
     ("e.106", "presupposes", "mbh.theological", "ref.avatara-theology",
      "doctrinal-discontinuity", "Bhakti and avatara theology", {}),

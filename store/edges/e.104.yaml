@@ -1,8 +1,10 @@
 id: e.104
 type: presupposes
 from: ws.mbh.core
-to: ref.karma-rebirth-moksa
+to: ref.karma-rebirth
 method: doctrinal-discontinuity
 provenance:
-  tier: asserted
-  source: 'docs/dating-sanskrit-epics.md scored inventory, row: Karma, rebirth, moksa as framework'
+  tier: attested
+  locus: MBh.3.002.067-069 - evam patati samsare tasu tasu iha yonisu / avidyakarmatrsnabhir bhramyamano
+    'tha cakravat; falling into samsara through ignorance, karma and craving, wandering like a wheel.
+    ARCHETYPAL

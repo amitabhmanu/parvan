@@ -1,8 +1,8 @@
-id: e.032
-type: attests
-from: ws.brhadaranyaka
-to: ref.karma-rebirth
-method: doctrinal-discontinuity
+id: ref.karma-rebirth
+kind: referent
+label: Karma binding across rebirths
+class: concept
+text_derived: true
 provenance:
   tier: asserted
   source: 'docs/dating-sanskrit-epics.md scored inventory, row: Karma, rebirth, moksa as assumed framework'

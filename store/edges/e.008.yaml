@@ -1,8 +1,10 @@
 id: e.008
 type: presupposes
 from: ram.core
-to: ref.karma-rebirth-moksa
+to: ref.karma-rebirth
 method: doctrinal-discontinuity
 provenance:
-  tier: asserted
-  source: 'docs/dating-sanskrit-epics.md scored inventory, row: Karma, rebirth, moksa as assumed framework'
+  tier: attested
+  locus: Ram.5.023.018 - kidrsam tu maya papam pura dehantare krtam yenedam prapyate duhkham; Sita in
+    captivity asking what sin she did in a former body. Cf. Ram.2.047.019 nunam jatyantare kasmin, a present
+    event explained by an act in a prior birth

@@ -844,6 +844,7 @@ drekkāṇa     0 hits  →  zero under every spelling tried</div>
           <p><strong>The two that looked hardest.</strong> Aspectual collapse and past-participle-as-predicate are claims about how forms <em>function</em> across a whole text, which no single locus settles &mdash; so the same move works: express the function as a <em>ratio against its own alternative</em>. The perfect displacing the imperfect as plain narrative past runs 0.08 in the Atharvaveda against 0.60 and 0.88 in the epics; the instrumental-agent participle construction runs 6.2 per 10,000 words against 14 to 22. Both encoded.</p>
           <p><strong>And one metric that looked best of all, refuted.</strong> The aorist falls from 4.33 per 10,000 words in the Atharvaveda to 0.19 in the R&#257;m&#257;ya&#7751;a &mdash; until a control text runs it. K&#257;lid&#257;sa, c. 400 CE, comes in at 4.89, the Vedic rate and twenty-five times the R&#257;m&#257;ya&#7751;a's. <strong>A metric on which a fifth-century poet resembles the Atharvaveda is measuring register, not date.</strong> Recorded as unusable rather than encoded &mdash; the same confound that sank the compound-length measurement.</p>
           <p>A compound presupposition is only as strong as its weakest component, and the weakest here is not weakly evidenced &mdash; it is unmeasurable on one side by the nature of the transmission. <strong>The highest-rated evidence class in both inventories is the one least amenable to citation-level checking</strong>, and knowing precisely which of its six parts are blocked by cost, which by method, and which permanently is worth more than the aggregate score of 5.</p>
+          <p><strong>A later section revisits this row and does not leave it standing.</strong> Attesting five of its six components turned out not to make them <em>do</em> anything: a preregistered falsifier fired on exactly this class, and the ablation is below.</p>
         </article>
 
         <article class="item item-fails">
@@ -1222,6 +1223,96 @@ historical chain removed              230 BCE</div>
       can shoot down.</p>
     </section>
 
+    <!-- ============ F-1 ============ -->
+    <section>
+      <h2>A prediction made in advance, and what happened to it</h2>
+
+      <p class="lede">Before any of this network existed &mdash; before there was a solver to
+      run &mdash; four falsifiers were written down and frozen. They are stopping conditions,
+      not tuning opportunities: each names a result that, if it came out a particular way,
+      obliges the project to say so. <strong>The first one has now fired.</strong></p>
+
+      <div class="docket">
+
+        <article class="item item-fails">
+          <div class="item-head">
+            <span class="claim">F-1 &middot; Metrical evidence carries nothing</span>
+            <span class="chip chip-fails">fired</span>
+            <span class="score">frozen before a solver existed</span>
+          </div>
+          <div class="quote">
+            <span>"If ablating every <code>metrical-statistics</code> edge does not degrade
+            anchor recovery, then metrical arguments carry no usable information, and the source
+            document's claim that language and metre form <em>the tightest single bracket</em>
+            is wrong. Report it as such."</span>
+            <span class="gloss">preregistration.md, F-1 &mdash; written in Phase 1</span>
+          </div>
+
+          <p><strong>The specified test could not answer it, and that had to be said first.</strong>
+          Anchor recovery already fails 0 of 9 before any ablation, because every anchor in this
+          network is <em>terminal</em> &mdash; nothing in the corpus is later than it, so holding
+          one out leaves its ceiling unbounded no matter what else is present. Removing the
+          metrical edges left every recovered interval byte-identical.</p>
+          <div class="counts">ablation                                   PASS  WEAK  FAIL   rate
+baseline (nothing removed)                    0     0     9     0%
+metrical-statistics removed                   0     0     9     0%
+metre + linguistic-stratigraphy removed       0     0     9     0%</div>
+          <p>So F-1's literal condition is met &mdash; <em>vacuously</em>. A measure reading
+          zero before an ablation cannot read lower after it. <strong>Reporting that as the
+          finding would have looked like evidence and been an artefact of a floored
+          instrument.</strong> The preregistration could not have known: the terminality of the
+          anchors was discovered afterwards.</p>
+        </article>
+
+        <article class="item item-fails">
+          <div class="item-head">
+            <span class="claim">What the class actually does: it bounds only itself</span>
+            <span class="chip chip-fails">no text moves</span>
+            <span class="score">6 bounds move &middot; <b>0</b> of them a text</span>
+          </div>
+          <p>Asked a different way &mdash; remove the class and see what moves anywhere in the
+          network:</p>
+          <div class="counts">metre + linguistic-stratigraphy removed          6 bounds moved
+  ref.aspectual-collapse#emergence     [1200 BCE, 300 BCE] -> [1200 BCE, unbounded]
+  ref.classical-kavya-style#emergence  [500 BCE, 460 CE]   -> [500 BCE, unbounded]
+  ref.post-vedic-grammar#emergence     [unbounded, 300 BCE]-> [unbounded, unbounded]
+  ref.ppp-predicate#emergence          [1200 BCE, 300 BCE] -> [1200 BCE, unbounded]
+  ref.subjunctive-loss#emergence       [1200 BCE, 300 BCE] -> [1200 BCE, unbounded]</div>
+          <p><strong>Every bound that moves is a referent that exists only to carry this class
+          of argument.</strong> Not one text stratum moves. R&#257;m&#257;ya&#7751;a core and
+          Mah&#257;bh&#257;rata core are unchanged to the year, and so is every other work-state
+          in the store.</p>
+          <blockquote class="pull" style="--edge: var(--fails);">The metrical and linguistic
+          edges form a closed pocket. They bound the concepts they themselves introduce and
+          transmit nothing to any text. Remove them and the only thing that loses its date is
+          the argument itself.</blockquote>
+          <p>They are not weak evidence for dating the epics. They are <strong>not evidence for
+          dating the epics at all</strong> &mdash; a self-contained description of the language,
+          correctly recorded, wired to nothing. Three independent routes now agree: the ablation
+          moves no text, the apparatus test shows no discriminative power, and the specified
+          instrument cannot see anything either way.</p>
+        </article>
+
+      </div>
+
+      <p><strong>What follows, because the preregistration requires it rather than permits it.</strong>
+      The source's highest-rated evidence class supplies no bracket on either epic. The row
+      survives only as a <em>floor</em> &mdash; post-Vedic, resting on a comparison with the
+      Atharvaveda slack by 450 and 700 years. And the next phase of this project, which
+      proposed to infer strata from <em>vipul&#257;</em> ratios, compound length and
+      morphological frequencies in sliding windows, is <strong>retired before it was run</strong>:
+      it would have spent weeks inferring layers from features now measured three ways to carry
+      nothing.</p>
+
+      <p>The fourteen edges stay in the store. They are accurate records of an argument the
+      field makes, and deleting them would hide the finding rather than state it.</p>
+
+      <p class="register">What this does not say &middot; the epic language <em>is</em>
+      post-Vedic, and that is attested &middot; metre and morphology remain the primary evidence
+      for language history &middot; the claim is narrower and harder: in this network, on this
+      corpus, that class does not reach any text whose date is in question</p>
+    </section>
+
     <!-- ============ what is new ============ -->
     <section>
       <h2>What is new here, and what is not</h2>
@@ -1241,6 +1332,7 @@ historical chain removed              230 BCE</div>
         validating dating metrics</em> turned up no precedent when searched for; the nearest
         related work in manuscript dating deliberately avoids using palaeographic estimates as
         targets, for the circularity reason this design shares.</li>
+        <li><strong>A preregistered falsifier, fired and reported.</strong> F-1 was frozen in Phase 1 and has now fired &mdash; against the class the field rates highest. Its specified test turned out unable to discriminate, which is itself reported rather than smoothed over. See the section above.</li>
         <li><strong>The result that follows from it, which is a negative one.</strong> Against
         that label, every linguistic dating metric is flat &mdash; perfect/imperfect 1.07&times;,
         participle 0.96&times;, aorist 0.83&times;, word length 1.01&times; &mdash; while lexical

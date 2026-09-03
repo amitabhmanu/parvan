@@ -96,6 +96,15 @@ If ablating every `metrical-statistics` edge does not degrade anchor recovery, t
 arguments carry no usable information, and the source document's claim that language and
 metre form "the tightest single bracket" is wrong. Report it as such.
 
+> **OUTCOME 2026-09-03 - FIRED. See `f1-verdict.md`.** The specified instrument turned out
+> unable to answer it: V-2 already fails 0 of 9 at baseline because every anchor is terminal,
+> so the ablation condition is met *vacuously* and reporting that as a pass would have been an
+> artefact of a floored measure. Adjudicated on two other routes instead. Ablating the class
+> moves six bounds and **every one is a referent that exists only to carry the class** - no
+> text stratum moves at all - and against 66,177 apparatus-labelled lines every form-based
+> metric is flat while lexical content moves fifteenfold. The prediction stands; the wording
+> of its test does not. Phase 6 as designed is retired.
+
 **F-2 · Method reliabilities do not identify.**
 If the Phase 5 posteriors on method reliability are no narrower than their priors, the
 calibration corpus is too thin. The hierarchical layer collapses to hand-assigned scores and
